@@ -1,2 +1,2 @@
-# vanilla-behavior-pack
-Minecraft Bedrock Edition Vanilla Behavior Pack
+# Minecraft Vanilla Behavior Pack
+More Info Soon...
