@@ -72,7 +72,7 @@
           "slot_drop_chance": [
             {
               "slot": "slot.weapon.offhand",
-              "drop_chance" :  1.0
+              "drop_chance": 1.0
             }
           ]
         }
