@@ -11,6 +11,8 @@
           },
           {
             "minecraft:move_to": {
+              "block_pos_id": "target_pos",
+              "distance_epsilon": 1.5
             }
           },
           {
