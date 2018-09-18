@@ -1,7 +1,7 @@
 # Minecraft Vanilla Behavior Pack
 
 ## Documentation
-<h1>Version: 1.6.1.0</h1>
+<h2>Version: 1.6.1.0</h2>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#[01]Entity Definition Properties">Entity Definition Properties</a></th> </tr>
