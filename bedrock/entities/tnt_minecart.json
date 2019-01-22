@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:tnt_minecart",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:primed_tnt": {
@@ -9,6 +15,23 @@
 
           },
           "fuseLength": 4,
+          "fuseLit": true,
+          "power": 3,
+          "causesFire": false
+        },
+        "minecraft:rail_sensor": {
+          
+        
+        },
+        "minecraft:is_ignited": {
+        }
+      },
+      "minecraft:instant_explode_tnt": {
+        "minecraft:explode": {
+          "on_activate": {
+
+          },
+          "fuseLength": 0,
           "fuseLit": true,
           "power": 3,
           "causesFire": false
@@ -95,9 +118,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:tnt_minecart"
-      },
       "minecraft:type_family": {
         "family": [ "minecart", "inanimate" ]
       },
@@ -130,6 +150,18 @@
         "add": {
           "component_groups": [
             "minecraft:primed_tnt"
+          ]
+        }
+      },
+      "minecraft:on_instant_prime": {
+        "remove": {
+          "component_groups": [
+            "minecraft:inactive"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:instant_explode_tnt"
           ]
         }
       }

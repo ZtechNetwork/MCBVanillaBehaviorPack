@@ -1,14 +1,17 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:lightning_bolt",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:lightning_bolt"
-      },
       "minecraft:type_family": {
         "family":["lightning"]          
       }

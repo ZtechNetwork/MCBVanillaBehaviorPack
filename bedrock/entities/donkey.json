@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:donkey",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:donkey_baby": {
         "minecraft:is_baby": {
@@ -266,9 +271,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:donkey"
-      },
       "minecraft:type_family": {
         "family": [ "donkey" ]
       },
@@ -290,7 +292,7 @@
         "value": 0.175
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_water": true,
         "avoid_damage_blocks": true
       },

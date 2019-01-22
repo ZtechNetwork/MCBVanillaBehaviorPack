@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:pufferfish",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:pufferfish_puffed": {
         "minecraft:movement": {
@@ -21,9 +27,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:pufferfish"
-      },
       "minecraft:type_family": {
         "family": [ "pufferfish", "fish" ]
       },
@@ -51,7 +54,7 @@
 
       "minecraft:navigation.generic": { // Allows the mob to go through water
         "is_amphibious": false,
-        "can_float": false,
+        "can_path_over_water": false,
         "can_swim": true,
         "can_walk": false,
         "can_breach": false,

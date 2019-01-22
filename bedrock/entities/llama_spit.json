@@ -1,11 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:llama_spit",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:llama_spit"
-      },
       "minecraft:collision_box": {
         "width": 0.31,
         "height": 0.31

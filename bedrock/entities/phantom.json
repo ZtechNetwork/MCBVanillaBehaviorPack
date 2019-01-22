@@ -1,15 +1,19 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+
+    "description": {
+      "identifier": "minecraft:phantom",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
 
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:phantom"
-      },
       "minecraft:type_family": {
         "family": [ "phantom", "undead", "monster" ]
       },
@@ -46,6 +50,28 @@
         "speed_when_turning": 0.2
       },
       "minecraft:burns_in_daylight": {
+      },
+      "minecraft:follow_range": {
+        "value": 64,
+        "max": 64
+      },
+      "minecraft:behavior.avoid_mob_type": {
+        "priority": 0,
+        "max_dist": 16.0,
+        "ignore_visibility": true,
+        "entity_types": [
+          {
+            "filters": {
+                "any_of": [
+                  { "test" :  "is_family", "subject" : "other", "value" :  "ocelot"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "cat"}
+                ]
+            },
+            "max_dist": 16,
+            "walk_speed_multiplier": 1,
+            "sprint_speed_multiplier": 1
+          }
+        ]
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 1,

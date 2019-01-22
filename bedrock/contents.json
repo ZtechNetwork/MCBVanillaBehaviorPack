@@ -100,6 +100,9 @@
             "path": "entities/boat.json"
         },
         {
+            "path": "entities/cat.json"
+        },
+        {
             "path": "entities/cave_spider.json"
         },
         {
@@ -217,6 +220,9 @@
             "path": "entities/ocelot.json"
         },
         {
+            "path": "entities/panda.json"
+        },
+        {
             "path": "entities/parrot.json"
         },
         {
@@ -224,6 +230,9 @@
         },
         {
             "path": "entities/pig.json"
+        },
+        {
+            "path": "entities/pillager.json"
         },
         {
             "path": "entities/player.json"
@@ -439,6 +448,12 @@
             "path": "loot_tables/entities/boat.json"
         },
         {
+            "path": "loot_tables/entities/cat.json"
+        },
+        {
+            "path": "loot_tables/entities/cat_gift.json"
+        },
+        {
             "path": "loot_tables/entities/cave_spider.json"
         },
         {
@@ -511,6 +526,12 @@
             "path": "loot_tables/entities/ocelot.json"
         },
         {
+            "path": "loot_tables/entities/panda.json"
+        },
+        {
+            "path": "loot_tables/entities/panda_sneeze.json"
+        },
+        {
             "path": "loot_tables/entities/parrot.json"
         },
         {
@@ -521,6 +542,12 @@
         },
         {
             "path": "loot_tables/entities/pig_saddled.json"
+        },
+        {
+            "path": "loot_tables/entities/pillager.json"
+        },
+        {
+            "path": "loot_tables/entities/pillager_gear.json"
         },
         {
             "path": "loot_tables/entities/polar_bear.json"
@@ -628,7 +655,16 @@
             "path": "loot_tables/gameplay/fishing.json"
         },
         {
+            "path": "loot_tables/gameplay/jungle_fishing.json"
+        },
+        {
             "path": "loot_tables/gameplay/fishing/fish.json"
+        },
+        {
+            "path": "loot_tables/gameplay/fishing/jungle_fish.json"
+        },
+        {
+            "path": "loot_tables/gameplay/fishing/jungle_junk.json"
         },
         {
             "path": "loot_tables/gameplay/fishing/junk.json"

@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:turtle",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:baby": {
@@ -114,9 +120,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:turtle"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0,
@@ -134,7 +137,7 @@
       },
       "minecraft:navigation.generic": {
         "is_amphibious": true,
-        "can_float": false,
+        "can_path_over_water": false,
         "can_swim": true,
         "can_walk": true,
         "can_sink": false,

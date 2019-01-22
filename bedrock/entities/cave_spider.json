@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-	
+    "description": {
+      "identifier": "minecraft:cave_spider",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:spider_jockey": {
         "minecraft:addrider": {
@@ -70,30 +75,17 @@
 
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 2,
-          "within_radius": 16.0,
           "entity_types": [
             {
               "filters": {
                 "any_of": [
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "player"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "snowgolem"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "irongolem"
-                  }
+                  { "test" :  "is_family", "subject" : "other", "value" :  "player"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "snowgolem"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "irongolem"}
                 ]
-              },
-              "max_dist": 16
-            }
+               },
+               "max_dist": 16
+             }
           ],
           "must_see": true,
           "attack_interval": 5
@@ -123,28 +115,15 @@
         },
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 2,
-          "within_radius": 16.0,
           "entity_types": [
             {
               "filters": {
                 "any_of": [
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "player"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "snowgolem"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "irongolem"
-                  }
+                  { "test" :  "is_family", "subject" : "other", "value" :  "player"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "snowgolem"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "irongolem"}
                 ]
-              },
+               },
               "max_dist": 16
             }
           ],
@@ -187,9 +166,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:cave_spider"
-      },
       "minecraft:type_family": {
         "family": [ "cavespider", "monster", "arthropod" ]
       },
@@ -214,7 +190,7 @@
         "value": 0.3
       },
       "minecraft:navigation.climb": {
-        "can_float": true
+        "can_path_over_water": true
       },
       "minecraft:movement.basic": {
         

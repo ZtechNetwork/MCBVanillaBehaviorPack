@@ -1,10 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:elder_guardian",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:elder_guardian"
-      },
       "minecraft:collision_box": {
         "width": 1.99,
         "height": 1.99
@@ -16,7 +19,7 @@
       },
       "minecraft:navigation.generic": {
         "is_amphibious": true,
-        "can_float": false,
+        "can_path_over_water": false,
         "can_swim": true,
         "can_walk": false,
         "can_breach": true

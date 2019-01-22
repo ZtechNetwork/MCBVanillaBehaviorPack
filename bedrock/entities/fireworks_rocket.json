@@ -1,11 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:fireworks_rocket",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:fireworks_rocket"
-      },
       "minecraft:collision_box": {
         "width": 0.25,
         "height": 0.25

@@ -1,11 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:vex",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:vex"
-      },
-
       "minecraft:type_family": {
         "family": [ "vex", "monster" ]
       },
@@ -27,7 +29,7 @@
         "value": 1.0
       },
       "minecraft:navigation.walk": {
-        "can_float": true
+        "can_path_over_water": true
       },
       "minecraft:movement.basic": {
 
@@ -45,26 +47,13 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 3,
-        "within_radius": 16.0,
         "entity_types": [
           {
             "filters": {
-              "any_of": [
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "player"
-                },
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "villager"
-                },
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "irongolem"
-                }
+              "any_of" : [
+                {"test" : "is_family", "subject" : "other", "value" :  "player"},
+                {"test" : "is_family", "subject" : "other", "value" :  "villager"},
+                {"test" : "is_family", "subject" : "other", "value" :  "irongolem"}
               ]
             },
             "max_dist": 70

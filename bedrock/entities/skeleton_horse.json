@@ -1,8 +1,32 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:skeleton_horse",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
+      "minecraft:skeleton_horse_baby": {
+        "minecraft:is_baby": {
+        },
+        "minecraft:scale_by_age": {
+          "start_scale": 0.5,
+          "end_scale": 1.0
+        },
+        "minecraft:ageable": {
+          "duration": 1200,
+          "grow_up": {
+            "event": "minecraft:ageable_grow_up",
+            "target": "self"
+          }
+        },
+        "minecraft:behavior.follow_parent": {
+          "priority": 4,
+          "speed_multiplier": 1.0
+        }
+      },
       "minecraft:skeleton_horse_adult": {
         "minecraft:loot": {
           "table": "loot_tables/entities/skeleton_horse.json"
@@ -10,6 +34,31 @@
         "minecraft:collision_box": {
           "width": 1.4,
           "height": 1.6
+        },
+        "minecraft:rideable": {
+          "priority": 0,
+          "seat_count": 1,
+          "family_types": [
+            "player",
+            "skeleton",
+            "zombie"
+          ],
+          "interact_text": "action.interact.ride.horse",
+          "seats": {
+            "position": [ 0.0, 1.2, -0.2 ]
+          }
+        },
+        "minecraft:behavior.mount_pathing": {
+          "priority": 2,
+          "speed_multiplier": 1.5,
+          "target_dist": 4.0,
+          "track_target": true
+        },
+        "minecraft:behavior.player_ride_tamed": {
+        },
+        "minecraft:input_ground_controlled": {
+        },
+        "minecraft:can_power_jump": {
         }
       },
 
@@ -41,9 +90,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:skeleton_horse"
-      },
       "minecraft:type_family": {
         "family": [ "skeletonhorse", "undead" ]
       },
@@ -111,42 +157,30 @@
       },
       "minecraft:is_tamed": {
       },
-      "minecraft:rideable": {
-        "priority": 0,
-        "seat_count": 1,
-        "family_types": [
-          "player",
-          "skeleton",
-          "zombie"
-        ],
-        "interact_text": "action.interact.ride.horse",
-        "seats": {
-          "position": [ 0.0, 1.2, -0.2 ]
-        }
-      },
-      "minecraft:behavior.player_ride_tamed": {
-      },
-      "minecraft:input_ground_controlled": {
-      },
-      "minecraft:can_power_jump": {
-      },
-      "minecraft:behavior.mount_pathing": {
-        "priority": 2,
-        "speed_multiplier": 1.5,
-        "target_dist": 4.0,
-        "track_target": true
-      },
       "minecraft:physics": {
       }
     },
 
     "events": {
       "minecraft:entity_spawned": {
-        "add": {
-          "component_groups": [
-            "minecraft:skeleton_horse_adult"
-          ]
-        }
+        "randomize": [
+          {
+            "weight": 36,
+            "add": {
+              "component_groups": [
+                "minecraft:skeleton_horse_adult"
+              ]
+            }
+          },
+          {
+            "weight": 9,
+            "add": {
+              "component_groups": [
+                "minecraft:skeleton_horse_baby"
+              ]
+            }
+          }
+        ]
       },
 
       "minecraft:on_leash": {
@@ -169,7 +203,7 @@
       },
 
       "minecraft:spring_trap": {
-        "add": { "component_groups": [ "minecraft:lightning_immune" ] }
+        "add": { "component_groups": [ "minecraft:skeleton_horse_adult", "minecraft:lightning_immune" ] }
       }
     }
   }

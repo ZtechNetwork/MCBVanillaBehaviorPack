@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:snow_golem",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:snowgolem_leashed": {
@@ -16,9 +22,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:snow_golem"
-      },
       "minecraft:type_family": {
         "family": [ "snowgolem" ]
       },
@@ -115,14 +118,9 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 1,
-        "within_radius": 16.0,
         "entity_types": [
           {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "monster"
-            },
+            "filters": { "test" :  "is_family", "subject" : "other", "value" :  "monster"},
             "within_default": 6
           }
         ],

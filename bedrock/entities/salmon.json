@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:salmon",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "scale_small": {
@@ -45,9 +51,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:salmon"
-      },
       "minecraft:type_family": {
         "family": [ "salmon", "fish" ]
       },
@@ -70,7 +73,7 @@
       },
       "minecraft:navigation.generic": { // Allows the mob to go through water
         "is_amphibious": false,
-        "can_float": false,
+        "can_path_over_water": false,
         "can_swim": true,
         "can_walk": false,
         "can_breach": false,
@@ -97,10 +100,6 @@
             "sprint_speed_multiplier": 2.0
           }
         ]
-      },
-      "minecraft:behavior.follow_flock": {
-        "priority": 2,
-        "speed_multiplier": 0.12
       },
       "minecraft:behavior.swim_idle": {
         "priority": 5

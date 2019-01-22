@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:ender_pearl",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:no_spawn": {
         "minecraft:projectile": {
@@ -19,9 +24,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:ender_pearl"
-      },
       "minecraft:collision_box": {
         "width": 0.25,
         "height": 0.25

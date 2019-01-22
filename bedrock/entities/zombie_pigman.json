@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:zombie_pigman",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:pig_zombie_baby": {
         "minecraft:is_baby": {
@@ -59,9 +64,6 @@
       },
       "minecraft:fire_immune": true,
       "minecraft:burns_in_daylight": false,
-      "minecraft:identifier": {
-        "id": "minecraft:zombie_pigman"
-      },
       "minecraft:type_family": {
         "family": [ "zombie_pigman", "undead", "monster" ]
       },
@@ -81,11 +83,6 @@
       "minecraft:attack": {
         "damage": 5
       },
-      "minecraft:follow_range": {
-        "value": 16,
-        "max": 16
-      },
-
       "minecraft:behavior.break_door": {
         "priority": 1
       },
@@ -106,6 +103,7 @@
         "search_range": 24,
         "search_height": 3,
         "goal_radius": 1.14,
+        "search_count": 4,
         "interval": 20
       },
       "minecraft:behavior.move_towards_restriction": {

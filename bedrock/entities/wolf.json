@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:wolf",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:wolf_baby": {
@@ -101,23 +107,15 @@
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 4,
           "attack_interval": 10,
-          "within_radius": 16.0,
           "reselect_targets": true,
           "entity_types": [
             {
               "filters": {
                 "any_of": [
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "sheep"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "rabbit"
-                  }
-                ]
+                  { "test" :  "is_family", "subject" : "other", "value" :  "skeleton"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "sheep"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "rabbit"}
+                ] 
               },
               "max_dist": 16
             },
@@ -207,14 +205,9 @@
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 5,
           "attack_interval": 10,
-          "within_radius": 16.0,
           "entity_types": [
             {
-              "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "skeleton"
-              },
+              "filters": { "test" :  "is_family", "subject" : "other", "value" :  "skeleton"},
               "max_dist": 16
             }
           ],
@@ -252,9 +245,6 @@
 
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:wolf"
-      },
       "minecraft:nameable": {
       },
       "minecraft:type_family": {
@@ -276,7 +266,7 @@
         "value": 0.3
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_damage_blocks": true
       },
       "minecraft:movement.basic": {
@@ -399,7 +389,8 @@
         "priority": 9,
         "look_distance": 8,
         "look_time": [ 2, 4 ],
-        "items": [ "bone" ]
+        "items": [ "bone", "porkchop", "cooked_porkchop", "chicken", "cooked_chicken", 
+                   "beef", "cooked_beef", "rotten_flesh", "muttonraw", "muttoncooked", "rabbit", "cooked_rabbit" ]
       },
 
       "minecraft:behavior.hurt_by_target": {

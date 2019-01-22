@@ -1,11 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:evocation_illager",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:evocation_illager"
-      },
-
       "minecraft:type_family": {
         "family": [ "evocation_illager", "monster", "illager" ]
       },
@@ -31,7 +33,7 @@
         "value": 0.5
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "can_pass_doors": true,
         "can_open_doors": true,
         "avoid_water": true
@@ -166,7 +168,6 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
         "entity_types": [
           {
             "filters": {  
@@ -175,8 +176,8 @@
                   { "test" :  "is_family", "subject" : "other", "value" :  "snowgolem"},
                   { "test" :  "is_family", "subject" : "other", "value" :  "irongolem"},
                   { "test" :  "is_family", "subject" : "other", "value" :  "villager"}
-                ]
-			      },
+                ] 
+			},
             "max_dist": 16
           }
         ],

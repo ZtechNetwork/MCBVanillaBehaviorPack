@@ -1,11 +1,14 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:player",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:player"
-      },
       "minecraft:type_family": {
         "family": [ "player" ]
       },
@@ -59,7 +62,7 @@
         "family_types": [
           "parrot_tame"
         ],
-		"pull_in_entities": true,
+        "pull_in_entities": true,
         "seats": [
           {
             "position": [ 0.4, -0.15, 0.04 ],
@@ -74,8 +77,8 @@
             "lock_rider_rotation": 0
           }
         ]
-      }
+      },
+      "minecraft:scaffolding_climber": { }
     }
-
   }
 }

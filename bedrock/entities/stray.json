@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:stray",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:revert_to_skeleton": {
@@ -49,9 +55,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:stray"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0,
@@ -108,15 +111,10 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
         "reselect_targets": true,
         "entity_types": [
           {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "player"
-            },
+            "filters": { "test": "is_family", "subject": "other", "value": "player" },
             "max_dist": 16
           },
           {

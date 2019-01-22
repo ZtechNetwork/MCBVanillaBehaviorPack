@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:ender_crystal",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "crystal_exploding": {
@@ -15,9 +21,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:ender_crystal"
-      },
       "minecraft:collision_box": {
         "width": 0.98,
         "height": 0.98

@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:llama",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:llama_baby": {
@@ -274,9 +280,6 @@
 
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:llama"
-      },
       "minecraft:type_family": {
         "family": [ "llama" ]
       },
@@ -296,7 +299,7 @@
         "value": 0.25
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_damage_blocks": true
       },
       "minecraft:movement.basic": {

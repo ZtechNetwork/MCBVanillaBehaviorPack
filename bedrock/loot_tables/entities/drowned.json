@@ -34,7 +34,7 @@
                 {
                     "condition": "random_chance_with_looting",
                     "chance": 0.11,
-                    "looting_multiplier": 0.01
+                    "looting_multiplier": 0.02
                 }
             ],
             "rolls": 1,

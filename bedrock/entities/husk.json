@@ -1,12 +1,18 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:husk",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:look_to_start_zombie_transformation": {
         "minecraft:environment_sensor": {
           "filters": {
-            "test": "is_underwater", "subject": "self", "operator": "==", "value": "true"
+            "test": "is_underwater", "subject": "self", "operator": "==", "value": true
           },
           "event": "minecraft:start_transforming"
         }
@@ -97,9 +103,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:husk"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0,
@@ -148,10 +151,6 @@
       },
       "minecraft:can_climb": {
       },
-      "minecraft:follow_range": {
-        "value": 16,
-        "max": 16
-      },
       "minecraft:environment_sensor": [
         {
           "filters": {
@@ -179,6 +178,7 @@
         "search_range": 24,
         "search_height": 3,
         "goal_radius": 1.14,
+        "search_count": 4,
         "interval": 20
       },
       "minecraft:behavior.move_towards_restriction": {
@@ -202,6 +202,7 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
+        "within_radius": 25,
         "reselect_targets": true,
         "entity_types": [
           {

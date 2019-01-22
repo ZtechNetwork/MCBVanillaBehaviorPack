@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
  "minecraft:entity": {
-  "format_version": "1.6.0",
+  "description": {
+    "identifier": "minecraft:wither_skull",
+    "is_spawnable": false,
+    "is_summonable": false,
+    "is_experimental": false
+  },
 
   "component_groups": {
     "minecraft:exploding": {
@@ -15,9 +21,6 @@
   },
 
   "components": {
-    "minecraft:identifier": {
-      "id": "minecraft:wither_skull"
-    },
     "minecraft:collision_box": {
       "width": 0.15,
       "height": 0.15

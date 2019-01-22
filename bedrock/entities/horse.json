@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:horse",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:horse_baby": {
@@ -76,7 +82,7 @@
           ],
           "interact_text": "action.interact.mount",
           "seats": {
-            "position": [0.0, 1.1, -0.2]
+            "position": [ 0.0, 1.1, -0.2 ]
           }
 
         },
@@ -221,13 +227,71 @@
         },
         "minecraft:behavior.player_ride_tamed": {
         }
-      }
+      },
+
+      "minecraft:base_white": {
+        "minecraft:variant": {
+          "value": 0
+        }
+      },
+      "minecraft:base_creamy": {
+        "minecraft:variant": {
+          "value": 1
+        }
+      },
+      "minecraft:base_chestnut": {
+        "minecraft:variant": {
+          "value": 2
+        }
+      },
+      "minecraft:base_brown": {
+        "minecraft:variant": {
+          "value": 3
+        }
+      },
+      "minecraft:base_black": {
+        "minecraft:variant": {
+          "value": 4
+        }
+      },
+      "minecraft:base_gray": {
+        "minecraft:variant": {
+          "value": 5
+        }
+      },
+      "minecraft:base_darkbrown": {
+        "minecraft:variant": {
+          "value": 6
+        }
+      },
+      "minecraft:markings_none": {
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
+      "minecraft:markings_white_details": {
+        "minecraft:mark_variant": {
+          "value": 1
+        }
+      },
+      "minecraft:markings_white_fields": {
+        "minecraft:mark_variant": {
+          "value": 2
+        }
+      },
+      "minecraft:markings_white_dots": {
+        "minecraft:mark_variant": {
+          "value": 3
+        }
+      },
+      "minecraft:markings_black_dots": {
+        "minecraft:mark_variant": {
+          "value": 4
+        }
+      }      
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:horse"
-      },
       "minecraft:equippable": {
         "slots": [
           {
@@ -277,7 +341,7 @@
         }
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_water": true,
         "avoid_damage_blocks": true
       },
@@ -366,24 +430,108 @@
 
     "events": {
       "minecraft:entity_spawned": {
-        "randomize": [
+        "sequence": [
           {
-            "weight": 36,
-            "add": {
-              "component_groups": [
-                "minecraft:horse_adult",
-                "minecraft:horse_wild"
-              ]
-            }
+            "randomize": [
+              {
+                "weight": 36,
+                "add": {
+                  "component_groups": [
+                    "minecraft:horse_adult",
+                    "minecraft:horse_wild"
+                  ]
+                }
+              },
+              {
+                "weight": 9,
+                "add": {
+                  "component_groups": [
+                    "minecraft:horse_baby"
+                  ]
+                }
+              }
+            ]
           },
           {
-            "weight": 9,
-            "add": {
-              "component_groups": [
-                "minecraft:horse_baby"
-              ]
-            }
-          }
+            "randomize": [
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_white"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_creamy"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_chestnut"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_brown"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_black"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_gray"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:base_darkbrown"]
+                }
+              }
+            ]
+          },
+          {
+            "randomize": [
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:markings_none"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:markings_white_details"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:markings_white_fields"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:markings_white_dots"]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": ["minecraft:markings_black_dots"]
+                }
+              }
+            ]
+          }          
         ]
       },
 
@@ -449,6 +597,42 @@
           "component_groups": [
             "minecraft:horse_saddled"
           ]
+        }
+      },
+
+      "minecraft:make_white": {
+        "add": {
+          "component_groups": ["minecraft:base_white"]
+        }
+      },
+      "minecraft:make_creamy": {
+        "add": {
+          "component_groups": ["minecraft:base_creamy"]
+        }
+      },
+      "minecraft:make_chestnut": {
+        "add": {
+          "component_groups": ["minecraft:base_chestnut"]
+        }
+      },
+      "minecraft:make_brown": {
+        "add": {
+          "component_groups": ["minecraft:base_brown"]
+        }
+      },
+      "minecraft:make_black": {
+        "add": {
+          "component_groups": ["minecraft:base_black"]
+        }
+      },
+      "minecraft:make_gray": {
+        "add": {
+          "component_groups": ["minecraft:base_gray"]
+        }
+      },
+      "minecraft:make_darkbrown": {
+        "add": {
+          "component_groups": ["minecraft:base_darkbrown"]
         }
       }
     }

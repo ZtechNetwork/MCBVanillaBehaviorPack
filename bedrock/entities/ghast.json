@@ -1,12 +1,14 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:ghast",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "components": {
-
-      "minecraft:identifier": {
-        "id": "minecraft:ghast"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0
@@ -26,7 +28,7 @@
         "value": 0.03
       },
       "minecraft:navigation.float": {
-        "can_float": true
+        "can_path_over_water": true
       },
       "minecraft:behavior.float_wander": {
         "priority": 2,
@@ -47,6 +49,11 @@
       "minecraft:fall_damage": {
         "value": 0.0
       },
+      "minecraft:jump.static": {
+      },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
       "minecraft:behavior.ranged_attack": {
         "priority": 1,
         "attack_radius": 64,
@@ -64,13 +71,17 @@
         "priority": 2,
         "entity_types": [
           {
-            "filters": {"test" :  "is_family", "subject" : "other", "value" :  "player"},
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "value": "player"
+            },
             "max_dist": 28
           }
         ],
         "must_see": true
       },
-	    "minecraft:physics": {
+      "minecraft:physics": {
       }
     }
   }

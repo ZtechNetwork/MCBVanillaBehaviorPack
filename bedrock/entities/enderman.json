@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:enderman",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:enderman_calm": {
         "minecraft:on_target_acquired": {
@@ -33,9 +38,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:enderman"
-      },
       "minecraft:type_family": {
         "family": [ "enderman", "monster" ]
       },
@@ -75,11 +77,21 @@
         "searchRadius": 64.0,
         "setTarget": true,
         "look_cooldown": 5.0,
-        "filters": { 
+        "filters": {
           "all_of": [
-            { "subject" : "other", "test" :  "is_family", "value" :  "player"},
-            { "test" :  "has_equipment", "domain": "head", "subject" : "other", "operator" : "not", "value" : "carved_pumpkin"} 
-          ] 
+            {
+              "subject": "other",
+              "test": "is_family",
+              "value": "player"
+            },
+            {
+              "test": "has_equipment",
+              "domain": "head",
+              "subject": "other",
+              "operator": "not",
+              "value": "carved_pumpkin"
+            }
+          ]
         }
       },
       "minecraft:behavior.nearest_attackable_target": {
@@ -87,18 +99,22 @@
         "attack_interval": 10,
         "entity_types": [
           {
-            "filters": { "test" :  "is_family", "subject" : "other", "value" :  "endermite"},
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "value": "endermite"
+            },
             "max_dist": 64
           }
         ],
         "must_see": true
       },
       "minecraft:navigation.walk": {
-        "can_float": false,
+        "can_path_over_water": false,
         "avoid_water": true
       },
       "minecraft:movement.basic": {
-        
+
       },
       "minecraft:jump.static": {
       },
@@ -131,7 +147,7 @@
       "minecraft:hurt_when_wet": {
         "value": true
       },
-	    "minecraft:physics": {
+      "minecraft:physics": {
       }
     },
 

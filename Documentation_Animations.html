@@ -1,0 +1,758 @@
+<h1>ANIMATIONS DOCUMENTATION </br>Version: 1.8.0.24</h1>
+<h2><p id="Index">Index</p></h2>
+<table border="1">
+<tr> <th><a href="#Overview">Overview</a></th> </tr>
+<tr> <th><a href="#Getting Started">Getting Started</a></th> </tr>
+<tr> <td> <a href="#Upgrade from v1.7 Beta"> Upgrade from v1.7 Beta</a> </tr> </td>
+<tr> <td> <a href="#Version Notes"> Version Notes</a> </tr> </td>
+<tr> <td> <a href="#Adding Animations"> Adding Animations</a> </tr> </td>
+<tr> <td> <a href="#Animation Hierarchy"> Animation Hierarchy</a> </tr> </td>
+<tr> <th><a href="#Names">Names</a></th> </tr>
+<tr> <th><a href="#Transforms">Transforms</a></th> </tr>
+<tr> <th><a href="#Scripting vs Raw Data">Scripting vs Raw Data</a></th> </tr>
+<tr> <td> <a href="#Parameters"> Parameters</a> </tr> </td>
+<tr> <td> <a href="#Member Variables"> Member Variables</a> </tr> </td>
+<tr> <td> <a href="#Entity Flags"> Entity Flags</a> </tr> </td>
+<tr> <th><a href="#Channels (Rotation, Position, Scale)">Channels (Rotation, Position, Scale)</a></th> </tr>
+<tr> <th><a href="#Entity Animation Format">Entity Animation Format</a></th> </tr>
+<tr> <th><a href="#Key Frames">Key Frames</a></th> </tr>
+<tr> <td> <a href="#Interpolation"> Interpolation</a> </tr> </td>
+<tr> <th><a href="#Animation Controllers">Animation Controllers</a></th> </tr>
+<tr> <td> <a href="#"> </a> </tr> </td>
+<tr> <td> <a href="#States"> States</a> </tr> </td>
+<tr> <td> <a href="#State Transitions"> State Transitions</a> </tr> </td>
+<tr> <th><a href="#Render Controllers">Render Controllers</a></th> </tr>
+<tr> <td> <a href="#Getting Started"> Getting Started</a> </tr> </td>
+<tr> <td> <a href="#Examples"> Examples</a> </tr> </td>
+<tr> <th><a href="#Attachables">Attachables</a></th> </tr>
+<tr> <td> <a href="#Getting Started"> Getting Started</a> </tr> </td>
+</table>
+<a href="#Index">Back to top</a>
+<h1><p id="Overview">Overview</p></h1>
+
+The follows the current Minecraft JSON paradigms:-Fields should be lower-case and use underscores (no spaces)</br>-All JSON files in the definitions directory and subtree will be read into and interpreted by the animation system</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Getting Started">Getting Started</p></h1>
+
+<h1><p id="Upgrade from v1.7 Beta">Upgrade from v1.7 Beta</p></h1>
+
+There have been few changes as we clean things up based on feedback and as we push the tech along the road map.To upgrade previous scripts, you'll want to do the following steps to all of your MoLang scripts in the order listed:</br>1)entity.flags.foo --> query.foo</br>2)entity.member.foo --> query.foo</br>3)entity.foo --> variable.foo</br>4)params.foo --> global.foo</br>5)The general rule is that query represents read-only values from the entity the script is running on, and variable represents read-write data created by the user.</br>6)We've adopted snake_case for all names of things. You are welcome to use upper case letters if you wish as we are case-insensitive, however we recommend snake_case in general.</br>7)Several variables previously set on mobs have been changed to use the query.foo format. Look through the updated list below to see what has been added and changed.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Version Notes">Version Notes</p></h1>
+
+<h2>Parameters</h2>
+
+<h2><p id="1.8">1.8</p></h2>
+
+There are a number of new directories in resource packs with the addition of animations.Animations are stored in the 'animations' folder of a resource pack in a .json format, and referenced by the entity's .json definition file. Resource packs on the stack will overwrite previously specified animations of the same name in stack order (top overwriting bottom). They can be organized in any number of files with any names (ending in .json).</br><h3>Folder Structure</h3>
+<resource_pack_root><br / ><textarea readonly="true" cols="24" rows="4">
+|_animation_controllers
+|_animations
+|_entity
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h1><p id="Adding Animations">Adding Animations</p></h1>
+
+<h2></h2>
+
+<h2><p id="Entity Definition">Entity Definition</p></h2>
+
+In order to define what animations an entity has, you must add both animations and animation controllers to an entity's entity definition file.</br><h3>Parameters</h3>
+
+Here you can see the entity definition for pig.json:</br><h4></h4>
+<br / ><textarea readonly="true" cols="62" rows="32">
+{
+  "format_version": "1.8.0",
+  "minecraft:client_entity": {
+  "description": {
+    "identifier": "minecraft:pig",
+      "materials" : { "default": "pig" }, 
+      "textures" : {
+        "default": "textures/entity/pig/pig",
+        "saddled" : "textures/entity/pig/pig_saddle"
+      },
+      "geometry" : {
+        "default": "geometry.pig"
+      },
+      "animations" : {
+        "setup": "animation.pig.setup",
+        "walk" : "animation.quadruped.walk",
+        "look_at_target" : "animation.common.look_at_target",
+        "baby_transform" : "animation.pig.baby_transform"
+      },
+      "animation_controllers": [
+        { "setup": "controller.animation.pig.setup" },
+        { "move": "controller.animation.pig.move" },
+        { "baby": "controller.animation.pig.baby" }
+      ],
+      "render_controllers" : ["controller.render.pig"],
+      "locators" : {
+        "lead": { "head": [0.0, 14.0, -6.0] }
+      }, 
+      "spawn_egg" : {
+        "texture": "spawn_egg",
+        "texture_index" : 2
+      }
+    }
+  }
+}
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+Note: the walk animation for pig is the same for cows and sheep, and thus uses animation.quadruped.walk instead of defining its own. This means you will not see the move animation in the pig.json animation file either. If you would like to make a custom pig walk you can change this line to point to your custom animation.</br></br>Animations are specified as a short name, followed by their full name. The short name is used in the animation controller, while the long name is used in the animations file.</br><a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h2><p id="Animation Controller">Animation Controller</p></h2>
+
+One needs to be able to control how animations are played, when, and how they interact with other animations. Animation controllers allow for blending of multiple animations based on parameters such as those exposed by the entity (eg: ground speed, rotation speed, etc).</br><h3></h3>
+Here's Pig's animation controller<br / ><textarea readonly="true" cols="192" rows="2">
+{  "format_version": "1.8.0",  "animation_controllers" : {  "controller.animation.pig.setup": {    "states": {      "default": {        "animations": {          "setup": {}        }      }    }  },  "controller.animation.pig.baby": {    "states": {      "baby": {        "parameters": ["Entity.Flags.BABY"],        "animations" : {          "baby_transform": [          {            "0.0": 0.0,            "1.0" : 1.0          }          ]        }      }    }  },  "controller.animation.pig.move": {    "states": {      "default": {        "parameters": ["Entity.Member.WalkSpeed"],        "animations" : {          "walk": [          {            "0.0": 0.0,            "1.0" : 1.0          }          ],          "look_at_target": {}        }      }    }  }}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Animations">Animations</p></h2>
+
+At the beginning of each frame, the skeleton is reset to its default pose from its geometry definition and then animations are applied additively in order.</br><h3></h3>
+
+<h3><p id="Note that animation data can be either raw data:">Note that animation data can be either raw data:</p></h3>
+
+<h4></h4>
+By default, if three values are specified, then values are in degrees, in euler X then Y then Z format<br / ><textarea readonly="true" cols="29" rows="2">
+"rotation": [90.0, 0.0, 0.0]
+</textarea> </br>
+If four values are specified, then values represent a quaternion.  This behaviour is overrideable per component<br / ><textarea readonly="true" cols="41" rows="2">
+"rotation": [0.373, 0.577, 0.687, 0.235]
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h3><p id="or a run-time interpreted script:">or a run-time interpreted script:</p></h3>
+
+<h4></h4>
+<br / ><textarea readonly="true" cols="80" rows="2">
+"rotation": ["cos(query.anim_pos * 38.17) * 80.0 * query.anim_speed", 0.0, 0.0]
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h3></h3>
+Here is an example from pig.json in the vanilla resource pack's animation folder:<br / ><textarea readonly="true" cols="164" rows="29">
+{  "format_version": "1.8.0",
+  "animations": {
+    "animation.pig.setup": {
+      "loop": true, 
+      "bones": {
+        "body": {
+          "rotation": ["-this", 0.0, 0.0]
+        }
+      }
+    },
+    "animation.pig.idle": {
+      "loop": true, 
+      "bones": {
+        "head": { "rotation": ["Math.cos(Params.AnimTime * 38.17) * 2.0 + Math.cos(Params.AnimTime * 27.0) * 2.0", "Math.cos(Params.AnimTime * 15.1) * 4.0", 0.0] }
+      }
+    },
+    "animation.pig.baby_transform": {
+      "loop": true, 
+      "bones": {
+        "head": {
+          "scale": 2.0,
+          "position": [0.0, 8.0, 4.0]
+        }
+      }
+    }
+  }
+}
+
+</textarea> </br>
+Here is a small example from sheep.animation.json:<br / ><textarea readonly="true" cols="102" rows="26">
+{
+  "animation.sheep.grazing": {
+    "bones": {
+      "head": {
+        "position": {
+          "0.0": [0.0, 0.0, 0.0], 
+          "0.2": [0.0, 9.0, 0.0], 
+          "1.8": [0.0, 9.0, 0.0], 
+          "2.0": [0.0, 0.0, 0.0], 
+        }
+        "rotation": {
+          "0.2": {
+            "pre": [36.0, 0.0, 0.0],
+            "post": ["180.0 * (0.2 + 0.07 * Math.Sin(Params.KeyFrameLerpTime * 1644.39))", 0.0, 0.0],
+          },
+          "1.8": {
+            "pre": ["180.0 * (0.2 + 0.07 * Math.Sin(Params.KeyFrameLerpTime * 1644.39))", 0.0, 0.0],
+            "post": [36.0, 0.0, 0.0]
+          },
+        }
+      }
+    }
+  }
+}
+
+</textarea> </br>
+<br><br>
+
+<br><br>
+
+<h1><p id="Animation Hierarchy">Animation Hierarchy</p></h1>
+
+Animations are channel based (rotation, position, or scale), and within that, they are key-framed: </br>  EntityAnimation: animation name</br>    BoneAnimation[]: bone name to animation for this animation</br>      AnimationChannel[]: rotation, scale, or translation to animate</br>        KeyFrame[]: the value for the channel to be at, at a specific time</br></br>All of the above concepts are described in a detailed, bottom-up approach below</br><a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h1><p id="Names">Names</p></h1>
+
+All names: animations, bones, states, etc, must all start with a letter and contain only alphanumerics, underscore, or period. It is recommended to use names in all lowercase</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Transforms">Transforms</p></h1>
+
+-Order of operations: vertices are scaled, rotated, then translated.</br>-Animation data is assumed to be hierarchical, and is applied to a bone by name matching the bone name in the animation data to the targeted geometry's skeleton.</br>-Not every bone needs to be animated</br>-You can animate bones that don't exist in the targeted geometry (missing bones are ignored).</br>-For each of scale, rotation, position, one can set the fields individually or uniformly with a single value. For example, these are equivalent.</br><h2></h2>
+<br / ><textarea readonly="true" cols="25" rows="4">
+"scale": [2.0, 2.0, 2.0]
+"scale": 2.0
+"scale": [2.0]
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Scripting vs Raw Data">Scripting vs Raw Data</p></h1>
+
+When specifying a transform (scale, rotation, or position), one can specify either a specific value, or a script:</br>"position": [3.0, 10.0, 2.0]</br>"position": [3.0, "10.0 * Math.cos(query.anim_time * Math.Pi + 3.3)", 2.0]</br></br>Please refer to the MoLang documentation for details on scripting</br><h1><p id="Parameters">Parameters</p></h1>
+
+There are a few parameters currently exposed to all scripts to help control animation:</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">global.anim_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Time into this animation</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">global.delta_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">time since this animation was last updated</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">global.key_frame_lerp_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">amount of blending between key frames from 0.0 == start key frame to 1.0 == end key frame</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">global.life_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">time since this entity was created</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Member Variables">Member Variables</p></h1>
+
+See the Animation Controller section below for details on how these are used</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.variant</td>
+<td style="border-style:solid; border-width:3; padding:7px">The variant of this Entity is (eg. which cat/horse texture)</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.walk_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">How fast this Entity is moving</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.yaw_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">How fast this Entity is turning(in degrees)</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Entity Flags">Entity Flags</p></h1>
+
+Animation scripts can query the current entity for any entity flag such as is_onfire, is_baby, is_gliding, etc. These are boolean values that can be used to affect the animation via the ?: operator.</br>For a full list of Entity Flags, please refer to the Query Functions List.</br><h2></h2>
+For example, changing the position of a bone based on whether the Mob is a baby or not:<br / ><textarea readonly="true" cols="77" rows="2">
+"position": [0.0, "query.is_baby ? -8.0 : 0.0", "query.is_baby ? 4.0 : 0.0"]
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h1><p id="Channels (Rotation, Position, Scale)">Channels (Rotation, Position, Scale)</p></h1>
+
+The engine tracks the animation of rotation, position, and scale separately. Within a channel, one or more key frames are specified at arbitrary times, in seconds, from the start of the animation. If no key frames are specified, a single key frame is created at t=0.0 and all channel data is stored within that key frame.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Entity Animation Format">Entity Animation Format</p></h1>
+
+The json format for an animation is as follows:</br> Note Matching the geometry format, units are in 1/16ths of meters.</br><h2></h2>
+<br / ><textarea readonly="true" cols="192" rows="32">
+"<animation_name>": {
+  // optional
+  "loop": <bool>                                    // default = false.  Should the animation loop back to t=0.0 when it finishes?
+  "blend_weight": <expression>                      // default = "1.0".  How much this animation is blended with the others.  0.0 = off.  1.0 = fully apply all transforms.  Can be an expression - see the Animation Controller section below
+  "animation_length" : <float>                       // default = time of last key frame.  At what time does the system consider this animation finished?
+  "override_previous_animation" : <bool>             // default = false.  Should the animation pose of the bone be set to the bind pose before applying this animation, thereby overriding any previous animations to this point?
+
+  // required
+  "bones": [
+  {
+    "<bone_name>": {                          // must match the name of the bone specified in the geometry skeleton
+
+      // various flavours of setting data
+      // omitting a channel skips that channel for this animation of this bone
+      // any number of floats below can be replaced by a string expression as described above; you don't have to replace all the floats on a line with expressions, only the ones you want to be expression-based
+
+      "position": 1.0,                      // set x, y, and z to 1
+      "position" : [1.0],                    // set x, y, and z to 1
+      "position" : [1.0, 2.0, 3.0],          // set x=1 , y=2 , and z=3
+
+      "rotation" : 45.0,                     // set x, y, and z to 45 degrees
+      "rotation" : [45.0],                   // set x, y, and z to 45 degress
+      "rotation" : [30.0, 0.0, 45.0],        // set x, y, and z to the respective values (in degrees)
+      "rotation" : [0.373, 0.577, 0.687, 0.235], // set x, y, z, and w to the respective values (in radians)
+
+      // note: only uniform scaling is supported at this time
+      "scale" : 2.0,                         // scales the bone by 2.0
+      "scale" : [2.0],                       // scales the bone by 2.0
+
+      // Key frame data is described below
+      // Note that any of the above styles of values will work for "pre" and "post", and "pre" does not have to have the same format as "post"
+      "rotation" : {
+        "0.0": [80.0, 0.0, 0.0],
+        "0.1667" : [-80.0, 0.0, 0.0],
+        "0.333" : [80.0, 0.0, 0.0]
+      }
+
+    // For discontinuous channel curve, you can specify a different value when interpolating to/from this key frame
+    "rotation": {
+      "0.3": {                                                    // the key field is the time stamp for this key frame : the value can be any of the above examples
+        "pre": [30.0, 0.0, 45.0],                               // when interpolating towards this keyframe from the previous, use this value
+        "post" : "180.0 * Math.Sin(global.key_frame_lerp_time)"  // when interpolating away from this key frame to the next, use this value
+      }
+    }
+
+    // another example
+    "rotation": {
+      "0.0": [80.0, 0.0, 0.0],           // start at an x rotation of 80 degrees
+      "0.4" : {
+        "pre": [80.0, 0.0, 0.0],       // stay at 80 until 0.4 seconds have elapsed
+        "post" : [0.0, 0.0, 0.0],       // discontinuously pop the x rotation to 0.0 degrees
+      },
+      "0.8" : [-80.0, 0.0, 0.0]           // using the previous frame's lerp mode, lerp to a x rotation of -80 degrees by 0.8 seconds
+        }
+      }
+    }
+  ]
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Key Frames">Key Frames</p></h1>
+
+A key frame defines two values for a channel-specific transform to a specific bone at a specified time, one as time approaches the key frame time, and the second from that key frame time onwards.</br>As such, when interpolating between two key frames, one can define the slope of the animation curve in either a continuous or discontinuous manner.</br><h1><p id="Interpolation">Interpolation</p></h1>
+
+Currently only linear interpolation is supported. Key frame "pre" and "post" settings allow control of the interpolation curve at any key frame.</br><h2></h2>
+
+<h2><p id="Continouos Example">Continouos Example</p></h2>
+
+This example spins the bone "head" around the y axis 1 rotation in 1 second.</br>Note that because interpolation is linear, at .25 seconds the head will be rotated to 90 degrees.</br><h3></h3>
+<br / ><textarea readonly="true" cols="25" rows="8">
+"head": {
+  "rotation": {
+    "0.0":[0, 0, 0],
+    "0.5": [ 0, 180, 0],
+    "1.0": [0, 360, 0]
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Discontinuous Example">Discontinuous Example</p></h2>
+
+Discontinuous just means that there won't be a smooth transition between key frames. It is useful if you want something to happen immediately.</br>This example scales the bone "head":</br>1. From 0 to 0.5 seconds (in the "pre" tag), the head bone is set to its normal scale of 1 in all dimensions [X, Y, Z]</br>2. At 0.5 seconds, the bone will instantly scale up to 2 times its normal size and then</br>3. From 0.5 to 1 second ("post"), the bone will re-scale back to its normal size of scale of 1 in all dimensions</br></br>Note In the larger example above of the file format, "pre" and "post" can also be defined by a MoLang expression that calculates that value at runtime. Allowing you to have a mathematically defined curve instead of being purely linear.</br><h3></h3>
+<br / ><textarea readonly="true" cols="24" rows="10">
+"head": {
+  "scale": {
+    "0.5": {
+      "pre": [1, 1, 1],
+      "post": 2.0
+    }
+    "1.0": [ 1.0 ]
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+
+<h1><p id="Animation Controllers">Animation Controllers</p></h1>
+
+Animation controllers decide which animations to play when. Each controller contains a list of states that play one or more animations, each of which can be blended on one or more parameters. Controller files are stored as JSON in the animation_controllers folder</br><h2></h2>
+Animation Controller Format:<br / ><textarea readonly="true" cols="64" rows="23">
+"<controller_name>": {
+  "states": {
+    "<state_name>": {
+      "parameters": [<parameter 0 script>, ...],  // optional
+      "animations": {
+        "<animation 0 name>": [
+          {
+            "min": 0.0,                             // optional
+            "peak": 0.1, 
+            "max": 0.3                              // optional
+          }
+        ],
+        ...
+      },
+      "transitions": [
+        { "<target_state_name>", "<expression>" },
+        ...
+      ]
+    },
+    ...
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="States">States</p></h1>
+
+A state defines how one or more animations interact with zero or more parameters. Each state has an optional parameters section, listing any number of parameters used by the animations to control their blending. Each state also has one or more animations, using the name given in the entity's definition json.</br><h2></h2>
+
+<h2><p id="State Parameters">State Parameters</p></h2>
+
+Parameters are either set by the game or by a user defined script that can be found in the entity definition json found in definitions/entity/<entity_name>.json</br><h3></h3>
+
+<h3><p id="For Example:">For Example:</p></h3>
+
+This defines a controller with a single state default that references the entity's ground speed (in metres per second).</br>It will play one animation walk that will blend from 0.0 to 1.0 as the ground speed increases from stopped to 2.3 m/s.</br>If the ground speed is greater than 2.3 m/s, the walk blend value will remain at 1.0.</br>If the ground speed is 0.0, the blend value will be 0.0 and the animation will be skipped.</br><h4></h4>
+<br / ><textarea readonly="true" cols="43" rows="16">
+"animation.controller.pig.move": {
+  "states": {
+    "default": {
+      "parameters": ["query.walk_speed"], 
+      "animations": {
+        "walk": [
+          {
+            "0.0": 0.0,
+            "2.3": 1.0
+          }
+        ]
+      };
+    }
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h3><p id="We can change the example like this:">We can change the example like this:</p></h3>
+
+-If pig is stopped it will play the idle animation.</br>-As the pig's speed increases to 0.1 m/s, the idle animation will be faded out.</br>-As the pig's speed goes from 0.0 to 2.7 m/s, the walk animation will be blended in from 0.0 to 1.0.</br>-As the pig's speed goes from 2.7 to 3.88 m/s, the walk animation will be blended out from 1.0 to 0.0 and the run animation will be blended in from 0.0 to 1.0</br>-Any speed higher than 3.88 m/s will simply play the run animation at a blend value of 1.0.</br><h4>Vanilla entities that use this</h4>
+<br / ><textarea readonly="true" cols="43" rows="29">
+"animation.controller.pig.move": {
+  "states": {
+    "default": {
+      "parameters": ["query.walk_speed"], 
+      "animations": {
+        "idle": [
+          {
+            "0.0": 1.0,
+            "0.1": 0.0,
+          }
+        ]
+        "walk": [
+          {
+            "0.1": 0.0,
+            "2.7": 1.0,
+            "3.88": 0.0
+          }
+        ]
+        "run": [
+          {
+            "2.7": 0.0,
+            "3.88": 1.0
+          }
+        ]
+      };
+    }
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h2><p id="Zero Parameters">Zero Parameters</p></h2>
+
+A controller with zero parameters will simply play it's animation(s).</br><a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Mult-Parameter Blending">Mult-Parameter Blending</p></h2>
+
+If the controller has multiple parameters, the resulting blend values are simply multiplied together. If you want a turn animation to play if a pig is turning, but fade it out if the pig is moving:</br>-Blend in the turn_right animation from 0.0 to 1.0 as the yaw speed increases from 0.0 to 90.0 degrees / second.</br>-Scale that value by 1.0 to 0.0 as the ground speed increases from 0.0 to 1.3 m/s.</br>-So if the pig is standing still, the first parameter will result in a blend weight of 0.0 and the second will be 1.0, which, when multiplied together gives 0.0.</br>-If the pig is rotating at 90.0 degrees per second, the first will be 1.0 and the second will be 1.0, so the turn animation will be blended at 1.0.</br>-If the pig is turning at 30.0 degrees per second and moving forwards at 0.9 m/s, the first will be 0.333, the second will be 0.75, so the turn animation will be weighted by 0.25.</br><h3></h3>
+<br / ><textarea readonly="true" cols="105" rows="20">
+"animation.controller.pig.move": {
+  "states": {
+    "default": {
+      "parameters": ["query.yaw_speed", "query.walk_speed"],
+      "animations": {
+        "turn_right": [
+          {                   // this first entry maps to parameter 0 (query.yaw_speed in this example)
+            "0.0": 0.0,
+            "90.0": 1.0
+          },
+          {                   // the second entry maps to parameter 1 (query.walk_speed in this example)
+            "0.0": 1.0,
+            "1.2": 0.0
+          }
+        ]
+      }
+    }
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="User-Defined Script Example">User-Defined Script Example</p></h2>
+
+This script will set foo to the result of the sin of query.life_time to later be used in the animation or animation controller.</br></br>Note: "pre_animation" tells the script to figure out the values of those variables once a frame, before animation occurs, so that the animation can use those values in their own formulas. If a variable didn't exist, it will create a new variable and its default value will be 0.0</br><h3>Parameters</h3>
+
+<h3><p id="In definitions\entity\tiger.json:">In definitions\entity\tiger.json:</p></h3>
+
+<h4></h4>
+<br / ><textarea readonly="true" cols="90" rows="10">
+{
+  "custom:tiger":{
+    "scripts":{
+      "pre_animation": { //determine these values before the animation happens each frame
+        "variable.foo = math.sin(query.life_time)"
+      }
+    }
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+Note that because foo is equal to a sin wave, that its values will range from -1 to 1. This means that you will have a period from 0 to -1 to 0 where only "base_pose" will play and then an equal amount of time where Walk will play on top of base_pose as foo goes from 0 to 1 back to 0. Base_pose will have a blend value of 1.0.</br><h4></h4>
+<br / ><textarea readonly="true" cols="79" rows="20">
+"controller.animation.tiger.move": {
+  "states": {
+    "default": {
+      "parameters":  ["Entity.foo"],
+      "animations": {
+        //animations are ADDITIVE unless otherwise specified
+        //in this case, base_pose will always be playing in the default state
+        //walk will play as well if Entity.foo is greater than 0.0
+        "base_pose": {},
+        "walk": [
+          {
+            "0.0": 0.0, //play none of the walk animation if foo is "0.0"
+            "1.0": 1.0 //play the walk animation fully blended if foo is "1.0"
+          }
+        ]
+      }
+    }
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+
+<h1><p id="State Transitions">State Transitions</p></h1>
+
+A state can specify any number of transition scripts, listed in order. Each transition has a target state to switch to, and a script for whether it should switch or not. For each transition in order, evaluate the script, and if it returns non-zero, switch to the specified state immediately. NOTE: Only one transition will be processed per frame.</br><h2></h2>
+<br / ><textarea readonly="true" cols="69" rows="13">
+"<controller_name>": {
+  "states": {
+    "<state_name>": {
+      ...    },    "transitions": [
+      // Evaluate the below expressions in order.
+      // The first to return non-zero is the state to transition to.
+      // If all are zero, then don't transition.
+      { "<target_state_name>", "<expression>" },
+      ...
+    ]
+  },
+  ...},
+</textarea> </br>
+For example: <br / ><textarea readonly="true" cols="110" rows="31">
+"controller.animation.tiger.move": {
+  "states": {
+    "default": {
+      "parameters":  ["query.walk_speed"], 
+      "animations": {
+        //animations are ADDITIVE unless otherwise specified
+        //in this case, base_pose will always be playing in the default state
+        //walk will play as well if query.walk_speed is greater than 0.0
+        "base_pose": {},
+        "walk": [
+          {
+            "0.0": 0.0, //play none of the walk animation if query.walk_speed is "0.0"
+            "1.0": 1.0 //play the walk animation fully if query.walk_speed is "1.0"
+          }
+        ]
+      },
+      "transitions": [
+        { "angry" : "query.is_angry" } // transition to angry state if query.is_angry returns true
+      ]    },
+    "angry": {
+      "animations": {
+        "prowl": {} // play the prowl animation in the angry state
+      },
+      "transitions": [
+        { "default" : "!query.is_angry" } // transition back to default state if query.is_angry returns false
+      ]
+    }
+  }
+}
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h1><p id="Render Controllers">Render Controllers</p></h1>
+
+The Render Controller needs an identifier and needs to follow the format of "controller.render.<name>". This name needs to match the name set in the Client Entity Definitions JSON.</br></br>Render Controllers are a way for the player to determine what renders on the entity. Players can set the geometry, materials, textures, and part visibility of the entity. In addition to setting the keys directly, players can use arrays to have the entity choose between different options.</br><h1><p id="Getting Started">Getting Started</p></h1>
+
+To begin create a new folder named "render_controllers" in the root of the Resource Pack you want to add the new Render Controller JSON inside.</br><h2></h2>
+Example render controllers JSON for the ocelot<br / ><textarea readonly="true" cols="91" rows="15">
+"format_version": "1.8.0",
+"render_controllers": {
+  "controller.render.ocelot": {
+    "arrays": {
+      "textures": {
+        "Array.skins": ["Texture.wild", "Texture.black", "Texture.red", "Texture.siamese"]
+      }
+    },
+    "geometry": "Geometry.default",
+    "materials": [{ "*": "Material.default" }],
+    "textures": ["Array.skins[query.variant]"]
+  }
+}
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Examples">Examples</p></h1>
+
+<h2>Parameters</h2>
+
+<h3></h3>
+Example Array for geometry from the sheep JSON<br / ><textarea readonly="true" cols="59" rows="8">
+"arrays": {
+  "geometries": {
+    "Array.geos": ["Geometry.default", "Geometry.sheared"]
+  }
+},
+"geometry": "Array.geos[query.is_sheared]",
+
+</textarea> </br>
+Example Array for textures from the villager JSON<br / ><textarea readonly="true" cols="113" rows="8">
+"arrays": {
+  "textures": {
+    "Array.skins": ["Texture.farmer", "Texture.librarian", "Texture.priest", "Texture.smith", "Texture.butcher"]
+  }
+},
+"textures": ["Array.skins[query.variant]"]
+
+</textarea> </br>
+Example Array for materials from the spider JSON<br / ><textarea readonly="true" cols="66" rows="8">
+"arrays": {
+  "materials": {
+    "Array.materials": ["Material.default", "Material.invisible"]
+  }
+},
+"materials": [{ "*": "Array.materials[query.is_invisible]" }], 
+
+</textarea> </br>
+Example with part_visibility for turning on and off visibility of parts from Llama JSON:<br / ><textarea readonly="true" cols="192" rows="21">
+"format_version": "1.8.0",
+"render_controllers": {
+  "controller.render.llama": {
+    "arrays": {
+      "textures": {
+        "Array.base": ["Texture.creamy", "Texture.white", "Texture.brown", "Texture.gray"],
+        "Array.decor": ["Texture.decor_none", "Texture.decor_white", "Texture.decor_orange", "Texture.decor_magenta", "Texture.decor_light_blue", "Texture.decor_yellow", "Texture.decor_lime", "Texture.decor_pink", "Texture.decor_gray", "Texture.decor_silver", "Texture.decor_cyan", "Texture.decor_purple", "Texture.decor_blue", "Texture.decor_brown", "Texture.decor_green", "Texture.decor_red", "Texture.decor_black"]
+      }
+    },
+    "geometry": "Geometry.default", 
+    "part_visibility": [{ "chest*": "query.is_chested" }],
+    "materials": [{ "*": "Material.default" }],
+    "textures": [
+      "Array.base[query.variant]",
+      "Array.decor[variable.decor_texture_index]",
+      "Texture.decor_none"
+    ]
+  }
+}
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+NOTE: The arrays for Materials and Part visibility are applied in the order specified. Materials and Part visibility specified later in the file will override previous materials or parts.</br><h3></h3>
+Material array example from Horse render controllers. Saddle will override Mane, which will override TailA, etc.:<br / ><textarea readonly="true" cols="42" rows="8">
+"materials": [
+  { "*": "Material.default" },
+  { "TailA": "Material.horse_hair" },
+  { "Mane": "Material.horse_hair" },
+  { "*Saddle*": "Material.horse_saddle" }
+],
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+
+<h1><p id="Attachables">Attachables</p></h1>
+
+<h1><p id="Getting Started">Getting Started</p></h1>
+
+Attachables are a way for you to specify what materials, textures, and geometry equipped armor will use.</br></br>In the root of the Resource Pack create a new folder and name it "attachables". In the "attachables" folder create a JSON file and give it a name. The JSON file needs a format version and minecraft:attachable information.</br></br>The minecraft:attachable section contains the description for the attachable. Under description there are a number of things that you can set and have the client run on the attachable.</br><h2>Parameters</h2>
+
+<h3></h3>
+Example attachables JSON for the chainmail_boots JSON<br / ><textarea readonly="true" cols="58" rows="21">
+"format_version": "1.8.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "minecraft:chainmail_boots", 
+      "materials": {
+        "default": "armor",
+        "enchanted": "armor_enchanted"
+      },
+      "textures": {
+        "default": "textures/models/armor/chain_1",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      ),
+      "geometry": {
+        "default": "geometry.humanoid.armor.boots"
+      },
+      "render_controllers": ["controller.render.armor"]
+    }
+  }
+}
+
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Identifier">Identifier</p></h2>
+
+The identifier is used to register the attachable with the server. In the attachables JSON the identifier sets the appearance of the entity (materials, textures, geometry, etc.) The matching identifier needs to match a corresponding identifier in the "items_client" JSON of the resource pack.</br><a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Materials, Textures, and Geometry">Materials, Textures, and Geometry</p></h2>
+
+Players can set the materials, textures, and geometry used for the attachable in these sections. Players can set one or more materials, textures, and geometries that can be used by the attachable. Players can set create user defined keys of when materials, textures and geometries are used. These keys are set in the Render Controllers JSON. Players can reference materials from the vanilla Resource Pack or create their own. Custom materials, textures, and geometries should be placed in the corresponding folder at the root of the Resource Pack.</br><a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Controllers">Controllers</p></h2>
+
+Specifies the identifier of the Render Controller. This identifier needs to match the identifier of a corresponding JSON located in the "render_controllers" folder. You can reference Render Controllers from the vanilla Resource Pack or create your own. Custom Render Controllers should be in the "textures" folder at the root of the Resource Pack.</br><a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+

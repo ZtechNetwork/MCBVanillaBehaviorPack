@@ -1,7 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:arrow",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "component_groups": {
       "minecraft:hard_arrow": {
         "minecraft:projectile": {
@@ -56,13 +61,36 @@
           "shouldbounce": true,
           "offset": [ 0, -0.1, 0 ]
         }
+      },
+
+      "minecraft:pillager_arrow": {
+        "minecraft:projectile": {
+          "onHit": {
+            "impact_damage": {
+              "damage": [ 3, 6 ],
+              "knockback": true,
+              "semirandomdiffdamage": false,
+              "destroyonhit": true
+            },
+            "stick_in_ground": {
+              "shake_time": 0.35
+            },
+            "arrow_effect": {
+            }
+          },
+          "hitSound": "bow.hit",
+          "power": 1.6,
+          "gravity": 0.05,
+          "uncertaintyBase": 16,
+          "uncertaintyMultiplier": 4,
+          "anchor": 1,
+          "shouldbounce": true,
+          "offset": [ 0, -0.1, 0 ]
+        }
       }
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:arrow"
-      },
       "minecraft:collision_box": {
         "width": 0.25,
         "height": 0.25
@@ -107,6 +135,12 @@
             "filters": {"test": "is_family", "subject": "other", "value": "player"},
             "add": {
               "component_groups" : [ "minecraft:player_arrow" ]
+            }
+          },
+          {
+            "filters": {"test": "is_family", "subject": "other", "value": "pillager"},
+            "add": {
+              "component_groups": [ "minecraft:pillager_arrow" ]
             }
           }
         ]

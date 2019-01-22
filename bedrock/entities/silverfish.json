@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:silverfish",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:silverfish_calm": {
@@ -31,9 +37,6 @@
     },
 
 	"components": {
-	  "minecraft:identifier": {
-		  "id": "minecraft:silverfish"
-	  },
 	  "minecraft:type_family": {
 		  "family":["silverfish", "monster", "arthropod" ]          
 	  },
@@ -53,9 +56,9 @@
 			"minecraft:movement": {
 				"value": 0.25
 			},
-      "minecraft:navigation.walk": {
-        "can_float": true
-      },
+    "minecraft:navigation.walk": {
+      "can_path_over_water": true
+    },
       "minecraft:movement.basic": {
         
       },
@@ -79,7 +82,6 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
         "entity_types": [
           {
             "filters": {  

@@ -1,17 +1,19 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:witch",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:witch"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0
       },
       "minecraft:nameable": {
-	    },
+      },
       "minecraft:loot": {
         "table": "loot_tables/entities/witch.json"
       },
@@ -24,7 +26,7 @@
         "value": 0.25
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_water": false
       },
       "minecraft:movement.basic": {
@@ -60,7 +62,6 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
         "entity_types": [
           {
             "filters": {
@@ -87,11 +88,11 @@
         ],
         "must_reach": true
       },
-     "minecraft:type_family": {
-       "family": [ "witch", "monster" ]
-     },
-	   "minecraft:physics": {
-     }
+      "minecraft:type_family": {
+        "family": [ "witch", "monster" ]
+      },
+      "minecraft:physics": {
+      }
     }
   }
 }

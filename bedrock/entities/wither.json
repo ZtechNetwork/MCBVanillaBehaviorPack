@@ -1,11 +1,14 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:wither",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:wither"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0
@@ -37,14 +40,14 @@
       "minecraft:nameable": {
       },
       "minecraft:movement": {
-        "value": 0.6
+        "value": 0.25
       },
       "minecraft:navigation.walk": {
-        "can_float": true,
+        "can_path_over_water": true,
         "avoid_water": true
       },
       "minecraft:movement.basic": {
-        "max_turn": 180.0
+        "max_turn":  180.0
       },
       "minecraft:jump.static": {
       },
@@ -52,11 +55,6 @@
       },
       "minecraft:can_fly": {
       },
-      "minecraft:follow_range": {
-        "value": 70,
-        "max": 70
-      },
-
       "minecraft:behavior.float": {
         "priority": 1
       },
@@ -73,16 +71,12 @@
         "priority": 3,
         "entity_types": [
           {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "player"
-            },
+            "filters": { "test" :  "is_family", "subject" : "other", "value" :  "player"},
             "max_dist": 70
           },
           {
             "filters": {
-              "all_of": [
+               "all_of": [
                 {
                   "test": "is_family",
                   "subject": "other",
@@ -120,7 +114,7 @@
       "minecraft:type_family": {
         "family": [ "wither", "skeleton", "monster", "undead" ]
       },
-      "minecraft:physics": {
+	    "minecraft:physics": {
       }
     },
 

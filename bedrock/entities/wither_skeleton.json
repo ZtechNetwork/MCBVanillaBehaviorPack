@@ -1,11 +1,14 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:wither_skeleton",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:wither_skeleton"
-      },
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0,
@@ -17,7 +20,7 @@
       },
       "minecraft:collision_box": {
         "width": 0.72,
-        "height": 2.0
+        "height": 2.01
       },
       "minecraft:attack": {
         "damage": 4,
@@ -53,15 +56,10 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
         "reselect_targets": true,
         "entity_types": [
           {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "player"
-            },
+            "filters": { "test": "is_family", "subject": "other", "value": "player" },
             "max_dist": 16
           },
           {

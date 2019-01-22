@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:tnt",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "from_explosion": {
@@ -17,9 +23,6 @@
     },
 	
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:tnt"
-      },
       "minecraft:type_family": {
         "family": [ "tnt", "inanimate" ]
       },

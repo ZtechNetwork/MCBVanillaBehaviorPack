@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:guardian",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:guardian_aggressive": {
@@ -57,9 +63,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:guardian"
-      },
       "minecraft:nameable": {
       },
       "minecraft:collision_box": {
@@ -85,7 +88,7 @@
       },
       "minecraft:navigation.generic": {
         "is_amphibious": true,
-        "can_float": false,
+        "can_path_over_water": false,
         "can_swim": true,
         "can_walk": false,
         "can_breach": true

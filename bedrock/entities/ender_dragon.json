@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:ender_dragon",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "dragon_sitting": {
@@ -40,9 +46,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:ender_dragon"
-      },
       "minecraft:type_family": {
         "family": [ "dragon" ]
       },

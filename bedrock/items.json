@@ -18,6 +18,7 @@
         "nutrition": 4, //
         "saturation_modifier": "supernatural",
         "is_meat": false, //
+        "can_always_eat": true,
         "effects": [
           {
             "name": "regeneration",
@@ -60,7 +61,7 @@
         ]
       }
     },
-    "appleEnchanted" : {
+    "appleEnchanted": {
       "hand_equipped": false,
       "stack_by_data": true,
       "use_duration": 32,
@@ -71,6 +72,7 @@
         "nutrition": 4,
         "saturation_modifier": "supernatural",
         "is_meat": false,
+        "can_always_eat": true,
         "effects": [
           {
             "name": "regeneration",
@@ -198,7 +200,7 @@
         ]
       }
     },
-    "cooked_fish" : {
+    "cooked_fish": {
       "use_duration": 32,
       "max_damage": 0,
       "stacked_by_data": true,
@@ -210,7 +212,7 @@
         "is_meat": true
       }
     },
-    "cooked_salmon" : {
+    "cooked_salmon": {
       "use_duration": 32,
       "max_damage": 0,
       "stacked_by_data": true,
@@ -221,7 +223,7 @@
         "is_meat": true
       }
     },
-    "cookie" : {
+    "cookie": {
       "use_duration": 32,
 
       "food": {
@@ -230,7 +232,7 @@
         "is_meat": false
       }
     },
-    "melon" : {
+    "melon": {
       "use_duration": 32,
 
       "food": {
@@ -257,7 +259,7 @@
         "is_meat": true
       }
     },
-    "chicken" : {
+    "chicken": {
       "use_duration": 32,
 
       "food": {
@@ -274,7 +276,7 @@
         ]
       }
     },
-    "cooked_chicken" : {
+    "cooked_chicken": {
       "use_duration": 32,
 
       "food": {
@@ -283,7 +285,7 @@
         "is_meat": true
       }
     },
-    "muttonRaw" : {
+    "muttonRaw": {
       "use_duration": 32,
 
       "food": {
@@ -292,7 +294,7 @@
         "is_meat": true
       }
     },
-    "muttonCooked" : {
+    "muttonCooked": {
       "use_duration": 32,
 
       "food": {
@@ -344,7 +346,7 @@
         ]
       }
     },
-    "carrot" : {
+    "carrot": {
       "use_duration": 32,
 
       "food": {
@@ -357,7 +359,7 @@
         "plant_at": "farmland"
       }
     },
-    "potato" : {
+    "potato": {
       "use_duration": 32,
 
       "food": {
@@ -370,7 +372,7 @@
         "plant_at": "farmland"
       }
     },
-    "baked_potato" : {
+    "baked_potato": {
       "use_duration": 32,
 
       "food": {
@@ -379,7 +381,7 @@
         "is_meat": false
       }
     },
-    "poisonous_potato" : {
+    "poisonous_potato": {
       "use_duration": 32,
 
       "food": {
@@ -396,7 +398,7 @@
         ]
       }
     },
-    "golden_carrot" : {
+    "golden_carrot": {
       "use_duration": 32,
 
       "food": {
@@ -405,7 +407,7 @@
         "is_meat": false
       }
     },
-    "pumpkin_pie" : {
+    "pumpkin_pie": {
       "use_duration": 32,
 
       "food": {
@@ -414,7 +416,7 @@
         "is_meat": false
       }
     },
-    "rabbit" : {
+    "rabbit": {
       "use_duration": 32,
 
       "food": {
@@ -443,7 +445,7 @@
         "is_meat": true
       }
     },
-    "beetroot" : {
+    "beetroot": {
       "use_duration": 32,
 
       "food": {
@@ -464,7 +466,7 @@
         "is_meat": false
       }
     },
-    "wheat_seeds" : {
+    "wheat_seeds": {
       "seed": {
         "crop_result": "wheat", // wheatCrops
         "plant_at": "farmland"
@@ -476,21 +478,21 @@
         "plant_at": "farmland"
       }
     },
-    "melon_seeds" : {
+    "melon_seeds": {
 
       "seed": {
         "crop_result": "melon_stem",
         "plant_at": "farmland"
       }
     },
-    "nether_wart" : {
+    "nether_wart": {
 
       "seed": {
         "crop_result": "nether_wart",
         "plant_at": "soul_sand"
       }
     },
-    "beetroot_seeds" : {
+    "beetroot_seeds": {
       "seed": {
         "crop_result": "beetroot",
         "plant_at": "farmland"
@@ -507,6 +509,19 @@
         "picture_duration": 1.0,
         "slide_away_duration": 0.2
 
+      }
+    },
+    "chorus_fruit": {
+      "use_duration": 32,
+
+      "food": {
+        "nutrition": 4,
+        "saturation_modifier": "low",
+        "is_meat": false,
+        "on_use_action": "chorus_teleport",
+        "cooldown_type": "chorusfruit",
+        "cooldown_time": 20,
+        "can_always_eat": true
       }
     }
   }

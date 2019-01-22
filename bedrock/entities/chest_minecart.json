@@ -1,11 +1,13 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
-
+    "description": {
+      "identifier": "minecraft:chest_minecart",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:chest_minecart"
-      },
       "minecraft:type_family": {
         "family": [ "minecart", "inanimate" ]
       },

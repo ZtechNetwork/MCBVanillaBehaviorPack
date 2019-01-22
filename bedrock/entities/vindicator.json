@@ -1,6 +1,12 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:vindicator",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "component_groups": {
       "minecraft:vindicator_aggro": {
@@ -29,9 +35,6 @@
     },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:vindicator"
-      },
       "minecraft:nameable": {
         "default_trigger": {
           "event": "minecraft:stop_johnny",
@@ -71,7 +74,7 @@
         "value": 0.35
       },
       "minecraft:navigation.walk": {
-        "can_float": true
+        "can_path_over_water": true
       },
       "minecraft:movement.basic": {
       },

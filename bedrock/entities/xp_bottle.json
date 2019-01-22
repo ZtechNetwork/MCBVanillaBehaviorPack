@@ -1,11 +1,14 @@
 {
+  "format_version": "1.8.0",
   "minecraft:entity": {
-    "format_version": "1.6.0",
+    "description": {
+      "identifier": "minecraft:xp_bottle",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
 
     "components": {
-      "minecraft:identifier": {
-        "id": "minecraft:xp_bottle"
-      },
       "minecraft:collision_box": {
         "width": 0.25,
         "height": 0.25
