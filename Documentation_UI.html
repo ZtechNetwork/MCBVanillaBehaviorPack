@@ -1,0 +1,120 @@
+<h1>UI DOCUMENTATION </br>Version: 1.12.0.28</h1>
+<h2><p id="Index">Index</p></h2>
+<table border="1">
+<tr> <th><a href="#Scripting System">Scripting System</a></th> </tr>
+<tr> <td> <a href="#Getting The Script Engine"> Getting The Script Engine</a> </tr> </td>
+<tr> <td> <a href="#Engine Bindings"> Engine Bindings</a> </tr> </td>
+<tr> <td> <a href="#Script Bindings"> Script Bindings</a> </tr> </td>
+</table>
+<a href="#Index">Back to top</a>
+<h1><p id="Scripting System">Scripting System</p></h1>
+
+The custom UI for Minecraft is based on HTML 5.</br>You can write JavaScript within the HTML file to listen and respond to events from the UI Engine. These events can be triggered by the UI Engine itself or you can trigger them from your scripts.</br>In order to use custom UI, the resource pack containing the custom UI needs to have the custom UI capabilities enabled. To do this, simply add "experimental_custom_ui" to the capabilities array in the pack's manifest. You can check the Turn-Based RPG demo for an example of how to do this.</br><h1><p id="Getting The Script Engine">Getting The Script Engine</p></h1>
+
+In order to create a link between the UI Engine and the Script Engine you need to capture the instance of the Script Engine.</br>The engine.on() function needs to listen for the event "facet:updated:scripting" and you need to store the return value.</br>You will then need to request the script engine by triggering the "facet:request" event and passing it "scripting" in a vector.</br>The order of the calls is important. If you trigger the request before you registered the listener you won't be able to capture the callback.</br><h2>Example of how to capture the Script Engine:</h2>
+<br / ><textarea readonly="true" cols="59" rows="6">
+let scriptInterface = undefined;
+engine.on("facet:updated:scripting", function(interface) {
+  scriptInterface = interface;
+});
+engine.trigger("facet:request", ["scripting"]);
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Engine Bindings">Engine Bindings</p></h1>
+
+<h2></h2>
+
+<h2><p id="on(EventIdentifier, Callback)">on(EventIdentifier, Callback)</p></h2>
+
+This is used to get events from the UI Engine. These events can be originally sent from client scripts using `send_ui_event`, or created by the game and passed along by the UI Engine. The data sent from scripts to this function must be a string.</br><h3></h3>
+
+<h3><p id="Parameters">Parameters</p></h3>
+
+<h4></h4>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">EventIdentifier</td>
+<td style="border-style:solid; border-width:1; padding:9px">String</td>
+<td style="border-style:solid; border-width:1; padding:9px">Specifies the event that function will react to</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">Callback</td>
+<td style="border-style:solid; border-width:1; padding:9px">JavaScript Object</td>
+<td style="border-style:solid; border-width:1; padding:9px">The callback that will be called when the event happens</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h3>Example of how to listen for events from a client script:</h3>
+<br / ><textarea readonly="true" cols="62" rows="3">
+engine.on("exampleEventIdentifier", function (exampleData) { 
+}
+</textarea> </br>
+<br><br>
+
+<h2><p id="trigger(EventIdentifier, Arguments)">trigger(EventIdentifier, Arguments)</p></h2>
+
+This is used to send events to the UI Engine.</br><h3></h3>
+
+<h3><p id="Parameters">Parameters</p></h3>
+
+<h4></h4>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">EventIdentifier</td>
+<td style="border-style:solid; border-width:1; padding:9px">String</td>
+<td style="border-style:solid; border-width:1; padding:9px">Specifies the event that function will react to</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">Arguments</td>
+<td style="border-style:solid; border-width:1; padding:9px">JavaScript Object</td>
+<td style="border-style:solid; border-width:1; padding:9px">The arguments passed to the callback</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h3>Example of how to send an event to the UI engine:</h3>
+<br / ><textarea readonly="true" cols="59" rows="2">
+engine.trigger("exampleEventIdentifier", eventDataObject);
+</textarea> </br>
+<br><br>
+
+<br><br>
+
+<h1><p id="Script Bindings">Script Bindings</p></h1>
+
+<h2></h2>
+
+<h2><p id="triggerEvent(Data)">triggerEvent(Data)</p></h2>
+
+This triggers the minecraft:ui_event on client scripts with the provided data.</br><h3></h3>
+
+<h3><p id="Parameters">Parameters</p></h3>
+
+<h4></h4>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">Data</td>
+<td style="border-style:solid; border-width:1; padding:9px">String</td>
+<td style="border-style:solid; border-width:1; padding:9px">This string will be sent to "minecraft:ui_event" event in client scripts</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h3>Example of how to send events to a client script:</h3>
+<br / ><textarea readonly="true" cols="57" rows="2">
+scriptInterface.triggerEvent("SendThisDataToTheScript");
+</textarea> </br>
+<br><br>
+
+<br><br>
+
+<br><br>
+

@@ -1,0 +1,875 @@
+<h1>MOLANG DOCUMENTATION </br>Version: 1.12.0.28</h1>
+<h2><p id="Index">Index</p></h2>
+<table border="1">
+<tr> <th><a href="#Why Does MoLang Exist?">Why Does MoLang Exist?</a></th> </tr>
+<tr> <th><a href="#Lexical Structure">Lexical Structure</a></th> </tr>
+<tr> <td> <a href="#Values"> Values</a> </tr> </td>
+<tr> <td> <a href="#Variables"> Variables</a> </tr> </td>
+<tr> <td> <a href="#Keywords"> Keywords</a> </tr> </td>
+<tr> <td> <a href="#Math Functions"> Math Functions</a> </tr> </td>
+<tr> <td> <a href="#Types, Values, and Variables"> Types, Values, and Variables</a> </tr> </td>
+<tr> <td> <a href="#Simple vs Complex Expressions"> Simple vs Complex Expressions</a> </tr> </td>
+<tr> <th><a href="#Domain Examples">Domain Examples</a></th> </tr>
+<tr> <td> <a href="#Entity Definition Scripts"> Entity Definition Scripts</a> </tr> </td>
+<tr> <td> <a href="#Animation and Animation Controller Files"> Animation and Animation Controller Files</a> </tr> </td>
+<tr> <td> <a href="#Render Controllers"> Render Controllers</a> </tr> </td>
+<tr> <th><a href="#Query Functions">Query Functions</a></th> </tr>
+<tr> <td> <a href="#"> </a> </tr> </td>
+<tr> <td> <a href="#List of Entity Queries"> List of Entity Queries</a> </tr> </td>
+</table>
+<a href="#Index">Back to top</a>
+<h1><p id="Why Does MoLang Exist?">Why Does MoLang Exist?</p></h1>
+
+MoLang is a simple expression-based language designed for fast calculation of values at run-time.  Its focus is solely to enable script-like capabilities in high-performance systems where JavaScript is not performant at scale.  We need scripting capabilities in these low-level systems to support end-user modding capabilities, custom entities, rendering, and animation.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Lexical Structure">Lexical Structure</p></h1>
+
+The language structure is largely based on simple C-style syntax, focusing on handling math expressions.  A script is made of either one expression for simple cases, or can be made of several where intermediate values are required or to help reduce compute time.</br></br>In all cases, the value of the last expression in a script provides the script's value.  In a multi-expression script, all but the last expression must assign a value to a variable.  The last expression can as well, but doesn't need to as its value is assumed to be the used as the return value.</br><h1><p id="Values">Values</p></h1>
+
+- Value types are concretely specified, or numeric if not.</br>- All numerical values are floats.</br>- Boolean values such as actor flags are converted to a float value of either 0.0 or 1.0 for values of false or true respectively.</br>- For boolean tests, a float value equivalent to 0.0 is false, and anything not equal to 0.0 is true.</br>- For array indices, floats are c-style cast to ints, and clamped at zero for negative values or wrapped by the array size for large values.</br>- Other supported types are textures, materials, and geometry where they make sense (such as render controllers).</br>- Errors generally return a value of 0.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Variables">Variables</p></h1>
+
+There are several domains a variable may belong to:</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Domain</th> <th style="border-style:solid; border-width:3;">Scope</th> <th style="border-style:solid; border-width:3;">Example</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">temp</td>
+<td style="border-style:solid; border-width:3; padding:7px">current expression</td>
+<td style="border-style:solid; border-width:3; padding:7px">temp.foo = math.sin(query.anim_time); return temp.foo * temp.foo;</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">variable</td>
+<td style="border-style:solid; border-width:3; padding:7px">read-write values, usually related to the current entity</td>
+<td style="border-style:solid; border-width:3; padding:7px">variable.my_saved_var = variable.my_saved_var + 1;</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query</td>
+<td style="border-style:solid; border-width:3; padding:7px">read-only values, usually related to current entity</td>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_baby</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">geometry</td>
+<td style="border-style:solid; border-width:3; padding:7px">current render controller</td>
+<td style="border-style:solid; border-width:3; padding:7px">"geometry": "array.geos[query.is_sheared]"</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">material</td>
+<td style="border-style:solid; border-width:3; padding:7px">current render controller</td>
+<td style="border-style:solid; border-width:3; padding:7px">"materials": [ { "*": "material.default" }, { "leg*": "material.legs" } ]</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">texture</td>
+<td style="border-style:solid; border-width:3; padding:7px">current render controller</td>
+<td style="border-style:solid; border-width:3; padding:7px">"textures": ["array.skins[query.is_saddled]"]</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Keywords">Keywords</p></h1>
+
+All identifiers not in a scope listed below are reserved for future use</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Keyword</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`float`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Numerical constant value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`( )`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Parentheses for expression term evaluation control`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Brackets for array access`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`query.function_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Access to an entity's properties`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.function_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Various math functions (see below)`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`temp.variable_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Store an intermediate value for the duration of the current expression`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`variable.variable_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Store a value on the attached entity for later use`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`geometry.texture_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`A reference to a texture named in the entity definition`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`material.texture_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`A reference to a texture named in the entity definition`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`texture.texture_name`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`A reference to a texture named in the entity definition`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`! && || < <= >= > == !=`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Logical operators`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`* / + -`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Basic math operators`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`test ? if true : if false`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Conditional operator`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`this`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`The current value before executing the script (context sensitive)`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`return`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`For complex expressions, this evaluates the following statement and stops execution of the script, returns the value computed`</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Math Functions">Math Functions</p></h1>
+
+`</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Function</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.abs(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Absolute value of value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.sin(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Sine (in degrees) of value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.cos(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Cosine (in degrees) of value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.exp(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Calculates e to the value'th power`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.ln(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Natural logarithm of value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.pow(base, exponent)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Elevates base to the exponent'th power`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.sqrt(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Square root of value`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.random(low, high)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Random value between low and high inclusive`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.ceil(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Round value up to nearest integral number`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.round(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Round value to nearest integral number`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.trunc(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Round value towards zero`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.floor(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Round value down to nearest integral number`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.mod(value, denominator)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Return the remainder of value / denominator`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.min(A, B)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Return lowest value of A or B`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.max(A, B)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Return highest value of A or B`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.clamp(value, min, max)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Clamp value to between min and max inclusive`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.lerp(start, end, 0_to_1)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Lerp from start to end via 0_to_1`</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.lerprotate(start, end, 0_to_1)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">`Lerp the shortest direction around a circle from start degrees to end degrees via 0_to_1`</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Types, Values, and Variables">Types, Values, and Variables</p></h1>
+
+In general, all expression values are floats.  In render controllers, some expressions result in a texture or material depending on the context.  All array index expressions are processed as floats, and cast to integers when performing the final lookup into the array.  Positive array indices wrap by the size of the array.  Negative array indices clamp to 0.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Simple vs Complex Expressions">Simple vs Complex Expressions</p></h1>
+
+<h2></h2>
+
+A simple expression is a single statement, the value of which is returned to the system that evaluated the expression.  eg:</br><h3></h3>
+<br / ><textarea readonly="true" cols="33" rows="2">
+math.sin(query.anim_time * 1.23)
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+A complex expression is one with multiple statements, each ending in a ';'.  Each statement is evaluated in order.  In the current implementation, the last statement requires the use of the return keyword and defines the resulting value of the expression.  eg:</br><h3></h3>
+<br / ><textarea readonly="true" cols="69" rows="4">
+temp.my_temp_var = Math.sin(query.anim_time * 1.23);
+temp.my_other_temp_var = Math.cos(query.life_time + 2.0);
+return temp.my_temp_var * temp.my_temp_var + temp.my_other_temp_var;
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+Note that in a simple expression, ';' is not allowed, whereas in a complex expression, each statement requires a ';' including the last.</br><a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+
+<h1><p id="Domain Examples">Domain Examples</p></h1>
+
+<h1><p id="Entity Definition Scripts">Entity Definition Scripts</p></h1>
+
+In the definition file there is a section for pre-computing values.  These are executed immediately before animation and render controllers are processed, and stored in the entity.  The purpose is to pre-compute any expensive and complex values you may want to reuse in your scripts, long-living index variable updates, or generally any one-off computation per render tick.</br><h2></h2>
+<br / ><textarea readonly="true" cols="110" rows="7">
+"scripts": {
+    "pre_animation": [
+      "variable.my_constant = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed;",
+      "variable.my_constant2 = Math.exp(1.5);",
+    ]
+  },
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Animation and Animation Controller Files">Animation and Animation Controller Files</p></h1>
+
+These are always numerical operations to control which animations are playing and how to animate bones.  "variable.variable_name" and "query.function_name" refers to the entity currently being rendered.  They have access to everything in the language except material, texture, and geometry types.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Render Controllers">Render Controllers</p></h1>
+
+There are a few different kinds of expressions here, where context implies what is allowed.  As with animations, the entity accessors refer to the current entity, however depending on the context one also has access to materials, textures, and geometries.  There are two sections in a render controller:</br>-Array definitions (optional)</br>-Resource usage (required)</br>The array definition section allows you to create arrays of resources by resource type if you so desire.  These can then be referenced in the resource usage section.</br><h2>Parameters</h2>
+
+<h2><p id="Array Expressions">Array Expressions</p></h2>
+
+For each of the three resource types (materials, textures, and geometry), you can define an array of resources.  The name of the resource is the nice-name from the definition file.  Using materials as an example:</br><h3></h3>
+
+<h4></h4>
+<br / ><textarea readonly="true" cols="93" rows="12">
+"arrays":
+{
+  "materials": {
+    "array.my_array_1": ["material.a", "material.b", "material.c"],
+    "array.my_array_2" : ["material.d", "material.e"],
+    "array.my_array_3" : ["array.my_array_1", "material.my_array_2"],
+    "array.my_array_4" : ["array.my_array_2", "material.my_array_3"],
+    "array.my_array_5" : ["array.my_array_1", "material.my_array_1", "material.my_array_4"],
+    "array.my_array_6" : ["array.my_array_1", "material.f"],
+    ...
+  },
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+Note that all elements of an array must be of the same type.  eg: a texture array must only contain textures.</br></br>An array can reference any combination of zero or more arrays (including duplicates if desired) and/or zero or more materails (again, including duplicates if you like), and you can have as many arrays as you like, each with as many elements as you like.  If an array includes arrays in its members, they do not need to be the same length.  When indexing into an array in the resource usage section, you use numerical expressions.  If the resulting number is negative, it will use zero as the index.  Any non - negative index will converted to an integer, and will wrap based on the size of the array:</br><h4></h4>
+<br / ><textarea readonly="true" cols="47" rows="2">
+index = max(0, expression_result) % array_size
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<h2><p id="Resource Expression">Resource Expression</p></h2>
+
+A resource expression must return a single resource of a specific type depending on the context.</br>For example, in the "geometry" section, you must produce an expression that will result in a single geometry.  Some examples:</br><h3></h3>
+Always use a specific geometry<br / ><textarea readonly="true" cols="30" rows="2">
+"geometry": "geometry.my_geo"
+</textarea> </br>
+Cycle through an array of geometries at a rate of one per second<br / ><textarea readonly="true" cols="51" rows="2">
+"geometry": "array.my_geometries[query.anim_time]"
+</textarea> </br>
+Pick a geo based on an entity flag<br / ><textarea readonly="true" cols="68" rows="2">
+"geometry": "query.is_sheared ? geometry.sheared : geometry.woolly"
+</textarea> </br>
+Use specific geo when sleeping, otherwise flip through an array based on a cosine curve, using index zero for almost half the time while the cosine curve is negative<br / ><textarea readonly="true" cols="127" rows="2">
+"geometry": "query.is_sleeping ? geometry.my_sleeping_geo : array.my_geos[math.cos(query.anim_time * 12.3 + 41.9) * 10 + 0.6]"
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="Resource Sections">Resource Sections</p></h2>
+
+<h3></h3>
+
+<h3><p id="Geometry">Geometry</p></h3>
+
+The geometry section specifies which geometry to use when rendering.  As you can specify as many render controllers as you like in the definition file, a single render controller is only concerned with how to render a single geometry.  Note that a geometry can be arbitrarily complex using any number of bones and polygons.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="Materials">Materials</p></h3>
+
+The materials section specifies how to map what material to what bone of the geometry.  A single material is mapped to a whole bone.  Material expressions are evaluated in the order listed.  The first part of each statement is the name of the model part to apply the material to, and the second part is the material to use.  The model part name can use * for wild - card matching of characters.  For example : </br><h4></h4>
+
+<h6></h6>
+<br / ><textarea readonly="true" cols="100" rows="7">
+  "materials": [
+      { "*": "Material.default" },
+      { "TailA": "array.hair_colors[variable.hair_color]" },
+      { "Mane": "array.hair_colors[variable.hair_color]" },
+      { "*Saddle*": "variable.is_leather_saddle ? material.leather_saddle : material.iron_saddle" }
+    ],
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+- This will start by applying Material.default to all model parts.</br>- Next, it will set the material on a model part named "TailA" to the result of the expression "Array.hairColors[variable.hair_color]".  This will look up some previously created variable on the entity named hair_color and use that to index into a material array called "array.hair_colors" defined in this render controller.  This will overwrite the Material.default material set in the line above.</br>- Third, it will look up the same material as the expression is identical, and apply it to the "Mane" model part.</br>- Lastly, if will find any model part starting with, ending with, or containing "Saddle" (case sensitive) and change its material to either material.leather_saddle or material.iron_saddle depending on the previously set entity variable variable.is_leather_saddle.</br><a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
+<br><br>
+
+<br><br>
+
+<br><br>
+
+<h1><p id="Query Functions">Query Functions</p></h1>
+
+Query Functions are boolean expressions that allow you to query for values owned by the engine under different circumstances.  They can be used in MoLang expressionsUseful for controlling things like changing positions, textures, animations, etc if a mob is a baby.  For example:</br><h2></h2>
+<br / ><textarea readonly="true" cols="79" rows="2">
+"position": [ 0.0, "query.is_baby ? -8.0 : 0.0", "query.is_baby ? 4.0 : 0.0" ]
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="List of Entity Queries">List of Entity Queries</p></h1>
+
+<h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.all_animations_finished</td>
+<td style="border-style:solid; border-width:3; padding:7px">Only valid in an animation controller.  Returns 1.0 if all animations in the current animation controller state have played through at least once, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.anim_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the time in seconds since the current animation started, else 0.0 if not called within an animation</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.any_animation_finished</td>
+<td style="border-style:solid; border-width:3; padding:7px">Only valid in an animation controller.  Returns 1.0 if any animation in the current animation controller state has played through at least once, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.armor_color_slot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.armor_material_slot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.armor_texture_slot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the texture type of the requested slot</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.blocking</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is blocking, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.body_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the body yaw rotation if called on an actor, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_climb</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can climb, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_fly</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can fly, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_power_jump</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can power jump, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_swim</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can swim, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_walk</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can walk, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.current_squish_value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the squish value for the current entity, or 0.0 if this doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.delta_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the time in seconds since the previous frame</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.frame_alpha</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the ratio (from 0 to 1) of how much between AI ticks this frame is being rendered</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.ground_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the ground speed of the entity in metres/second</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_armor_slot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_collision</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has collisions enabled, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_gravity</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is affected by gravity, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_owner</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns true if the entity has an owner ID else it returns false</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_rider</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has a rider, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_target</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has a target, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.head_roll_angle</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns the roll angle of the head of the wolf entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.head_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one argument as a parameter.  Returns the nth head x rotation of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.head_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.invulnerable_ticks</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the number of ticks of invulnerability the entity has left if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_angry</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is angry, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_avoiding_mobs</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is fleeing from mobs, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_baby</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is a baby, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_breathing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is breathing, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_bribed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has been bribed, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_carrying_block</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is carrying a block, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_casting</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is casting, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_charged</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is charged, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_charging</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is charging, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_chested</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has chests attached to it, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_critical</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is critical, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_dancing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is dancing, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_delayed_attacking</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns 1.0 if the entity is attacking using the delayed attack, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_eating</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is eating, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_elder</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is an elder version of it, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_enchanted</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is enchanted, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_fire_immune</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is immune to fire, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_first_person</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is being rendered in first person mode, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_gliding</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is gliding, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_grazing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is grazing, or 0.0 if not</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_idling</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is idling, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_ignited</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is ignited, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_illager_captain</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is an illager captain, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_in_love</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in love, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_in_water</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in water, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_in_water_or_rain</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in water or rain, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_interested</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is interested, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_invisible</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is invisible, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_jumping</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in water or rain, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_laying_down</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is laying down, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_laying_egg</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is laying an egg, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_leashed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is leashed to something, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_lingering</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is lingering, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_moving</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is moving, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_on_ground</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is on the ground, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_onfire</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is on fire, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_orphaned</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is orphaned, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_powered</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is powered, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_pregnant</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is pregnant, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_resting</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is resting, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_riding</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is riding, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_roaring</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns 1.0 if the entity is currently roaring, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_rolling</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is rolling, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_saddled</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has a saddle, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_scared</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is scared, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_shaking</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is casting, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_shaking_wetness</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns true if the entity is shaking water off</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sheared</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is able to be sheared and is sheared, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_shield_powered</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0f if the entity has an active powered shield if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_silent</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is silent, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sitting</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is sitting, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sleeping</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is sleeping, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sneaking</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is sneaking, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sneezing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is sneezing, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_sprinting</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is sprinting, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_stackable</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is stackable, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_standing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is standing, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_stunned</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns 1.0 if the entity is currently stunned, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_swimming</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is swimming, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_tamed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is tamed, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_transforming</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is transforming, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_using_item</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is using an item, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_wall_climbing</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is climbing a wall, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.item_in_use_duration</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the amount of time an item has been in use in seconds up to the maximum duration, else 0.0 if it doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.item_max_use_duration</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the maximum amount of time the item can be used, else 0.0 if it doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.item_remaining_use_duration</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the amount of time an item has left to use in seconds, else 0.0 if it doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.key_frame_lerp_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the ratio between the previous and next key frames</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.lie_amount</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the lie down amount for the entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.life_span</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns the limited life span of an entity, or 0.0 if it lives forever</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.life_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the time in seconds since the current animation started, else 0.0 if not called within an animation</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.log</td>
+<td style="border-style:solid; border-width:3; padding:7px">debug log a value</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.mark_variant</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the entity's mark variant</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.max_trade_tier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the maximum trade tier of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.model_scale</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the scale of the current entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.modified_distance_moved</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the total distance the entity has moved horizontally in metres (since the entity was last loaded, not necessarily since it was originally created) modified along the way by status flags such as is_baby or on_fire</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.modified_move_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the current walk speed of the entity modified by status flags such as is_baby or on_fire</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.overlay_alpha</td>
+<td style="border-style:solid; border-width:3; padding:7px">Do not use - this function is deprecated and will be removed</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.previous_squish_value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the previous squish value for the current entity, or 0.0 if this doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.roll_counter</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the roll counter of the entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.shake_angle</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns the shaking angle of the wolf entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.sit_amount</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the current sit amount of the entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.skin_id</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the entity's skin ID</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.sneeze_counter</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the sneeze counter of the entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.spellcolor.b</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the blue colour channel of the current entity spell colour if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.spellcolor.g</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the green colour channel of the current entity spell colour if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.spellcolor.r</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the red colour channel of the current entity spell colour if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.standing_scale</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the scale of how standing up the entity is</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.swell_amount</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns how swollen the entity is</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.swelling_dir</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the swelling direction of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.tail_angle</td>
+<td style="border-style:solid; border-width:3; padding:7px">returns the angle of the tail of the wolf entity else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.target_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the x rotation required to aim at the entity's current target if it has one, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.target_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the y rotation required to aim at the entity's current target if it has one, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.time_stamp</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the current time stamp of the level</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.trade_experience</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the current trade experience of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.trade_tier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the trade tier of the entity if it makes sense, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.unhappy_counter</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns how unhappy the entity is</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.variant</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the entity's variant index</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.wing_flap_position</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the wing flap position of the entity, or 0.0 if this doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.wing_flap_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.yaw_speed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the entity's yaw speed</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+
