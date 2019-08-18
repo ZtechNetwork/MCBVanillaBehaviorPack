@@ -61,13 +61,6 @@
         }
       },
 
-      "minecraft:rabbit_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
-      },
-
       "coat_brown": {
         "minecraft:variant": { "value": 0 }
       },
@@ -125,15 +118,7 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance":  10.0,
-        "on_leash": {
-          "event": "leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "unleash",
-          "target": "self"
-        }
+        "max_distance":  10.0
       },
       "minecraft:balloonable": {
         "mass": 0.75
@@ -313,14 +298,6 @@
       "grow_up": {
         "remove": { "component_groups": [ "baby" ] },
         "add": { "component_groups": [ "adult" ] }
-      },
-
-      "leash": {
-        "add": { "component_groups": [ "minecraft:rabbit_leashed" ] }
-      },
-
-      "unleash": {
-        "remove": { "component_groups": [ "minecraft:rabbit_leashed" ] }
       }
     }
   }

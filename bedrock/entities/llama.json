@@ -23,7 +23,7 @@
               "growth": 0.1
             },
             {
-              "item": "tile.hay_block",
+              "item": "hay_block",
               "growth": 0.9
             }
           ],
@@ -54,6 +54,7 @@
         "minecraft:breedable": {
           "requireTame": true,
           "inheritTamed": false,
+          "love_filters": { "test": "is_mark_variant", "subject": "self", "operator": "!=", "value": 1 }, // Wandering Trader Llamas can't fall in love
           "breedsWith": {
             "mateType": "minecraft:llama",
             "babyType": "minecraft:llama",
@@ -62,7 +63,25 @@
               "target": "baby"
             }
           },
-          "breedItems": [ "tile.hay_block" ]
+          "breedItems": [ "hay_block" ]
+        }
+      },
+
+      "minecraft:llama_wandering_trader": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:environment_sensor": {
+          // If this is a Wandering Trader's llama and it was just released from its leash, make it tame
+          "on_environment": {
+            "filters": {
+              "all_of": [
+                { "test": "is_leashed", "subject": "self", "value": false },
+                { "test": "has_component", "subject": "self", "operator": "!=", "value" :  "minecraft:is_tamed" }
+              ]
+            },
+            "event": "minecraft:on_tame"
+          }
         }
       },
 
@@ -141,7 +160,7 @@
               "temperMod": 3
             },
             {
-              "item": "tile.hay_block",
+              "item": "hay_block",
               "temperMod": 6
             }
           ],
@@ -227,13 +246,6 @@
         }
       },
 
-      "minecraft:llama_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
-      },
-
       "minecraft:llama_angry": {
         "minecraft:angry": {
           "duration": 4,
@@ -289,9 +301,12 @@
       },
       "minecraft:nameable": {
       },
+      "minecraft:mark_variant": {
+        "value": 0
+      },
       "minecraft:health": {
         "value": {
-          "range_min": 15, 
+          "range_min": 15,
           "range_max": 30
         }
       },
@@ -314,14 +329,7 @@
         "soft_distance": 4.0,
         "hard_distance": 6.0,
         "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
-        }
+        "can_be_stolen": true
       },
       "minecraft:balloonable": {
       },
@@ -332,7 +340,7 @@
             "heal_amount": 2
           },
           {
-            "item": "tile.hay_block",
+            "item": "hay_block",
             "heal_amount": 10
           }
         ]
@@ -555,6 +563,99 @@
         }
       },
 
+      "minecraft:from_wandering_trader": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "minecraft:llama_adult",
+                "minecraft:llama_wandering_trader"
+              ]
+            }
+          },
+          {
+            "randomize": [
+              {
+                "weight": 32,
+                "add": {
+                  "component_groups": [
+                    "minecraft:strength_1"
+                  ]
+                }
+              },
+              {
+                "weight": 32,
+                "add": {
+                  "component_groups": [
+                    "minecraft:strength_2"
+                  ]
+                }
+              },
+              {
+                "weight": 32,
+                "add": {
+                  "component_groups": [
+                    "minecraft:strength_3"
+                  ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [
+                    "minecraft:strength_4"
+                  ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [
+                    "minecraft:strength_5"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "randomize": [
+              {
+                "weight": 25,
+                "add": {
+                  "component_groups": [
+                    "minecraft:llama_creamy"
+                  ]
+                }
+              },
+              {
+                "weight": 25,
+                "add": {
+                  "component_groups": [
+                    "minecraft:llama_white"
+                  ]
+                }
+              },
+              {
+                "weight": 25,
+                "add": {
+                  "component_groups": [
+                    "minecraft:llama_brown"
+                  ]
+                }
+              },
+              {
+                "weight": 25,
+                "add": {
+                  "component_groups": [
+                    "minecraft:llama_gray"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+
       "minecraft:ageable_grow_up": {
         "remove": {
           "component_groups": [
@@ -579,22 +680,6 @@
           "component_groups": [
             "minecraft:llama_tamed",
             "minecraft:llama_unchested"
-          ]
-        }
-      },
-
-
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:llama_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:llama_leashed"
           ]
         }
       },

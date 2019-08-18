@@ -233,13 +233,6 @@
             "target": "self"
           }
         }
-      },
-
-      "minecraft:wolf_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
       }
     },
 
@@ -500,21 +493,6 @@
         "add": {
           "component_groups": [
             "minecraft:wolf_wild"
-          ]
-        }
-      },
-
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:wolf_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:wolf_leashed"
           ]
         }
       }

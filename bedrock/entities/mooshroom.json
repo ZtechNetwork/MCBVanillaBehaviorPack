@@ -21,7 +21,7 @@
           "value":0.5
         },
         "minecraft:ageable": {
-          "threshold": 1200,
+          "duration": 1200,
           "feedItems": "wheat",
           "grow_up": {
             "event": "minecraft:ageable_grow_up",
@@ -98,13 +98,6 @@
             "interact_text": "action.interact.milk"
           }
         ]
-      },
-
-      "minecraft:cow_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
       }
     },
 
@@ -144,15 +137,7 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
-        }
+        "max_distance": 10.0
       },
       "minecraft:balloonable": {
       },
@@ -265,21 +250,6 @@
         "add": {
           "component_groups": [
             "minecraft:cow_adult"
-          ]
-        }
-      },
-
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:cow_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:cow_leashed"
           ]
         }
       }

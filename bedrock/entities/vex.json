@@ -8,6 +8,8 @@
       "is_experimental": false
     },
     "components": {
+      "minecraft:nameable": {
+      },
       "minecraft:type_family": {
         "family": [ "vex", "monster" ]
       },
@@ -52,8 +54,17 @@
             "filters": {
               "any_of" : [
                 {"test" : "is_family", "subject" : "other", "value" :  "player"},
-                {"test" : "is_family", "subject" : "other", "value" :  "villager"},
-                {"test" : "is_family", "subject" : "other", "value" :  "irongolem"}
+                {"test" : "is_family", "subject" : "other", "value" :  "irongolem"},
+                {"test" : "is_family", "subject" : "other", "value" :  "wandering_trader"}
+              ]
+            },
+            "max_dist": 70
+          },
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "villager" },
+                { "test": "has_component", "subject": "other", "operator": "!=", "value": "minecraft:is_baby" }
               ]
             },
             "max_dist": 70

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ender_dragon",
@@ -52,6 +52,10 @@
       "minecraft:health": {
         "value": 200,
         "max": 200
+      },
+      "minecraft:boss": {
+        "should_darken_sky": false,
+        "hud_range": 125
       },
       "minecraft:collision_box": {
         "width": 13,

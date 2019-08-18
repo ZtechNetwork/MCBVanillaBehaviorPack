@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:drowned",
@@ -87,6 +87,7 @@
         "minecraft:navigation.generic": {
           "is_amphibious": true,
           "can_path_over_water": false,
+          "can_break_doors": true,
           "can_swim": true,
           "can_walk": true,
           "avoid_sun": true
@@ -97,6 +98,7 @@
         "minecraft:navigation.generic": {
           "is_amphibious": true,
           "can_path_over_water": false,
+          "can_break_doors": true,
           "can_swim": false,
           "can_walk": true,
           "avoid_sun": true
@@ -116,7 +118,8 @@
         "width": 0.6,
         "height": 1.8
       },
-
+      "minecraft:annotation.break_door": {
+      },
       "minecraft:underwater_movement": {
         "value": 0.06
       },
@@ -144,14 +147,12 @@
       "minecraft:navigation.generic": {
         "is_amphibious": true,
         "can_path_over_water": false,
+        "can_break_doors": true,
         "can_swim": false,
         "can_walk": true,
         "avoid_sun": true
       },
 
-      "minecraft:behavior.break_door": {
-        "priority": 1
-      },
       "minecraft:behavior.flee_sun": {
         "priority": 2,
         "speed_multiplier": 1
@@ -159,7 +160,7 @@
       "minecraft:behavior.stomp_turtle_egg": {
         "priority": 4,
         "speed_multiplier": 1,
-        "search_range": 24,
+        "search_range": 10,
         "search_height": 3,
         "goal_radius": 1.14,
         "search_count": 4,
@@ -195,64 +196,49 @@
               "all_of": [
                 {
                   "any_of": [
-                    {
-                      "test": "is_family",
-                      "subject": "other",
-                      "value": "player"
-                    },
-                    {
-                      "test": "is_family",
-                      "subject": "other",
-                      "value": "snowgolem"
-                    },
-                    {
-                      "test": "is_family",
-                      "subject": "other",
-                      "value": "irongolem"
-                    },
-                    {
-                      "test": "is_family",
-                      "subject": "other",
-                      "value": "villager"
-                    }
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "is_family", "subject": "other", "value": "snowgolem" },
+                    { "test": "is_family", "subject": "other", "value": "irongolem" }
                   ]
                 },
                 {
                   "any_of": [
-                    {
-                      "test": "in_water",
-                      "subject": "other",
-                      "value": true
-                    },
-                    {
-                      "test": "is_brightness",
-                      "subject": "other",
-                      "operator": "<",
-                      "value": 0.49
-                    }
+                    { "test": "in_water", "subject": "other", "value": true },
+                    { "test": "is_brightness", "subject": "other", "operator": "<", "value": 0.49 }
                   ]
                 }
               ]
             },
-            "max_dist": 35
+            "max_dist": 20
           },
           {
             "filters": {
               "all_of": [
                 {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "baby_turtle"
+                  "any_of": [
+                    { "test": "is_family", "subject": "other", "value": "villager" },
+                    { "test": "is_family", "subject": "other", "value": "wandering_trader" }
+                  ]
                 },
                 {
-                  "test": "in_water",
-                  "subject": "other",
-                  "operator": "!=",
-                  "value": true
+                  "any_of": [
+                    { "test": "in_water", "subject": "other", "value": true },
+                    { "test": "is_brightness", "subject": "other", "operator": "<", "value": 0.49 }
+                  ]
                 }
               ]
             },
-            "max_dist": 35
+            "max_dist": 20,
+            "must_see": false
+          },
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "baby_turtle" },
+                { "test": "in_water", "subject": "other", "operator": "!=", "value": true }
+              ]
+            },
+            "max_dist": 20
           }
         ],
         "must_see": true,

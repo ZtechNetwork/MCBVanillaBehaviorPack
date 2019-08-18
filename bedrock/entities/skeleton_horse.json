@@ -8,6 +8,10 @@
       "is_experimental": false
     },
     "component_groups": {
+      "minecraft:skeleton_horse_r5_upgrade": {
+        "minecraft:rideable": {
+        }
+      },
       "minecraft:skeleton_horse_baby": {
         "minecraft:is_baby": {
         },
@@ -36,7 +40,6 @@
           "height": 1.6
         },
         "minecraft:rideable": {
-          "priority": 0,
           "seat_count": 1,
           "family_types": [
             "player",
@@ -47,25 +50,6 @@
           "seats": {
             "position": [ 0.0, 1.2, -0.2 ]
           }
-        },
-        "minecraft:behavior.mount_pathing": {
-          "priority": 2,
-          "speed_multiplier": 1.5,
-          "target_dist": 4.0,
-          "track_target": true
-        },
-        "minecraft:behavior.player_ride_tamed": {
-        },
-        "minecraft:input_ground_controlled": {
-        },
-        "minecraft:can_power_jump": {
-        }
-      },
-
-      "minecraft:skeleton_horse_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
         }
       },
 
@@ -81,7 +65,11 @@
         "minecraft:damage_sensor": [
           {
             "on_damage": {
-              "filters": { "test": "is_family", "subject": "other", "value": "lightning" }
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "lightning"
+              }
             },
             "deals_damage": false
           }
@@ -127,15 +115,31 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
+        "max_distance": 10.0
+      },
+      "minecraft:rideable": {
+        "seat_count": 1,
+        "family_types": [
+          "player",
+          "skeleton",
+          "zombie"
+        ],
+        "interact_text": "action.interact.ride.horse",
+        "seats": {
+          "position": [ 0.0, 1.2, -0.2 ]
         }
+      },
+      "minecraft:behavior.mount_pathing": {
+        "priority": 2,
+        "speed_multiplier": 1.5,
+        "target_dist": 4.0,
+        "track_target": true
+      },
+      "minecraft:behavior.player_ride_tamed": {
+      },
+      "minecraft:input_ground_controlled": {
+      },
+      "minecraft:can_power_jump": {
       },
       "minecraft:balloonable": {
       },
@@ -174,6 +178,11 @@
           },
           {
             "weight": 9,
+            "remove": {
+              "component_groups": [
+                "minecraft:skeleton_horse_r5_upgrade"
+              ]
+            },
             "add": {
               "component_groups": [
                 "minecraft:skeleton_horse_baby"
@@ -181,21 +190,6 @@
             }
           }
         ]
-      },
-
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:skeleton_horse_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:skeleton_horse_leashed"
-          ]
-        }
       },
 
       "minecraft:set_trap": {

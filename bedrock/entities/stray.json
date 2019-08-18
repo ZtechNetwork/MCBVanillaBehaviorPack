@@ -114,7 +114,19 @@
         "reselect_targets": true,
         "entity_types": [
           {
-            "filters": { "test": "is_family", "subject": "other", "value": "player" },
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "value": "player"
+            },
+            "max_dist": 16
+          },
+          {
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "value": "irongolem"
+            },
             "max_dist": 16
           },
           {

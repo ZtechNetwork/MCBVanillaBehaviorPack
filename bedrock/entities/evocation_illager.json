@@ -7,6 +7,28 @@
       "is_summonable": true,
       "is_experimental": false
     },
+    "component_groups": {
+      "minecraft:raid_configuration": {
+        "minecraft:dweller": {
+          "dwelling_type": "village",
+          "dweller_role": "hostile",
+          "update_interval_base": 60,
+          "update_interval_variant": 40,
+          "can_find_poi": false,
+          "can_migrate": false,
+          "first_founding_reward": 0
+        },
+        "minecraft:behavior.move_to_village": {
+          "priority": 6,
+          "speed_multiplier": 0.7
+        },
+        "minecraft:ambient_sound_interval": {
+          "value": 2.0,
+          "range": 4.0,
+          "event_name": "ambient.in.raid"
+        }
+      }
+    },
     "components": {
       "minecraft:type_family": {
         "family": [ "evocation_illager", "monster", "illager" ]
@@ -27,7 +49,7 @@
       },
       "minecraft:collision_box": {
         "width": 0.6,
-        "height": 1.95
+        "height": 1.9
       },
       "minecraft:movement": {
         "value": 0.5
@@ -175,10 +197,19 @@
                   { "test" :  "is_family", "subject" : "other", "value" :  "player"},
                   { "test" :  "is_family", "subject" : "other", "value" :  "snowgolem"},
                   { "test" :  "is_family", "subject" : "other", "value" :  "irongolem"},
-                  { "test" :  "is_family", "subject" : "other", "value" :  "villager"}
+                  { "test" :  "is_family", "subject" : "other", "value" :  "wandering_trader"}
                 ] 
-			},
-            "max_dist": 16
+            },
+            "max_dist": 20
+          },
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "villager" },
+                { "test": "has_component", "subject": "other", "operator": "!=", "value": "minecraft:is_baby" }
+              ]
+            },
+            "max_dist": 20
           }
         ],
         "must_see": true
@@ -197,7 +228,19 @@
       "minecraft:behavior.hurt_by_target": {
         "priority": 1
       },
-	    "minecraft:physics": {
+      "minecraft:physics": {
+      },
+      "minecraft:follow_range": {
+        "value": 64
+      }
+    },
+    "events": {
+      "minecraft:spawn_for_raid": {
+        "add": {
+          "component_groups": [
+            "minecraft:raid_configuration"
+          ]
+        }
       }
     }
   }

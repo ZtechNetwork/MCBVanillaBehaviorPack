@@ -83,12 +83,6 @@
         "minecraft:is_sheared": {
         }
       },
-      "minecraft:sheep_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
-      },
       "minecraft:sheep_white": {
         "minecraft:color": {
           "value": 0
@@ -184,15 +178,7 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
-        }
+        "max_distance": 10.0
       },
       "minecraft:balloonable": {
         "mass": 0.75
@@ -401,20 +387,6 @@
             }
           }
         ]
-      },
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:sheep_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:sheep_leashed"
-          ]
-        }
       },
       "wololo": {
         "add": {

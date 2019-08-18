@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:polar_bear",
@@ -116,6 +116,9 @@
       },
       "minecraft:movement": {
         "value": 0.25
+      },
+      "minecraft:water_movement": {
+        "drag_factor": 0.98
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,

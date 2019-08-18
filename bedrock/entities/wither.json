@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wither",
@@ -12,6 +12,10 @@
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0
+      },
+      "minecraft:boss": {
+        "should_darken_sky": true,
+        "hud_range": 55
       },
       "minecraft:damage_sensor": [
         {

@@ -7,14 +7,6 @@
       "is_summonable": true,
       "is_experimental": false
     },
-    "component_groups": {
-      "minecraft:boat_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
-        }
-      }
-    },
 
     "components": {
       "minecraft:type_family": {
@@ -30,15 +22,7 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
-        }
+        "max_distance": 10.0
       },
       "minecraft:rideable": {
         "seat_count": 2,
@@ -74,23 +58,6 @@
       "minecraft:is_stackable": {
       },
       "minecraft:physics": {
-      }
-    },
-
-    "events": {
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:boat_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:boat_leashed"
-          ]
-        }
       }
     }
   }

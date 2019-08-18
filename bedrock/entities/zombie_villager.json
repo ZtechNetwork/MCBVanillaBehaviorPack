@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:zombie_villager",
@@ -8,6 +8,12 @@
       "is_experimental": false
     },
     "component_groups": {
+      "become_zombie_villager_v2": {
+        "minecraft:transformation": {
+          "into": "minecraft:zombie_villager_v2",
+          "keep_level": false
+        }
+      },
       "baby": {
         "minecraft:is_baby": {},
         "minecraft:scale": {
@@ -201,8 +207,10 @@
       "minecraft:navigation.walk": {
         "is_amphibious": true,
         "can_pass_doors": true,
-        "can_open_doors": true,
+        "can_break_doors": true,
         "avoid_sun": false
+      },
+      "minecraft:annotation.break_door": {
       },
       "minecraft:movement.basic": {
       },
@@ -239,8 +247,17 @@
         "on_interact": {
           "filters": {
             "all_of": [
-              { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "golden_apple" },
-              { "test": "has_component", "subject": "self", "value": "minecraft:effect.weakness" }
+              {
+                "test": "has_equipment",
+                "domain": "hand",
+                "subject": "other",
+                "value": "golden_apple"
+              },
+              {
+                "test": "has_component",
+                "subject": "self",
+                "value": "minecraft:effect.weakness"
+              }
             ]
           },
           "event": "villager_converted",
@@ -251,9 +268,6 @@
       },
 
       // Zombie_villager Behaviors
-      "minecraft:behavior.break_door": {
-        "priority": 1
-      },
       "minecraft:behavior.melee_attack": {
         "priority": 6,
         "speed_multiplier": 1,
@@ -294,44 +308,28 @@
           {
             "filters": {
               "any_of": [
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "player"
-                },
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "snowgolem"
-                },
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "irongolem"
-                },
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "villager"
-                }
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "is_family", "subject": "other", "value": "snowgolem" },
+                { "test": "is_family", "subject": "other", "value": "irongolem" }
               ]
             },
             "max_dist": 35
           },
           {
             "filters": {
+              "any_of": [
+                { "test": "is_family", "subject": "other", "value": "villager" },
+                { "test": "is_family", "subject": "other", "value": "wandering_trader" }
+              ]
+            },
+            "max_dist": 35,
+            "must_see": false
+          },
+          {
+            "filters": {
               "all_of": [
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "baby_turtle"
-                },
-                {
-                  "test": "in_water",
-                  "subject": "other",
-                  "operator": "!=",
-                  "value": true
-                }
+                { "test": "is_family", "subject": "other", "value": "baby_turtle" },
+                { "test": "in_water", "subject": "other", "operator": "!=", "value": true }
               ]
             },
             "max_dist": 35

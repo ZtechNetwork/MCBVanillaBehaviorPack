@@ -7,6 +7,28 @@
       "is_summonable": true,
       "is_experimental": false
     },
+    "component_groups": {
+      "minecraft:raid_configuration": {
+        "minecraft:dweller": {
+          "dwelling_type": "village",
+          "dweller_role": "hostile",
+          "update_interval_base": 60,
+          "update_interval_variant": 40,
+          "can_find_poi": false,
+          "can_migrate": false,
+          "first_founding_reward": 0
+        },
+        "minecraft:behavior.move_to_village": {
+          "priority": 3,
+          "speed_multiplier": 1.2
+        },
+        "minecraft:ambient_sound_interval": {
+          "value": 2.0,
+          "range": 4.0,
+          "event_name": "ambient.in.raid"
+        }
+      }
+    },
     "components": {
       "minecraft:breathable": {
         "totalSupply": 15,
@@ -46,15 +68,15 @@
         "attack_radius": 10.0
       },
       "minecraft:behavior.random_stroll": {
-        "priority": 2,
+        "priority": 4,
         "speed_multiplier": 1.0
       },
       "minecraft:behavior.look_at_player": {
-        "priority": 3,
+        "priority": 5,
         "look_distance": 8.0
       },
       "minecraft:behavior.random_look_around": {
-        "priority": 3,
+        "priority": 5,
         "look_distance": 8.0
       },
       "minecraft:behavior.hurt_by_target": {
@@ -92,6 +114,18 @@
         "family": [ "witch", "monster" ]
       },
       "minecraft:physics": {
+      },
+      "minecraft:follow_range": {
+        "value": 64
+      }
+    },
+    "events": {
+      "minecraft:spawn_for_raid": {
+        "add": {
+          "component_groups": [
+            "minecraft:raid_configuration"
+          ]
+        }
       }
     }
   }

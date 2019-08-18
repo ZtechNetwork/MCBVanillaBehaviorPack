@@ -28,7 +28,7 @@
               "growth": 0.025
             },
             {
-              "item": "tile.hay_block",
+              "item": "hay_block",
               "growth": 0.15
             },
             {
@@ -186,7 +186,7 @@
             "appleEnchanted",
             "golden_carrot",
             "carrotOnAStick",
-            "tile.hay_block",
+            "hay_block",
             "sugar",
             "bread",
             "wheat"
@@ -228,13 +228,6 @@
         "minecraft:can_power_jump": {
         },
         "minecraft:behavior.player_ride_tamed": {
-        }
-      },
-
-      "minecraft:mule_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
         }
       }
     },
@@ -278,15 +271,7 @@
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
-        "max_distance": 10.0,
-        "on_leash": {
-          "event": "minecraft:on_leash",
-          "target": "self"
-        },
-        "on_unleash": {
-          "event": "minecraft:on_unleash",
-          "target": "self"
-        }
+        "max_distance": 10.0
       },
       "minecraft:balloonable": {
       },
@@ -301,7 +286,7 @@
             "heal_amount": 1
           },
           {
-            "item": "tile.hay_block",
+            "item": "hay_block",
             "heal_amount": 20
           },
           {
@@ -400,21 +385,6 @@
           "component_groups": [
             "minecraft:mule_adult",
             "minecraft:mule_wild"
-          ]
-        }
-      },
-
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:mule_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:mule_leashed"
           ]
         }
       },

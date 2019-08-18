@@ -54,16 +54,6 @@
           "value": 10,
           "max": 10
         },
-        "minecraft:behavior.tempt": {
-          "priority": 4,
-          "speed_multiplier": 0.5,
-          "within_radius": 16,
-          "can_get_scared": true,
-          "items": [
-            "fish",
-            "salmon"
-          ]
-        },
         "minecraft:tameable": {
           "probability": 0.33,
           "tameItems": [ "fish", "salmon" ],
@@ -72,20 +62,14 @@
             "target": "self"
           }
         },
-        "minecraft:behavior.avoid_mob_type": {
-          "priority": 5,
-          "entity_types": [
-            {
-              "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "player"
-              },
-              "max_dist": 10,
-              "walk_speed_multiplier": 0.8,
-              "sprint_speed_multiplier": 1.33
-            }
-          ]
+        "minecraft:rideable": {
+          "seat_count": 1,
+          "family_types": [
+            "zombie"
+          ],
+          "seats": {
+            "position": [ 0.0, 0.35, 0.0 ]
+          }
         },
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 1,
@@ -121,14 +105,33 @@
             }
           ]
         },
-        "minecraft:rideable": {
-          "seat_count": 1,
-          "family_types": [
-            "zombie"
-          ],
-          "seats": {
-            "position": [ 0.0, 0.35, 0.0 ]
-          }
+        "minecraft:behavior.tempt": {
+          "priority": 5,
+          "speed_multiplier": 0.5,
+          "within_radius": 16,
+          "can_get_scared": true,
+          "items": [
+            "fish",
+            "salmon"
+          ]
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 6,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "player"
+              },
+              "max_dist": 10,
+              "walk_speed_multiplier": 0.8,
+              "sprint_speed_multiplier": 1.33
+            }
+          ]
+        },
+        "minecraft:behavior.move_towards_restriction": {
+          "priority": 7
         }
       },
       "minecraft:cat_tame": {
@@ -144,7 +147,7 @@
         "minecraft:sittable": {
         },
         "minecraft:behavior.tempt": {
-          "priority": 4,
+          "priority": 5,
           "speed_multiplier": 0.5,
           "within_radius": 16,
           "items": [
@@ -158,15 +161,7 @@
         "minecraft:leashable": {
           "soft_distance": 4.0,
           "hard_distance": 6.0,
-          "max_distance": 10.0,
-          "on_leash": {
-            "event": "minecraft:on_leash",
-            "target": "self"
-          },
-          "on_unleash": {
-            "event": "minecraft:on_unleash",
-            "target": "self"
-          }
+          "max_distance": 10.0
         },
         "minecraft:behavior.follow_owner": {
           "priority": 4,
@@ -178,7 +173,7 @@
           "priority": 3
         },
         "minecraft:behavior.ocelot_sit_on_block": {
-          "priority": 6,
+          "priority": 7,
           "speed_multiplier": 1.0
         },
         "minecraft:behavior.pet_sleep_with_owner": {
@@ -216,12 +211,6 @@
             "event": "minecraft:cat_gifted_owner",
             "target": "self"
           }
-        }
-      },
-      "minecraft:cat_leashed": {
-        "minecraft:behavior.move_towards_restriction": {
-          "priority": 2,
-          "speed_multiplier": 1.0
         }
       },
       "minecraft:cat_white": {
@@ -273,6 +262,11 @@
         "minecraft:variant": {
           "value": 9
         }
+      },
+      "minecraft:cat_jellie": {
+        "minecraft:variant": {
+          "value": 10
+        }
       }
     },
 
@@ -293,6 +287,18 @@
         "width": 0.6,
         "height": 0.7
       },
+      "minecraft:healable": {
+        "items": [
+          {
+            "item": "fish",
+            "heal_amount": 2
+          },
+          {
+            "item": "salmon",
+            "heal_amount": 2
+          }
+        ]
+      },
       "minecraft:movement": {
         "value": 0.3
       },
@@ -309,6 +315,15 @@
       },
       "minecraft:fall_damage": {
         "value": 0.0
+      },
+      "minecraft:dweller": {
+        "dwelling_type": "village",
+        "dweller_role": "passive",
+        "update_interval_base": 60,
+        "update_interval_variant": 40,
+        "can_find_poi": false,
+        "can_migrate": true,
+        "first_founding_reward": 0
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -454,6 +469,14 @@
                     "minecraft:cat_black"
                   ]
                 }
+              },
+              {
+                "weight": 15,
+                "add": {
+                  "component_groups": [
+                    "minecraft:cat_jellie"
+                  ]
+                }
               }
             ]
           }
@@ -561,6 +584,14 @@
                     "minecraft:cat_tabby"
                   ]
                 }
+              },
+              {
+                "weight": 15,
+                "add": {
+                  "component_groups": [
+                    "minecraft:cat_jellie"
+                  ]
+                }
               }
             ]
           }
@@ -630,20 +661,6 @@
             }
           }
         ]
-      },
-      "minecraft:on_leash": {
-        "add": {
-          "component_groups": [
-            "minecraft:cat_leashed"
-          ]
-        }
-      },
-      "minecraft:on_unleash": {
-        "remove": {
-          "component_groups": [
-            "minecraft:cat_leashed"
-          ]
-        }
       },
       "minecraft:pet_slept_with_owner": {
         "add": {
