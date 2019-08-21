@@ -5,7 +5,7 @@
 ## Game Changelogs
 ### v1.12.0
 - Increased the frequency and volume of the ambient mob sounds made during raids, to make them easier to locate
-- Added new Wandering Trader sounds (MCPE-41191)
+- Added new Wandering Trader sounds
 - Updated the main menu splash text
 - Updated the default main menu panorama from Aquatic to Village & Pillage
 - The "Store" button on the main menu has been renamed to "Marketplace"
