@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wandering_trader",
@@ -14,7 +14,7 @@
       },
       "despawning": {
         "minecraft:type_family": {
-          "family": [ "wandering_trader", "wandering_trader_despawning" ]
+          "family": [ "wandering_trader", "wandering_trader_despawning", "mob" ]
         }
       },
       "minecraft:scared": {
@@ -30,7 +30,7 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "wandering_trader" ]
+        "family": [ "wandering_trader", "mob" ]
       },
       "minecraft:is_hidden_when_invisible": {
       },
@@ -62,16 +62,25 @@
         "new_screen": true
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:health": {
         "value": 20,
         "max": 20
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:collision_box": {
         "width": 0.6,
-        "height": 1.8
+        "height": 1.9
       },
       "minecraft:movement": {
         "value": 0.5
@@ -105,32 +114,34 @@
           ]
         }
       },
-      "minecraft:damage_sensor": [
-        {
-          "cause": "entity_attack",
-          "deals_damage": true,
-          "on_damage": {
-            "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
-            "event": "minecraft:become_scared"
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "entity_attack",
+            "deals_damage": true,
+            "on_damage": {
+              "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
+              "event": "minecraft:become_scared"
+            }
+          },
+          {
+            "cause": "projectile",
+            "deals_damage": true,
+            "on_damage": {
+              "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
+              "event": "minecraft:become_scared"
+            }
+          },
+          {
+            "cause": "magic",
+            "deals_damage": true,
+            "on_damage": {
+              "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
+              "event": "minecraft:become_scared"
+            }
           }
-        },
-        {
-          "cause": "projectile",
-          "deals_damage": true,
-          "on_damage": {
-            "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
-            "event": "minecraft:become_scared"
-          }
-        },
-        {
-          "cause": "magic",
-          "deals_damage": true,
-          "on_damage": {
-            "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "player" },
-            "event": "minecraft:become_scared"
-          }
-        }
-      ],
+        ]
+      },
       "minecraft:behavior.trade_with_player": {
         "priority": 1
       },
@@ -232,6 +243,10 @@
         "priority": 9
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
     "events": {

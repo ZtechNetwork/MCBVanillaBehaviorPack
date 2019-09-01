@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:magma_cube",
@@ -79,20 +79,26 @@
     },
 
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? query.variant : 0"
+      },
       "minecraft:type_family": {
-        "family": [ "magmacube", "monster" ]
+        "family": [ "magmacube", "monster", "mob" ]
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0,
-        "breathesLava": true
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_lava": true
       },
       "minecraft:nameable": {
       },
       "minecraft:fire_immune": true,
       "minecraft:burns_in_daylight": false,
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
@@ -140,6 +146,10 @@
         "must_see": true
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

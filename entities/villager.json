@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:villager",
@@ -105,7 +105,7 @@
 
       "farmer":{
         "minecraft:type_family": {
-          "family":[ "villager", "peasant", "farmer" ]          
+          "family":[ "villager", "peasant", "farmer", "mob" ]          
         },
         "minecraft:variant": {
           "value": 0
@@ -120,7 +120,7 @@
 
       "fisherman":{
         "minecraft:type_family": {
-          "family":[ "villager", "peasant", "fisherman" ]          
+          "family":[ "villager", "peasant", "fisherman", "mob" ]          
         },
         "minecraft:variant": {
           "value": 0
@@ -135,7 +135,7 @@
 
       "shepherd":{
         "minecraft:type_family": {
-          "family":[ "villager", "peasant", "shepherd" ]          
+          "family":[ "villager", "peasant", "shepherd", "mob" ]          
         },
         "minecraft:variant": {
           "value": 0
@@ -150,7 +150,7 @@
 
       "fletcher":{
         "minecraft:type_family": {
-          "family":[ "villager", "peasant", "fletcher" ]          
+          "family":[ "villager", "peasant", "fletcher", "mob" ]          
         },
         "minecraft:variant": {
           "value": 0
@@ -165,7 +165,7 @@
 
       "librarian":{
         "minecraft:type_family": {
-          "family":[ "villager", "librarian" ]          
+          "family":[ "villager", "librarian", "mob" ]          
         },
         "minecraft:variant": {
           "value": 1
@@ -180,7 +180,7 @@
 
       "cartographer":{
         "minecraft:type_family": {
-          "family":[ "villager", "cartographer" ]          
+          "family":[ "villager", "cartographer", "mob" ]          
         },
         "minecraft:variant": {
           "value": 1
@@ -195,7 +195,7 @@
 
       "cleric":{
         "minecraft:type_family": {
-          "family":[ "villager", "priest", "cleric" ]          
+          "family":[ "villager", "priest", "cleric", "mob" ]          
         },
         "minecraft:variant": {
           "value": 2
@@ -210,7 +210,7 @@
 
       "armorer":{
         "minecraft:type_family": {
-          "family":[ "villager", "blacksmith", "armorer" ]          
+          "family":[ "villager", "blacksmith", "armorer", "mob" ]          
         },
         "minecraft:variant": {
           "value": 3
@@ -225,7 +225,7 @@
 
       "weaponsmith":{
         "minecraft:type_family": {
-          "family":[ "villager", "blacksmith", "weaponsmith" ]          
+          "family":[ "villager", "blacksmith", "weaponsmith", "mob" ]          
         },
         "minecraft:variant": {
           "value": 3
@@ -240,7 +240,7 @@
 
       "toolsmith":{
         "minecraft:type_family": {
-          "family":[ "villager", "blacksmith", "toolsmith" ]          
+          "family":[ "villager", "blacksmith", "toolsmith", "mob" ]          
         },
         "minecraft:variant": {
           "value": 3
@@ -255,7 +255,7 @@
 
       "butcher":{
         "minecraft:type_family": {
-          "family":[ "villager", "artisan", "butcher" ]          
+          "family":[ "villager", "artisan", "butcher", "mob" ]          
         },
         "minecraft:variant": {
           "value": 4
@@ -270,7 +270,7 @@
 
       "leatherworker":{
         "minecraft:type_family": {
-          "family":[ "villager", "artisan", "leatherworker" ]          
+          "family":[ "villager", "artisan", "leatherworker", "mob" ]          
         },
         "minecraft:variant": {
           "value": 4
@@ -316,20 +316,29 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": "villager"
+        "family": ["villager", "mob"]
       },
 
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:health": {
         "value": 20,
         "max": 20
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:collision_box": {
         "width": 0.6,
-        "height": 1.8
+        "height": 1.9
       },
       "minecraft:nameable": {
       },
@@ -357,30 +366,33 @@
         "inventory_size": 8,
         "private": true
       },
-      "minecraft:damage_sensor": [
-        {
-          "on_damage": {
-            "filters": { "test" :  "is_family", "subject" : "other", "value" :  "lightning" },
-            "event": "become_witch"
-          },
-          "deals_damage": false
-        },
-        {
-          "on_damage": {
-            "filters": {
-			  "any_of": [
-			    {"test": "is_family", "subject": "other", "value": "zombie"},
-			    {"test": "is_family", "subject": "other", "value": "husk"}
-			  ],
-			  "all_of": [
-			    {"test": "has_damage", "value": "fatal"}
-			  ]
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": { "test" :  "is_family", "subject" : "other", "value" :  "lightning" },
+              "event": "become_witch"
             },
-            "event": "become_zombie"
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {"test": "is_family", "subject": "other", "value": "zombie"},
+                  {"test": "is_family", "subject": "other", "value": "husk"}
+                ],
+                "all_of": [
+                  {"test": "has_damage", "value": "fatal"}
+                ]
+              },
+              "event": "become_zombie"
+            }
           }
-        }
-      ],
-
+        ]
+      },
+      "minecraft:persistent": {
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -404,7 +416,7 @@
                   { "test" : "is_family", "subject" : "other", "value" : "zombie_villager"},
                   { "test" : "is_family", "subject" : "other", "value" : "zombie_pigman"},
                   { "test" : "is_family", "subject" : "other", "value" : "illager"},
-				  { "test" : "is_family", "subject" : "other", "value" : "vex"}
+                  { "test" : "is_family", "subject" : "other", "value" : "vex"}
                 ]
             },
             "max_dist": 8,
@@ -454,7 +466,11 @@
         "look_distance": 8,
         "probability": 0.02
       },
-	    "minecraft:physics": {
+        "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
     "events":{

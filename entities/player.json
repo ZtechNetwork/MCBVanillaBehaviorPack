@@ -1,5 +1,5 @@
 {
-  "format_version": "1.11.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:player",
@@ -46,6 +46,9 @@
     },
 
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "Math.Min(query.player_level * 7, 100)"
+      },
       "minecraft:type_family": {
         "family": [ "player" ]
       },
@@ -62,6 +65,15 @@
       },
       "minecraft:movement": {
         "value": 0.1
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
       },
       "minecraft:attack": {
         "damage": 1
@@ -82,16 +94,20 @@
         "max": 1
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": -1,
-        "inhaleTime": 3.75,
-        "generatesBubbles": false
+        "total_supply": 15,
+        "suffocate_time": -1,
+        "inhale_time": 3.75,
+        "generates_bubbles": false
       },
       "minecraft:nameable": {
-        "alwaysShow": true,
-        "allowNameTagRenaming": false
+        "always_show": true,
+        "allow_name_tag_renaming": false
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
       },
       "minecraft:insomnia": {
         "days_until_insomnia": 3
@@ -119,21 +135,23 @@
       },
       "minecraft:scaffolding_climber": {},
       "minecraft:environment_sensor": {
-        "filters": {
-          "all_of": [
-            {
-              "test": "has_mob_effect",
-              "subject": "self",
-              "value": "bad_omen"
-            },
-            {
-              "test": "is_in_village",
-              "subject": "self",
-              "value": true
-            }
-          ]
-        },
-        "event": "minecraft:trigger_raid"
+        "triggers": {
+          "filters": {
+            "all_of": [
+              {
+                "test": "has_mob_effect",
+                "subject": "self",
+                "value": "bad_omen"
+              },
+              {
+                "test": "is_in_village",
+                "subject": "self",
+                "value": true
+              }
+            ]
+          },
+          "event": "minecraft:trigger_raid"
+        }
       }
     },
 

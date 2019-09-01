@@ -6,7 +6,7 @@
     },
 
   "tags": [ "furnace" ],
-  "input": "minecraft:stone",
+  "input": "minecraft:stone:0",
   "output": "minecraft:smooth_stone"
   }
 }

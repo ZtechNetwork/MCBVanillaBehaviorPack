@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:tnt_minecart",
@@ -11,13 +11,10 @@
     "component_groups": {
       "minecraft:primed_tnt": {
         "minecraft:explode": {
-          "on_activate": {
-
-          },
-          "fuseLength": 4,
-          "fuseLit": true,
+          "fuse_length": 4,
+          "fuse_lit": true,
           "power": 3,
-          "causesFire": false
+          "causes_fire": false
         },
         "minecraft:rail_sensor": {
           
@@ -28,13 +25,10 @@
       },
       "minecraft:instant_explode_tnt": {
         "minecraft:explode": {
-          "on_activate": {
-
-          },
-          "fuseLength": 0,
-          "fuseLit": true,
+          "fuse_length": 0,
+          "fuse_lit": true,
           "power": 3,
-          "causesFire": false
+          "causes_fire": false
         },
         "minecraft:rail_sensor": {
           
@@ -61,59 +55,59 @@
           }
           
         },
-        "minecraft:interact": [
-          {
-            "on_interact": {
-            "filters": {
-			  "any_of": [
-				{"test": "has_equipment", "subject": "other", "domain": "hand", "value": "fireball:0"},
-          {
-            "test": "has_equipment",
-            "subject": "other",
-            "domain": "hand",
-            "value": "flint_and_steel"
-          }
-			  ],
-			  "all_of": [
-          {"test": "is_family", "subject": "other", "value": "player"},
-          {"test": "is_game_rule", "domain": "tntexplodes", "operator": "==", "value": true}
-			  ]
-			},
-              "event": "minecraft:on_prime",
-              "target": "self"
-            },
-            "swing": true,
-            "play_sounds": "ignite",
-            "interact_text": "action.interact.creeper"
-          },
-          {
-            "on_interact": {
-              "filters": {
-                "any_of": [
-                  {
-                    "test": "has_component",
-                    "subject": "other",
-                    "value": "fire_aspect"
-                  }
-                ],
-
-                "all_of": [
-                  {
-                    "test": "is_game_rule",
-                    "domain": "tntexplodes",
-                    "operator": "==",
-                    "value": true
-                  }
-                ]
-
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "on_interact": {
+                "filters": {
+                  "any_of": [
+                    {"test": "has_equipment", "subject": "other", "domain": "hand", "value": "fireball:0"},
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "hand",
+                      "value": "flint_and_steel"
+                    }
+                  ],
+                  "all_of": [
+                    {"test": "is_family", "subject": "other", "value": "player"},
+                    {"test": "is_game_rule", "domain": "tntexplodes", "operator": "==", "value": true}
+                  ]
+                },
+                "event": "minecraft:on_prime",
+                "target": "self"
               },
-              "event": "minecraft:on_prime",
-              "target": "self"
+              "swing": true,
+              "play_sounds": "ignite",
+              "interact_text": "action.interact.creeper"
             },
-            "swing": true,
-            "interact_text": "action.interact.creeper"
-          }
-        ]
+            {
+              "on_interact": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_component",
+                      "subject": "other",
+                      "value": "fire_aspect"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "is_game_rule",
+                      "domain": "tntexplodes",
+                      "operator": "==",
+                      "value": true
+                    }
+                  ]
+                },
+                "event": "minecraft:on_prime",
+                "target": "self"
+              },
+              "swing": true,
+              "interact_text": "action.interact.creeper"
+            }
+          ]
+        }
       }
     },
 
@@ -129,7 +123,11 @@
       },
       "minecraft:is_stackable": {
       },
-	    "minecraft:physics": {
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

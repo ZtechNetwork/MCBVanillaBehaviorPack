@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:iron_golem",
@@ -40,7 +40,7 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "irongolem" ]
+        "family": [ "irongolem", "mob" ]
       },
       "minecraft:nameable": {
       },
@@ -54,6 +54,15 @@
       "minecraft:health": {
         "value": 100,
         "max": 100
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
       },
       "minecraft:movement": {
         "value": 0.25
@@ -76,8 +85,11 @@
           "range_max": 21
         }
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
       "minecraft:knockback_resistance": {
         "value": 1.0
@@ -172,6 +184,20 @@
           }
         ]
       },
+      "minecraft:behavior.target_when_pushed": {
+        "priority": 1,
+        "percent_chance": 5.0,
+        "entity_types": [
+          {
+            "filters": { 
+              "all_of": [
+                { "test" :  "is_family", "subject" : "other", "value" :  "monster" },
+                { "test" :  "is_family", "subject" : "other", "operator": "!=", "value" :  "creeper" }
+              ] 
+            }
+          }
+        ]
+      },
       "minecraft:behavior.melee_attack": {
         "priority": 1,
         "target_dist": 1.0,
@@ -229,7 +255,13 @@
           "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "creeper" }
         }
       },
+      "minecraft:persistent": {
+      },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
       "minecraft:follow_range": {
         "value": 64

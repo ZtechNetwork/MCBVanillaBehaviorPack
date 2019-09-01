@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
 
     "description": {
@@ -14,8 +14,11 @@
     },
 
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 5 : 0"
+      },
       "minecraft:type_family": {
-        "family": [ "phantom", "undead", "monster" ]
+        "family": [ "phantom", "undead", "monster", "mob" ]
       },
       "minecraft:loot": {
         "table": "loot_tables/entities/phantom.json"
@@ -26,17 +29,30 @@
         "value": 20,
         "max": 20
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:physics": {
         "has_gravity": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
       "minecraft:attack": {
         "damage": 6
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0,
-        "breathesAir": true,
-        "breathesWater": false
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_air": true,
+        "breathes_water": false
       },
       "minecraft:collision_box": {
         "width": 0.9,

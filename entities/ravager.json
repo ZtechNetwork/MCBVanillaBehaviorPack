@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ravager",
@@ -8,6 +8,25 @@
       "is_experimental": false
     },
     "component_groups": {
+      "minecraft:celebrate": {
+        "minecraft:behavior.celebrate": {
+          "priority": 5,
+          "celebration_sound": "celebrate",
+          "sound_interval": {
+            "range_min": 2.0,
+            "range_max": 7.0
+          },
+          "jump_interval": {
+            "range_min": 1.0,
+            "range_max": 3.5
+          },
+          "duration": 30.0,
+          "on_celebration_end_event": {
+            "event": "minecraft:stop_celebrating",
+            "target": "self"
+          }
+        }
+      },
       "minecraft:pillager_rider": {
         "minecraft:addrider": {
           "entity_type": "minecraft:pillager"
@@ -54,7 +73,8 @@
         },
         "minecraft:behavior.move_to_village": {
           "priority": 5,
-          "speed_multiplier": 1.0
+          "speed_multiplier": 1.0,
+          "goal_radius": 2.0
         },
         "minecraft:behavior.random_stroll": {
           "priority": 6,
@@ -198,6 +218,9 @@
       }
     },
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 20 : 0"
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -221,8 +244,8 @@
         "damage": 12.0
       },
       "minecraft:breathable": {
-        "suffocateTime": 0,
-        "totalSupply": 15
+        "suffocate_time": 0,
+        "total_supply": 15
       },
       "minecraft:collision_box": {
         "height": 1.9,
@@ -231,6 +254,15 @@
       "minecraft:health": {
         "max": 100,
         "value": 100
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
       },
       "minecraft:jump.static": {},
       "minecraft:loot": {
@@ -246,11 +278,15 @@
       "minecraft:nameable": {},
       "minecraft:navigation.walk": {
         "avoid_damage_blocks": true,
-        "avoid_water": true,
         "can_path_over_water": true,
         "can_sink": false
       },
-      "minecraft:physics": {},
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
       "minecraft:break_blocks": {
         "breakable_blocks": [
           "bamboo",
@@ -303,7 +339,8 @@
         "family": [
           "monster",
           "illager",
-          "ravager"
+          "ravager", 
+          "mob"
         ]
       }
     },
@@ -408,6 +445,12 @@
             "roaring"
           ]
         }
+      },
+      "minecraft:start_celebrating": { // Event must be called exactly this for village to fire it when a raid is lost
+        "add": { "component_groups": [ "minecraft:celebrate" ] }
+      },
+      "minecraft:stop_celebrating": {
+        "remove": { "component_groups": [ "minecraft:celebrate" ] }
       }
     }
   }

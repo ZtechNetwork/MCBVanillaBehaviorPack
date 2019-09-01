@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:blaze",
@@ -8,6 +8,9 @@
       "is_experimental": false
     },
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 10 : 0"
+      },
       "minecraft:loot": {
         "table": "loot_tables/entities/blaze.json"
       },
@@ -18,8 +21,11 @@
       "minecraft:attack": {
         "damage": 6
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
       "minecraft:movement": {
         "value": 0.23
@@ -41,12 +47,18 @@
         "value": 20,
         "max": 20
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_water_or_rain", "operator": "==", "value": true },
+            "cause": "drowning",
+            "damage_per_tick": 1
+          }
+        ]
+      },
       "minecraft:follow_range": {
         "value": 48,
         "max": 48
-      },
-      "minecraft:hurt_when_wet": {
-        "value": true
       },
       "minecraft:fire_immune": true,
       "minecraft:nameable": {
@@ -101,9 +113,13 @@
         "priority": 6
       },
       "minecraft:type_family": {
-        "family": [ "blaze", "monster" ]
+        "family": [ "blaze", "monster", "mob" ]
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

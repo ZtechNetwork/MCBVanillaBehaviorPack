@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:agent",
@@ -14,12 +14,12 @@
     "components": {
       "minecraft:tick_world": {
       },
-      "minecraft:damage_sensor": [
-        {
+      "minecraft:damage_sensor": {
+        "triggers": {
           "cause": "all",
           "deals_damage": false
         }
-      ],
+      },
       "minecraft:fire_immune": true,
       "minecraft:inventory": {
         "inventory_size": 27,
@@ -34,8 +34,8 @@
         "height": 0.93
       },
       "minecraft:nameable": {
-        "alwaysShow": true,
-        "allowNameTagRenaming": false
+        "always_show": true,
+        "allow_name_tag_renaming": false
       },
       "minecraft:movement": {
         "value": 1,
@@ -54,7 +54,13 @@
                 ] 
         }
       },
-	  "minecraft:physics": {
+      "minecraft:persistent": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
       }
     }
   }

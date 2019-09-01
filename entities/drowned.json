@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:drowned",
@@ -9,6 +9,9 @@
     },
     "component_groups": {
       "minecraft:baby_drowned": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? 12 + (query.equipment_count * Math.Random(1,3)) : 0"
+        },
         "minecraft:is_baby": {},
         "minecraft:scale": {
           "value": 0.5
@@ -22,6 +25,9 @@
       },
 
       "minecraft:adult_drowned": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? 5 + (query.equipment_count * Math.Random(1,3)) : 0"
+        },
         "minecraft:loot": {
           "table": "loot_tables/entities/drowned.json"
         }
@@ -112,11 +118,11 @@
 
       // Zombie Components
       "minecraft:type_family": {
-        "family": [ "drowned", "zombie", "undead", "monster" ]
+        "family": [ "drowned", "zombie", "undead", "monster", "mob" ]
       },
       "minecraft:collision_box": {
         "width": 0.6,
-        "height": 1.8
+        "height": 1.9
       },
       "minecraft:annotation.break_door": {
       },
@@ -133,16 +139,25 @@
         "value": 20,
         "max": 20
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:movement": {
         "value": 0.23
       },
       "minecraft:burns_in_daylight": {
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0,
-        "breathesAir": true,
-        "breathesWater": true
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_air": true,
+        "breathes_water": true
       },
       "minecraft:navigation.generic": {
         "is_amphibious": true,
@@ -204,7 +219,7 @@
                 {
                   "any_of": [
                     { "test": "in_water", "subject": "other", "value": true },
-                    { "test": "is_brightness", "subject": "other", "operator": "<", "value": 0.49 }
+                    { "test": "is_daytime", "value": false }
                   ]
                 }
               ]
@@ -223,7 +238,7 @@
                 {
                   "any_of": [
                     { "test": "in_water", "subject": "other", "value": true },
-                    { "test": "is_brightness", "subject": "other", "operator": "<", "value": 0.49 }
+                    { "test": "is_daytime", "value": false }
                   ]
                 }
               ]
@@ -246,6 +261,10 @@
         "persist_time": 0.5
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
       "minecraft:on_target_acquired": {
         "event": "minecraft:has_target",

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ender_dragon",
@@ -47,7 +47,7 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "dragon" ]
+        "family": [ "dragon", "mob" ]
       },
       "minecraft:health": {
         "value": 200,
@@ -75,8 +75,11 @@
       "minecraft:attack": {
         "damage": 3
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
       "minecraft:on_start_landing": {
         "event": "minecraft:start_land",
@@ -89,6 +92,8 @@
       "minecraft:on_death": {
         "event": "minecraft:start_death",
         "target": "self"
+      },
+      "minecraft:persistent": {
       },
       "minecraft:physics": {
         "has_gravity": false,

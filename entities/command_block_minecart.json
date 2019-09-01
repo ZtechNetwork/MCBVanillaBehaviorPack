@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:command_block_minecart",
@@ -48,6 +48,10 @@
       "minecraft:inventory": {
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

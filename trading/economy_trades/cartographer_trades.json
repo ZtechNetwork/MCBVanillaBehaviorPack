@@ -61,7 +61,7 @@
               "wants": [
                 {
                   "item": "minecraft:glass_pane",
-                  "quantity": 10,
+                  "quantity": 11,
                   "price_multiplier": 0.05
                 }
               ],

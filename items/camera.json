@@ -7,7 +7,7 @@
     
     "components": {
       "minecraft:use_duration": 100000,
-      "minecraft:block": "camera",
+      "minecraft:block": "minecraft:camera",
       "minecraft:camera": {
         "black_bars_duration": 0.2,
         "black_bars_screen_ratio": 0.08,

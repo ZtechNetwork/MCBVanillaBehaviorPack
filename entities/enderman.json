@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:enderman",
@@ -38,12 +38,15 @@
     },
 
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 5 : 0"
+      },
       "minecraft:type_family": {
-        "family": [ "enderman", "monster" ]
+        "family": [ "enderman", "monster", "mob" ]
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:nameable": {
       },
@@ -53,6 +56,20 @@
       "minecraft:health": {
         "value": 40,
         "max": 40
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          },
+          {
+            "filters": { "test": "in_water_or_rain", "operator": "==", "value": true },
+            "cause": "drowning",
+            "damage_per_tick": 1
+          }
+        ]
       },
       "minecraft:attack": {
         "damage": 7
@@ -66,16 +83,16 @@
         "height": 2.9
       },
       "minecraft:teleport": {
-        "randomTeleports": true,
-        "maxRandomTeleportTime": 30,
-        "randomTeleportCube": [ 32, 32, 32 ],
-        "targetDistance": 16,
+        "random_teleports": true,
+        "max_random_teleport_time": 30,
+        "random_teleport_cube": [ 32, 32, 32 ],
+        "target_distance": 16,
         "target_teleport_chance": 0.05,
-        "lightTeleportChance": 0.05
+        "light_teleport_chance": 0.05
       },
       "minecraft:lookat": {
-        "searchRadius": 64.0,
-        "setTarget": true,
+        "search_radius": 64.0,
+        "set_target": true,
         "look_cooldown": 5.0,
         "filters": {
           "all_of": [
@@ -144,10 +161,11 @@
       "minecraft:behavior.enderman_take_block": {
         "priority": 11
       },
-      "minecraft:hurt_when_wet": {
-        "value": true
-      },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

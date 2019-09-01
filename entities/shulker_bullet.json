@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:shulker_bullet",
@@ -14,11 +14,11 @@
         "height": 0.625
       },
       "minecraft:projectile": {
-        "onHit": {
+        "on_hit": {
           "impact_damage": {
             "damage": 4,
             "knockback": true,
-            "shouldbounce": true
+            "should_bounce": true
           },
           "mob_effect": {
             "effect": "levitation",
@@ -34,13 +34,13 @@
             "on_other_hit": true
           }
         },
-        "hitSound": "bullet.hit",
+        "hit_sound": "bullet.hit",
         "destroyOnHurt": true,
-        "critParticleOnHurt": true,
+        "crit_particle_on_hurt": true,
         "power": 1.6,
         "gravity": 0.05,
-        "uncertaintyBase": 16,
-        "uncertaintyMultiplier": 4,
+        "uncertainty_base": 16,
+        "uncertainty_multiplier": 4,
         "anchor": 1,
         "offset": [ 0, -0.1, 0 ],
         "homing": true

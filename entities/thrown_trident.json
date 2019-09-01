@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
 	"minecraft:entity": {
     "description": {
       "identifier": "minecraft:thrown_trident",
@@ -14,31 +14,35 @@
 				"height": 0.35
 			},
 			"minecraft:projectile": {
-				"onHit": {
+				"on_hit": {
 					"impact_damage": {
 						"damage": 8,
 						"knockback": true,
-						"semirandomdiffdamage": false,
-						"destroyonhit": false
+						"semi_random_diff_damage": false,
+						"destroy_on_hit": false
 					},
 					"stick_in_ground": {
 						"shake_time" : 0
 					}
 				},
 				"liquid_inertia": 0.99,
-				"hitSound": "item.trident.hit",
-				"hitGroundSound": "item.trident.hit_ground",
+				"hit_sound": "item.trident.hit",
+				"hit_ground_sound": "item.trident.hit_ground",
 				"power": 4,
 				"gravity": 0.10,
-				"uncertaintyBase": 1,
-				"uncertaintyMultiplier": 0,
-				"stopOnHurt": true,
+				"uncertainty_base": 1,
+				"uncertainty_multiplier": 0,
+				"stop_on_hurt": true,
 				"anchor": 1,
-				"shouldbounce": true,
-				"multipletargets": false,
+				"should_bounce": true,
+				"multiple_targets": false,
 				"offset": [ 0, -0.1, 0 ]
 			},
 			"minecraft:physics": {
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
 			}
 		}
 	}
