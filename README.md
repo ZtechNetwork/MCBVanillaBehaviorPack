@@ -3,6 +3,11 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/ZtechNetwork/MCBVanillaBehaviorPack/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ZtechNetwork/MCBVanillaBehaviorPack) ![GitHub last commit](https://img.shields.io/github/last-commit/ZtechNetwork/MCBVanillaBehaviorPack)
 
 ## Game Changelogs
+### v1.12.1
+- Bug Fixes.
+- See the full [changelog](https://feedback.minecraft.net/hc/en-us/articles/360032928992-Minecraft-1-12-1-Bedrock-) for more info.
+- No changes to behavior packs in this version.
+
 ### v1.12.0
 - Increased the frequency and volume of the ambient mob sounds made during raids, to make them easier to locate
 - Added new Wandering Trader sounds
