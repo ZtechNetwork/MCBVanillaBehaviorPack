@@ -3,6 +3,20 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/ZtechNetwork/MCBVanillaBehaviorPack/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ZtechNetwork/MCBVanillaBehaviorPack?include_prereleases) ![GitHub last commit](https://img.shields.io/github/last-commit/ZtechNetwork/MCBVanillaBehaviorPack)
 
 ## Changelogs
+### v1.13.0.13 [Beta]
+#### *Changes to the Pack Manifest:*
+- **All Pack Types:**
+    - The 'name' field in the header is now required for all pieces of content.
+- **Resource and Behavior Packs:**
+    - The 'min_engine_version' field is now required. This affects how the game interprets some of the assets loaded from Resource and Behavior Packs. We recommend using the latest available version of the game for this field (e.g. '[1, 13, 0]') to ensure your pack works correctly.
+- **Base Game Version Field:**
+    - For this field, we recommend using the value "`*`". This will ensure that anyone using your content in their Minecraft worlds will always get the latest base game (vanilla) content when an update is available. In the case that your content relies on specific base game behavior, you can use this field to specify a base game version, starting with 1.13. If you choose to do this, you should omit the third octet; for example, if the version of the game you are targeting is '[1, 14, 2]', you would specify a version of '[1, 14, 0]'). If you specify a version this way, any worlds using your custom content will not get new base game content when it becomes available in future releases, which could help prevent unwanted changes to behavior in your content caused by updates to the base game. However, we still recommend using the “`*`” value to ensure players can continue to enjoy your content in their Minecraft worlds long-term while also receiving updates to the base game.
+
+#### *Bug Fixes:*
+- Using "lock_rider_rotation" now works correctly on players 
+- Using "yaw_speed" calculation now works correctly
+- Custom entities now get proper death messages
+
 ### v1.13.0.9 [Beta]
 #### *Changes for Map Makers & Addons:*
 - **New Data Driven Items:**
