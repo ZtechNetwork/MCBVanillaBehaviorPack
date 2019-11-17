@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:bat",
@@ -12,25 +12,36 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "bat" ]
+        "family": [ "bat", "mob" ]
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:collision_box": {
         "width": 0.5,
         "height": 0.9
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
-
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:movement": {
         "value": 0.1
       },
-      "minecraft:navigation.float": {
-        "can_path_over_water": true
+      "minecraft:navigation.float": {	
+        "can_path_over_water": true	
       },
       "minecraft:movement.basic": {
       },

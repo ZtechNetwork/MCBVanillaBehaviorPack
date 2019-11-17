@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:snowball",
@@ -13,7 +13,7 @@
         "height": 0.25
       },
       "minecraft:projectile": {
-        "onHit": {
+        "on_hit": {
           "impact_damage": {
             "filter": "blaze",
             "damage": 3,
@@ -29,9 +29,13 @@
         },
         "power": 1.5,
         "gravity": 0.03,
-        "angleoffset": 0.0
+        "angle_offset": 0.0
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     }
   }

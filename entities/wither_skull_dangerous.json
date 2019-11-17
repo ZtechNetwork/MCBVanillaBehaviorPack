@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
  "minecraft:entity": {
   "description": {
     "identifier": "minecraft:wither_skull_dangerous",
@@ -11,12 +11,12 @@
   "component_groups": {
     "minecraft:exploding": {
       "minecraft:explode": {
-        "fuseLength": 0,
-        "fuseLit": true,
+        "fuse_length": 0,
+        "fuse_lit": true,
         "power": 1,
-        "causesFire": false,
-        "maxResistance": 4.0,
-        "destroyAffectedByGriefing": true
+        "causes_fire": false,
+        "max_resistance": 4.0,
+        "destroy_affected_by_griefing": true
       }
     }
   },
@@ -27,10 +27,10 @@
       "height": 0.15
     },
     "minecraft:projectile": {
-      "onHit": {
+      "on_hit": {
         "definition_event": {
-          "affectProjectile": true,
-          "eventTrigger": {
+          "affect_projectile": true,
+          "event_trigger": {
             "event": "minecraft:explode",
             "target": "self"
           }
@@ -45,19 +45,23 @@
       },
       "power": 0.6,
       "gravity": 0.00,
-      "uncertaintyBase": 7.5,
-      "uncertaintyMultiplier": 1,
-      "shootSound": "bow",
-      "hitSound": "bow.hit",
+      "uncertainty_base": 7.5,
+      "uncertainty_multiplier": 1,
+      "shoot_sound": "bow",
+      "hit_sound": "bow.hit",
       "anchor": 1,
       "offset": [ 0, -0.1, 0 ],
-      "isdangerous": true,
+      "is_dangerous": true,
       "inertia": 1.0,
       "liquid_inertia": 1.0,
-      "shoottarget": false,
-      "reflectOnHurt": true 
+      "shoot_target": false,
+      "reflect_on_hurt": true 
     },
 	  "minecraft:physics": {
+    },
+    "minecraft:pushable": {
+      "is_pushable": true,
+      "is_pushable_by_piston": true
     }
   },
   "events": {

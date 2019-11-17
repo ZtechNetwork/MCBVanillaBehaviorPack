@@ -2,7 +2,72 @@
 ## Repository Status
 ![GitHub All Releases](https://img.shields.io/github/downloads/ZtechNetwork/MCBVanillaBehaviorPack/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ZtechNetwork/MCBVanillaBehaviorPack) ![GitHub last commit](https://img.shields.io/github/last-commit/ZtechNetwork/MCBVanillaBehaviorPack/master)
 
+
 ## Changelogs
+### v1.13.2 (iOS Only)
+- No changes to Addons and Scripts.
+
+### v1.13.1
+- No changes to Addons and Scripts.
+
+### v1.13.0
+#### *Changes for Map Makers & Addons:*
+
+- **New Data-Driven Objects for Add-Ons**
+    - Brewing stand potion recipes are now data-driven
+    - Arrow shake animation
+    - Item breaking particles
+    - Data-driven environment damage for entities
+    - Added 'push' component that determines whether an entity can be pushed
+    - Added 'persistent' component that determines whether an entity should be persistent in the game world
+    - Turtle Lightning interactions are now data-driven
+    - Pufferfish puffed states are now data-driven
+    - Guardian/Elder Guardian animation and rendering
+        - Fixed unparented geometry on pre-1.8 guardians
+        - Elder Guardian spike animation
+    - Fishing hook
+    - Horse models and animations
+    - Snow Golem trail behavior
+    - Dragon Breath particles
+    - Sparkler particles (Education)
+    - Balloons (Education)
+
+- **Script Engine**
+
+    - Actor Definition Events can now be triggered from scripts
+    - Scripting logs can now be opened and viewed while the game is running
+    - Added new scripting Actor tags
+    - Added 'container' scripting component for blocks
+    - Added 'projectile_hit' scripting event
+    - Added 'entity_hurt' scripting event
+    - Added 'entity_sneak' scripting event
+    - Added 'entity_attack' scripting event
+    - Added 'block_exploded' scripting event
+
+- Added new feature rules data that implements existing biome decoration through JSON
+
+    - Final infrastructure changes required to support fully data-driven features. Rules themselves must be provided in a behavior pack with Experimental Gameplay enabled
+
+- Significantly increased the maximum 'spawnRadius' distance
+- Levers now have their own block state
+- Changed Breathable, RideTick, and Transformation systems to use ViewedEntityContext
+- All pillar blocks now have their own block state instead of using some values of the direction block state. This allows mirror and rotating with structure blocks
+
+- **Changes to Pack Manifests**
+    - ***Summary***
+        - As of 1.13, we have made some changes to the pack manifest with a new format version of "2". We recommend that any new packs or world templates that you create use format version of 2 from now on. With this new format, there are a few additional changes to be aware of, detailed below
+- **All Pack Types**
+    - The 'name' field in the header is now required for all pieces of content
+- **World Templates**
+    - The 'lock_template_options' field is now required. This Boolean field determines whether the world options for your template should be locked to default values when a player creates a world from the template. They can still choose to unlock and modify the options, but will be warned that doing so could affect gameplay
+    - The 'base_game_version' field is required (see below for more info)
+    - The 'min_engine_version' field should no longer be used as it isn't parsed on world templates and produces a warning on import
+- **Resource and Behavior Packs**
+    - The 'min_engine_version' field is now required. This affects how the game interprets some of the assets loaded from Resource and Behavior Packs. We recommend using the latest available version of the game for this field (e.g. '[1, 13, 0]') to ensure your pack works correctly
+- **Base Game Version Field**
+    - For this field, we recommend using the value "*". This will ensure that anyone using your content in their Minecraft worlds will always get the latest base game (Vanilla) content when an update is available.
+    - In the case that your content relies on specific base game behavior, you can use this field to specify a base game version, starting with 1.13. If you choose to do this, you should omit the third octet; for example, if the version of the game you are targeting is '[1, 14, 2]', you would specify a version of '[1, 14, 0]'). If you specify a version this way, any worlds using your custom content will not get new base game content when it becomes available in future releases, which could help prevent unwanted changes to behavior in your content caused by updates to the base game. However, we still recommend using the "*" value to ensure players can continue to enjoy your content in their Minecraft worlds long-term while also receiving updates to the base game
+
 ### v1.12.1
 - No changes to Addons and Scripts.
 

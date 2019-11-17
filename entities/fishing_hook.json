@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:fishing_hook",
@@ -22,12 +22,16 @@
           "height": 0.15
         },
         "minecraft:projectile": {
-          "onHit": { "stick_in_ground": {} }
+          "on_hit": { "stick_in_ground": {} }
         },
         "minecraft:loot": {
           "table": "loot_tables/gameplay/fishing.json"
         },
         "minecraft:physics": {
+        },
+        "minecraft:pushable": {
+          "is_pushable": false,
+          "is_pushable_by_piston": true
         }
       },
 

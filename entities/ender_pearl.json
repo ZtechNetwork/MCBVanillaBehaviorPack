@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ender_pearl",
@@ -10,13 +10,13 @@
     "component_groups": {
       "minecraft:no_spawn": {
         "minecraft:projectile": {
-          "onHit": {
+          "on_hit": {
             "teleport_owner": { },
             "remove_on_hit": { }
           },
           "power": 1.5,
           "gravity": 0.025,
-          "angleoffset": 0.0,
+          "angle_offset": 0.0,
           "inertia": 1,
           "liquid_inertia": 1
         }
@@ -29,22 +29,26 @@
         "height": 0.25
       },
       "minecraft:projectile": {
-        "onHit": {
+        "on_hit": {
           "teleport_owner": { },
           "spawn_chance": {
-            "firstSpawnPercentChance": 5.0,
-            "firstSpawnCount": 1,
-            "spawnDefinition": "minecraft:endermite"
+            "first_spawn_percent_chance": 5.0,
+            "first_spawn_count": 1,
+            "spawn_definition": "minecraft:endermite"
           },
           "remove_on_hit": { }
         },
         "power": 1.5,
         "gravity": 0.025,
-        "angleoffset": 0.0,
+        "angle_offset": 0.0,
         "inertia": 1,
         "liquid_inertia": 1
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

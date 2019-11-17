@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:silverfish",
@@ -18,8 +18,8 @@
       "minecraft:silverfish_angry": {
         "minecraft:angry": {
           "duration": -1,
-          "broadcastAnger": true,
-          "broadcastRange": 20,
+          "broadcast_anger": true,
+          "broadcast_range": 20,
           "calm_event": {
             "event": "minecraft:on_calm",
             "target": "self"
@@ -37,12 +37,15 @@
     },
 
 	"components": {
+    "minecraft:experience_reward": {
+      "on_death": "query.last_hit_by_player ? 5 : 0"
+    },
 	  "minecraft:type_family": {
-		  "family":["silverfish", "monster", "arthropod" ]          
+		  "family":["silverfish", "monster", "mob", "arthropod" ]          
 	  },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
 	  "minecraft:nameable": {
 	  },
@@ -52,7 +55,16 @@
       "minecraft:health": {
         "value": 8,
         "max": 8
-      },	
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
 			"minecraft:movement": {
 				"value": 0.25
 			},
@@ -100,6 +112,10 @@
         "alert_same_type": true
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
 		},
 

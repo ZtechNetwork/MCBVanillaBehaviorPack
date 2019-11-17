@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wither",
@@ -9,16 +9,19 @@
     },
 
     "components": {
+      "minecraft:experience_reward": {
+        "on_death": "50"
+      },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:boss": {
         "should_darken_sky": true,
         "hud_range": 55
       },
-      "minecraft:damage_sensor": [
-        {
+      "minecraft:damage_sensor": {
+        "triggers": {
           "on_damage": {
             "filters": {
               "test": "is_family",
@@ -28,7 +31,7 @@
           },
           "deals_damage": false
         }
-      ],
+      },
       "minecraft:health": {
         "value": 600,
         "max": 600
@@ -114,11 +117,16 @@
       "minecraft:behavior.random_look_around": {
         "priority": 7
       },
-
       "minecraft:type_family": {
-        "family": [ "wither", "skeleton", "monster", "undead" ]
+        "family": [ "wither", "skeleton", "monster", "undead", "mob" ]
       },
-	    "minecraft:physics": {
+      "minecraft:persistent": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

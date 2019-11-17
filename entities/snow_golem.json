@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:snow_golem",
@@ -17,11 +17,11 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "snowgolem" ]
+        "family": [ "snowgolem", "mob" ]
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:nameable": {
       },
@@ -51,30 +51,53 @@
       "minecraft:attack": {
         "damage": 2
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
-      "minecraft:interact": [
-        {
-          "cooldown": 2.5,
-          "use_item": false,
-          "hurt_item": 1,
-          "play_sounds": "shear",
-          "interact_text": "action.interact.shear",
-          "on_interact": {
-            "filters": {
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          },
+          {
+            "filters": { "test": "is_temperature_value", "operator": ">", "value": 1.0 },
+            "cause": "temperature",
+            "damage_per_tick": 1
+          },
+          {
+            "filters": { "test": "in_water_or_rain", "operator": "==", "value": true },
+            "cause": "drowning",
+            "damage_per_tick": 1
+          }
+        ]
+      },
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "cooldown": 2.5,
+            "use_item": false,
+            "hurt_item": 1,
+            "play_sounds": "shear",
+            "interact_text": "action.interact.shear",
+            "on_interact": {
+              "filters": {
                 "all_of": [
-				  { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "shears"},
-                  { "test" :  "is_family", "subject" : "other", "value" :  "player"},
-                  { "test" :  "has_component", "operator": "!=", "value" :  "minecraft:is_sheared"}
+                  { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "shears"},
+                  { "test": "is_family", "subject": "other", "value": "player"},
+                  { "test": "has_component", "operator": "!=", "value": "minecraft:is_sheared"}
                 ]
               },
-            "event": "minecraft:on_sheared",
-            "target": "self"
+              "event": "minecraft:on_sheared",
+              "target": "self"
+            }
           }
-        }
-      ],
-
+        ]
+      },
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,
@@ -90,6 +113,10 @@
       },
       "minecraft:shooter": {
         "def": "minecraft:snowball"
+      },
+      "minecraft:trail": {
+        "block_type": "minecraft:snow_layer",
+        "spawn_filter": { "test": "is_temperature_value", "operator": "<", "value": 0.81 }
       },
       "minecraft:behavior.random_stroll": {
         "priority": 2,
@@ -112,10 +139,13 @@
         ],
         "must_reach": true
       },
+      "minecraft:persistent": {
+      },
       "minecraft:physics": {
       },
-      "minecraft:hurt_when_wet": {
-        "value": true
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

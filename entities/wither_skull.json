@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
  "minecraft:entity": {
   "description": {
     "identifier": "minecraft:wither_skull",
@@ -11,11 +11,11 @@
   "component_groups": {
     "minecraft:exploding": {
       "minecraft:explode": {
-        "fuseLength": 0,
-        "fuseLit": true,
+        "fuse_length": 0,
+        "fuse_lit": true,
         "power": 1,
-        "causesFire": false,
-        "destroyAffectedByGriefing": true
+        "causes_fire": false,
+        "destroy_affected_by_griefing": true
       }
     }
   },
@@ -26,10 +26,10 @@
       "height": 0.15
     },
     "minecraft:projectile": {
-      "onHit": {
+      "on_hit": {
         "definition_event": {
-          "affectProjectile": true,
-          "eventTrigger": {
+          "affect_projectile": true,
+          "event_trigger": {
             "event": "minecraft:explode",
             "target": "self"
           }
@@ -44,17 +44,21 @@
       },
       "power": 1.2,
       "gravity": 0.00,
-      "uncertaintyBase": 7.5,
-      "uncertaintyMultiplier": 1,
-      "shootSound": "bow",
-      "hitSound": "bow.hit",
+      "uncertainty_base": 7.5,
+      "uncertainty_multiplier": 1,
+      "shoot_sound": "bow",
+      "hit_sound": "bow.hit",
       "anchor": 1,
       "offset": [ 0, -0.1, 0 ],
       "inertia": 1.0,
       "liquid_inertia": 1.0,
-      "shoottarget": false
+      "shoot_target": false
     },
 	  "minecraft:physics": {
+    },
+    "minecraft:pushable": {
+      "is_pushable": true,
+      "is_pushable_by_piston": true
     }
   },
   "events": {

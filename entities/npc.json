@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:npc",
@@ -9,14 +9,14 @@
     },
 
     "components": {
-      "minecraft:damage_sensor": [
-        {
+      "minecraft:damage_sensor": {
+        "triggers": {
           "cause": "all",
           "deals_damage": false
         }
-      ],
+      },
       "minecraft:type_family": {
-        "family": [ "npc" ]
+        "family": [ "npc", "mob" ]
       },
       "minecraft:fire_immune": true,
       "minecraft:health": {
@@ -38,6 +38,8 @@
         "priority": 0,
         "look_distance": 6.0,
         "probability": 0.02
+      },
+      "minecraft:persistent": {
       },
       "minecraft:npc": {
         "npc_data": {
@@ -114,8 +116,8 @@
         }
       },
       "minecraft:nameable": {
-        "alwaysShow": true,
-        "allowNameTagRenaming": false
+        "always_show": true,
+        "allow_name_tag_renaming": false
       },
       "minecraft:physics": {
       }

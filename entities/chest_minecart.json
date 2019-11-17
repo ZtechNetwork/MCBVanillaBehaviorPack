@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:chest_minecart",
@@ -16,7 +16,6 @@
         "height": 0.7
       },
       "minecraft:rail_movement": {
-
       },
       "minecraft:inventory": {
         "container_type": "minecart_chest",
@@ -26,7 +25,11 @@
       "minecraft:is_stackable": {
         "value": true
       },
-	  "minecraft:physics": {
+	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     }
 

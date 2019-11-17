@@ -1,0 +1,89 @@
+<h1>ITEM DOCUMENTATION </br>Version: 1.13.0.34</h1>
+<h2><p id="Index">Index</p></h2>
+<table border="1">
+<tr> <th><a href="#Overview">Overview</a></th> </tr>
+<tr> <td> <a href="#Item Components"> Item Components</a> </tr> </td>
+<tr> <td> <a href="#Items"> Items</a> </tr> </td>
+</table>
+<a href="#Index">Back to top</a>
+<h1><p id="Overview">Overview</p></h1>
+
+Items are setup in Json files under the behavior_packs, /'name of pack'/, items directory.</br><h1><p id="Item Components">Item Components</p></h1>
+
+Here is a list of all item components and their settings.</br><h2>Item Component Settings:</h2>
+<br / ><textarea readonly="true" cols="112" rows="32">
+{
+"format_version": "1.12.0",
+"minecraft:item": {
+  "description": {
+  "identifier": "minecraft:apple"
+  },
+ 
+  "components": {
+    "minecraft:max_damage": 10,          // max damage item has, this is used like item max health.
+    "minecraft:hand_equipped": false,    // is this a hand equipped item.
+    "minecraft:stacked_by_data": false,  // stacked by data aux value or not?
+    "minecraft:foil": false,             // foil or glint.
+    "minecraft:block": ,               // block name, leave blank for no block.
+    "minecraft:max_stack_size": 64,      // max stack size.
+    "minecraft:use_duration": 32,        // how long to use before item is done being used.
+    "minecraft:food": { 
+      "nutrition": 4,                    // nutrition amount.
+      "saturation_modifier": "low"     // choose: poor, low, normal, good, max, supernatural.
+      "using_converts_to": 4,            // after using,  item converts it to this item.
+      "on_use_action": 4,                // 'chorus_teleport' or 'none'.
+      "on_use_range": 4,                 // array of 3 ranges.
+      "cooldown_type": 4,                // 'chorusfruit' or 'none'.
+      "cooldown_time": 4,                // cooldown time in ticks.
+      "can_always_eat": 4,               // can always eat this item? true or false.
+      
+      "effects": [,                      // effects.
+         { 
+           "name": "regeneration",     // name of effect: regeneration, absorption, resistance, fire_resistance
+            "chance": 1.0,                // float chance for effect to happen 
+            "duration": 30,               // int duration of effect 
+            "amplifier": 4,               // int amplifier
+          },                                                
+          {                                                 
+            "name": "absorption",                       
+            "chance" : 1.0,                               
+            "duration" : 120,                             
+            "amplifier" : 3                               
+          },                                                
+    },                                                     
+                                                           
+    "minecraft:seed": {                                  
+      "crop_result": "sweet_berry_bush",        // crop seed item result 
+      "plant_at": ["grass","dirt","podzol"] // valid blocks you can plant this item at.
+    },                                                       
+  }
+}
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Items">Items</p></h1>
+
+Represents a single item.'Input' items will burn and transform into items specified in 'output'.</br><h2>Item Example:</h2>
+<br / ><textarea readonly="true" cols="35" rows="17">
+{
+"format_version": "1.12.0",
+"minecraft:item": {
+  "description": {
+  "identifier": "minecraft:apple"
+  },
+ 
+  "components": {
+    "minecraft:use_duration": 32,
+    "minecraft:food": {
+      "nutrition": 4,
+      "saturation_modifier": "low"
+    },
+  }
+}
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<br><br>
+

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:evocation_illager",
@@ -8,6 +8,25 @@
       "is_experimental": false
     },
     "component_groups": {
+      "minecraft:celebrate": {
+        "minecraft:behavior.celebrate": {
+          "priority": 5,
+          "celebration_sound": "celebrate",
+          "sound_interval": {
+            "range_min": 2.0,
+            "range_max": 7.0
+          },
+          "jump_interval": {
+            "range_min": 1.0,
+            "range_max": 3.5
+          },
+          "duration": 30.0,
+          "on_celebration_end_event": {
+            "event": "minecraft:stop_celebrating",
+            "target": "self"
+          }
+        }
+      },
       "minecraft:raid_configuration": {
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -30,13 +49,15 @@
       }
     },
     "components": {
-      "minecraft:type_family": {
-        "family": [ "evocation_illager", "monster", "illager" ]
+      "minecraft:experience_reward": {
+        "on_death": "10"
       },
-
+      "minecraft:type_family": {
+        "family": [ "evocation_illager", "monster", "illager", "mob" ]
+      },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:nameable": {
       },
@@ -46,6 +67,15 @@
       "minecraft:health": {
         "value": 24,
         "max": 24
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
       },
       "minecraft:collision_box": {
         "width": 0.6,
@@ -228,7 +258,13 @@
       "minecraft:behavior.hurt_by_target": {
         "priority": 1
       },
+      "minecraft:persistent": {
+      },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
       "minecraft:follow_range": {
         "value": 64
@@ -241,6 +277,12 @@
             "minecraft:raid_configuration"
           ]
         }
+      },
+      "minecraft:start_celebrating": { // Event must be called exactly this for village to fire it when a raid is lost
+        "add": { "component_groups": [ "minecraft:celebrate" ] }
+      },
+      "minecraft:stop_celebrating": {
+        "remove": { "component_groups": [ "minecraft:celebrate" ] }
       }
     }
   }

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ender_crystal",
@@ -11,11 +11,11 @@
     "component_groups": {
       "crystal_exploding": {
         "minecraft:explode": {
-          "fuseLength": 0,
-          "fuseLit": true,
+          "fuse_length": 0,
+          "fuse_lit": true,
           "power": 6,
-          "causesFire": false,
-          "destroyAffectedByGriefing": true
+          "causes_fire": false,
+          "destroy_affected_by_griefing": true
         }
       }
     },
@@ -35,6 +35,10 @@
         "target": "self"
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

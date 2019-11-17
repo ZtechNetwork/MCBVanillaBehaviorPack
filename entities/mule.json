@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:mule",
@@ -18,7 +18,7 @@
         },
         "minecraft:ageable": {
           "duration": 1200,
-          "feedItems": [
+          "feed_items": [
             {
               "item": "wheat",
               "growth": 0.016667
@@ -60,6 +60,9 @@
       },
 
       "minecraft:mule_adult": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? Math.Random(1,3) : 0"
+        },
         "minecraft:loot": {
           "table": "loot_tables/entities/horse.json"
         },
@@ -88,37 +91,37 @@
           "track_target": true
         },
         "minecraft:tamemount": {
-          "minTemper": 0,
-          "maxTemper": 100,
+          "min_temper": 0,
+          "max_temper": 100,
           "feed_text": "action.interact.feed",
           "ride_text": "action.interact.mount",
-          "feedItems": [
+          "feed_items": [
             {
               "item": "wheat",
-              "temperMod": 3
+              "temper_mod": 3
             },
             {
               "item": "sugar",
-              "temperMod": 3
+              "temper_mod": 3
             },
             {
               "item": "apple",
-              "temperMod": 3
+              "temper_mod": 3
             },
             {
               "item": "golden_carrot",
-              "temperMod": 5
+              "temper_mod": 5
             },
             {
               "item": "golden_apple",
-              "temperMod": 10
+              "temper_mod": 10
             },
             {
               "item": "appleEnchanted",
-              "temperMod": 10
+              "temper_mod": 10
             }
           ],
-          "autoRejectItems": [
+          "auto_reject_items": [
             {
               "item": "horsearmorleather"
             },
@@ -195,23 +198,25 @@
       },
 
       "minecraft:mule_unchested": {
-        "minecraft:interact": [
-          {
-            "play_sounds": "armor.equip_generic",
-            "on_interact": {
-              "filters": {
-                "all_of": [
-                  { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "chest"},
-                  { "test" :  "is_family", "subject" : "other", "value" :  "player"}
-                ]
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "play_sounds": "armor.equip_generic",
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "chest"},
+                    { "test" :  "is_family", "subject" : "other", "value" :  "player"}
+                  ]
+                },
+                "event": "minecraft:on_chest",
+                "target": "self"
               },
-              "event": "minecraft:on_chest",
-              "target": "self"
-            },
-            "use_item": true,
-            "interact_text": "action.interact.attachchest"
-          }
-        ]
+              "use_item": true,
+              "interact_text": "action.interact.attachchest"
+            }
+          ]
+        }
       },
 
       "minecraft:mule_chested": {
@@ -234,11 +239,11 @@
 
     "components": {
       "minecraft:type_family": {
-        "family": [ "mule" ]
+        "family": [ "mule", "mob" ]
       },
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:collision_box": {
         "width": 1.4,
@@ -249,6 +254,15 @@
           "range_min": 15,
           "range_max": 30
         }
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
       },
       "minecraft:movement": {
         "value": 0.175
@@ -327,6 +341,10 @@
         "priority": 8
       },
 	    "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       }
     },
 

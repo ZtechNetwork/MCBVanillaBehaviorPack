@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
  "minecraft:entity": {
   "description": {
     "identifier": "minecraft:fireball",
@@ -11,12 +11,12 @@
   "component_groups": {
    "minecraft:exploding": {
     "minecraft:explode": {
-     "fuseLength": 0,
-     "fuseLit": true,
+     "fuse_length": 0,
+     "fuse_lit": true,
      "power": 1,
-     "causesFire": true,
-     "fireAffectedByGriefing": true,
-     "destroyAffectedByGriefing": true
+     "causes_fire": true,
+     "fire_affected_by_griefing": true,
+     "destroy_affected_by_griefing": true
     }
    }
   },
@@ -28,10 +28,10 @@
    },
    "minecraft:projectile": {
     
-    "onHit": {
+    "on_hit": {
      "definition_event": {
-      "affectProjectile": true,
-      "eventTrigger": {
+      "affect_projectile": true,
+      "event_trigger": {
             "event": "minecraft:explode",
             "target": "self"
       }
@@ -40,14 +40,19 @@
     "power": 1.6,
     "gravity": 0.00,
     "inertia": 1,
-    "uncertaintyBase": 0,
-    "uncertaintyMultiplier": 0,
+    "liquid_inertia": 1,
+    "uncertainty_base": 0,
+    "uncertainty_multiplier": 0,
     "anchor": 1,
     "offset": [ 0, -0.1, 0 ],
-    "reflectOnHurt": true,
-    "catchFire": true
+    "reflect_on_hurt": true,
+    "catch_fire": true
    },
    "minecraft:physics": {
+   },
+   "minecraft:pushable": {
+    "is_pushable": true,
+    "is_pushable_by_piston": true
    }
   },
   "events": {

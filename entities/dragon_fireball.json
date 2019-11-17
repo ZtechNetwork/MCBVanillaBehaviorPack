@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.12.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:dragon_fireball",
@@ -14,7 +14,7 @@
       },
 
       "minecraft:projectile": {
-        "onHit": {
+        "on_hit": {
           "spawn_aoe_cloud": {
             "radius": 6.0,
             "radius_on_use": 0,
@@ -31,13 +31,17 @@
         "inertia": 1,
         "anchor": 2,
         "offset": [ 0, 0.5, 0 ],
-        "semirandomdiffdamage": true,
-        "uncertaintyBase": 10.0,
-        "reflectOnHurt": true,
-        "hitSound": "explode"
+        "semi_random_diff_damage": true,
+        "uncertainty_base": 10.0,
+        "reflect_on_hurt": true,
+        "hit_sound": "explode"
       }
     },
 	  "minecraft:physics": {
+    },
+    "minecraft:pushable": {
+      "is_pushable": true,
+      "is_pushable_by_piston": true
     }
   }
 }

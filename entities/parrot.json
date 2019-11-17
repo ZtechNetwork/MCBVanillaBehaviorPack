@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:parrot",
@@ -26,6 +26,9 @@
       },
 
       "minecraft:parrot_adult": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? Math.Random(1,3) : 0"
+        },
         "minecraft:loot": {
           "table": "loot_tables/entities/parrot.json"
         }
@@ -33,11 +36,11 @@
 
       "minecraft:parrot_wild": {
         "minecraft:type_family": {
-          "family": [ "parrot_wild" ]
+          "family": [ "parrot_wild", "mob" ]
         },
         "minecraft:tameable": {
           "probability": 0.33,
-          "tameItems": [
+          "tame_items": [
             "wheat_seeds",
             "pumpkin_seeds",
             "melon_seeds",
@@ -67,7 +70,7 @@
 
       "minecraft:parrot_tame": {
         "minecraft:type_family": {
-          "family": [ "parrot_tame" ]
+          "family": [ "parrot_tame", "mob" ]
         },
         "minecraft:is_tamed": {
         },
@@ -95,8 +98,8 @@
 
     "components": {
       "minecraft:breathable": {
-        "totalSupply": 15,
-        "suffocateTime": 0
+        "total_supply": 15,
+        "suffocate_time": 0
       },
       "minecraft:collision_box": {
         "width": 0.5,
@@ -108,11 +111,23 @@
         "value": 6,
         "max": 6
       },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
       "minecraft:movement": {
         "value": 0.4
       },
-      "minecraft:fall_damage": {
-        "value": 0.0
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
       },
       "minecraft:jump.static": {
       },
@@ -125,6 +140,10 @@
       "minecraft:movement.fly": {
       },
       "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
       "minecraft:behavior.float": {
         "priority": 0
