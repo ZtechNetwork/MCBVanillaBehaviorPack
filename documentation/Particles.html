@@ -1,4 +1,4 @@
-<h1>PARTICLES DOCUMENTATION </br>Version: 1.13.0.34</h1>
+<h1>PARTICLES DOCUMENTATION </br>Version: 1.14.30.2</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Basic Structure Overview">Basic Structure Overview</a></th> </tr>
@@ -827,7 +827,7 @@ Curves are interpolation values, with inputs from 0 to 1, and outputs based on t
 
 <h1><p id="Events">Events</p></h1>
 
-Events are particle events that can be triggered elsewhere in the .json.  An event triggers a particle effect.  If the type is "emitter", this will create an emitter of "effect" type at the event's world position, in a fire-and-forget way.  "emitter_bound" works similarly, except if the spawning emitter is bound to an actor/locator, the new emitter will be bound to the same actor/locator.  If the type is "particle", then the event will manually emit a particle on an emitter of "effect" type at the event location, creating the emitter if it doesn't already exist (be sure to use "minecraft:emitter_rate_manual" for the spawned emitter effect). "particle_with_velocity" will do the same as "particle" except the new particle will inherit the spawning particle's velocity.</br></br>The events themselves consist of an optional node tree and/or an actual event.  When "sequence" is specified, that array will execute in order, with every element executing when that event fires.  When using "random", one element will be picked from the array based on the weight.</br><h2></h2>
+Events can be triggered elsewhere in the .json and fire off new particle and sound effects.</br></br>Particle effects have different types. If the type is "emitter", this will create an emitter of "effect" type at the event's world position, in a fire-and-forget way.  "emitter_bound" works similarly, except if the spawning emitter is bound to an actor/locator, the new emitter will be bound to the same actor/locator.  If the type is "particle", then the event will manually emit a particle on an emitter of "effect" type at the event location, creating the emitter if it doesn't already exist (be sure to use "minecraft:emitter_rate_manual" for the spawned emitter effect). "particle_with_velocity" will do the same as "particle" except the new particle will inherit the spawning particle's velocity.</br></br>Sound effects specify the specific "level sound event" to be played when the event fires.</br></br>The events themselves consist of an optional node tree and/or an actual event.  When "sequence" is specified, that array will execute in order, with every element executing when that event fires.  When using "random", one element will be picked from the array based on the weight.</br><h2></h2>
 <br / ><textarea readonly="true" cols="117" rows="32">
 
   // events block:
@@ -875,6 +875,10 @@ Events are particle events that can be triggered elsewhere in the .json.  An eve
             // NOTE: this will not have access to the event
             // triggering emitter's MoLang data
             "pre_effect_expression": <string>,
+          },
+          "sound_effect": {
+            // name of the level sound event
+            "event_name": <string>
           },
           // Runs this MoLang expression on the event-firing emitter
           "expression": <string>,

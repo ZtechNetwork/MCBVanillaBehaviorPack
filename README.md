@@ -4,11 +4,21 @@
 
 
 ## Changelogs
-### v1.13.2 (iOS Only)
-- No changes to Addons and Scripts.
+### v1.14.60
+- No changes made to Addons and Scripts.
+
+### v1.14.30
+- No changes made to Addons and Scripts.
+
+### v1.14.1
+- No changes made to Addons and Scripts.
+
+### v1.14.0
+- No changes made to Addons and Scripts.
+- Updated documentation for v1.14.X
 
 ### v1.13.1
-- No changes to Addons and Scripts.
+- No changes made to Addons and Scripts.
 
 ### v1.13.0
 #### *Changes for Map Makers & Addons:*
@@ -69,7 +79,7 @@
     - In the case that your content relies on specific base game behavior, you can use this field to specify a base game version, starting with 1.13. If you choose to do this, you should omit the third octet; for example, if the version of the game you are targeting is '[1, 14, 2]', you would specify a version of '[1, 14, 0]'). If you specify a version this way, any worlds using your custom content will not get new base game content when it becomes available in future releases, which could help prevent unwanted changes to behavior in your content caused by updates to the base game. However, we still recommend using the "*" value to ensure players can continue to enjoy your content in their Minecraft worlds long-term while also receiving updates to the base game
 
 ### v1.12.1
-- No changes to Addons and Scripts.
+- No changes made to Addons and Scripts.
 
 ### v1.12.0
 #### *Changes for Map Makers & Addons:*

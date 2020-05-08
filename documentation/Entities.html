@@ -1,4 +1,4 @@
-<h1>ENTITIES DOCUMENTATION </br>Version: 1.13.0.34</h1>
+<h1>ENTITIES DOCUMENTATION </br>Version: 1.14.30.2</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#AI Goals">AI Goals</a></th> </tr>
@@ -49,6 +49,7 @@
 <tr> <td> <a href="#minecraft:behavior.guardian_attack"> minecraft:behavior.guardian_attack</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.harvest_farm_block"> minecraft:behavior.harvest_farm_block</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.hold_ground"> minecraft:behavior.hold_ground</a> </tr> </td>
+<tr> <td> <a href="#minecraft:behavior.hover"> minecraft:behavior.hover</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.hurt_by_target"> minecraft:behavior.hurt_by_target</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.inspect_bookshelf"> minecraft:behavior.inspect_bookshelf</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.knockback_roar"> minecraft:behavior.knockback_roar</a> </tr> </td>
@@ -65,6 +66,7 @@
 <tr> <td> <a href="#minecraft:behavior.mount_pathing"> minecraft:behavior.mount_pathing</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.move_indoors"> minecraft:behavior.move_indoors</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.move_through_village"> minecraft:behavior.move_through_village</a> </tr> </td>
+<tr> <td> <a href="#minecraft:behavior.move_to_block"> minecraft:behavior.move_to_block</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.move_to_land"> minecraft:behavior.move_to_land</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.move_to_random_block"> minecraft:behavior.move_to_random_block</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.move_to_village"> minecraft:behavior.move_to_village</a> </tr> </td>
@@ -89,6 +91,7 @@
 <tr> <td> <a href="#minecraft:behavior.raid_garden"> minecraft:behavior.raid_garden</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.random_breach"> minecraft:behavior.random_breach</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.random_fly"> minecraft:behavior.random_fly</a> </tr> </td>
+<tr> <td> <a href="#minecraft:behavior.random_hover"> minecraft:behavior.random_hover</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.random_look_around"> minecraft:behavior.random_look_around</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.random_look_around_and_sit"> minecraft:behavior.random_look_around_and_sit</a> </tr> </td>
 <tr> <td> <a href="#minecraft:behavior.random_sitting"> minecraft:behavior.random_sitting</a> </tr> </td>
@@ -1379,10 +1382,16 @@ Allows the mob to move back to the position they were spawned.</br><h2>Parameter
 <td style="border-style:solid; border-width:3; padding:7px">A random value to determine when to randomly move somewhere. This has a 1/interval chance to choose this goal</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">on_home</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">on_failed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Event to run when this mob gets home.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Event to run when the mob is unable to get home due to the home position being too far away or if the mob is in a different dimension.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">on_home</td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Event to run when this mob arrives at home.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">speed_multiplier</td>
@@ -1447,6 +1456,21 @@ The mob freezes and looks at the mob they are targeting.</br><h2>Parameters</h2>
 <td style="border-style:solid; border-width:3; padding:7px">String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">Event to run when target is within the radius. This event is broadcasted if broadcast is true.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:behavior.hover">minecraft:behavior.hover</p></h1>
+
+Allows the mob to hover at its current position.</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">speed_multiplier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">1.0</td>
+<td style="border-style:solid; border-width:3; padding:7px">Movement speed multiplier of the mob when using this AI Goal</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -2023,6 +2047,92 @@ Can only be used by Villagers. Allows the villagers to create paths around the v
 <td style="border-style:solid; border-width:3; padding:7px">Movement speed multiplier of the mob when using this AI Goal</br></td>
 </tr>
 </table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:behavior.move_to_block">minecraft:behavior.move_to_block</p></h1>
+
+Allow the mob to move towards selected types of blocks. The goal will activate if there is any block matching that listed in 'block_types' within the 'search_range'. 'on_reach' will trigger when the Mob is within the 'goal_radius' of the target block. 'on_stay_completed' will trigger when they Mob has stayed at the target block for 'stay_duration' time.</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">goal_radius</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">0.5</td>
+<td style="border-style:solid; border-width:3; padding:7px">Distance in blocks within the mob considers it has reached the goal. This is the "wiggle room" to stop the AI from bouncing back and forth trying to reach a specific spot</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">on_reach</td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger or list of triggers to trigger when the Mob comes within the 'goal_radius' of the target block.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">on_stay_completed</td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Trigger or list of triggers to trigger when the Mob has stayed at the target block for 'stay_duration' time.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">search_height</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">1</td>
+<td style="border-style:solid; border-width:3; padding:7px">The maximum height the Mob will look for target blocks</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">search_range</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">0</td>
+<td style="border-style:solid; border-width:3; padding:7px">The maximum distance the Mob will look for target blocks</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">speed_multiplier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">1.0</td>
+<td style="border-style:solid; border-width:3; padding:7px">Multiplier for movement speed while moving towards the target block. 1.0 means no change in speed. 2.0 means twice as fast.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">stay_duration</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">0.0</td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies a time that themob should stay at the target block. Fires 'on_stay_completed' after this duration.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">target_blocks</td>
+<td style="border-style:solid; border-width:3; padding:7px">List</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">List or string of block descriptions</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">target_offset</td>
+<td style="border-style:solid; border-width:3; padding:7px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:3; padding:7px">[0.0, 0.0, 0.0]</td>
+<td style="border-style:solid; border-width:3; padding:7px">The offset is added to the target blocks position where [0.0, 0.0, 0.0] means the center of the block.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">target_selection_method</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies what method of target selection should be used when there are multiple candidates within range. The available methods are 'nearest' and 'random'.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">tick_interval</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">20</td>
+<td style="border-style:solid; border-width:3; padding:7px">Limits how often the mob searches for target blocks. 0 means every tick. Higher number means less often. Many mobs searching for blocks every tick could make the game run slower.</br></td>
+</tr>
+</table>
+<h2>Vanilla entities that use this</h2>
+target_blocks usage<br / ><textarea readonly="true" cols="68" rows="9">
+// String format: "(namespace:)block_name(:data_value)"
+"target_blocks": "minecraft:stone:2"
+
+// Object format (data field is optional):
+"target_blocks": { "item":"minecraft:dirt", "data":1 }
+
+// List format can combine object and string format:
+"target_blocks": ["stone", "minecraft:dirt:2", { "item": "grass" }]
+</textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:behavior.move_to_land">minecraft:behavior.move_to_land</p></h1>
@@ -2852,6 +2962,51 @@ Allows a mob to randomly fly around.</br><h2>Parameters</h2>
 <td style="border-style:solid; border-width:3; padding:7px">Integer</td>
 <td style="border-style:solid; border-width:3; padding:7px">7</td>
 <td style="border-style:solid; border-width:3; padding:7px">Distance in blocks that the mob will look up or down for a new spot to move to. Must be at least 1</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:behavior.random_hover">minecraft:behavior.random_hover</p></h1>
+
+Allows the mob to hover around randomly, close to the surface</br><h2>Parameters</h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">hover_height</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">interval</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">120</td>
+<td style="border-style:solid; border-width:3; padding:7px">A random value to determine when to randomly move somewhere. This has a 1/interval chance to choose this goal</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">speed_multiplier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">1.0</td>
+<td style="border-style:solid; border-width:3; padding:7px">Movement speed multiplier of the mob when using this AI Goal</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">xz_dist</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">10</td>
+<td style="border-style:solid; border-width:3; padding:7px">Distance in blocks on ground that the mob will look for a new spot to move to. Must be at least 1</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">y_dist</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">7</td>
+<td style="border-style:solid; border-width:3; padding:7px">Distance in blocks that the mob will look up or down for a new spot to move to. Must be at least 1</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">y_offset</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px">0.0</td>
+<td style="border-style:solid; border-width:3; padding:7px">Height in blocks to add to the selected target position</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -3888,6 +4043,12 @@ Allows the mob to be tempted by food they like.</br><h2>Parameters</h2>
 <td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
 <td style="border-style:solid; border-width:3; padding:7px">false</td>
 <td style="border-style:solid; border-width:3; padding:7px">If true, the mob can stop being tempted if the player moves too fast while close to this mob</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">can_tempt_vertically</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">false</td>
+<td style="border-style:solid; border-width:3; padding:7px">If true, the mob will try to follow the player when being tempted, even if the mob is right above or below the player</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">items</td>
@@ -11163,6 +11324,12 @@ This filter group will pass only when the moon_intensity is greater than 0.5 AND
 <td style="border-style:solid; border-width:3; padding:7px">1804286487</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.hover</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">380500540</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.hurt_by_target</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
@@ -11257,6 +11424,12 @@ This filter group will pass only when the moon_intensity is greater than 0.5 AND
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">779377630</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.move_to_block</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">-342788833</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.move_to_land</td>
@@ -11401,6 +11574,12 @@ This filter group will pass only when the moon_intensity is greater than 0.5 AND
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">-446385505</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.random_hover</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">-1797323808</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:behavior.random_look_around</td>
@@ -11953,6 +12132,27 @@ A component that does damage to entities that get within range.</br><h3>Paramete
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px">0.2</td>
 <td style="border-style:solid; border-width:2; padding:8px">How close a hostile entity must be to have the damage applied.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="minecraft:block_sensor">minecraft:block_sensor</p></h2>
+
+Fires off a specified event when a block in the block list is broken within the sensor range.</br><h3>Parameters</h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">sensor_radius</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">on_break</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -12864,6 +13064,27 @@ Defines sets of items that can be used to trigger events when used on this entit
 </table>
 <a href="#Index">Back to top</a><br><br>
 
+<h2><p id="minecraft:grows_crop">minecraft:grows_crop</p></h2>
+
+Could increase crop growth when entity walks over crop</br><h3>Parameters</h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">chance</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">Value between 0-1. Chance of success per tick.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">charges</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">10</td>
+<td style="border-style:solid; border-width:2; padding:8px">Number of charges</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
 <h2><p id="minecraft:healable">minecraft:healable</p></h2>
 
 Defines the interactions with this entity for healing it.</br><h3>Parameters</h3>
@@ -13326,6 +13547,21 @@ This move control allows a mob to fly, swim, climb, etc.</br><h3>Parameters</h3>
 </table>
 <a href="#Index">Back to top</a><br><br>
 
+<h2><p id="minecraft:movement.hover">minecraft:movement.hover</p></h2>
+
+This move control causes the mob to hover.</br><h3>Parameters</h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_turn</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">The maximum number in degrees the mob can turn per tick.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
 <h2><p id="minecraft:movement.jump">minecraft:movement.jump</p></h2>
 
 Move control that causes the mob to jump as it moves with a specified delay between jumps.</br><h3>Parameters</h3>
@@ -13468,6 +13704,12 @@ Allows this entity to generate paths that include vertical walls like the vanill
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
@@ -13523,6 +13765,12 @@ Allows this entity to generate paths by flying around the air like the regular G
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">true</td>
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
@@ -13582,6 +13830,12 @@ Allows this entity to generate paths in the air like the vanilla Parrots do.</br
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
@@ -13637,6 +13891,75 @@ Allows this entity to generate paths by walking, swimming, flying and/or climbin
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">true</td>
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel on the surface of the water</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_sink</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="minecraft:navigation.hover">minecraft:navigation.hover</p></h2>
+
+Allows this entity to generate paths in the air like the vanilla Bees do. Keeps them from falling out of the skies and doing predictive movement.</br><h3>Parameters</h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Whether or not the pathfinder should avoid tiles that are exposed to the sun when creating paths</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_water</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door assuming the AI will open the door</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_pass_doors</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
@@ -13696,6 +14019,12 @@ Allows this entity to generate paths that include water.</br><h3>Parameters</h3>
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
@@ -13751,6 +14080,12 @@ Allows this entity to generate paths by walking around and jumping up and down a
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">true</td>
 <td style="border-style:solid; border-width:2; padding:8px">Whether a path can be created through a door</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_path_from_air</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can start pathing when in the air</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_path_over_water</td>
@@ -15186,6 +15521,10 @@ Sets the mapping of internal animation controller references to actual animation
 <td style="border-style:solid; border-width:2; padding:8px">7747328847974975232</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:block_sensor</td>
+<td style="border-style:solid; border-width:2; padding:8px">1412663231484374250</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:boostable</td>
 <td style="border-style:solid; border-width:2; padding:8px">10374349793873959525</br></td>
 </tr>
@@ -15262,6 +15601,10 @@ Sets the mapping of internal animation controller references to actual animation
 <td style="border-style:solid; border-width:2; padding:8px">10350104567796602163</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:grows_crop</td>
+<td style="border-style:solid; border-width:2; padding:8px">9858360493228021377</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:healable</td>
 <td style="border-style:solid; border-width:2; padding:8px">5259571024542056448</br></td>
 </tr>
@@ -15330,6 +15673,10 @@ Sets the mapping of internal animation controller references to actual animation
 <td style="border-style:solid; border-width:2; padding:8px">0</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:movement.hover</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:movement.jump</td>
 <td style="border-style:solid; border-width:2; padding:8px">1256268727</br></td>
 </tr>
@@ -15359,6 +15706,10 @@ Sets the mapping of internal animation controller references to actual animation
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:navigation.generic</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:navigation.hover</td>
 <td style="border-style:solid; border-width:2; padding:8px">0</br></td>
 </tr>
 <tr>
