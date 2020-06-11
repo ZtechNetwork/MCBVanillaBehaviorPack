@@ -171,15 +171,11 @@
           }
         },
         "minecraft:on_hurt": {
-          "event": "minecraft:synchronized_ranged_mode",
+          "event": "minecraft:ranged_mode",
           "target": "self"
         },
         "minecraft:on_hurt_by_player": {
-          "event": "minecraft:synchronized_ranged_mode",
-          "target": "self"
-        },
-        "minecraft:on_friendly_anger": {
-          "event": "minecraft:synchronized_ranged_mode",
+          "event": "minecraft:ranged_mode",
           "target": "self"
         },
         "minecraft:on_target_escape": {
@@ -192,11 +188,7 @@
           "broadcast": true,
           "broadcast_range": 8,
           "within_radius_event": {
-            "event": "minecraft:synchronized_ranged_mode",
-            "target": "self"
-          },
-          "hurt_by_target_event": {
-            "event": "minecraft:synchronized_ranged_mode",
+            "event": "minecraft:ranged_mode",
             "target": "self"
           }
         },
@@ -205,13 +197,6 @@
           "speed_multiplier": 0.55,
           "within_radius": 8,
           "block_distance": 512
-        }
-      },
-      "minecraft:synchronized_ranged_attack": {
-        "minecraft:angry": {
-          "duration": -1,
-          "broadcast_anger": true,
-          "broadcast_range": 8
         }
       },
       "minecraft:patrol_follower": {
@@ -227,24 +212,16 @@
           "broadcast": true,
           "broadcast_range": 8,
           "within_radius_event": {
-            "event": "minecraft:synchronized_ranged_mode",
-            "target": "self"
-          },
-          "hurt_by_target_event": {
-            "event": "minecraft:synchronized_ranged_mode",
+            "event": "minecraft:ranged_mode",
             "target": "self"
           }
         },
         "minecraft:on_hurt": {
-          "event": "minecraft:synchronized_ranged_mode",
+          "event": "minecraft:ranged_mode",
           "target": "self"
         },
         "minecraft:on_hurt_by_player": {
-          "event": "minecraft:synchronized_ranged_mode",
-          "target": "self"
-        },
-        "minecraft:on_friendly_anger": {
-          "event": "minecraft:synchronized_ranged_mode",
+          "event": "minecraft:ranged_mode",
           "target": "self"
         },
         "minecraft:on_target_escape": {
@@ -442,10 +419,7 @@
         "remove": { "component_groups": [ "minecraft:celebrate" ] }
       },
       "minecraft:calm": {
-        "remove": { "component_groups": [ "minecraft:ranged_attack", "minecraft:melee_attack", "minecraft:synchronized_ranged_attack" ] }
-      },
-      "minecraft:synchronized_ranged_mode": {
-        "add": { "component_groups": [ "minecraft:synchronized_ranged_attack", "minecraft:ranged_attack" ] }
+        "remove": { "component_groups": [ "minecraft:melee_attack", "minecraft:ranged_attack" ] }
       }
     }
   }
