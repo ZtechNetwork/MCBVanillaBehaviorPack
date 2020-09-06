@@ -1,4 +1,4 @@
-<h1>BLOCKS DOCUMENTATION </br>Version: 1.14.30.2</h1>
+<h1>BLOCKS DOCUMENTATION </br>Version: 1.16.20.3</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Blocks">Blocks</a></th> </tr>
@@ -30,14 +30,24 @@ These properties are part of the Block Definition. This helps the system determi
 </tr>
 </table>
 <h2>Code Example</h2>
-Example<br / ><textarea readonly="true" cols="30" rows="10">
+Example<br / ><textarea readonly="true" cols="66" rows="20">
 {
-  "format_version": "1.10.0",
+  "format_version": "1.16.0",
   "minecraft:block": {
-   "components": {
-      ...
+    "description": {
+      "identifier": "design:lavenderstone"
+    },
+    "components": {
+      "minecraft:loot": "loot_tables/chests/simple_dungeon.json",
+      "minecraft:destroy_time": 4.0,
+      "minecraft:friction": 0.6,
+      "minecraft:map_color": "#00ff00",
+      "minecraft:flammable": {
+        "flame_odds": 50,
+        "burn_odds": 0
+    },
+      "minecraft:block_light_emission": 1.0
     }
-    ...
   }
 }
 </textarea> </br>
@@ -72,63 +82,19 @@ Example<br / ><textarea readonly="true" cols="30" rows="10">
 
 <h1><p id="minecraft:block_light_absorption">minecraft:block_light_absorption</p></h1>
 
-How a block absorbs light</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">value</td>
-<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
-<td style="border-style:solid; border-width:3; padding:7px">0</td>
-<td style="border-style:solid; border-width:3; padding:7px">The amount of light this block will absorb. For ice blocks, this describes at what light level the ice will melt.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+The amount of light this block will absorb.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:block_light_emission">minecraft:block_light_emission</p></h1>
 
-Makes the block emit light.</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">emission</td>
-<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
-<td style="border-style:solid; border-width:3; padding:7px">0.0</td>
-<td style="border-style:solid; border-width:3; padding:7px">The amount of light this block will emit in a range [0.0, 1.0].</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+The amount of light this block will emit in a range [0.0, 1.0].</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:destroy_time">minecraft:destroy_time</p></h1>
 
-The destroy time propety for a block</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">value</td>
-<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
-<td style="border-style:solid; border-width:3; padding:7px">0.0</td>
-<td style="border-style:solid; border-width:3; padding:7px">Sets the destroy time property for the block. Greater numbers result in greater mining times.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+Sets the destroy time property for the block. Greater numbers result in greater mining times.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:explosion_resistance">minecraft:explosion_resistance</p></h1>
 
-The explosion resistance property for a block.</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">value</td>
-<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
-<td style="border-style:solid; border-width:3; padding:7px">0.0</td>
-<td style="border-style:solid; border-width:3; padding:7px">Sets the explosion resistance for this block.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+Sets the explosion resistance for this block.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:flammable">minecraft:flammable</p></h1>
 
@@ -153,48 +119,15 @@ Describes the flammable properties for this block.</br><h2></h2>
 
 <h1><p id="minecraft:friction">minecraft:friction</p></h1>
 
-Property describing the friction for this block. Friction effects an entities movements when it walks on the block.</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">value</td>
-<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
-<td style="border-style:solid; border-width:3; padding:7px">0.1</td>
-<td style="border-style:solid; border-width:3; padding:7px">Sets the friction property for this block.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+Property describing the friction for this block. Friction effects an entities movements when it walks on the block.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:loot">minecraft:loot</p></h1>
 
-Loot table component used to set what loot table is used when a block is destroyed.</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">table</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">The path of the loot table that this component will use.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+The path of the loot table that this component will use when the block is destroyed.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="minecraft:map_color">minecraft:map_color</p></h1>
 
-Modifies the map color for a block.</br><h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">color</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">A color represented as a hex value. This will be the color rendered to a map.</br></td>
-</tr>
-</table>
-<a href="#Index">Back to top</a><br><br>
+A color represented as a hex value. This will be the color rendered to a map.</br><a href="#Index">Back to top</a><br><br>
 
 <br><br>
 

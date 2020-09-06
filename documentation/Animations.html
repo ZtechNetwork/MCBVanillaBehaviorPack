@@ -1,4 +1,4 @@
-<h1>ANIMATIONS DOCUMENTATION </br>Version: 1.14.30.2</h1>
+<h1>ANIMATIONS DOCUMENTATION </br>Version: 1.16.20.3</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Animation Controllers">Animation Controllers</a></th> </tr>
@@ -541,6 +541,40 @@ Example with color for tinting of parts from Armor 1.0 render controller JSON:<b
           "a": "query.armor_color_slot(1, 3)"
         },
         "textures": ["array.armor_texture[query.armor_texture_slot(1)]", "texture.enchanted"]
+    }
+}
+
+</textarea> </br>
+Example with is_hurt_color from Creeper render controller JSON:<br / ><textarea readonly="true" cols="53" rows="16">
+"format_version": "1.8.0",
+"render_controllers": {
+    "controller.render.creeper": {
+        "geometry" : "Geometry.default",
+        "materials" : [{ "*": "Material.default" }],
+        "textures" : "Texture.default",
+        "is_hurt_color" : {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 1.0,
+          "a": 0.5,
+        }
+    }
+}
+
+</textarea> </br>
+Example with on_fire_color from Fireball render controller JSON:<br / ><textarea readonly="true" cols="53" rows="16">
+"format_version": "1.8.0",
+"render_controllers": {
+    "controller.render.fireball": {
+        "geometry" : "Geometry.default",
+        "materials" : [{ "*": "Material.default" }],
+        "textures" : "Texture.default",
+        "on_fire_color" : {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 0.0,
+          "a": 0.0,
+        }
     }
 }
 

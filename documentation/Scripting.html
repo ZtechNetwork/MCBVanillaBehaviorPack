@@ -1,4 +1,4 @@
-<h1>SCRIPTING DOCUMENTATION </br>Version: 1.14.30.2</h1>
+<h1>SCRIPTING DOCUMENTATION </br>Version: 1.16.20.3</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Script API Objects">Script API Objects</a></th> </tr>
@@ -326,10 +326,9 @@ Allows you to get a block from the world when provided a JavaScript object conta
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Block JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object containing the block</br></td>
 </tr>
 </table>
@@ -375,14 +374,12 @@ Allows you to get a block from the world when provided an x, y, and z position. 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">object</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">null</br></td>
 </tr>
@@ -472,14 +469,12 @@ Allows you to get an array of blocks from the world when provided a minimum and 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Array</td>
-<td style="border-style:solid; border-width:1; padding:9px">array</td>
 <td style="border-style:solid; border-width:1; padding:9px">A 3D array of block objects. Indexs are the blocks positions relative to the min position given</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">null</br></td>
 </tr>
@@ -541,14 +536,12 @@ Allows you to get an array of blocks from the world when provided a minimum and 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">array</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">null</br></td>
 </tr>
@@ -591,10 +584,9 @@ Applies the component and any changes made to it in script back to the entity. W
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The component was successfully updated</br></td>
 </tr>
 </table>
@@ -649,10 +641,9 @@ Creates the specified component and adds it to the entity. This should only be u
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Component JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object with the following fields, and additionally, all the fields as defined in the component</br></td>
 </tr>
 </table>
@@ -710,10 +701,9 @@ Removes the specified component from the given entity. If the entity has the com
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The component was successfully removed from the entity</br></td>
 </tr>
 </table>
@@ -775,10 +765,9 @@ Looks for the specified component in the entity. If it exists, retrieves the dat
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Component JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object with the following fields, and additionally, all the fields as defined in the component</br><h5><p id="Component JS API Object">Component JS API Object</p></h5>
 
 <h6></h6>
@@ -856,10 +845,9 @@ Checks if the given entity has the specified component.</br><h3></h3>
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The EntityObject has the component</br></td>
 </tr>
 </table>
@@ -913,10 +901,9 @@ Creates a custom component that only exists in script. It can be then added, rem
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The component was successfully registered</br></td>
 </tr>
 </table>
@@ -947,10 +934,9 @@ Creates an empty entity with no components and does not place it in the world. T
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Entity JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object representing the newly created entity</br></td>
 </tr>
 </table>
@@ -986,10 +972,9 @@ Creates an entity and applies the specified template as defined in JSON. This al
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Entity JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object representing the newly created entity</br></td>
 </tr>
 </table>
@@ -1020,10 +1005,9 @@ Destroys an entity identified by the EntityObject. If the entity exists in the w
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The entity was successfully destroyed</br></td>
 </tr>
 </table>
@@ -1054,10 +1038,9 @@ Checks if the given EntityObject corresponds to a valid entity.</br><h3></h3>
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">The entity is in the Script Engine's database of entities</br></td>
 </tr>
 </table>
@@ -1073,7 +1056,7 @@ Entity Queries are a way for you to filter for entities based on their component
 
 <h2><p id="addFilterToQuery(Query, ComponentIdentifier)">addFilterToQuery(Query, ComponentIdentifier)</p></h2>
 
-By default no filters are added. This will allow queries to capture all entities.</br><h3>Parameters</h3>
+Allows you to add filters to your query. The query will only contain entities that have all the components specified.</br>By default no filters are added. This will allow queries to capture all entities.</br><h3>Parameters</h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -1132,10 +1115,9 @@ Allows you to fetch the entities captured by a query.</br><h3></h3>
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Array</td>
-<td style="border-style:solid; border-width:1; padding:9px">array</td>
 <td style="border-style:solid; border-width:1; padding:9px">An array of EntityObjects representing the entities found within the query</br></td>
 </tr>
 </table>
@@ -1208,10 +1190,9 @@ Allows you to fetch the entities captured by a query that was created with a com
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Array</td>
-<td style="border-style:solid; border-width:1; padding:9px">array</td>
 <td style="border-style:solid; border-width:1; padding:9px">An array of EntityObjects representing the entities found within the query</br></td>
 </tr>
 </table>
@@ -1247,10 +1228,9 @@ Allows you to register a query. A query will contain all entities that meet the 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Query JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object containing the ID of the query</br></td>
 </tr>
 </table>
@@ -1308,10 +1288,9 @@ Allows you to register a query that will only show entities that have the given 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Query JS API Object</td>
-<td style="border-style:solid; border-width:1; padding:9px">object</td>
 <td style="border-style:solid; border-width:1; padding:9px">An object containing the ID of the query</br></td>
 </tr>
 </table>
@@ -1361,10 +1340,9 @@ Allows you to trigger an event with the desired data from script. Anything that 
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">Successfully broadcasted the event</br></td>
 </tr>
 </table>
@@ -1406,10 +1384,9 @@ Creates an object with all the required fields and default data for the specifie
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">JavaScript Object</td>
-<td style="border-style:solid; border-width:1; padding:9px"></td>
 <td style="border-style:solid; border-width:1; padding:9px">The object containing the event data</br></td>
 </tr>
 </table>
@@ -1445,10 +1422,9 @@ Allows you to register a JavaScript object that gets called whenever the specifi
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">Successfully registered to listen for the event</br></td>
 </tr>
 </table>
@@ -1498,10 +1474,9 @@ Registers the Event to the script engine. This allows you to create Event Data b
 <h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
-<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Value</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
-<td style="border-style:solid; border-width:1; padding:9px">true</td>
 <td style="border-style:solid; border-width:1; padding:9px">Successfully registered the event data</br></td>
 </tr>
 </table>
@@ -1925,13 +1900,13 @@ Defines how the entity explodes.</br><h3>Parameters</h3>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">max_resistance</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">Infinite</td>
+<td style="border-style:solid; border-width:2; padding:8px">3.40282e+38</td>
 <td style="border-style:solid; border-width:2; padding:8px">A blocks explosion resistance will be capped at this value when an explosion occurs.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">power</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">3.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">3</td>
 <td style="border-style:solid; border-width:2; padding:8px">The radius of the explosion in blocks and the amount of damage the explosion deals.</br></td>
 </tr>
 </table>
@@ -2240,7 +2215,7 @@ Defines the behavior when another entity looks at this entity.</br><h3>Parameter
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">look_cooldown</td>
 <td style="border-style:solid; border-width:2; padding:8px">Range [a, b]</td>
-<td style="border-style:solid; border-width:2; padding:8px">[0.0, 0.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[0, 0]</td>
 <td style="border-style:solid; border-width:2; padding:8px">The range for the random amount of time during which the entity is 'cooling down' and won't get angered or look for a target.</br></td>
 </tr>
 <tr>
@@ -2252,7 +2227,7 @@ Defines the behavior when another entity looks at this entity.</br><h3>Parameter
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">search_radius</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">10.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">10</td>
 <td style="border-style:solid; border-width:2; padding:8px">Maximum distance this entity will look for another entity looking at it.</br></td>
 </tr>
 <tr>
@@ -2389,7 +2364,7 @@ Defines the entity's ranged attacks. This doesn't allow the entity to use a rang
 
 <h2><p id="minecraft:spawn_entity">minecraft:spawn_entity</p></h2>
 
-Controls the entity's ability to spawn an entity or an item. This is similar to the chicken's ability to lay eggs after a set amount of time.</br><h3>Parameters</h3>
+Adds a timer after which this entity will spawn another entity or item (similar to vanilla's chicken's egg-laying behavior).</br><h3>Parameters</h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -2397,67 +2372,67 @@ Controls the entity's ability to spawn an entity or an item. This is similar to 
 <td style="border-style:solid; border-width:2; padding:8px">filters</td>
 <td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">If present, the specified entity will only spawn if the filter evaluates to true</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">If present, the specified entity will only spawn if the filter evaluates to true.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">max_wait_time</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">600</td>
-<td style="border-style:solid; border-width:2; padding:8px">Maximum amount of time to randomly wait in seconds before another entity is spawned</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Maximum amount of time to randomly wait in seconds before another entity is spawned.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">min_wait_time</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">300</td>
-<td style="border-style:solid; border-width:2; padding:8px">Minimum amount of time to randomly wait in seconds before another entity is spawned</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Minimum amount of time to randomly wait in seconds before another entity is spawned.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">num_to_spawn</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">1</td>
-<td style="border-style:solid; border-width:2; padding:8px">The number of entities of this type to spawn each time that this triggers</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">The number of entities of this type to spawn each time that this triggers.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">should_leash</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">If true, this the spawned entity will be leashed to the parent</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, this the spawned entity will be leashed to the parent.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">single_use</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">If true, this component will only ever spawn the specified entity once</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, this component will only ever spawn the specified entity once.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">spawn_entity</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">Identifier of the entity to spawn, leave empty to spawn the item defined above instead</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Identifier of the entity to spawn, leave empty to spawn the item defined above instead.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">spawn_event</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:entity_born</td>
-<td style="border-style:solid; border-width:2; padding:8px">Event to call when the entity is spawned</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Event to call when the entity is spawned.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">spawn_item</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px">egg</td>
-<td style="border-style:solid; border-width:2; padding:8px">Item identifier of the item to spawn</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Item identifier of the item to spawn.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">spawn_method</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px">born</td>
-<td style="border-style:solid; border-width:2; padding:8px">Method to use to spawn the entity</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Method to use to spawn the entity.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">spawn_sound</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px">plop</td>
-<td style="border-style:solid; border-width:2; padding:8px">Identifier of the sound effect to play when the entity is spawned</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Identifier of the sound effect to play when the entity is spawned.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -2487,19 +2462,19 @@ This controls the entity's ability to teleport itself (similar to the Enderman).
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">max_random_teleport_time</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">20.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">20</td>
 <td style="border-style:solid; border-width:2; padding:8px">Maximum amount of time in seconds between random teleports</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">min_random_teleport_time</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</td>
 <td style="border-style:solid; border-width:2; padding:8px">Minimum amount of time in seconds between random teleports</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">random_teleport_cube</td>
 <td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
-<td style="border-style:solid; border-width:2; padding:8px">[32.0, 16.0, 32.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[32, 16, 32]</td>
 <td style="border-style:solid; border-width:2; padding:8px">Entity will teleport to a random position within the area defined by this cube</br></td>
 </tr>
 <tr>
@@ -2511,13 +2486,13 @@ This controls the entity's ability to teleport itself (similar to the Enderman).
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">target_distance</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">16.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">16</td>
 <td style="border-style:solid; border-width:2; padding:8px">Maximum distance the entity will teleport when chasing a target</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">target_teleport_chance</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">1.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">1</td>
 <td style="border-style:solid; border-width:2; padding:8px">The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%</br></td>
 </tr>
 </table>

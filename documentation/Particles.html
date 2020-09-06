@@ -1,4 +1,4 @@
-<h1>PARTICLES DOCUMENTATION </br>Version: 1.14.30.2</h1>
+<h1>PARTICLES DOCUMENTATION </br>Version: 1.16.20.3</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Basic Structure Overview">Basic Structure Overview</a></th> </tr>
@@ -443,7 +443,11 @@ This component tells the particle system to render the particle as a billboard, 
     // "direction_x" - unrotated particle x axis is along the direction vector, unrotated y axis attempts to aim upwards
     // "direction_y" - unrotated particle y axis is along the direction vector, unrotated x axis attempts to aim upwards
     // "direction_z" - billboard face is along the direction vector, unrotated y axis attempts to aim upwards
-    "face_camera_mode": <string>
+  // emitter_transform_xy, // orient the particles to match the emitter's transform (the billboard plane will match the transform's xy plane).
+  // emitter_transform_xz, // orient the particles to match the emitter's transform (the billboard plane will match the transform's xz plane).
+  // emitter_transform_yz, // orient the particles to match the emitter's transform (the billboard plane will match the transform's yz plane).
+  
+    //"face_camera_mode": <string>
 
     // Specifies how to calculate the direction of a particle, this will be used by facing modes that require a direction as input (for instance: lookat_direction and direction)
     // Options are:
@@ -799,25 +803,55 @@ This component directly controls the particle.  Note that this component won't w
 <h1><p id="Curves">Curves</p></h1>
 
 Curves are interpolation values, with inputs from 0 to 1, and outputs based on the curve.  The result of the curve is a MoLang variable of the same name that can be referenced in MoLang in components.  For each rendering frame for each particle, the curves are evaluated and the result is placed in a MoLang variable of the name of the curve.</br><h2></h2>
-<br / ><textarea readonly="true" cols="105" rows="23">
+<br / ><textarea readonly="true" cols="120" rows="32">
 
     "curves": {
       // "molangvar" is the MoLang variable to be used later in MoLang expressions
       // for example "variable.mycurve" here would make the result of the curve
       // available in MoLang as "variable.mycurve".  Note that all variables must begin with "variable."
       "molangvar": {
-        // type can be "linear", "bezier", or "catmull_rom"
+        // type can be "linear", "bezier", "bezier_chain", or "catmull_rom"
+        // "linear" is a series of nodes, equally spaced between 0 and 1 (after applying input/horizontal_range)
+        // "bezier" is a 4-node bezier spline, with the first and last point being the values at 0 and 1
+        //   and the middle two points forming the slope lines at 0.33 for the first point and 0.66 for the second
+        // "catmull_rom" is a series of curves which pass through all but the last/first node.  The first/last nodes
+        // are used to form the slope of the second/second-last points respectively.  All points are evenly spaced.
+        // "bezier_chain" is a chain of bezier splines.  See below for the node configuration.  A series of points are
+        //   specified, along with their corresponding slopes, and each segment will use it's pair of points and
+        //   slopes to form a bezier spline.  Each point other than first/last is shared between it's pair of 
+        //   spline segments.
         "type": type, 
 
         // control nodes for curve.  These are assumed to be equally
         // spaced, e.g. first node is at input value 0, second at 0.25, etc
+        // this notation works only for linear, bezier, and catmull_rom
         "nodes": [<float/molang>, <float/molang>, <float/molang>, <float/molang>],
 
+        // control nodes for bezier_chain
+        // the nodes will be sorted prior to parsing, so if you declare nodes 0.3, 0.6, 0.5, they will be
+        // re-ordered to 0.3, 0.5, 0.6
+        "nodes": {
+            // the key values map to the "input" field
+            "0.3": {
+                "value": "5", // the output of the curve
+                "left_value": "2", // when curve comes from the left of the node, what point does it use?
+                "right_value": "3", // when curve comes from the right side of the node, what point does it use?
+                "slope": "3", // the slope of the node, both sides
+                "left_slope: "0.4", // the left slope of the node
+                "right_slope": "2", // the right slope of the node
+            },
+            ... // more nodes
+        },
+
         // what is the input value to use
+    // for example, "variable.particle_age/variable.particle_lifetime would result in an input from 0 to 1 over
+    // the lifetime of the particle, while variable.particle_age would have input of how old the particle is in seconds
         "input": <float/molang>,
 
         // what is the range the input is mapped onto
         // between 0 and this value
+    // note: this field is deprecated and optional (default: 1.0)
+    // note: this field is ignored for bezier_chain
         "horizontal_range": <float/molang>
       }
     }
@@ -949,8 +983,8 @@ This particle effect generates a bunch of bubbles that bounce around.</br><h2></
         "size": [ "0.1", "0.1" ],
         "facing_camera_mode": "lookat_xyz",
         "uv": {
-          "texturewidth": 128,
-          "textureheight": 128,
+          "texture_width": 128,
+          "texture_height": 128,
           "uv": [ 0, 16 ],
           "uv_size": [ 8, 8 ]
         }
@@ -1000,8 +1034,8 @@ This particle is the little flame that appears on torches and furnaces to indica
         ],
         "facing_camera_mode": "lookat_xyz",
         "uv": {
-          "texturewidth": 128,
-          "textureheight": 128,
+          "texture_width": 128,
+          "texture_height": 128,
           "uv": [ 0, 24 ],
           "uv_size": [ 8, 8 ]
         }
@@ -1056,8 +1090,8 @@ The mob flame effect is used by the Blaze when it's charging up to hurl fireball
         "size": [ 0.5, 0.5 ],
         "facing_camera_mode": "lookat_xyz",
         "uv": {
-          "texturewidth": 1,
-          "textureheight": 32,
+          "texture_width": 1,
+          "texture_height": 32,
           "flipbook": {
             "base_UV": [ 0, 0 ],
             "size_UV": [ 1, 1 ],
@@ -1114,8 +1148,8 @@ This particle is the general-purpose smoke puff.  It appears on torches, furnace
         "size": [ 0.1, 0.1 ],
         "facing_camera_mode": "lookat_xyz",
         "uv": {
-          "texturewidth": 128,
-          "textureheight": 128,
+          "texture_width": 128,
+          "texture_height": 128,
           "flipbook": {
             "base_UV": [ 56, 0 ],
             "size_UV": [ 8, 8 ],
@@ -1342,6 +1376,10 @@ https://aka.ms/MCParticlesPack</br></br>Examples of various particles can be fou
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
 <tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:example_bezier_chaincurve</td>
+<td style="border-style:solid; border-width:3; padding:7px">Demonstrates the use of a bezier chain curve in an effect</br></td>
+</tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:example_beziercurve</td>
 <td style="border-style:solid; border-width:3; padding:7px">Demonstrates the use of a bezier curve in an effect</br></td>
