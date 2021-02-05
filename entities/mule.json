@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:mule",
@@ -164,7 +164,6 @@
           ]
         },
         "minecraft:rideable": {
-          "priority": 0,
           "seat_count": 1,
           "crouching_skip_interact": true,
           "family_types": [
@@ -273,7 +272,6 @@
         "avoid_damage_blocks": true
       },
       "minecraft:movement.basic": {
-        
       },
       "minecraft:jump.static": {
       },
@@ -321,6 +319,9 @@
           }
         ]
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -340,11 +341,13 @@
       "minecraft:behavior.random_look_around": {
         "priority": 8
       },
-	    "minecraft:physics": {
+      "minecraft:physics": {
       },
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

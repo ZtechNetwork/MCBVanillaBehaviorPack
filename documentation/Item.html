@@ -1,88 +1,391 @@
-<h1>ITEM DOCUMENTATION </br>Version: 1.16.20.3</h1>
+<h1>ITEM DOCUMENTATION </br>Version: 1.16.200.2</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
-<tr> <th><a href="#Overview">Overview</a></th> </tr>
+<tr> <th><a href="#Items">Items</a></th> </tr>
 <tr> <td> <a href="#Item Components"> Item Components</a> </tr> </td>
-<tr> <td> <a href="#Items"> Items</a> </tr> </td>
+<tr> <td> <a href="#Item Definition Properties"> Item Definition Properties</a> </tr> </td>
+<tr> <td> <a href="#Item Description Properties"> Item Description Properties</a> </tr> </td>
 </table>
 <a href="#Index">Back to top</a>
-<h1><p id="Overview">Overview</p></h1>
-
-Items are setup in Json files under the behavior_packs, /'name of pack'/, items directory.</br><h1><p id="Item Components">Item Components</p></h1>
-
-Here is a list of all item components and their settings.</br><h2>Item Component Settings:</h2>
-<br / ><textarea readonly="true" cols="112" rows="32">
-{
-"format_version": "1.12.0",
-"minecraft:item": {
-  "description": {
-  "identifier": "minecraft:apple"
-  },
- 
-  "components": {
-    "minecraft:max_damage": 10,          // max damage item has, this is used like item max health.
-    "minecraft:hand_equipped": false,    // is this a hand equipped item.
-    "minecraft:stacked_by_data": false,  // stacked by data aux value or not?
-    "minecraft:foil": false,             // foil or glint.
-    "minecraft:block": ,               // block name, leave blank for no block.
-    "minecraft:max_stack_size": 64,      // max stack size.
-    "minecraft:use_duration": 32,        // how long to use before item is done being used.
-    "minecraft:food": { 
-      "nutrition": 4,                    // nutrition amount.
-      "saturation_modifier": "low"     // choose: poor, low, normal, good, max, supernatural.
-      "using_converts_to": 4,            // after using,  item converts it to this item.
-      "on_use_action": 4,                // 'chorus_teleport' or 'none'.
-      "on_use_range": 4,                 // array of 3 ranges.
-      "cooldown_type": 4,                // 'chorusfruit' or 'none'.
-      "cooldown_time": 4,                // cooldown time in ticks.
-      "can_always_eat": 4,               // can always eat this item? true or false.
-      
-      "effects": [,                      // effects.
-         { 
-           "name": "regeneration",     // name of effect: regeneration, absorption, resistance, fire_resistance
-            "chance": 1.0,                // float chance for effect to happen 
-            "duration": 30,               // int duration of effect 
-            "amplifier": 4,               // int amplifier
-          },                                                
-          {                                                 
-            "name": "absorption",                       
-            "chance" : 1.0,                               
-            "duration" : 120,                             
-            "amplifier" : 3                               
-          },                                                
-    },                                                     
-                                                           
-    "minecraft:seed": {                                  
-      "crop_result": "sweet_berry_bush",        // crop seed item result 
-      "plant_at": ["grass","dirt","podzol"] // valid blocks you can plant this item at.
-    },                                                       
-  }
-}
-}
-</textarea> </br>
-<a href="#Index">Back to top</a><br><br>
-
 <h1><p id="Items">Items</p></h1>
 
-Represents a single item.'Input' items will burn and transform into items specified in 'output'.</br><h2>Item Example:</h2>
-<br / ><textarea readonly="true" cols="35" rows="17">
+<h1><p id="Item Components">Item Components</p></h1>
+
+Below are the various components for item functionality.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:armor</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The armor item componenent determines the amount of protection you have in your armor item.</br><h3><p id="protection">protection</p></h3>
+
+How much protection does the armor item have.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="texture_type">texture_type</p></h3>
+
+Texture Type to apply for the armor. Note that Horse armor is restricted to leather, iron, gold, or diamond.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:block_placer</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Planter item component. planter items are items that can be planted.</br><h3><p id="block">block</p></h3>
+
+block:  Set the placement block name for the planter item.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="use_on">use_on</p></h3>
+
+List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:cooldown</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Cool down time for a component. After you use an item it becomes unusable for the duration specified by the 'cool down time' setting in this component.</br><h3><p id="category">category</p></h3>
+
+The type of cool down for this item.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="duration">duration</p></h3>
+
+The duration of time this item will spend cooling down before becoming usable again.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:digger</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Digger item. Component put on items that dig.</br><h3><p id="destroy_speeds">destroy_speeds</p></h3>
+
+Destroy speed per block.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="on_dig">on_dig</p></h3>
+
+Trigger for when you dig a block that isn't listed in destroy_speeds</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="use_efficiency">use_efficiency</p></h3>
+
+Use efficiency? Default is set to false.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:display_name</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Display Name item component. Display Names display the name of an item.</br><h3><p id="value">value</p></h3>
+
+Set the display name for an item.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:durability</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Durability item component: how much damage can this item take before breaking.</br><h3><p id="damage_chance">damage_chance</p></h3>
+
+Damage chance.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="max_durability">max_durability</p></h3>
+
+Max durability is the amount of damage that this item can take before breaking.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:dye_powder</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Dye powder, there are 16 kinds of dye.</br><h3><p id="color">color</p></h3>
+
+Defines what color the dye is.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:entity_placer</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Entity placer item component. You can specifiy allowed blocks that the item is restricted to.</br><h3><p id="dispense_on">dispense_on</p></h3>
+
+List of block descriptors that contain blocks that this item can be dispensed on. If left empty, all blocks will be allowed.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="entity">entity</p></h3>
+
+The entity to be placed in the world.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="use_on">use_on</p></h3>
+
+List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:food</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">When an item has a food component, it becomes edible to the player.</br><h3><p id="can_always_eat">can_always_eat</p></h3>
+
+If true you can always eat this item (even when not hungry), defaults to false.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="nutrition">nutrition</p></h3>
+
+How much nutrition does this food item give the player when eaten.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="on_consume">on_consume</p></h3>
+
+<a href="#Index">Back to top</a><br><br>
+
+<h3><p id="saturation_modifier">saturation_modifier</p></h3>
+
+Saturation Modifier is used in this formula: (nutrition * saturation_modifier * 2) when appling the saturation buff. Which happens when you eat the item.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="using_converts_to">using_converts_to</p></h3>
+
+When used, convert the *this* item to the one specified by 'using_converts_to'.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:fuel</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Fuel component. Allows this item to be used as fuel in a furnace to 'cook' other items.</br><h3><p id="duration">duration</p></h3>
+
+How long in seconds will this fuel cook items for.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:icon</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The icon item componenent determines the icon to represent the item in the UI and elsewhere.</br><h3><p id="frame">frame</p></h3>
+
+An index or expression for which frame of the icon to display.  Default resolves to 0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="legacy_id">legacy_id</p></h3>
+
+Legacy texture id for older item icons</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="texture">texture</p></h3>
+
+The key from the resource_pack/textures/item_texture.json 'texture_data' object associated with the texture file Example: blaze_powder</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:knockback_resistance</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Knockback Resistance Item. Component put on items that provide knockback resistance.</br><h3><p id="protection">protection</p></h3>
+
+Amount of knockback resistance provided with the total maximum protection being 1.0</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:on_use</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The on_use item component allows you to receive an event when the item is used.</br><h3><p id="on_use">on_use</p></h3>
+
+Event trigger for when the item is used.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:on_use_on</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The on_use_on item component allows you to receive an event when the item is used on a block in the world.</br><h3><p id="on_use_on">on_use_on</p></h3>
+
+Event trigger for when the item is used.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:projectile</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Projectile item component. projectile items shoot out, like an arrow.</br><h3><p id="minimum_critical_power">minimum_critical_power</p></h3>
+
+How long you must charge a projectile for it to critically hit.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="projectile_entity">projectile_entity</p></h3>
+
+The entity to be fired as a projectile.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:repairable</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Repairable item component: how much damage can this item repair, what items can repair it.</br><h3><p id="on_repaired">on_repaired</p></h3>
+
+Event that is called when this item has been repaired.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="repair_items">repair_items</p></h3>
+
+Repair item entries.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:shooter</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Shooter Item Component.</br><h3><p id="ammunition">ammunition</p></h3>
+
+Ammunition.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="charge_on_draw">charge_on_draw</p></h3>
+
+Charge on draw? Default is set to false.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="launch_power_scale">launch_power_scale</p></h3>
+
+Launch power scale. Default is set to 1.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="max_draw_duration">max_draw_duration</p></h3>
+
+Draw Duration. Default is set to 0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="max_launch_power">max_launch_power</p></h3>
+
+Launch power. Default is set to 1.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="scale_power_by_draw_duration">scale_power_by_draw_duration</p></h3>
+
+Scale power by draw duration? Default is set to false.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:throwable</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Throwable item component. Throwable items, such as a snowball.</br><h3><p id="do_swing_animation">do_swing_animation</p></h3>
+
+Whether the item should use the swing animation when thrown. Default is set to false.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="launch_power_scale">launch_power_scale</p></h3>
+
+The scale at which the power of the throw increases. Default is set to 1.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="max_draw_duration">max_draw_duration</p></h3>
+
+The maximum duration to draw a throwable item. Default is set to 0.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="max_launch_power">max_launch_power</p></h3>
+
+The maximum power to launch the throwable item. Default is set to 1.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="min_draw_duration">min_draw_duration</p></h3>
+
+The minimum duration to draw a throwable item. Default is set to 0.0.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="scale_power_by_draw_duration">scale_power_by_draw_duration</p></h3>
+
+Whether or not the power of the throw increases with duration charged. Default is set to false.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:weapon</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.</br><h3><p id="on_hit_block">on_hit_block</p></h3>
+
+Trigger for letting you know when this item is used to hit a block</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="on_hurt_entity">on_hurt_entity</p></h3>
+
+Trigger for letting you know when this item is used to hurt another mob</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="on_not_hurt_entity">on_not_hurt_entity</p></h3>
+
+Trigger for letting you know when this item hit another actor, but didn't do damage</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:wearable</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Wearable item component.</br><h3><p id="dispensable">dispensable</p></h3>
+
+<a href="#Index">Back to top</a><br><br>
+
+<h3><p id="slot">slot</p></h3>
+
+equipment_slot: slot.weapon.mainhand, slot.weapon.offhand, slot.armor.head, slot.armor.chest, slot.armor.legs, slot.armor.feet, slot.hotbar, slot.inventory, slot.enderchest, slot.saddle, slot.armor, slot.chest</br><a href="#Index">Back to top</a><br><br>
+
+</td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Item Definition Properties">Item Definition Properties</p></h1>
+
+The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item.</br><h2></h2>
+
+<h2><p id="format_version">format_version</p></h2>
+
+<a href="#Index">Back to top</a><br><br>
+
+<h2>Code Example</h2>
+Example<br / ><textarea readonly="true" cols="42" rows="15">
 {
-"format_version": "1.12.0",
-"minecraft:item": {
-  "description": {
-  "identifier": "minecraft:apple"
-  },
- 
-  "components": {
-    "minecraft:use_duration": 32,
-    "minecraft:food": {
-      "nutrition": 4,
-      "saturation_modifier": "low"
+  "format_version": "1.16.0",
+ "minecraft:item": {
+    "description": {
+      "identifier": "minecraft:blaze_rod"
     },
+    "components": {
+      "minecraft:fuel": {
+        "duration": 120.0
+      },
+      "minecraft:hand_equipped": true
+    }
   }
 }
-}
 </textarea> </br>
+<br><br>
+
+<h1><p id="Item Description Properties">Item Description Properties</p></h1>
+
+<h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">category</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The category for this item. Categories are used to control high level properties of how the item is integrated into the bedrock engine, such as whether it can be used in slash commands.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">identifier</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The identifier for this item. The name must include a namespace and must not use the Minecraft namespace unless overriding a Vanilla item.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">is_experimental</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">false</td>
+<td style="border-style:solid; border-width:3; padding:7px">If this item is experimental, it will only be registered if the world is marked as experimental.</br></td>
+</tr>
+</table>
 <a href="#Index">Back to top</a><br><br>
 
 <br><br>

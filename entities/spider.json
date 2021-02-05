@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:spider",
@@ -87,6 +87,8 @@
         },
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 2,
+          "must_see": true,
+          "attack_interval": 5,
           "entity_types": [
             {
               "filters": {
@@ -110,9 +112,7 @@
               },
               "max_dist": 16
             }
-          ],
-          "attack_interval": 5,
-          "must_see": true
+          ]
         }
       },
 
@@ -132,7 +132,6 @@
         },
         "minecraft:behavior.melee_attack": {
           "priority": 3,
-          "speed_multiplier": 1.0,
           "track_target": true,
           "reach_multiplier": 0.8
         }
@@ -187,6 +186,9 @@
       "minecraft:attack": {
         "damage": 3
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 1
       },
@@ -225,6 +227,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wandering_trader",
@@ -51,17 +51,19 @@
           "target": "self"
         }
       },
-      "minecraft:spawn_entity": [
-        {
-          "min_wait_time": 0,
-          "max_wait_time": 0,
-          "spawn_entity": "llama",
-          "spawn_event": "minecraft:from_wandering_trader",
-          "single_use": true,
-          "num_to_spawn": 2,
-          "should_leash": true
-        }
-      ],
+      "minecraft:spawn_entity": {
+        "entities": [
+          {
+            "min_wait_time": 0,
+            "max_wait_time": 0,
+            "spawn_entity": "llama",
+            "spawn_event": "minecraft:from_wandering_trader",
+            "single_use": true,
+            "num_to_spawn": 2,
+            "should_leash": true
+          }
+        ]
+      },
       "minecraft:economy_trade_table": {
         "display_name": "entity.wandering_trader.name",
         "table": "trading/economy_trades/wandering_trader_trades.json",
@@ -105,6 +107,8 @@
       },
       "minecraft:behavior.float": {
         "priority": 0
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       },
       "minecraft:despawn": {
         "remove_child_entities": true,
@@ -237,10 +241,6 @@
       "minecraft:behavior.open_door": {
         "priority": 6,
         "close_door_after": true
-      },
-      "minecraft:behavior.move_towards_restriction": {
-        "priority": 7,
-        "speed_multiplier": 0.6
       },
       "minecraft:behavior.look_at_player": {
         "priority": 8,

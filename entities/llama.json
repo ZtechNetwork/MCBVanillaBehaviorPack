@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:llama",
@@ -90,6 +90,8 @@
             },
             "event": "minecraft:on_tame"
           }
+        },
+        "minecraft:persistent": {
         }
       },
 
@@ -201,7 +203,6 @@
         "minecraft:is_tamed": {
         },
         "minecraft:rideable": {
-          "priority": 0,
           "seat_count": 1,
           "crouching_skip_interact": true,
           "family_types": [
@@ -380,10 +381,11 @@
         ]
       },
       "minecraft:shooter": {
-        "type": "llamaspit",
         "def": "minecraft:llama_spit"
       },
-
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -424,6 +426,8 @@
       "minecraft:behavior.hurt_by_target": {
         "priority": 1,
         "hurt_owner": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       },
       "minecraft:damage_sensor": {
         "triggers": {

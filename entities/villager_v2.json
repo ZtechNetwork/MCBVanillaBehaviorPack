@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.100",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:villager_v2",
@@ -429,38 +429,45 @@
             {
               "item": "minecraft:bread",
               "want_amount": 3,
-              "surplus_amount": 6
+              "surplus_amount": 6,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:carrot",
               "want_amount": 60,
-              "surplus_amount": 4
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:potato",
               "want_amount": 60,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:beetroot",
               "want_amount": 60,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:wheat_seeds",
               "want_amount": 64,
-              "surplus_amount": 64
+              "surplus_amount": 64,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:beetroot_seeds",
               "want_amount": 64,
-              "surplus_amount": 64
+              "surplus_amount": 64,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:wheat",
               "want_amount": 45,
               "surplus_amount": 18,
-              "craft_into": "minecraft:bread"
+              "craft_into": "minecraft:bread",
+              "stored_in_inventory": true
             }
           ]
         },
@@ -480,6 +487,9 @@
         },
         "minecraft:behavior.harvest_farm_block": {
           "priority": 8,
+          "max_seconds_before_search": 1.0,
+          "search_cooldown_max_seconds": 8.0,
+          "seconds_until_new_task": 0.5,
           "speed_multiplier": 0.5
         }
       },
@@ -544,12 +554,20 @@
       },
 
 
-      "wander_schedule_villager" : {
+      "wander_schedule_villager": {
         "minecraft:behavior.explore_outskirts": {
           "priority": 9,
+          "next_xz": 5,
+          "next_y": 3,
+          "min_wait_time": 3.0,
+          "max_wait_time": 10.0,
+          "max_travel_time": 60.0,
+          "speed_multiplier": 0.6,
           "explore_dist": 6.0,
-          "wait_time": 200,
-          "speed_multiplier": 0.6
+          "min_perimeter": 1.0,
+          "min_dist_from_target": 2.5,
+          "timer_ratio": 2.0,
+          "dist_from_boundary": [ 5.0, 0.0, 5.0 ]
         }
       },
 
@@ -559,38 +577,45 @@
             {
               "item": "minecraft:bread",
               "want_amount": 3,
-              "surplus_amount": 6
+              "surplus_amount": 6,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:carrot",
               "want_amount": 60,
-              "surplus_amount": 4
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
-              "item":"minecraft:potato",
+              "item": "minecraft:potato",
               "want_amount": 60,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:beetroot",
               "want_amount": 60,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:wheat_seeds",
               "want_amount": 64,
-              "surplus_amount": 64
+              "surplus_amount": 64,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:beetroot_seeds",
               "want_amount": 64,
-              "surplus_amount": 64
+              "surplus_amount": 64,
+              "stored_in_inventory": true
             },
             {
-              "item":"minecraft:wheat",
+              "item": "minecraft:wheat",
               "want_amount": 45,
               "surplus_amount": 18,
-              "craft_into": "minecraft:bread"
+              "craft_into": "minecraft:bread",
+              "stored_in_inventory": true
             }
           ]
         }
@@ -602,22 +627,26 @@
             {
               "item": "minecraft:bread",
               "want_amount": 3,
-              "surplus_amount": 6
+              "surplus_amount": 6,
+              "stored_in_inventory": true
             },
             {
               "item": "minecraft:carrot",
               "want_amount": 12,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
-              "item":"minecraft:potato",
+              "item": "minecraft:potato",
               "want_amount": 12,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             },
             {
-              "item":"minecraft:beetroot",
+              "item": "minecraft:beetroot",
               "want_amount": 12,
-              "surplus_amount": 24
+              "surplus_amount": 24,
+              "stored_in_inventory": true
             }
           ]
         }
@@ -659,7 +688,9 @@
           "display_name": "entity.villager.farmer",
           "table": "trading/economy_trades/farmer_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -692,7 +723,9 @@
           "display_name": "entity.villager.fisherman",
           "table": "trading/economy_trades/fisherman_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -725,7 +758,9 @@
           "display_name": "entity.villager.shepherd",
           "table": "trading/economy_trades/shepherd_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -758,7 +793,9 @@
           "display_name": "entity.villager.fletcher",
           "table": "trading/economy_trades/fletcher_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -791,7 +828,9 @@
           "display_name": "entity.villager.librarian",
           "table": "trading/economy_trades/librarian_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -824,7 +863,9 @@
           "display_name": "entity.villager.cartographer",
           "table": "trading/economy_trades/cartographer_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -857,7 +898,9 @@
           "display_name": "entity.villager.cleric",
           "table": "trading/economy_trades/cleric_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -890,7 +933,9 @@
           "display_name": "entity.villager.armor",
           "table": "trading/economy_trades/armorer_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -923,7 +968,9 @@
           "display_name": "entity.villager.weapon",
           "table": "trading/economy_trades/weapon_smith_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -956,7 +1003,9 @@
           "display_name": "entity.villager.tool",
           "table": "trading/economy_trades/tool_smith_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -989,7 +1038,9 @@
           "display_name": "entity.villager.butcher",
           "table": "trading/economy_trades/butcher_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -1022,7 +1073,9 @@
           "display_name": "entity.villager.leather",
           "table": "trading/economy_trades/leather_worker_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -1055,7 +1108,9 @@
           "display_name": "entity.villager.mason",
           "table": "trading/economy_trades/stone_mason_trades.json",
           "new_screen": true,
-          "persist_trades": true
+          "persist_trades": true,
+          "cured_discount": [-100, -100],
+          "max_cured_discount": [-500, -500]
         },
         "minecraft:dweller": {
           "dwelling_type": "village",
@@ -1359,6 +1414,8 @@
         "value": 20,
         "max": 20
       },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
           {
@@ -1413,7 +1470,18 @@
         "triggers": [
           {
             "on_damage": {
-              "filters": { "test" :  "is_family", "subject" : "other", "value" :  "lightning" },
+              "filters": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "lightning"
+                },
+                {
+                  "test": "is_difficulty",
+                  "operator": "!=",
+                  "value": "peaceful"
+                }
+              ],
               "event": "become_witch"
             },
             "deals_damage": false
@@ -1475,7 +1543,8 @@
         "priority": 4,
         "max_dist": 3,
         "goal_radius": 2,
-        "speed_multiplier": 0.5
+        "speed_multiplier": 0.5,
+        "can_pickup_to_hand_or_equipment": false
       },
       "minecraft:behavior.move_indoors": {
         "priority": 6,
@@ -1501,7 +1570,7 @@
           }
         ]
       },
-      "minecraft:behavior.move_towards_restriction": {
+      "minecraft:behavior.move_towards_dwelling_restriction": {
         "priority": 10,
         "speed_multiplier": 0.6
       },
@@ -1867,9 +1936,11 @@
           {
             // Transform to adult villager
             "filters": { "test": "has_component", "subject": "other", "operator": "!=", "value": "minecraft:is_baby" },
-            "add": { "component_groups": [ "adult" ] },
-            
             "sequence": [ 
+              // Transform to adult villager
+              {
+                "add": { "component_groups": [ "adult" ] }
+              },
               // Transform to farmer villager
               {
                   "filters": { "test": "is_family", "subject": "other", "value": "farmer"},
@@ -1932,7 +2003,7 @@
               },
               // Transform to mason villager
               {
-                  "filters": { "test": "is_family", "subject": "other", "value": "mason" },
+                  "filters": { "test": "is_family", "subject": "other", "value": "stone_mason" },
                   "add": { "component_groups": [ "mason", "behavior_non_peasant", "work_schedule" ] }
               }
             ]

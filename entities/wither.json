@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wither",
@@ -40,7 +40,8 @@
         "width": 1,
         "height": 3
       },
-      "minecraft:fire_immune": true,
+      "minecraft:fire_immune": {
+      },
       "minecraft:loot": {
         "table": "loot_tables/entities/wither_boss.json"
       },
@@ -127,6 +128,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

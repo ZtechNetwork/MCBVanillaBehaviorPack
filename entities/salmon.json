@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:salmon",
@@ -100,6 +100,12 @@
         "is_pushable": true,
         "is_pushable_by_piston": true
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": { 
+          "min_distance": 32,
+          "max_distance": 40
+        }
+      },
       "minecraft:behavior.avoid_mob_type": {
         "priority": 1,
         "entity_types": [
@@ -117,7 +123,9 @@
         ]
       },
       "minecraft:behavior.swim_idle": {
-        "priority": 5
+        "priority": 5,
+        "idle_time": 5.0,
+        "success_rate": 0.1
       },
 
       "minecraft:behavior.random_swim": { // Randomly selects points to go to, even in water
@@ -130,8 +138,10 @@
 
       "minecraft:behavior.swim_wander": {
         "priority": 4,
+        "interval": 0.0166,
+        "look_ahead": 5.0,
         "speed_multiplier": 0.014,
-        "interval": 60
+        "wander_time": 5.0
       },
       "minecraft:flocking": {
         "in_water": true,
@@ -154,6 +164,8 @@
         "block_weight": 0.75
       },
       "minecraft:nameable": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ghast",
@@ -16,7 +16,8 @@
         "total_supply": 15,
         "suffocate_time": 0
       },
-      "minecraft:fire_immune": true,
+      "minecraft:fire_immune": {
+      },
       "minecraft:nameable": {
       },
       "minecraft:health": {
@@ -43,7 +44,6 @@
         "table": "loot_tables/entities/ghast.json"
       },
       "minecraft:shooter": {
-        "type": "largefireball",
         "def": "minecraft:fireball"
       },
       "minecraft:type_family": {
@@ -56,6 +56,9 @@
         }
       },
       "minecraft:jump.static": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -92,6 +95,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     }
   }

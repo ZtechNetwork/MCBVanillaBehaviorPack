@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:elder_guardian",
@@ -60,6 +60,9 @@
       "minecraft:breathable": {
         "breathes_water": true
       },
+      "minecraft:home": {
+        "restriction_radius": 16
+      },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 1,
         "entity_types": [
@@ -79,14 +82,14 @@
       "minecraft:behavior.guardian_attack": {
         "priority": 4
       },
-      "minecraft:behavior.move_towards_restriction": {
+      "minecraft:behavior.move_towards_home_restriction": {
         "priority": 5,
-        "speed_multiplier": 1.0,
-        "control_flags": [ "move", "look" ]
+        "speed_multiplier": 1.0
       },
-      "minecraft:behavior.random_stroll": {
+      "minecraft:behavior.random_swim": {
         "priority": 7,
-        "speed_multiplier": 0.5
+        "speed_multiplier": 0.5,
+        "avoid_surface": false
       },
       "minecraft:behavior.look_at_player": {
         "priority": 8,
@@ -104,6 +107,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     }
   }

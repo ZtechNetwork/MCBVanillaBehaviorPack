@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:bat",
@@ -47,6 +47,9 @@
       },
       "minecraft:jump.static": {
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -66,6 +69,8 @@
       "minecraft:nameable": {
       },
       "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

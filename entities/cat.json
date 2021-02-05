@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.100",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:cat",
@@ -41,6 +41,7 @@
         },
         "minecraft:breedable": {
           "require_tame": true,
+          "require_full_health": true,
           "allow_sitting": true,
           "breeds_with": {
             "mate_type": "minecraft:cat",
@@ -77,7 +78,6 @@
         },
         "minecraft:behavior.nearest_attackable_target": {
           "priority": 1,
-          "attack_interval": 10,
           "reselect_targets": true,
           "within_radius": 16.0,
           "entity_types": [
@@ -134,7 +134,7 @@
             }
           ]
         },
-        "minecraft:behavior.move_towards_restriction": {
+        "minecraft:behavior.move_towards_dwelling_restriction": {
           "priority": 7
         }
       },
@@ -195,6 +195,15 @@
       "minecraft:cat_gift_for_owner": {
         "minecraft:behavior.drop_item_for": {
           "priority": 1,
+          "seconds_before_pickup": 0.0,
+          "cooldown": 0.25,
+          "drop_item_chance": 0.7,
+          "offering_distance": 5.0,
+          "minimum_teleport_distance": 2.0,
+          "max_head_look_at_height": 10.0,
+          "target_range": [ 5.0, 5.0, 5.0 ],
+          "teleport_offset": [ 0.0, 1.0, 0.0],
+          "time_of_day_range": [ 0.74999, 0.80 ],
           "speed_multiplier": 1.0,
           "search_range": 5,
           "search_height": 2,
@@ -206,11 +215,7 @@
               "max_dist": 6
             }
           ],
-          "max_dist":  5,
-          "drop_item_chance": 0.7,
-          "offering_distance": 5,
           "loot_table": "loot_tables/entities/cat_gift.json",
-          "time_of_day_range": [ 0.74999, 0.80 ],
           "on_drop_attempt": {
             "event": "minecraft:cat_gifted_owner",
             "target": "self"
@@ -341,6 +346,9 @@
         "can_migrate": true,
         "first_founding_reward": 0
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -360,9 +368,16 @@
       },
       "minecraft:behavior.ocelotattack": {
         "priority": 4,
-        "walk_speed_multiplier": 0.8,
+        "cooldown_time": 1.0,
+        "x_max_rotation": 30.0,
+        "y_max_head_rotation": 30.0,
+        "max_distance": 15.0,
+        "max_sneak_range": 15.0,
+        "max_sprint_range": 4.0,
+        "reach_multiplier": 2.0,
+        "sneak_speed_multiplier": 0.6,
         "sprint_speed_multiplier": 1.33,
-        "sneak_speed_multiplier": 0.6
+        "walk_speed_multiplier": 0.8
       },
       "minecraft:behavior.random_stroll": {
         "priority": 8,
@@ -376,6 +391,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 

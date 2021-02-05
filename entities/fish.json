@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:cod",
@@ -67,8 +67,16 @@
       "minecraft:movement.sway": {
         "sway_amplitude": 0.0
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": { 
+          "min_distance": 32,
+          "max_distance": 40
+        }
+      },
       "minecraft:behavior.swim_idle": {
-        "priority": 5
+        "priority": 5,
+        "idle_time": 5.0,
+        "success_rate": 0.1
       },
       "minecraft:behavior.random_swim": { // Randomly selects points to go to, even in water
         "priority": 3,
@@ -79,9 +87,10 @@
       },
       "minecraft:behavior.swim_wander": {
         "priority": 4,
+        "interval": 0.1,
+        "look_ahead": 2.0,
         "speed_multiplier": 1.0,
-        "interval": 10,
-        "look_ahead": 2.0
+        "wander_time": 5.0
       },
       "minecraft:behavior.avoid_mob_type": {
         "priority": 1,
@@ -119,6 +128,8 @@
         "block_weight": 0.85
       },
       "minecraft:nameable": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     }
   }

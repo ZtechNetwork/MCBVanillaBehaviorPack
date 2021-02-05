@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:parrot",
@@ -132,10 +132,10 @@
       "minecraft:jump.static": {
       },
       "minecraft:can_fly": {
-        "value": true
       },
       "minecraft:navigation.fly": {
-        "can_path_over_water": true
+        "can_path_over_water": true,
+        "can_path_from_air": true
       },
       "minecraft:movement.fly": {
       },
@@ -144,6 +144,9 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -155,6 +158,8 @@
       "minecraft:behavior.look_at_player": {
         "priority": 1,
         "look_distance": 8.0
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       },
       "minecraft:healable": {
         "force_use": true,
@@ -173,6 +178,11 @@
             ]
           }
         ]
+      },
+      "minecraft:leashable": {
+        "soft_distance": 4.0,
+        "hard_distance": 6.0,
+        "max_distance": 10.0
       }
     },
 

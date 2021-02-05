@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:fox",
@@ -90,7 +90,6 @@
         },
         "minecraft:behavior.melee_attack": {
           "priority": 10,
-          "target_dist": 1.2,
           "track_target": true,
           "require_complete_path": true,
           "reach_multiplier": 1.5
@@ -100,7 +99,6 @@
       "minecraft:defending_fox": {
         "minecraft:behavior.melee_attack": {
           "priority": 1,
-          "target_dist": 1.2,
           "track_target": true,
           "require_complete_path": true,
           "reach_multiplier": 1.5
@@ -295,7 +293,7 @@
             {
               "filters": {
                 "all_of": [
-                  { "test": "is_weather", "operator": "!=", "value": "thunderstorm" },
+                  { "test": "weather_at_position", "operator": "!=", "value": "thunderstorm" },
                   { "test": "is_daytime", "value": true }
                 ]
               },
@@ -304,7 +302,7 @@
             {
               "filters": {
                 "all_of": [
-                  { "test": "is_weather", "operator": "!=", "value": "thunderstorm" },
+                  { "test": "weather_at_position", "operator": "!=", "value": "thunderstorm" },
                   { "test": "is_daytime", "value": false }
                 ]
               },
@@ -324,7 +322,7 @@
         "minecraft:environment_sensor": {
           "triggers": [
 	    {
-              "filters": { "test" : "is_weather", "value" : "thunderstorm" },
+              "filters": { "test" : "weather_at_position", "value" : "thunderstorm" },
               "event": "minecraft:fox_configure_thunderstorm"
             },
             {
@@ -360,7 +358,7 @@
                 "value": true
               },
               {
-                "test": "is_weather",
+                "test": "weather_at_position",
                 "subject": "self",
                 "operator": "!=",
                 "value": "thunderstorm"
@@ -401,7 +399,7 @@
         "minecraft:environment_sensor": {
           "triggers": [
 	    {
-              "filters": { "test" : "is_weather", "value" : "thunderstorm" },
+              "filters": { "test" : "weather_at_position", "value" : "thunderstorm" },
               "event": "minecraft:fox_configure_thunderstorm"
             },
             {
@@ -448,6 +446,8 @@
       "minecraft:breathable": {
         "totalSupply": 15,
         "suffocateTime": 0
+      },
+      "minecraft:equip_item": {
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
@@ -534,8 +534,14 @@
           }
         ]
       },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
+      },
+      "minecraft:behavior.equip_item": {
+        "priority": 2
       },
       "minecraft:behavior.avoid_mob_type": {
         "priority": 5,
@@ -579,12 +585,7 @@
         "interest_time": 2.0,
         "stuck_time": 2.0,
         "strike_dist": 2.0,
-        "stuck_blocks": {
-            "test": "is_block",
-            "subject": "block",
-            "operator": "==",
-            "value": "snow_layer"
-          }
+        "stuck_blocks": { "test": "is_block", "subject": "block", "operator": "==", "value": "snow_layer" }
       },
       "minecraft:behavior.pickup_items": {
         "priority": 11,
@@ -634,12 +635,15 @@
         "max_distance": 10.0
       },
       "minecraft:balloonable": {
+        "mass": 0.6
       },
       "minecraft:physics": {
       },
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       },
       "minecraft:scheduler": {
         "min_delay_secs": 0,

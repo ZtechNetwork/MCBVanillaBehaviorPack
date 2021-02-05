@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:vex",
@@ -43,7 +43,11 @@
       },
       "minecraft:can_climb": {
       },
-      "minecraft:fire_immune": true,
+      "minecraft:fire_immune": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
       "minecraft:behavior.float": {
         "priority": 0
       },
@@ -92,6 +96,8 @@
       "minecraft:physics": {
         "has_gravity": false,
         "has_collision": false
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       }
     }
   }

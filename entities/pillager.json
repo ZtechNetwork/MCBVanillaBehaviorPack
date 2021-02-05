@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:pillager",
@@ -31,12 +31,11 @@
       "minecraft:ranged_attack": {
         "minecraft:behavior.ranged_attack": {
           "priority": 4,
-          "attack_interval_min": 1,
-          "attack_interval_max": 1,
-          "attack_radius": 8
+          "attack_interval_min": 1.0,
+          "attack_interval_max": 1.0,
+          "attack_radius": 8.0
         },
         "minecraft:shooter": {
-          "type": "Arrow",
           "def": "minecraft:arrow"
         },
         "minecraft:environment_sensor": {
@@ -54,8 +53,6 @@
       "minecraft:melee_attack": {
         "minecraft:behavior.melee_attack": {
           "priority": 4,
-          "target_dist": 1.2,
-          "speed_multiplier": 1,
           "track_target": true
         },
         "minecraft:attack": {
@@ -132,6 +129,14 @@
               "target": "other"
             }
           }
+        },
+        "minecraft:on_hurt": {
+          "event": "minecraft:ranged_mode",
+          "target": "self"
+        },
+        "minecraft:on_hurt_by_player": {
+          "event": "minecraft:ranged_mode",
+          "target": "self"
         }
       },
       "minecraft:patrol_captain": {
@@ -235,6 +240,8 @@
       "minecraft:experience_reward": {
         "on_death": "query.last_hit_by_player ? (query.is_baby ? 12 : 5) + (Math.die_roll(query.equipment_count,1,3)) : 0"
       },
+      "minecraft:equip_item": {
+      },
       "minecraft:collision_box": {
         "width": 0.6,
         "height": 1.9
@@ -253,10 +260,17 @@
         "value": 24,
         "max": 24
       },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
           {
-            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "filters": {
+              "test": "in_lava",
+              "subject": "self",
+              "operator": "==",
+              "value": true
+            },
             "cause": "lava",
             "damage_per_tick": 4
           }
@@ -264,6 +278,16 @@
       },
       "minecraft:loot": {
         "table": "loot_tables/entities/pillager.json"
+      },
+      "minecraft:shareables": {
+        "items": [
+          {
+            "item": "minecraft:banner:15",
+            "want_amount": 1,
+            "surplus_amount": 1,
+            "priority": 0
+          }
+        ]
       },
       "minecraft:movement": {
         "value": 0.35
@@ -279,6 +303,9 @@
       },
       "minecraft:equipment": {
         "table": "loot_tables/entities/pillager_gear.json"
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -297,15 +324,28 @@
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
-        "within_radius": 16.0,
+        "must_see": true,
         "reselect_targets": true,
+        "within_radius": 16.0,
         "entity_types": [
           {
             "filters": {
               "any_of": [
-                { "test": "is_family", "subject": "other", "value": "player" },
-                { "test": "is_family", "subject": "other", "value": "irongolem" },
-                { "test": "is_family", "subject": "other", "value": "wandering_trader" }
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "irongolem"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "wandering_trader"
+                }
               ]
             },
             "max_dist": 16
@@ -313,25 +353,42 @@
           {
             "filters": {
               "all_of": [
-                { "test": "is_family", "subject": "other", "value": "villager" },
-                { "test": "has_component", "subject": "other", "operator": "!=", "value": "minecraft:is_baby" }
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "villager"
+                },
+                {
+                  "test": "has_component",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "minecraft:is_baby"
+                }
               ]
             },
             "max_dist": 16
           }
-        ],
-        "must_see": true
+        ]
+      },
+      "minecraft:behavior.equip_item": {
+        "priority": 3
+      },
+      "minecraft:behavior.pickup_items": {
+        "priority": 7,
+        "max_dist": 3,
+        "goal_radius": 2,
+        "speed_multiplier": 1.0
       },
       "minecraft:behavior.random_stroll": {
-        "priority": 7,
+        "priority": 8,
         "speed_multiplier": 1
       },
       "minecraft:behavior.look_at_player": {
-        "priority": 8,
+        "priority": 9,
         "look_distance": 8
       },
       "minecraft:behavior.random_look_around": {
-        "priority": 8
+        "priority": 10
       },
       "minecraft:behavior.charge_held_item": {
         "priority": 3,
@@ -376,6 +433,7 @@
       "minecraft:spawn_as_illager_captain": {
         "add": {
           "component_groups": [
+            "minecraft:ranged_attack",
             "minecraft:illager_squad_captain"
           ]
         }
