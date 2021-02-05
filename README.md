@@ -6,6 +6,284 @@
 From v1.16 and on, changelogs shown here will only go back two major versions to prevent a long list. Along with this, new releases will contain changelogs on the [releases](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/releases) page.
 
 ## Changelogs
+### v1.16.200
+#### Fixes
+- Turning bandwidth optimizations off to see if it fixes stationary mob problem and entity "lag" issues.
+- Custom projectiles once again animate properly.
+- Fixed an issue where loot tables with a `set_data` function produced incorrect loot items.
+- Fixed face occlusion with data-driven blocks to properly account for unit cube transparent vs unit cube opaque.
+- Data-driven blocks no longer have their top faces rotated 180 degrees when carried or in inventory.
+- Fixed an issue with a runaway block ticking queue that occurred on a looping data-driven block that changed itself to a different permutation. The bug could cause memory issues, increased load and save times, as well as stalling the game periodically. (No ID)
+- Fixed data-driven blocks to shrink UVs the same way as actors to prevent UV bleeding. (No ID)
+- Fixed some culling issues with data-driven blocks larger than 1x1x1 when placed on a chunk boundary. Also added content warnings for larger blocks
+- Changed `set_block` and `set_block_at_pos` to use `BlockDescriptor` when specifying `block_type`.
+- Old command versions now use the previous position instead of current one
+Fixed issue where `query.cardinal_block_face_placed_on` no longer worked with `on_player_placing`.
+- Changed texture atlas padding size from 0 to 1 when disabling mipmap
+- Fixed issue of blocks listed in the "minecraft:block_placer" component not working correctly.
+- Fixed player smaller hitbox while swimming and gliding from being reset after an event is sent on the player.
+- Fixed custom spawn egg generation in template worlds.
+- MoLang geometry, material, and texture variable names can once again contain dots.
+- Items with the item lock component no longer cause the recipe book to show invalid recipe results.
+
+#### Blocks
+- Added `query.cardinal_facing_2d` to get a ground plane direction that doesn't return up or down.
+- Added the ability to put block models into the models/blocks folder.
+- Added the ability for item triggers to send events to the block they are interacting with. (when there is one such as `on_use_on`)
+- Added the ability to query the interacted face for both interactions with blocks and using `minecraft:on_use_on` in an item. Face can be queried with `query.block_face`.
+
+#### Components
+- Fixed using `query.get_equipped_item_name` with an item that was renamed not returning the right result. We now tie this to vanilla versioning so that the old name is returned if the world is tied to a specific vanilla version.
+- `add_mob_effect` and `remove_mob_effect` no longer throw content errors when valid effect names are passed in.
+- Added documentation for `remove_mob_effect` to make creators aware they can use the value `all` in effect to remove all mob effects from a target.
+- Fixed items not being placeable in additional horse equipment slots. Does not fix all equippable behaviors.
+- Inventory size on the minecraft:inventory component has to be increased to match the equippable slots in order for the server to accept the item placement.
+- The tooltip for item with item lock component will no longer show when game rule `showtags` is disabled.
+
+### v1.16.100
+#### Fixes
+- Fixed particles when using animation controllers to play particles and switching to a different state that also plays particles.
+- Striders now have a separate texture mapping for each leg, and their leg textures are properly mirrored.
+- Pitch written in `sound_definitions.json` is now correctly played.
+- FMOD music channel now sets its priority to 0 when music is played to prevent FMOD virtual channel from stealing it when a regular sound is played in game. (default priority is 128)
+- Villagers/Zombie Villagers once again correctly spawn as a baby when using the summon command to summon them with the event `minecraft:entity_born`.
+- Attempting to load a custom material that is not defined no longer causes a crash. A proper content error is now thrown.
+
+#### Commands
+- Added `/structure` command that allows saving and loading of structures without having to use Structure Blocks.
+- Added the ability to animate the placement of a structure with the `/structure` command.
+- Added the `/music` command, allowing creators to play and control custom music.
+- Added `/playanimation` command that allows you to run a one-off animation. It assumes all variables have been setup correctly for the animation to run.
+- Added `/camerashake` command to enable a camera shaking effect.
+- Added `/ride` command that allows you to make entities ride other entities, stop entities from riding, make rides evict their riders, or summon rides and riders.
+- Added `/clearspawnpoint` command that allows you to clear a player’s spawn point.
+- Added `/event` command that can be used to trigger an event on an entity.
+- Using the `/spawnpoint` command will no longer affect Players that are sleeping.
+- Older command versions using `/execute` now use the proper position for command selectors when calculating the radius.
+
+#### Data-Driven Blocks
+- Added documentation for block event responses and re-organized block documentation.
+- Blocks that have ticking components will now clear their pending ticks from the ticking queue upon removal.
+    - Added the `on_player_destroyed` trigger component.
+- Made data-driven blocks pathable with disabled collisions.
+- Added the `BlockDisplayNameComponent` to allow display names to be configured in the localization table.
+- Added support for parsing and performing the following event responses:
+    - Added the `set_block_at_pos` event response.
+    - Spawn Loot
+    - Set Block
+    - Added support for the `on_interact` trigger component.
+- Added support for the `on_player_placing` trigger component.
+    - Also added MoLang queries for `cardinal_block_face_placed_on` and `cardinal_player_facing` for getting placement context.
+
+#### Data-Driven Block Models
+- Added the first pass of the new data-driven block tessellation pipeline.
+- Added the `minecraft:geometry` component to allow using a block model for rendering.
+- Added the `minecraft:unit_cube` component to allow using a default unit cube for rendering. Unit cubes get some extra effects like ambient occlusion and face removal.
+- Added the `minecraft:material_instances` component to allow mapping faces and material_instances in a geometry file to an actual material.
+- Fixed smooth lighting and ambient occlusion with new data-driven blocks.
+
+#### Placement Filter
+Added `minecraft:placement_filter` component which allows you to set conditions for where this block can be placed. This component will also kick in whenever neighboring blocks change and pop its loot if it is no longer in a valid location.
+
+- Added serialization to Block Descriptor.
+- Added static anyMatch functions to BlockDescriptor to compare a list of BlockDescriptors against: Block*, BlockLegacy, or BlockDescriptor.
+- Added a function to compare two BlockDescriptors. This covers: matching blocks, any tag of either descriptor match, block states with matching permutations.
+- Changed the BlockDescriptor BlockLegacy member variable to a Block* so we can set the block states during deferred block resolution and get the block with the states set.
+- Removed all the existing Block* json parsing.
+
+#### Schema
+- Split `allowed_blocks` into `use_on` and `dispense_on`.
+- `use_on` specifies what blocks an entity placer item is allowed to be used on, omit to allow all blocks.
+- `dispense_on` specifies what blocks an entity placer item is allowed to be dispensed on, omit to allow all blocks.
+
+#### Execute Command
+- Added support to item json events for the `execute_command` keyword. It supports both a string and string array format, where the string is the command intended to run. Commands are compiled at load time and executed after add/remove_mob_effect and teleport actions, but before other triggers for events. Commands will be segmented in sequence and randomize nodes as expected.
+
+#### Run Command
+- Added support to entity json events for the `run_command` keyword alongside the current add and remove keywords. It supports both a string and string array format, where the string is the command intended to run. Commands will be run after component groups have been added and removed, and will be segmented in sequence and randomize nodes as expected.
+- Updated the following components to parse and use BlockDescriptor instead of Block*
+    - BlockBreakSensorComponent
+    - BlockListEventMap
+    - BreathableComponent
+    - BreedableComponent
+    - BuoyancyComponent
+    - EntityPlacerItemComponent
+    - PreferredPathComponent
+    - SeedItemComponentLegacy
+- Updated the following features to parse and use BlockDescriptor instead of Block*
+    - NoSurfaceOreFeature
+    - OreFeature
+    - SingleBlockFeature
+- Updated the following goal definitions to parse and use BlockDescriptor instead of Block*
+    - GoalDefinition
+    - RaidGardenGoal
+    - VanillaGoalDefinition
+- Updated the following surfaces code to parse and use BlockDescriptor instead of Block*
+    - MesaSurfaceAttributes
+    - SurfaceMaterialAdjustmentAttributes
+    - SurfaceMaterialAttributes
+- Updated the following tests to reflect the changes from updating code to use BlockDescriptors
+    - BuoyancyComponentServerTests
+    - FeatureHelperTests
+    - NoSurfaceOreFeatureTests
+    - OreFeatureTests
+    - SingleBlockFeatureTests
+- Updated the following trees to parse and use BlockDescriptor instead of Block*
+    - AcaciaTreeCanopy
+    - AcaciaTreeTrunk
+    - FallenTreeTrunk
+    - FancyTreeCanopy
+    - FancyTreeTrunk
+    - MegaPineTreeCanopy
+    - MegaTreeCanopy
+    - MegaTreeTrunk
+    - PineTreeCanopy
+    - RoofedTreeCanopy
+    - SimpleTreeCanopy
+    - SimpleTreeTrunk
+    - SpruceTreeCanopy
+    - TreeHelper
+
+#### Actors
+- Squid rendering is now data-driven.
+- All types of minecarts are now data-driven.
+- The `minecraft:behavior.controlled_by_player` goal is now data-driven.
+- Physics component's `has_gravity` field is now used to decide whether a mob should apply water gravity, if the mob does not have a navigation component
+- Spatial Bandwidth Optimizations are now exposed through a component, `minecraft:conditional_bandwidth_optimization`.
+- Spatial Bandwidth Optimizations are now utilized by every actor using `minecraft:conditional_bandwidth_optimization`.
+- Added the selector component to raw text, which can be used to print entity names in commands such as `tellraw` and `titleraw`.
+- Pathfinding will now account for the `minecraft:scale` component.
+- Updated BrewingStand, ButtonBlock, ChestBlock, EnderChestBlock, SlabBlock, and SoulSandBlockblock types to allow path-finding and navigation.
+- Updated Actor Properties. Two fields that were invalid and appeared in some vanilla content will now give a content error. The field `value` on `minecraft:can_fly` and the property `minecraft:foot_size` should simply be removed from any entity files.
+- The `MoveToLiquidGoal` has been changed to use data for its target block.
+- Strider now correctly executes the `move_to_liquid` goal.
+- Made boats use the Buoyancy component. Added two new components, the `inside_block_notifier` component, which fires specified events when the actor enters or exits specified blocks, and the `out_of_control` component, which sets a corresponding actor flag, in order to make this possible.
+- Exposed new data parameters to control the behavior of Drop Item For Goal. This includes: `seconds_before_pickup`, `cooldown`, `minimum_teleport_distance`, `max_head_look_at_height`, `teleport_offset`, and `entity_types`. Check out the new Actor component documentation!
+- Exposed new data parameters to control the behavior of Harvest Farm Block Goal, including `max_seconds_before_search`, `search_cooldown_max_seconds`, and `seconds_until_new_task`. Check out the new Actor component documentation!
+- Added error checks to parsing of Minecraft shareables items. Displays content log if item name is invalid or the array is empty.
+
+#### Fog
+- Created `/fog` command for managing active fog settings for players; these fog settings override fog driven from the client such as biome location of player camera.
+- Updated `biomes_client.json` to link each biome to a fog definition identifier.
+- Added child object `volumetric` which contains `density` and `media_coefficients` objects. These hold the data values used for the volumetric fog.
+
+#### Record Item Component
+- Items can now be made records to play music in Jukeboxes.
+- **Component Variables**
+    - `sound_event` - A string value correseponding to a sound event in the game code. This string must be one these for music to play: `13`, `cat`, `blocks`, `chirp`, `far`, `mall`, `mellohi`, `stal`, `strad`, `ward`, `11`, `wait`, `pigstep`.
+    - `duration` - A float value that determines how long particles are spawned from the JukeBox Block, should approximately match length of sound event.
+    - `comparator_signal` - An integer value that represents the strenght of the analog signal, used by the Comparator Block.
+- **Examples**
+    - When added to JukeBox Block this will play the sound clip of `record.chirp`
+    - Example 1: `"minecraft:record": { "sound_event": "chirp", "duration": 185.0, "comparator_signal": 4 }`
+
+#### Items
+- Renamed items to be consistent with the list of Java Edition items.
+- Created RepairableItemComponent that data-drives how an item is repaired in game.
+- Items can now override their display name with a localized `value`. If a value is not supplied, the component will stay with its default name. If the value supplied is not in the localization file, the display name will be the value string.
+- Added a Lock in Inventory component that can be applied to an item via the `/give` and `/replaceitem` commands. This prevents the item from being removed from the player's inventory, dropped, or crafted with. 
+    - Example of use: `/give @s apple 1 0 {"item_lock": {"mode": "lock_in_inventory"}}`
+- Added a Lock in Slot component that can be applied to an item via the `/give` and `/replaceitem` commands. This prevents the item from being moved or removed from its slot in the player's inventory, dropped, or crafted with.
+    - Example of use: `/give @s apple 1 0 {"item_lock": {"mode": "lock_in_slot"}}`
+- Added a Keep on Death component which can be applied to an item via the `/give` and `/replaceitem` commands. This component prevents the item from being dropped when the player dies.
+    - Example of use: `/give @s apple 1 0 {"keep_on_death": {}}`
+
+#### Item Icon Component
+- Items now have an easy way to set the icon for an item for displaying in the user interface.
+Component Variables
+`texture`: Full path to icon image to use as item's icon. No default.
+`frame`: Molang script to be executed at runtime to determine the icon's current frame. Can be a constant, defaults to: `0`.
+`legacy_texture_id`: The name of the texture used on legacy items. No default.
+`legacy_frame`: Molang script to be executed at runtime to determine the icon's current frame. Can be a constant, defaults to: `0`.
+
+#### Item Parsing
+- `any_tag` functionality added to several actor components. In addition to representing items as item names in json they can now be represented as a set of tags.
+- Examples:
+    - `"item": {"any_tag": "food"}`
+    - `"item": {"any_tag": ["food", "wood"]}`
+    - `"bribe_items": ["emerald", {"any_tag": "stone"}]`
+- Components and fields that can now use `any_tag` functionality:
+    - `minecraft:ageable`
+    - `minecraft:breedable` breed_items
+    - `minecraft:bribeable` bribe_items
+    - `minecraft:giveable` items
+    - `minecraft:healable` items
+    - `minecraft:tamemount` feed_items and auto_reject_items
+    - `minecraft:equippable` accepted_items
+
+#### Technical Changes
+- Item names of the format `minecraft:item.someitem` no longer need the `item.` portion and it will be ignored.
+- Added Entity Movement Prediction.
+- Changed LegacyCubemap from opaque to transparent.
+- Added `decrement_count` event response for items.
+- **'minecraft:behavior.send_event' Changes**
+    - `minecraft:behavior.send_event` no longer uses `-1` in `max_activation_range` as a value to indicate unlimited range, the default has been changed to `32`.
+    - Added content log warnings for when `min_activation_range` and `max_activation_range` is less than `0`.
+    - Added content log warnings for when `min_activation_range` is greater than `max_activation_range`.
+- **'minecraft:behavior.summon_entity' Changes**
+    - `minecraft:behavior.summon_entity` no longer uses `-1` in `max_activation_range` as a value to indicate unlimited range, the default has been changed to `32`.
+    - Added content log warnings for when `min_activation_range` and `max_activation_range` is less than `0`.
+    - Added content log warnings for when `min_activation_range` is greater than `max_activation_range`.
+- Fixed a difference with the default return type of the script function, which differed from the usual return type. (No ID)
+- Added new BlockRaycastComponent that can override the AABB used for outlines and raycasting.
+- Added new BlockCollisionComponent that can override the AABB used for entity collision.
+- Added new BlockPropertyComponent that can replace the blockProperties : Unwalkable, Infiniburn, PreventsJumping, Immovable, BreakOnPush, OnlyPistonPush and BreaksWhenHitByArrow.
+- Added new BlockQueuedTickingComponent that triggers events for a block on a range of time set by the creator.
+- Added new BlockRandomTickingComponent that triggers events for a block randomly.
+- Added a Rotation Component that allows a block to rotate. The component only allows axis-aligned rotations.
+- Adds the base implementation of the CraftingTableComponent.
+    - Allows the creation of custom crafting tables.
+    - Currently only supports 3x3 grids.
+
+#### Animations
+- Added a new `loop_delay` field to skeletal animation files that controls how to wait between each iteration of a looping animation.
+- Fixed a bug where `start_delay`fields in skeletal animations were being used for both the initial delay before playing an animation and for inter-loop delays.
+
+#### MoveTowardsRestrictionGoal
+- This goal has been removed in favor of the two new child goals that make the behavior clearer. The behavior works the same, but is now separated out properly into the two goals.
+#### MoveTowardsDwellingRestrictionGoal
+- This goal is for Actors that are part of the Village construct.
+- The `DwellerComponent` is necessary for this goal.
+
+#### MoveTowardsHomeRestrictionGoal
+- The `HomeComponent` is necessary for this goal
+- Exposed a new data parameter for the range at which the Actor will stay within in relation to their home: `restriction_radius`
+
+#### Send Event Goal
+- `minecraft:behavior.send_event` no longer uses `-1` in `max_activation_range` as a value to indicate unlimited range, the default has been changed to `32`
+- Added content log warnings for when `min_activation_range` and `max_activation_range` is less than `0`.
+- Added content log warnings for when `min_activation_range` is greater than `max_activation_range`.
+- Added a new json field `look_at_target` which allows and disallows entities to turn and face their target.
+
+#### SetBannerDetailsFunction
+- Now supports customizing non-Illager banners.
+- Up to 6 patterns and colors can be specified.
+- **Accepted Banner Types**
+    - `default` `illager_captain`
+- **Accepted Color Values**
+    - `black` `red` `green` `brown` `blue` `purple` `cyan` `silver` `gray` `pink` `lime` `yellow` `light_blue` `magenta` `orange` `white`
+- **Accepted Pattern Values**
+`base` `border` `bricks` `circle` `creeper` `cross` `curly_border` `diagonal_left` `diagonal_right` `diagonal_up_left` `diagonal_up_right` `flower` `gradient` `gradient_up` `half_horizontal` `half_horizontal_bottom` `half_vertical` `half_vertical_right` `mojang` `piglin` `rhombus` `skull` `small_stripes` `square_bottom_left` `square_bottom_right` `square_top_left` `square_top_right` `straight_cross` `stripe_bottom` `stripe_center` `stripe_downleft` `stripe_downright` `stripe_left` `stripe_middle` `stripe_right` `stripe_top` `triangle_bottom` `triangle_top` `triangles_bottom` `triangles_top`
+- **Possible Input:**
+```JSON
+"function": "set_banner_details",
+"type": "default",
+"base_color": "blue",
+"patterns": [
+    {
+        "pattern": "flower",
+        "color": "white"
+    },
+    {
+        "pattern": "triangle_bottom",
+        "color": "brown"
+    }
+]
+```
+
+#### Format Version Checks
+- Updated the `format_version` field in geometry, particles, and animation files to behave as entity behavior files do. That is, you no longer need to specify a specific version for it to be accepted, instead you can just specify the version of the release you are targeting.
+
 ### v1.16.20
 - Updated Piglin geometry and entity files: Fixed issue with scaling carried item for baby humanoid mobs.
 - Accessing a Beacon no longer spams the content log with warnings.
@@ -124,5 +402,5 @@ From v1.16 and on, changelogs shown here will only go back two major versions to
 - Updated documentation for `v1.14.X`.
 
 ```
-    All assets belong to Mojang & Microsoft.
+    All assets belong to Mojang Studios & Microsoft.
 ```
