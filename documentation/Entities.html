@@ -1,4 +1,4 @@
-<h1>ENTITIES DOCUMENTATION </br>Version: 1.16.200.2</h1>
+<h1>ENTITIES DOCUMENTATION </br>Version: 1.16.210.5</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Client Entity Documentation">Client Entity Documentation</a></th> </tr>
@@ -12232,18 +12232,6 @@ How many blocks radius from the mob's center to search in for the required block
 <td style="border-style:solid; border-width:2; padding:8px">The filters to run when attempting to fall in love.</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:2; padding:8px">max_number_of_children</td>
-<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
-<td style="border-style:solid; border-width:2; padding:8px">true</td>
-<td style="border-style:solid; border-width:2; padding:8px">The maximum number of children the mob will breed</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">min_number_of_children</td>
-<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
-<td style="border-style:solid; border-width:2; padding:8px">true</td>
-<td style="border-style:solid; border-width:2; padding:8px">The minimum number of children the mob will breed</br></td>
-</tr>
-<tr>
 <td style="border-style:solid; border-width:2; padding:8px">mutation_factor</td>
 <td style="border-style:solid; border-width:2; padding:8px">JSON Object</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
@@ -13808,16 +13796,16 @@ Allows this entity to generate paths that include vertical walls like the vanill
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -13832,10 +13820,28 @@ Allows this entity to generate paths that include vertical walls like the vanill
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -13880,10 +13886,28 @@ Allows this entity to generate paths that include vertical walls like the vanill
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -13895,16 +13919,16 @@ Allows this entity to generate paths by flying around the air like the regular G
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -13919,10 +13943,28 @@ Allows this entity to generate paths by flying around the air like the regular G
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -13967,10 +14009,28 @@ Allows this entity to generate paths by flying around the air like the regular G
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -13982,16 +14042,16 @@ Allows this entity to generate paths in the air like the vanilla Parrots do.</br
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -14006,10 +14066,28 @@ Allows this entity to generate paths in the air like the vanilla Parrots do.</br
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -14054,10 +14132,28 @@ Allows this entity to generate paths in the air like the vanilla Parrots do.</br
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -14069,16 +14165,16 @@ Allows this entity to generate paths by walking, swimming, flying and/or climbin
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -14093,10 +14189,28 @@ Allows this entity to generate paths by walking, swimming, flying and/or climbin
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -14141,10 +14255,28 @@ Allows this entity to generate paths by walking, swimming, flying and/or climbin
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -14156,16 +14288,16 @@ Allows this entity to generate paths in the air like the vanilla Bees do. Keeps 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -14180,10 +14312,28 @@ Allows this entity to generate paths in the air like the vanilla Bees do. Keeps 
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -14228,10 +14378,28 @@ Allows this entity to generate paths in the air like the vanilla Bees do. Keeps 
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -14243,16 +14411,16 @@ Allows this entity to generate paths that include water.</br><h3></h3>
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -14267,10 +14435,28 @@ Allows this entity to generate paths that include water.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -14315,10 +14501,28 @@ Allows this entity to generate paths that include water.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -14330,16 +14534,16 @@ Allows this entity to generate paths by walking around and jumping up and down a
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">avoid_damage_blocks</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid blocks that cause damage when finding a path</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_portals</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid portals (like nether portals) when finding a path</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">avoid_powder_snow</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid powder snow blocks when creating a path</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">avoid_sun</td>
@@ -14354,10 +14558,28 @@ Allows this entity to generate paths by walking around and jumping up and down a
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder to avoid water when creating a path</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">blocks_to_avoid</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder which blocks to avoid when creating a path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_breach</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump out of water (like a dolphin)</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_break_doors</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder that it can path through a closed door and break it</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_jump</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can jump up blocks</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_open_doors</td>
@@ -14402,10 +14624,28 @@ Allows this entity to generate paths by walking around and jumping up and down a
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it will be pulled down by gravity while in water</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can path anywhere through water and plays swimming animation along that path</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">can_walk</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground outside water</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">can_walk_in_lava</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can travel in lava like walking on ground</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">is_amphibious</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Tells the pathfinder whether or not it can walk on the ground underwater</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>

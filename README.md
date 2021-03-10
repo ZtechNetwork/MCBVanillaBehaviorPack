@@ -6,6 +6,39 @@
 From v1.16 and on, changelogs shown here will only go back two major versions to prevent a long list. Along with this, new releases will contain changelogs on the [releases](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/releases) page.
 
 ## Changelogs
+### v1.16.210
+- Added Fog documentation.
+#### Fixes
+- Horses, Donkeys, Mules, Skeleton Horses, and Zombie Horses can now properly be given custom names, and identified using their respective `runtime_identifier`.
+- Improved performance for actors using `TemptGoal`.
+- Zombie villagers spawned from zombie spawners on Marketplace worlds that were created after version 1.11 now correctly spawn as V2 zombie villagers. When cured, they will now correctly turn into V2 villagers.
+- Fixed upgrade path for `format_version` 1.13.0 boats to be properly upgraded to 1.16.100, which resolves a bug where boats templated worlds with a version lower than 1.16.100 had no gravity.
+- Structure blocks no longer auto-save data when structure name text box is deselected.
+- Entities that use material state "Blending" now render correctly behind transparent parts.
+- The scoreboard data of an entity is no longer removed if the entity is being teleported to an unloaded area of the world.
+- Custom blocks now can only drop default state when broken, even with Silk Touch.
+
+#### Technical
+- Structures can now be deleted from the saved structure list using the new `/structure delete <name>` command.
+- Added new slash command options for `/setblock`, `/fill`, and `/clone` commands for passing in a list of block states to set on the block being spawned.
+- A boolean parameter called `ignore_game_mode` has been added for the block event response `decrement_stack`, set to false by default. Thus `decrement_stack` no longer decreases the item stack when playing in Creative by default.
+- Changing `RideableComponent` property `rotate_rider_by` to function for custom mobs.
+- `SetBlock` and `SetBlockAtPos` events now support custom block states.
+- Attachable items created in 1.16.2 and before will not render for their player in first person. Attachable items created after 1.16.2 will render for their player in first person unless they are armor.
+
+#### Custom Biomes and Blocks
+- Disabled loading of entities in custom biome features.
+- Fixed UVs of data-driven blocks to not be slightly shrunk, which caused texel warping.
+- Fixed data-driven blocks being pushed by pistons not working correctly.
+
+#### Render Offsets Component
+- Simple items, like swords or pickaxes, can have an optional offset applied to them to modify the way they are rendered. Note this component should not be added to an attachable item.
+- Component Variables:
+    - `main_hand` - An optional object storing optional transform data for `first_person` and `third_person` for the player's right hand.
+    - `off_hand` - An optional object storing optional transform data for `first_person` and `third_person` for the player's left hand.
+    - `first_person` - An optional object storing 3 vectors `position`, `rotation`, `scale` used to build the first person matrix.
+    - `third_person`- An optional object storing 3 vectors `position`, `rotation`, `scale` used to build the third person matrix.
+
 ### v1.16.200
 #### Fixes
 - Turning bandwidth optimizations off to see if it fixes stationary mob problem and entity "lag" issues.

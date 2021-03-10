@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.16.210",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:armor_stand",
@@ -27,6 +27,9 @@
             "damage_per_tick": 4
           }
         ]
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
       },
       "minecraft:loot": {
         "table": "loot_tables/entities/armor_stand.json"

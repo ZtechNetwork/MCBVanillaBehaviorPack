@@ -1,4 +1,4 @@
-<h1>FEATURES DOCUMENTATION </br>Version: 1.16.200.2</h1>
+<h1>FEATURES DOCUMENTATION </br>Version: 1.16.210.5</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Overview">Overview</a></th> </tr>
@@ -27,7 +27,7 @@ Features are decorations scattered throughout the world. Things such as trees, p
 <h1><p id="JSON format">JSON format</p></h1>
 
 All features must specify the version that they target via the "format_version" field. The remainder of the data is contained in independet JSON sub-objects for each supported feature type. These feature types define the behavior of the feature and include properties specific to that behavior. To be valid, a definition must include exactly one of these type objects. See the full feature schema below for additional details and the full list of supported feature types.</br><h2></h2>
-Here is a sample feature<br / ><textarea readonly="true" cols="49" rows="32">
+Here is a sample feature<br / ><textarea readonly="true" cols="49" rows="16">
 {
   "format_version": "1.13.0",
   "minecraft:ore_feature": {
@@ -38,46 +38,7 @@ Here is a sample feature<br / ><textarea readonly="true" cols="49" rows="32">
     "places_block": "minecraft:coal_ore",
     "may_replace": [
       {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "andesite"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "andesite_smooth"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "diorite"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "diorite_smooth"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "granite"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "granite_smooth"
-        }
-      },
-      {
-        "name": "minecraft:stone",
-        "states": {
-          "stone_type": "stone"
-        }
+        "name": "minecraft:stone"
       }
     ]
   }

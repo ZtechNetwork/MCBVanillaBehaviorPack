@@ -1,4 +1,4 @@
-<h1>MOLANG DOCUMENTATION </br>Version: 1.16.200.2</h1>
+<h1>MOLANG DOCUMENTATION </br>Version: 1.16.210.5</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Why Does MoLang Exist?">Why Does MoLang Exist?</a></th> </tr>
@@ -768,6 +768,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can climb, else it returns 0.0</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.can_damage_nearby_mobs</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can damage nearby mobs, else it returns 0.0</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.can_fly</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity can fly, else it returns 0.0</br></td>
 </tr>
@@ -852,6 +856,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">takes a slot name followed by any tag you want to check for in the form of 'tag_name' and returns 0 if none of the tags are on that equipped item or 1 if at least 1 tag exists</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.equipped_item_is_attachable</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the desired hand slot as a parameter (0 or 'main_hand' for main hand, 1 or 'off_hand' for off hand), and returns whether the item is an attachable or not.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.eye_target_x_rotation</td>
 <td style="border-style:solid; border-width:3; padding:7px">returns the X eye rotation of the entity if it makes sense, else it returns 0.0</br></td>
 </tr>
@@ -866,6 +874,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.get_actor_info_id</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the integer id of an actor by its string name</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.get_animation_frame</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the current texture of the item</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.get_equipped_item_name</td>
@@ -1296,6 +1308,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns the amount of time an item has left to use in seconds, else 0.0 if it doesn't make sense</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.item_slot_to_bone_name</td>
+<td style="border-style:solid; border-width:3; padding:7px">query.item_slot_to_bone_name requires one parameter: the name of the equipment slot.  This function returns the name of the bone this entity has mapped to that slot.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.key_frame_lerp_time</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the ratio between the previous and next key frames</br></td>
 </tr>
@@ -1438,6 +1454,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.shake_time</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the shake time of the entity.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.shield_blocking_bob</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the how much the offhand shield should translate down when blocking and being hit.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.sit_amount</td>
@@ -1631,5 +1651,5 @@ Query Functions are boolean expressions that allow you to query for values owned
 
 <h1><p id="Experimental Operators">Experimental Operators</p></h1>
 
-Some operators are under `Experimental MoLang Features` atm (see list below).  We are hoping people will experiment with them and give us feedback, so we can move them into general usage.</br></br>- ContextVariable</br>- Loop</br>- ForEach</br>- Break</br>- Continue</br>- Pointer</br><a href="#Index">Back to top</a><br><br>
+Some operators are under `Experimental MoLang Features` atm (see list below).  We are hoping people will experiment with them and give us feedback, so we can move them into general usage.</br></br><a href="#Index">Back to top</a><br><br>
 
