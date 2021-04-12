@@ -257,14 +257,7 @@
         "randomize": [
           {
             "weight": 95,
-            "remove": {
-            },
-            "add": {
-              "component_groups": [
-                "minecraft:pig_adult",
-                "minecraft:pig_unsaddled"
-              ]
-            }
+            "trigger": "minecraft:spawn_adult"
           },
           {
             "weight": 5,
@@ -313,6 +306,14 @@
         "add": {
           "component_groups": [
             "minecraft:pig_saddled"
+          ]
+        }
+      },
+      "minecraft:spawn_adult": {
+        "add": {
+          "component_groups": [
+            "minecraft:pig_adult",
+            "minecraft:pig_unsaddled"
           ]
         }
       }

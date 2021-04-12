@@ -6,6 +6,19 @@
 From v1.16 and on, changelogs shown here will only go back two major versions to prevent a long list. Along with this, new releases will contain changelogs on the [releases](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/releases) page.
 
 ## Changelogs
+### v1.16.220
+
+#### Changes and Fixes
+- Renamed all references of `Actor` to `Entity`.
+- Renamed `BlockPos` to `BlockLocation`.
+- Updated Behavior Packs to require explicit module dependencies when using other native modules.
+- Identifiers within `render_controllers` will now be considered content errors if there is no render controller matching that name.
+- Entity json before version 1.16.100 will no longer give a content error for the deprecated field `minecraft:foot_size`.
+- Modified condition in `trident.animation_controllers.json` to allow mobs to enter  `wield_third_person_raise`.
+- Fixed an issue where loading into a world would cause continuous MoLang errors around "unhandled request for unknown variable".
+- Items can now have the `transparentattachable` tag applied to make attachable items not render for the player wearing them in the first person perspective.
+- Fixed an issue where V2 Villagers were not properly updating their MoLang variables on initialization.
+
 ### v1.16.210
 - Added Fog documentation.
 #### Fixes
