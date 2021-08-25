@@ -1,4 +1,4 @@
-<h1>MOLANG DOCUMENTATION </br>Version: 1.16.220.2</h1>
+<h1>MOLANG DOCUMENTATION </br>Version: 1.17.10.4</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Why Does MoLang Exist?">Why Does MoLang Exist?</a></th> </tr>
@@ -117,27 +117,27 @@ All identifiers not in a scope listed below are reserved for future use</br><h2>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`->`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Arrow operator, for accessing data from a different entity</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Arrow operator, for accessing data from a different entity</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`context.variable_name`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Read-only storage provided by the game in certain scenarios</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Read-only storage provided by the game in certain scenarios</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`loop`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) For repeating one or more commands 'n' times</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">For repeating one or more commands 'n' times</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`for_each`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) For iterating over an array of entities</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">For iterating over an array of entities</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`break`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) For early exiting a loop/for_each scope</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">For early exiting a loop/for_each scope</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`continue`</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) For skipping the rest of the set of statements of a loop/for_each iteration and moving to the next iteration</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">For skipping the rest of the set of statements of a loop/for_each iteration and moving to the next iteration</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`[` `]`</td>
@@ -361,6 +361,10 @@ Strings in molang are surrounded by single - quotes.Eg: 'minecraft:pig' or 'hell
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`math.min(A, B)`</td>
 <td style="border-style:solid; border-width:3; padding:7px">Return lowest value of A or B</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">`math.min_angle(value)`</td>
+<td style="border-style:solid; border-width:3; padding:7px">Minimize angle magnitude (in degrees) into the range [-180, 180)</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">`math.mod(value, denominator)`</td>
@@ -756,6 +760,18 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns the body yaw rotation if called on an actor, else it returns 0.0</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.bone_aabb</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the axis aligned bounding box of a bone as a struct with members '.min', '.max', along with '.x', '.y', and '.z' values for each.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.bone_origin</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the initial (from the .geo) pivot of a bone as a struct with members '.x', '.y', and '.z'.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.bone_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the initial (from the .geo) rotation of a bone as a struct with members '.x', '.y', and '.z' in degrees.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.camera_distance_range_lerp</td>
 <td style="border-style:solid; border-width:3; padding:7px">Takes two distances (any order) and return a number from 0 to 1 based on the camera distance between the two ranges clamped to that range.  For example, `query.camera_distance_range_lerp(10, 20)` will return 0 for any distance less than or equal to 10, 0.2 for a distance of 12, 0.5 for 15, and 1 for 20 or greater.  If you pass in (20, 10), a distance of 20 will return 0.0</br></td>
 </tr>
@@ -824,6 +840,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns the day of the current level.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.death_ticks</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the elapsed ticks since the mob started dying.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.debug_output</td>
 <td style="border-style:solid; border-width:3; padding:7px">debug log a value to the output debug window for builds that have one</br></td>
 </tr>
@@ -878,6 +898,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.get_animation_frame</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the current texture of the item</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.get_default_bone_pivot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Gets specified axis of the specified bone orientation pivot</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.get_equipped_item_name</td>
@@ -1096,6 +1120,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is an illager captain, else it returns 0.0</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_in_contact_with_water</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in contact with any water (water, rain, splash water bottle), else it returns 0.0</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_in_love</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in love, else it returns 0.0</br></td>
 </tr>
@@ -1174,6 +1202,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_persona_or_premium_skin</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the player has a persona or permium skin, else it returns 0.0</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_playing_dead</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is playing dead, else it returns 0.0</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_powered</td>
@@ -1305,7 +1337,7 @@ Query Functions are boolean expressions that allow you to query for values owned
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.item_remaining_use_duration</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns the amount of time an item has left to use in seconds, else 0.0 if it doesn't make sense</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the amount of time an item has left to use, else 0.0 if it doesn't make sense. Item queried is specified by the slot name 'main_hand' or 'off_hand'. Time remaining is normalized using the normalization value, only if one is given, else it is returned in seconds.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.item_slot_to_bone_name</td>
@@ -1460,6 +1492,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <td style="border-style:solid; border-width:3; padding:7px">Returns the how much the offhand shield should translate down when blocking and being hit.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.show_bottom</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if we render the entity's bottom, else it returns 0.0</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.sit_amount</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the current sit amount of the entity</br></td>
 </tr>
@@ -1573,6 +1609,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
 <tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.actor_property</td>
+<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.biome_has_all_tags</td>
 <td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if all of them exist in the biome, else it returns 0.  Eg: query.biome_has_all_tags('is_cold', 'has_trees')</br></td>
 </tr>
@@ -1615,6 +1655,10 @@ Query Functions are boolean expressions that allow you to query for values owned
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.get_riders</td>
 <td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Returns the array of entities that are riding this entity</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_actor_property</td>
+<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL) Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise. </br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_player_rider</td>

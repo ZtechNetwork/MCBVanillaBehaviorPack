@@ -1,4 +1,4 @@
-<h1>FEATURES DOCUMENTATION </br>Version: 1.16.220.2</h1>
+<h1>FEATURES DOCUMENTATION </br>Version: 1.17.10.4</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Overview">Overview</a></th> </tr>
@@ -7,10 +7,16 @@
 <tr> <th><a href="#Supported features">Supported features</a></th> </tr>
 <tr> <td> <a href="#minecraft:aggregate_feature"> minecraft:aggregate_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:sequence_feature"> minecraft:sequence_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:beards_and_shavers"> minecraft:beards_and_shavers</a> </tr> </td>
 <tr> <td> <a href="#minecraft:cave_carver_feature"> minecraft:cave_carver_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:conditional_list"> minecraft:conditional_list</a> </tr> </td>
 <tr> <td> <a href="#minecraft:growing_plant_feature"> minecraft:growing_plant_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:hell_cave_carver_feature"> minecraft:hell_cave_carver_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:multiface_feature"> minecraft:multiface_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:geode_feature"> minecraft:geode_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:ore_feature"> minecraft:ore_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:rect_layout"> minecraft:rect_layout</a> </tr> </td>
+<tr> <td> <a href="#minecraft:scan_surface"> minecraft:scan_surface</a> </tr> </td>
 <tr> <td> <a href="#minecraft:scatter_feature"> minecraft:scatter_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:search_feature"> minecraft:search_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:single_block_feature"> minecraft:single_block_feature</a> </tr> </td>
@@ -18,6 +24,7 @@
 <tr> <td> <a href="#minecraft:structure_template_feature"> minecraft:structure_template_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:underwater_cave_carver_feature"> minecraft:underwater_cave_carver_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:tree_feature"> minecraft:tree_feature</a> </tr> </td>
+<tr> <td> <a href="#minecraft:vegetation_patch_feature"> minecraft:vegetation_patch_feature</a> </tr> </td>
 <tr> <td> <a href="#minecraft:weighted_random_feature"> minecraft:weighted_random_feature</a> </tr> </td>
 <tr> <th><a href="#Attaching features">Attaching features</a></th> </tr>
 <tr> <th><a href="#Feature rules">Feature rules</a></th> </tr>
@@ -96,6 +103,26 @@ Example use: Scattering fruit throughout the canopy of a tree.<br / ><textarea r
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
+<h1><p id="minecraft:beards_and_shavers">minecraft:beards_and_shavers</p></h1>
+
+'minecraft:beards_and_shavers' will build a 'beard' or 'shave' out space so as to provide a clear space for a feature to place.</br>Succeeds if: a beard/shave is made (this should always happen).</br>Fails if: will always return placement pos, but interior feature placement not guaranteed.</br><h2></h2>
+Example use: provides an area for interior structure placement<br / ><textarea readonly="true" cols="70" rows="14">
+{"code:beards_and_shavers": {
+          "description": {
+            "identifier": "..."
+          },
+          "places_feature": "badger:feature_that_places_a_structure",
+          "bounding_box_min": [ -2, 0, -2 ],
+          "bounding_box_max": [ 2, 8, 2 ],
+          "y_delta": 2.0,
+          "surface_block_type": "minecraft:grass",
+          "subsurface_block_type": "minecraft:dirt",
+          "beard_raggedness_min": 0.1,
+          "beard_raggedness_max": 0.3
+        }}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
 <h1><p id="minecraft:cave_carver_feature">minecraft:cave_carver_feature</p></h1>
 
 'minecraft:cave_carver_feature' carves a cave through the world in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will also only work when placed specifically in the pass "pregeneration_pass".</br><h2></h2>
@@ -113,10 +140,25 @@ Example use: Carve caves normally.<br / ><textarea readonly="true" cols="70" row
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
+<h1><p id="minecraft:conditional_list">minecraft:conditional_list</p></h1>
+
+'minecraft:conditional_list' Places the first suitable feature within a collection.</br>These conditional features will be evaluated in order.</br>Succeeds if: A condition is successfully resolved.</br>Fails if: No condition is successfully resolved.</br><h2></h2>
+Example use: assigning a feature to an expression<br / ><textarea readonly="true" cols="65" rows="9">
+"conditional_features" : [
+            { 
+              "places_feature" : "badger:some_feature_or_other",
+              "condition" : "query.check_some_block_property(),
+            },
+          ],
+          "early_out_scheme": "placement_success"
+        
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
 <h1><p id="minecraft:growing_plant_feature">minecraft:growing_plant_feature</p></h1>
 
 'minecraft:growing_plant_feature' places a growing plant in the world. A growing plant is a column that is anchored either to the ceiling or the floor, based on its growth direction.</br>The growing plant has a body and a head, where the head is the tip of the plant, and the body consists of the remainder blocks.</br>This feature can be used to define growing plants with variable body and head blocks, e.g. Cave Vines.</br><h2></h2>
-Example use: Defining a growing plant feature with variable body and head blocks and height distribution.<br / ><textarea readonly="true" cols="53" rows="24">
+Example use: Defining a growing plant feature with variable body and head blocks and height distribution.<br / ><textarea readonly="true" cols="53" rows="25">
 {
   "format_version": "1.16.0",
   "minecraft:growing_plant_feature": {
@@ -124,12 +166,12 @@ Example use: Defining a growing plant feature with variable body and head blocks
       "identifier": "minecraft:cave_vine_feature"
     },
     "height_distribution":  [
-      ["math.random_integer(1, 12)", 2],
-      [1, 3],
-      ["math.random_integer(1, 6)", 10]
+      [{"range_min": 1, "range_max": 13}, 2],
+      [{"range_min": 1, "range_max": 2}, 3],
+      [{"range_min": 1, "range_max": 7}, 10]
     ],
     "growth_direction": "DOWN",
-    "age" : "math.random_integer(17, 25)",
+    "age" : {"range_min": 17, "range_max": 26},
     "body_blocks" : [
       ["minecraft:cave_vines", 4],
       ["minecraft:cave_vines_body_with_berries", 1 ]
@@ -137,7 +179,8 @@ Example use: Defining a growing plant feature with variable body and head blocks
     "head_blocks" : [
       ["minecraft:cave_vines", 4],
       ["minecraft:cave_vines_head_with_berries", 1 ]
-    ]
+    ],
+  "allow_water": true
   }
 }
 </textarea> </br>
@@ -160,23 +203,155 @@ Example use: Carve nether caves normally.<br / ><textarea readonly="true" cols="
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
+<h1><p id="minecraft:multiface_feature">minecraft:multiface_feature</p></h1>
+
+'minecraft:multiface_feature' places one or a few multiface blocks on floors/walls/ceilings. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if this feature can be placed on them based on the list provided in the 'can_place_on' field. If no 'can_replace_on' field is specified, the 'place_block' block can be placed on any existing block.</br>This feature will also try to spread the 'place_block' block around the location in world the feature is placed.</br>Succeeds if: At least one block is successfully placed.</br>Fails if: All block placements fail.</br><h2></h2>
+Example use: Blue vines in caves.<br / ><textarea readonly="true" cols="49" rows="18">
+{
+  "format_version": 1.13.0,
+  "minecraft:multiface_feature": {
+    "description": {
+      "identifier": "example:blue_vines_feature"
+    },
+    "places_block": "example:blue_vine",
+    "search_range": 64,
+  "can_place_on_floor": true,
+  "can_place_on_ceiling": true,
+  "can_place_on_wall": true,
+  "chance_of_spreading": 0.5,
+    "can_place_on": [
+      "minecraft:stone"
+    ]
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:geode_feature">minecraft:geode_feature</p></h1>
+
+'minecraft:geode_feature' generates a rock formation to simulate a geode. Each layer of, and block within, the geode can be replaced. Succeeds if: At least one block within the geode is placed.</br>Fails if: All blocks within the geode fail to be placed.</br><h2></h2>
+Example use: Diamond geodes with emerald blocks inside and obsidian on the outside.<br / ><textarea readonly="true" cols="56" rows="32">
+{
+  "format_version": "1.13.0",
+  "minecraft:geode_feature": {
+    "description": {
+      "identifier": "minecraft:diamond_geode_feature"
+    },
+    "filler": "minecraft:air",
+    "inner_layer": "minecraft:diamond_block",
+    "alternate_inner_layer": "minecraft:emerald_block",
+    "middle_layer": "minecraft:calcite",
+    "outer_layer": "minecraft:obsidian",
+    "inner_placements": [
+      {
+        "name": "minecraft:amethyst_cluster",
+        "states": {
+          "amethyst_cluster_type": "small"
+        }
+      }
+    ],
+    "min_outer_wall_distance": 4,
+    "max_outer_wall_distance": 7,
+    "min_distribution_points": 3,
+    "max_distribution_points": 5,
+    "min_point_offset": 1,
+    "max_point_offset": 3,
+    "max_radius": 16,
+    "crack_point_offset": 2.0,
+    "generate_crack_chance": 0.95,
+    "base_crack_size": 2.0,
+    "noise_multiplier": 0.025,
+    "use_potential_placements_chance": 0.35,
+    "use_alternate_layer0_chance": 0.083,
+    "placements_require_layer0_alternate": true,
+  "invalid_blocks_threshold": 1
+  }
+}
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
 <h1><p id="minecraft:ore_feature">minecraft:ore_feature</p></h1>
 
-'minecraft:ore_feature' places a vein of blocks to simulate ore deposits. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if they can be replaced by the new ore block based on the list provided in the 'may_replace' field. If no 'may_replace' field is specified, the ore block can replace any existing block.</br>Succeeds if: At least one ore block is successfully placed.</br>Fails if: All ore block placements fail.</br><h2></h2>
-Example use: Oil deposits in the sand.<br / ><textarea readonly="true" cols="50" rows="14">
+'minecraft:ore_feature' places a vein of blocks to simulate ore deposits. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if they can be replaced by the new ore block based on the list provided in the 'may_replace' field of a 'replace_rules' entry. If no 'may_replace' field is specified in a 'replace_rule' entry, the ore block can replace any existing block.</br>Succeeds if: At least one ore block is successfully placed.</br>Fails if: All ore block placements fail.</br><h2></h2>
+Example use: Malachite ore in different materials.<br / ><textarea readonly="true" cols="56" rows="30">
+{
+  "format_version": 1.13.0,
+  "minecraft:ore_feature": {
+    "description": {
+      "identifier": "example:malachite_ore_feature"
+    },
+  "count": 12,
+  "replace_rules": [
+    {
+      "places_block": "example:malachite_ore",
+      "may_replace": [
+        "minecraft:stone"
+      ]
+    },
+    {
+      "places_block": "example:granite_malachite_ore",
+      "may_replace": [
+        "minecraft:granite"
+      ]
+    },
+    {
+      "places_block": "example:andesite_malachite_ore",
+      "may_replace": [
+        "minecraft:andesite"
+      ]
+    }
+  ]
+  }
+}
+</textarea> </br>
+Example use: Oil deposits in the sand.<br / ><textarea readonly="true" cols="50" rows="18">
 {
   "format_version": 1.13.0,
   "minecraft:ore_feature": {
     "description": {
       "identifier": "example:oil_deposit_feature"
     },
-    "places_block": "example:oil_block",
-    "count": 12,
-    "may_replace": [
-      "minecraft:sand"
-    ]
+  "count": 12,
+  "replace_rules": [
+    {
+      "places_block": "example:oil_block",
+      "may_replace": [
+        "minecraft:sand"
+      ]
+    }
+  ]
   }
 }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:rect_layout">minecraft:rect_layout</p></h1>
+
+'minecraft:rect_layout' scans the surface of a Chunk, calling place() on the surface of each block column.</br>Succeeds if: A Feature is successfully placed within a Chunk.</br>Fails if: No Feature could be placed within a Chunk.</br><h2></h2>
+Example use: Scans the surface of a chunk and places a feature if able<br / ><textarea readonly="true" cols="46" rows="16">
+
+      {
+        "ratio_of_empty_space": 0.5,
+        "feature_areas":[
+          {
+            "feature": "badger:tree",
+            "area_dimensions": [Width,Height]
+          },
+          {
+            "feature": "badger:tree2",
+            "area_dimensions": [Width,Height]
+          }
+        ]
+      }
+    
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="minecraft:scan_surface">minecraft:scan_surface</p></h1>
+
+'minecraft:scan_surface' scans the surface of a Chunk, calling place() on the surface of each block column.</br>Succeeds if: A Feature was successfully placed during the scan.</br>Fails if: No Feature was placed during the course of the scan.</br><h2></h2>
+Example use: Scans the surface of a chunk and places a feature if able<br / ><textarea readonly="true" cols="50" rows="2">
+{"scan_surface_feature": "example:apple_feature"}
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -318,6 +493,10 @@ Example use: Carve caves normally.<br / ><textarea readonly="true" cols="70" row
 
 Feature type 'minecraft:tree_feature' has not yet been documented.</br><a href="#Index">Back to top</a><br><br>
 
+<h1><p id="minecraft:vegetation_patch_feature">minecraft:vegetation_patch_feature</p></h1>
+
+Feature type 'minecraft:vegetation_patch_feature' has not yet been documented.</br><a href="#Index">Back to top</a><br><br>
+
 <h1><p id="minecraft:weighted_random_feature">minecraft:weighted_random_feature</p></h1>
 
 'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.</br>Succeeds if: The selected feature is placed.</br>Fails if: The selected feature fails to be placed.</br><h2></h2>
@@ -366,6 +545,31 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
               feature_reference "<any array element>" : opt
           }
       }
+      object "minecraft:beards_and_shavers" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+          feature_reference "places_feature" // Named reference of feature to be placed
+          array "bounding_box_min" // Dimensions of the Bounding Box
+          {
+              float "[0..0]"
+              float "[1..1]"
+              float "[2..2]"
+          }
+          array "bounding_box_max" // Dimensions of the Bounding Box
+          {
+              float "[0..0]"
+              float "[1..1]"
+              float "[2..2]"
+          }
+          float "y_delta" // Y Delta for BAS
+           "surface_block_type" // Reference to the block to be placed.
+           "subsurface_block_type" // Reference to the block to be placed.
+          float "beard_raggedness_min" : opt // Y Delta for BAS
+          float "beard_raggedness_max" : opt // Y Delta for BAS
+      }
       object "minecraft:cave_carver_feature" : opt
       {
           object "description"
@@ -374,6 +578,22 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
           }
           block_reference "fill_with" : opt // Reference to the block to fill the cave with.
           molang "width_modifier" : opt // How many blocks to increase the cave radius by, from the center point of the cave.
+      }
+      object "minecraft:conditional_list" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+          array "conditional_features" // Array of Features, and their associated Conditions, for attempted placement. These features will be evaluated as ordered.
+          {
+              object "<any array element>" : opt
+              {
+                  feature_reference "places_feature" // Feature to be placed.
+                  molang "condition" // Condition for placing associated Feature
+              }
+          }
+          enumerated_value "early_out_scheme"<"condition_success", "placement_success"> : opt // Denote whether placement should end on first successful placement or first passed condition.
       }
       object "minecraft:growing_plant_feature" : opt
       {
@@ -385,12 +605,12 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
           {
               array "<any array element>"[2] // Collection of weighted heights that placement will select from.
               {
-                  molang "[0..0]" // Plant height.
+                   "[0..0]" // Plant height.
                   float "[1..1]" // Weight used in random selection. Value is relative to other weights in the collection.
               }
           }
           string "growth_direction" // Direction that the plant grows towards. Valid values: UP and DOWN
-          molang "age" // Age of the head of the plant.
+           "age" : opt // Age of the head of the plant.
           array "body_blocks"[1,*]
           {
               array "<any array element>"[2] // Collection of weighted block descriptor that placement will select from for the body of the plant.
@@ -407,6 +627,7 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
                   float "[1..1]" // Weight used in random selection. Value is relative to other weights in the collection.
               }
           }
+          bool "allow_water" : opt // Plant blocks can be placed in water.
       }
       object "minecraft:hell_cave_carver_feature" : opt
       {
@@ -417,6 +638,54 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
           block_reference "fill_with" : opt // Reference to the block to fill the cave with.
           molang "width_modifier" : opt // How many blocks to increase the cave radius by, from the center point of the cave.
       }
+      object "minecraft:multiface_feature" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+           "places_block" // Reference to the block to be placed.
+          int "search_range"<1-64> // How far, in blocks, this feature can search for a valid position to place.
+          bool "can_place_on_floor" // Can this feature be placed on the ground (top face of a block)?
+          bool "can_place_on_ceiling" // Can this feature be placed on the ceiling (bottom face of a block)?
+          bool "can_place_on_wall" // Can this feature be placed on the wall (side faces of a block)?
+          float "chance_of_spreading"<0.000000-1.000000> // For each block placed by this feature, how likely will that block spread to another?
+          array "can_place_on"[1,*] : opt
+          {
+               "<any array element>" : opt // A list of blocks that the block in this feature can be placed on. Omit this field to allow any block to be placed on.
+          }
+      }
+      object "minecraft:geode_feature" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+           "filler" // The block to fill the inside of the geode.
+           "inner_layer" // The block that forms the inside layer of the geode shell.
+           "alternate_inner_layer" // The block that has a chance of generating instead of inner_layer.
+           "middle_layer" // The block that forms the middle layer of the geode shell.
+           "outer_layer" // The block that forms the outer shell of the geode.
+          array "inner_placements"[1,*] : opt
+          {
+               "<any array element>" // A list of blocks that may be replaced during placement. Omit this field to allow any block to be replaced.
+          }
+          int "min_outer_wall_distance"<1-10> // The minimum distance each distribution point must be from the outer wall. [0,10]
+          int "max_outer_wall_distance"<1-20> // The maximum distance each distribution point can be from the outer wall. [0,20]
+          int "min_distribution_points"<1-10> // The minimum number of points inside the distance field that can get generated. The distance field is the area consisting of all points with a minimum distance to all destribution points. [0,10]
+          int "max_distribution_points"<1-20> // The maximum number of points inside the distance field that can get generated. The distance field is the area consisting of all points with a minimum distance to all destribution points. [0,20]
+          int "min_point_offset"<0-10> // The lowest possible value of random offset applied to the position of each distribution point. [0,10]
+          int "max_point_offset"<0-10> // The highest possible value of random offset applied to the position of each distribution point. [0,10]
+          int "max_radius" // The maximum possible radius of the geode generated.
+          int "crack_point_offset"<0-10> // An offset applied to each distribution point that forms the geode crack opening. [0,10]
+          float "generate_crack_chance"<0.000000-1.000000> // The likelihood of a geode generating with a crack in its shell. [0,1]
+          float "base_crack_size"<0.000000-5.000000> // How large the crack opening of the geode should be when generated. [0,5]
+          float "noise_multiplier" // A multiplier applied to the noise that is applied to the distribution points within the geode. Higher = more noisy.
+          float "use_potential_placements_chance"<0.000000-1.000000> // The likelihood that a special block will be placed on the inside of the geode. [0,1]
+          float "use_alternate_layer0_chance"<0.000000-1.000000> // The likelihood that a block in the innermost layer of the geode will be replaced with an alternate option. [0,1]
+          bool "placements_require_layer0_alternate" // If true, the potential placement block will only be placed on the alternate layer0 blocks that get placed. Potential placement blocks are blocks that depend on the existance of another block to be placed. The latter are the layer0 alternate blocks.
+          int "invalid_blocks_threshold" // The threshold of invalid blocks for a geode to have a distribution point in before it aborts generation entirely.
+      }
       object "minecraft:ore_feature" : opt
       {
           object "description"
@@ -424,11 +693,45 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
               string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
           }
           int "count"<1-*> // The number of blocks to be placed.
-           "places_block" // Reference to the block to be placed.
-          array "may_replace"[1,*] : opt
+          array "replace_rules"[1,*] : opt
           {
-               "<any array element>" : opt // A list of blocks that may be replaced during placement. Omit this field to allow any block to be replaced.
+              object "<any array element>" // Collection of replace rules that will be checked in order of definition. If a rule is resolved, the rest will not be resolved for that block position.
+              {
+                   "places_block" // Reference to the block to be placed.
+                  array "may_replace"[1,*] : opt
+                  {
+                       "<any array element>" : opt // A list of blocks that may be replaced during placement. Omit this field to allow any block to be replaced.
+                  }
+              }
           }
+      }
+      object "minecraft:rect_layout" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+          float "ratio_of_empty_space" : opt // Ratio of a Chunk to be filled with empty space rather than features.
+          array "feature_areas"[1,4294967295]
+          {
+              object "<any array element>" : opt
+              {
+                  feature_reference "feature" // Feature to be placed.
+                  array "area_dimensions" // Dimensions (size) of the associated Feature.
+                  {
+                      int "[0..0]"
+                      int "[1..1]"
+                  }
+              }
+          }
+      }
+      object "minecraft:scan_surface" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+          feature_reference "scan_surface_feature" // Named reference of feature to be placed
       }
       object "minecraft:scatter_feature" : opt
       {
@@ -1006,6 +1309,27 @@ Here is the complete feature schema<br / ><textarea readonly="true" cols="192" r
                   }
               }
           }
+      }
+      object "minecraft:vegetation_patch_feature" : opt
+      {
+          object "description"
+          {
+              string "identifier" // The name of this feature in the form 'namespace_name:feature_name'. 'feature_name' must match the filename.
+          }
+          array "replaceable_blocks"
+          {
+               "<any array element>" : opt
+          }
+           "ground_block"
+          feature_reference "vegetation_feature"
+          string "surface" : opt
+           "depth"
+          float "extra_deep_block_chance" : opt
+          int "vertical_range"
+          float "vegetation_chance" : opt
+           "horizontal_radius"
+          float "extra_edge_column_chance"<0.000000-*> : opt
+          bool "waterlogged" : opt
       }
       object "minecraft:weighted_random_feature" : opt
       {

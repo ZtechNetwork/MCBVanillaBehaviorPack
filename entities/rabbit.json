@@ -1,5 +1,5 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.17.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:rabbit",
@@ -87,10 +87,12 @@
     },
 
     "components": {
-      "minecraft:type_family": {
-        "family":["rabbit", "mob"]
+      "minecraft:is_hidden_when_invisible": {
       },
-      
+      "minecraft:type_family": {
+        "family":["rabbit", "lightweight", "mob"]
+      },
+
       "minecraft:breathable": {
         "total_supply": 15,
         "suffocate_time": 0
@@ -185,7 +187,7 @@
       "minecraft:behavior.raid_garden": {
         "priority": 5,
         "blocks": [
-          "carrots"
+          "minecraft:carrots"
         ],
         "search_range": 16,
         "goal_radius": 0.8
@@ -199,13 +201,15 @@
       "minecraft:behavior.look_at_player": {
         "priority": 11
       },
-	    "minecraft:physics": {
+        "minecraft:physics": {
       },
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
       },
       "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:block_climber": {
       }
     },
 

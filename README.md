@@ -6,8 +6,41 @@
 From v1.16 and on, changelogs shown here will only go back two major versions to prevent a long list. Along with this, new releases will contain changelogs on the [releases](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/releases) page.
 
 ## Changelogs
-### v1.16.220
+### v1.17.10
+#### Changes
+- Updated documentation for `DisplayNameItemComponent`.
+- Updated documentation for `BlockUnwalkableComponent`.
+- Incoming client-sync properties for newly seen types will properly register with client-side Actor Property Manager groups.
+- Added recipes for candles.
 
+#### MoLang
+- `query.wing_flap_position` now works with the Ender Dragon.
+- Added `query.show_bottom` - a query for determining whether or not the entity's bottom is rendered.
+- Added `query.death_time` - a query for determining the elapsed ticks since a mob started dying.
+- Added `math.min_angle` - a math expression for minimizing the angle magnitude (in degrees) into the range [-180, 180].
+- Fixed experimental `query.target` to work on client-side queries.
+- View the official changelog [here](https://feedback.minecraft.net/hc/en-us/articles/4404454406285-Minecraft-1-17-10-Bedrock-).
+
+### v1.17.0
+#### Changes & Fixes
+- Added a MoLang query to get default bone pivots.
+- Updated MoLang query to return normalized item use time remaining based off given parameters.
+- Added a new field `transform_to_item` to the `minecraft:ageable` component. If the field is filled with an item name, the item will be given back when any of `feed_items` are used. Similar to `transform_to_item` in the `minecraft:breedable` component.
+- Added a new optional flag `use_simplified_breeding` to `minecraft:genetics` component. When this flag is set to true, the offspring never inherits hidden alleles of parents as main alleles and main as hidden. This allows to implement simple breeding logic easier.
+- Fixed `query.is_in_ui` so that it is available to use when a data-driven mob is rendering in the UI (`query.is_in_ui` returns true when the mob is rendering in the UI, such as in the inventory window).
+- The `ImpactDamageSubcomponent` once again only prevents damage from being dealt to fire immune mobs if the `catchFire` field is true and the projectile is on fire.
+- The `has_equipment` filter now properly evaluates custom entity spawn eggs.
+- Added new recipes and items.
+
+#### Volumes
+- Create volumes in your world: simply create a `volumes` folder in a saved world and put json files in there - one json file per volume. More information can be found in the Behavior Pack documentation.
+- Can be enabled using the "Upcoming Creator Features" experimental feature toggle.
+- Currently, you can attach a fog - Minecraft or your own custom fog - to a volume. When the player enters the volume, the fog will take effect.
+- Added `AddVolumeEntityPacket` that contains information of a volume entity including its net ID and NBT containing information about the volume's definition and components, which will be added to the client's registry.
+- Added `RemoveVolumeEntityPacket` that contains a volume entity's net ID to remove it from the client's registry.
+- View the official changelog [here](https://feedback.minecraft.net/hc/en-us/articles/4402427632013-Minecraft-Caves-Cliffs-Part-I-1-17-0-Bedrock-).
+
+### v1.16.220
 #### Changes and Fixes
 - Renamed all references of `Actor` to `Entity`.
 - Renamed `BlockPos` to `BlockLocation`.

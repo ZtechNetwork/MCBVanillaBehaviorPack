@@ -1,4 +1,4 @@
-<h1>FOGS DOCUMENTATION </br>Version: 1.16.220.2</h1>
+<h1>FOGS DOCUMENTATION </br>Version: 1.17.10.4</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Fog Definitions">Fog Definitions</a></th> </tr>
@@ -59,7 +59,7 @@ The command layer is all the settings set by the "/fog" command and evaluated it
 
 <h2>Biomes</h2>
 
-Fog settings can be determined for the biomes with "biomes_client.json". In each biome entry, you can have a variable called "fog_identifier" and set a name that matches the fog setting you want to use with this biome.</br></br>The "default" entry can also be set this way and will be used underneath the biomes entries in the active fog stack.So, a biome's fog setting does not completely replace the default's setting, but instead the biome is read on top of the default as described in the "Active Fog Stack" section.</br><a href="#Index">Back to top</a><br><br>
+Fog settings can be determined for the biomes with "biomes_client.json". In each biome entry, you can have a variable called "fog_identifier" and set a name that matches the fog setting you want to use with this biome.</br></br>The "default" entry can also be set this way and will be used underneath the biomes entries in the active fog stack.So, a biome's fog setting does not completely replace the default's setting, but instead the biome is read on top of the default as described in the "Active Fog Stack" section.</br></br>The "default" biome entry has the tag "remove_all_prior_fog" that is defaulted to "false".</br>While set to false (or if the tag is not entered), missing fog definitions will be filled in by any lower resource pack that does have the definition filled.</br>When set to true, all previous fog definitions in resource packs before the current pack that enabled it will be cleared, effectively making the current resource pack the new starting point for all fogs.</br></br>In each biome (including "default") there is the tag "inherit_from_prior_fog" that is also defaulted to "false".</br>While set to false (or if the tag is not entered), the current resource pack's biome will overwrite the currently stored "fog_identifier" tag with its own.</br>When set to true, the "fog_identifier" tags from all matching biomes will be added together and create a new merged fog definition for that biome.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="Fog Command">Fog Command</p></h1>
 
