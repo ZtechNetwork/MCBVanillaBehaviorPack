@@ -1,4 +1,4 @@
-<h1>BLOCKS DOCUMENTATION </br>Version: 1.17.10.4</h1>
+<h1>BLOCKS DOCUMENTATION </br>Version: 1.18.0.2</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Blocks">Blocks</a></th> </tr>
@@ -42,16 +42,22 @@
 <td style="border-style:solid; border-width:3; padding:7px">Property describing the breathability of this block and whether it is treated as a solid or as air.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:creative_category</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies the creative group for the block.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:destroy_time</td>
 <td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
 <td style="border-style:solid; border-width:3; padding:7px">0.0</td>
-<td style="border-style:solid; border-width:3; padding:7px">Sets the destroy time property for the block. Greater numbers result in greater mining times.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Sets the destroy time property for the block. Greater numbers result in greater mining times. Time is measured in seconds with base equipment.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:display_name</td>
 <td style="border-style:solid; border-width:3; padding:7px">String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Specifies the display name id for the block.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies the language file key that maps to what text will be displayed when you hover over the block.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:entity_collision</td>
@@ -90,13 +96,13 @@
 <td style="border-style:solid; border-width:2; padding:8px">burn_odds</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">0</td>
-<td style="border-style:solid; border-width:2; padding:8px">How likely the block will be destroyed by flames when on fire.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">How likely the block will be destroyed by flames when on fire. Value must be greater than or equal to 0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">flame_odds</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">0</td>
-<td style="border-style:solid; border-width:2; padding:8px">How likely the block will catch flame when next to a fire.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">How likely the block will catch flame when next to a fire. Value must be greater than or equal to 0.</br></td>
 </tr>
 </table>
 </td>
@@ -111,13 +117,19 @@
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:geometry</td>
 <td style="border-style:solid; border-width:3; padding:7px">String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">The geometry definition name to use.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">The geometry description identifier to use, this identifier must match an existing geometry identifier in any of the currently loaded resource packs.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:immovable</td>
 <td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">An Immovable block cannot be pushed by pistons</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:loot</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">The path to the loot table, relative to the behavior pack.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:map_color</td>
@@ -136,6 +148,12 @@
 <td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">Blocks with those components won't stick to stickyPistons</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:part_visibility</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Maps bone names in a geometry file to a condition that turns their rendering on/off. The condition should be a Molang query that uses block properties to determine true/falseSupported queries include 'has_block_property', 'block_property', and other queries that can evaluate without knowledge of the block's in-game positional or player affected data.</br>Experimental toggles required: Upcoming Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:pick_collision</td>
@@ -295,9 +313,9 @@ List of conditions where the block can be placed/survive</br><h4></h4>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:unit_cube</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Specifies that a unit cube is to be used with tessellation.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies that a unit cube is to be used with tessellation.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:unwalkable</td>
@@ -587,7 +605,7 @@ Event responses for block trigger components.</br><h2></h2>
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">property</td>
-<td style="border-style:solid; border-width:2; padding:8px">MoLang</td>
+<td style="border-style:solid; border-width:2; padding:8px">Molang</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
 <td style="border-style:solid; border-width:2; padding:8px">Block property to set on the block.</br></td>
 </tr>

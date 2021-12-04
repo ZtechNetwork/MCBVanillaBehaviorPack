@@ -46,7 +46,7 @@
             "translate": [0, 20, 0],
             "scale": [1.7, 1.7, 1.7]
           },
-          "skin_list":[
+          "skin_list": [
             {
               "variant": 0
             },
@@ -106,12 +106,27 @@
             },
             {
               "variant": 19
+            },
+            {
+              "variant": 20
+            },
+            {
+              "variant": 21
+            },
+            {
+              "variant": 22
+            },
+            {
+              "variant": 23
+            },
+            {
+              "variant": 24
             }
           ]
         }
       },
       "minecraft:nameable": {
-        "always_show": true,
+        "always_show": false,
         "allow_name_tag_renaming": false
       },
       "minecraft:physics": {

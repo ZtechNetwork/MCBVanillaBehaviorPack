@@ -4,7 +4,7 @@
     "description": {
       "identifier": "minecraft:xp_orb",
       "is_spawnable": false,
-      "is_summonable": false,
+      "is_summonable": true,
       "is_experimental": false
     },
     "components": {

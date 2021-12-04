@@ -19,7 +19,8 @@
           "grass",
           "dirt",
           "podzol",
-          "moss_block"
+          "moss_block",
+          "mycelium"
         ]
       }
     }

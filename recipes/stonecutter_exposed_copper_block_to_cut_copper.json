@@ -14,7 +14,8 @@
       }
     ],
     "result": {
-      "item": "minecraft:exposed_cut_copper"
+      "item": "minecraft:exposed_cut_copper",
+      "count": 4
     }
   }
   

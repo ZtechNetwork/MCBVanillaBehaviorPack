@@ -31,8 +31,8 @@
 
       "minecraft:slime_medium": {
         "minecraft:collision_box": {
-          "width": 0.78,
-          "height": 0.78
+          "width": 1.04,
+          "height": 1.02
         },
         "minecraft:health": {
           "value": 4,
@@ -148,9 +148,18 @@
         "entity_types": [
           {
             "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "value": "player"
+              "any_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "irongolem"
+                }
+              ]
             },
             "max_dist": 16
           }

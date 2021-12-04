@@ -49,6 +49,9 @@
         }
       }
     },
+    "minecraft:raid_persistence": {
+      "minecraft:persistent": {}
+    },
     "components": {
       "minecraft:is_hidden_when_invisible": {
       },
@@ -169,15 +172,32 @@
       "minecraft:spawn_for_raid": {
         "add": {
           "component_groups": [
-            "minecraft:raid_configuration"
+            "minecraft:raid_configuration",
+            "minecraft:raid_persistence"
           ]
         }
       },
       "minecraft:start_celebrating": { // Event must be called exactly this for village to fire it when a raid is lost
-        "add": { "component_groups": [ "minecraft:celebrate" ] }
+        "sequence": [
+          {
+            "add": { "component_groups": [ "minecraft:celebrate" ] }
+          },
+          {
+            "filters": { "test": "has_nametag", "value": false },
+            "remove": { "component_groups": [ "minecraft:raid_persistence" ] }
+          }
+        ]
       },
       "minecraft:stop_celebrating": {
         "remove": { "component_groups": [ "minecraft:celebrate" ] }
+      },
+      "minecraft:raid_expired": {
+        "sequence": [
+          {
+            "filters": { "test": "has_nametag", "value": false },
+            "remove": { "component_groups": [ "minecraft:raid_persistence" ] }
+          }
+        ]
       }
     }
   }

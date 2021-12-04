@@ -81,6 +81,9 @@
                                 "min": 0.15,
                                 "max": 0.95
                             }
+                        },
+                        {
+                            "function": "enchant_randomly"
                         }
                     ],
                     "name": "minecraft:diamond_pickaxe"

@@ -121,6 +121,14 @@
           "event_name": "ambient.in.raid"
         }
       },
+      "minecraft:raid_persistence": {
+        "minecraft:persistent": {}
+      },
+      "minecraft:raid_despawn": {
+        "minecraft:despawn": {
+          "despawn_from_distance": {}
+        }
+      },
       "minecraft:illager_squad_captain": {
         "minecraft:is_illager_captain": {
         },
@@ -374,7 +382,9 @@
         "add": {
           "component_groups": [
             "minecraft:default_targeting",
-            "minecraft:raid_configuration"
+            "minecraft:raid_configuration",
+            "minecraft:raid_persistence",
+            "minecraft:raid_despawn"
           ]
         }
       },
@@ -410,10 +420,26 @@
         }
       },
       "minecraft:start_celebrating": { // Event must be called exactly this for village to fire it when a raid is lost
-        "add": { "component_groups": [ "minecraft:celebrate" ] }
+        "sequence": [
+          {
+            "add": { "component_groups": [ "minecraft:celebrate" ] }
+          },
+          {
+            "filters": { "test": "has_nametag", "value": false },
+            "remove": { "component_groups": [ "minecraft:raid_persistence" ] }
+          }
+        ]
       },
       "minecraft:stop_celebrating": {
         "remove": { "component_groups": [ "minecraft:celebrate" ] }
+      },
+      "minecraft:raid_expired": {
+        "sequence": [
+          {
+            "filters": { "test": "has_nametag", "value": false },
+            "remove": { "component_groups": [ "minecraft:raid_persistence" ] }
+          }
+        ]
       }
     }
   }

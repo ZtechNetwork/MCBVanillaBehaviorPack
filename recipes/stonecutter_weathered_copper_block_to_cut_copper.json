@@ -14,7 +14,8 @@
       }
     ],
     "result": {
-      "item": "minecraft:weathered_cut_copper"
+      "item": "minecraft:weathered_cut_copper",
+      "count": 4
     }
   }
   

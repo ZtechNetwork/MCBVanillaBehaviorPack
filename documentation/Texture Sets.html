@@ -1,19 +1,25 @@
-<h1>TEXTURE SETS DOCUMENTATION </br>Version: 1.17.10.4</h1>
+<h1>TEXTURE SETS DOCUMENTATION </br>Version: 1.18.0.2</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Texture Sets">Texture Sets</a></th> </tr>
+<tr> <td> <a href="#Texture Set Json Schema"> Texture Set Json Schema</a> </tr> </td>
 <tr> <td> <a href="#Layers"> Layers</a> </tr> </td>
 <tr> <td> <a href="#Specifying uniform values"> Specifying uniform values</a> </tr> </td>
 <tr> <td> <a href="#Examples of *.texture_set.json files"> Examples of *.texture_set.json files</a> </tr> </td>
 <tr> <td> <a href="#Invalid *.texture_set.json"> Invalid *.texture_set.json</a> </tr> </td>
 <tr> <td> <a href="#Resource Stack Behaviour"> Resource Stack Behaviour</a> </tr> </td>
 <tr> <td> <a href="#Referencing Texture Resources"> Referencing Texture Resources</a> </tr> </td>
-<tr> <td> <a href="#Texture Set Json Schema"> Texture Set Json Schema</a> </tr> </td>
 </table>
 <a href="#Index">Back to top</a>
 <h1><p id="Texture Sets">Texture Sets</p></h1>
 
-Minecraft supports a Physically Based Rendering (PBR) color pipeline (e.g. used for Ray Tracing). 		This uses more texture data than simply 'color' to enable richer, more realistic visuals. 		With the PBR approach, you can have layers for different specular reflections, emissivity, normal maps, etc. which goes beyond the Classic color pipeline for Vanilla Minecraft. 		Texture Sets have been added as the feature for defining multiple PBR layers for a texture resource. Texture sets are data driven from json files.</br><h1><p id="Layers">Layers</p></h1>
+Minecraft supports a Physically Based Rendering (PBR) color pipeline (e.g. used for Ray Tracing). 		This uses more texture data than simply 'color' to enable richer, more realistic visuals. 		With the PBR approach, you can have layers for different specular reflections, emissivity, normal maps, etc. which goes beyond the Classic color pipeline for Vanilla Minecraft. 		Texture Sets have been added as the feature for defining multiple PBR layers for a texture resource. Texture sets are data driven from json files.</br><h1><p id="Texture Set Json Schema">Texture Set Json Schema</p></h1>
+
+<h2>Texture Set Json Schema</h2>
+
+```</br>--------</br>{</br>    version "format_version"</br>    object "minecraft:texture_set"</br>    {</br>        color "color" : opt // Fill RGBA channels of a textureset layer with the specified values in an array or hex string</br>        string "color" : opt // The texture name of a textureset layer</br>        string "normal" : opt // The texture name of a textureset layer</br>        string "heightmap" : opt // The texture name of a textureset layer</br>        color "metalness_emissive_roughness" : opt // Fill RGB channels of a textureset layer with the specified values in an array or hex string</br>        string "metalness_emissive_roughness" : opt // The texture name of a textureset layer</br>    }</br>}</br></br>----------</br>```</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Layers">Layers</p></h1>
 
 A texture_set.json file may specify several layers.</br>Layers are references to texture image resources. they can also be defined in .json as values for uniform solid values as an alternative to referencing texture images in a pack.</br></br><h2></h2>
 
@@ -93,12 +99,6 @@ If a Texture Set is invalid, we'll log a CONTENT_ERROR and the Texture Set will 
 <h1><p id="Referencing Texture Resources">Referencing Texture Resources</p></h1>
 
 The priority of file extensions, in case you have duplicate image references, is: .tga > .png > .jpg > .jpeg. For example: 			if grass.png and grass.tga both exist in the folder, grass.tga will be chosen. This also applies to other data driven files, like actor json referencing a texture resource.</br><a href="#Index">Back to top</a><br><br>
-
-<h1><p id="Texture Set Json Schema">Texture Set Json Schema</p></h1>
-
-<h2>Texture Set Json Schema</h2>
-
-```</br>--------</br>{</br>    version "format_version"</br>    object "minecraft:texture_set"</br>    {</br>        color "color" : opt // Fill RGBA channels of a textureset layer with the specified values in an array or hex string</br>        string "color" : opt // The texture name of a textureset layer</br>        string "normal" : opt // The texture name of a textureset layer</br>        string "heightmap" : opt // The texture name of a textureset layer</br>        color "metalness_emissive_roughness" : opt // Fill RGB channels of a textureset layer with the specified values in an array or hex string</br>        string "metalness_emissive_roughness" : opt // The texture name of a textureset layer</br>    }</br>}</br></br>----------</br>```</br><a href="#Index">Back to top</a><br><br>
 
 <br><br>
 
