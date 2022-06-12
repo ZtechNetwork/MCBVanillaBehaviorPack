@@ -96,7 +96,7 @@
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
         "can_pass_doors": true,
-        "can_open_doors": true,
+        "can_open_doors": false,
         "avoid_water": true
       },
       "minecraft:movement.basic": {
@@ -104,6 +104,9 @@
       "minecraft:jump.static": {
       },
       "minecraft:can_climb": {
+      },
+      "minecraft:home": {
+        "restriction_radius": 16
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -235,12 +238,13 @@
         ],
         "max_dist": 6
       },
-      "minecraft:behavior.restrict_open_door": {
-        "priority": 5
-      },
-      "minecraft:behavior.open_door": {
+      "minecraft:behavior.move_towards_home_restriction": {
         "priority": 6,
-        "close_door_after": true
+        "speed_multiplier": 0.6
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.6
       },
       "minecraft:behavior.look_at_player": {
         "priority": 8,
@@ -255,6 +259,8 @@
       "minecraft:pushable": {
         "is_pushable": true,
         "is_pushable_by_piston": true
+      },
+      "minecraft:nameable": {
       }
     },
     "events": {

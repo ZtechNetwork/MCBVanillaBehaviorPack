@@ -1,5 +1,5 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.18.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:goat",
@@ -364,6 +364,8 @@
         "soft_distance": 4,
         "hard_distance": 6,
         "max_distance": 10
+      },
+      "minecraft:balloonable": {
       },
       "minecraft:physics": {},
       "minecraft:pushable": {

@@ -68,7 +68,7 @@
           "update_interval_base": 60,
           "update_interval_variant": 40,
           "can_find_poi": false,
-          "can_migrate": false,
+          "can_migrate": true,
           "first_founding_reward": 0
         },
         "minecraft:behavior.move_to_village": {
@@ -153,6 +153,11 @@
                     "subject": "other",
                     "test": "is_family",
                     "value": "irongolem"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "wandering_trader"
                   }
                 ]
               },
@@ -278,7 +283,7 @@
         "table": "loot_tables/entities/ravager.json"
       },
       "minecraft:knockback_resistance": {
-        "value": 0.5
+        "value": 0.75
       },
       "minecraft:movement": {
         "value": 0.0

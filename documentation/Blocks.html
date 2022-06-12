@@ -1,4 +1,4 @@
-<h1>BLOCKS DOCUMENTATION </br>Version: 1.18.0.2</h1>
+<h1>BLOCKS DOCUMENTATION </br>Version: 1.19.0.5</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Blocks">Blocks</a></th> </tr>
@@ -18,10 +18,46 @@
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
 <tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default Value</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:block_light_absorption</td>
-<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
-<td style="border-style:solid; border-width:3; padding:7px">0</td>
-<td style="border-style:solid; border-width:3; padding:7px">The amount of light this block will absorb.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:aim_collision</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean / JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Describes the collision of the block for raycast and its outline. If set to false it disables the collision of the block with entities. An origin of [-8.0, 0.0, -8.0] with a size of [16, 16, 16] is a unit cube.</br>Experimental toggles required: Holiday Creator Features</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">origin</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[-8.0, 0.0, -8.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minimal position Bounds of the selection box. Origin is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">size</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[16.0, 16.0, 16.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">Size of each side of the selection box. Size is specified as [x, y, z]. Origin + size must be in the range (-8, 0, -8) to (8, 16, 8), inclusive</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:block_collision</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean / JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Describes the collision of the block with entities and actors. If set to false, it disables the collision of the block with entities. An origin of [-8.0, 0.0, -8.0] with a size of [16, 16, 16] is a unit cube.</br>Experimental toggles required: Holiday Creator Features</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">origin</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[-8.0, 0.0, -8.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minimal position Bounds of the collision box. Origin is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">size</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[16.0, 16.0, 16.0]</td>
+<td style="border-style:solid; border-width:2; padding:8px">Size of each side of the collision box. Size is specified as [x, y, z]. Origin + size must be in the range (-8, 0, -8) to (8, 16, 8), inclusive</br></td>
+</tr>
+</table>
+</td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:block_light_emission</td>
@@ -30,22 +66,44 @@
 <td style="border-style:solid; border-width:3; padding:7px">The amount of light this block will emit in a range [0.0, 1.0].</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:breakonpush</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">When pushed by a piston the block breaks</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:block_light_filter</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px">0</td>
+<td style="border-style:solid; border-width:3; padding:7px">The amount of light this block will filter out. Higher value means more light will be filtered out (0 - 15).</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:breathability</td>
 <td style="border-style:solid; border-width:3; padding:7px">Enumerator</td>
 <td style="border-style:solid; border-width:3; padding:7px">solid</td>
-<td style="border-style:solid; border-width:3; padding:7px">Property describing the breathability of this block and whether it is treated as a solid or as air.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">The breathing type of this block that affects the breathing state of mobs when they have their breathing points inside this block. Available values: solid, air</br>Experimental toggles required: Holiday Creator Features</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">minecraft:crafting_table</td>
+<td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">Describes the component of a custom crafting table. This component supports only "recipe_shaped" and "recipe_shapeless" typed recipes and not others like "recipe_furnace" or "recipe_brewing_mix". If there are two recipes for one item, the recipe book will pick the first that was parsed. If two input recipes are the same, crafting may assert and the resulting item may vary.</br>Experimental toggles required: Holiday Creator Features</br><h3><p id="crafting_tags">crafting_tags</p></h3>
+
+Defines the tags recipes should define to be crafted on this table. Limited to 64 tags. Each tag is limited to 64 characters.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="custom_description">custom_description</p></h3>
+
+Defines the language file key that maps what text will be displayed in the UI of this table. If not specified, the name of the block will be used.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:creative_category</td>
 <td style="border-style:solid; border-width:3; padding:7px">String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Specifies the creative group for the block.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies the menu category and group for the block, which determine where this block is placed in the inventory and crafting table container screens. If this component is omitted, the block will not appear in the inventory or crafting table container screens.</br>Experimental toggles required: Holiday Creator Features</br><h3><p id="category">category</p></h3>
+
+Determines which category this block will be placed under in the inventory and crafting table container screens. Options are "construction", "nature", "equipment", "items", and "none". If omitted or "none" is specified, the block will not appear in the inventory or crafting table container screens.</br><a href="#Index">Back to top</a><br><br>
+
+<h3><p id="group">group</p></h3>
+
+Specifies the language file key that maps to which expandable/collapsible group this block will be a part of within a category. If the string given can not be resolved as a loc string, then we will check if there is an existing group whose name matches the raw string. If this field is omitted, or there is no group whose name matches the loc string or the raw string, this block will be placed standalone in the given category.</br><a href="#Index">Back to top</a><br><br>
+
+</td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:destroy_time</td>
@@ -55,30 +113,9 @@
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:display_name</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">Localization String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Specifies the language file key that maps to what text will be displayed when you hover over the block.</br>Experimental toggles required: Holiday Creator Features</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:entity_collision</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px">false</td>
-<td style="border-style:solid; border-width:3; padding:7px">Can only be set to false, it disables the collision of the block with entities</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
-<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">origin</td>
-<td style="border-style:solid; border-width:2; padding:8px">Array</td>
-<td style="border-style:solid; border-width:2; padding:8px">[-8.0, 0.0, -8.0]</td>
-<td style="border-style:solid; border-width:2; padding:8px">Minimal position Bounds of the collision box</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">size</td>
-<td style="border-style:solid; border-width:2; padding:8px">Array</td>
-<td style="border-style:solid; border-width:2; padding:8px">[16.0, 16.0, 16.0]</td>
-<td style="border-style:solid; border-width:2; padding:8px">Size of each side of the box of the component</br></td>
-</tr>
-</table>
-</td>
+<td style="border-style:solid; border-width:3; padding:7px">Specifies the language file key that maps to what text will be displayed when you hover over the block. Key is limited to 256 characters.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:explosion_resistance</td>
@@ -110,44 +147,65 @@
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:friction</td>
 <td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
-<td style="border-style:solid; border-width:3; padding:7px">0.1</td>
-<td style="border-style:solid; border-width:3; padding:7px">Property describing the friction for this block. Friction effects an entities movements when it walks on the block.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">0.6</td>
+<td style="border-style:solid; border-width:3; padding:7px">Property describing the friction for this block in a range of [0.1, 1.0]. Friction affects an entity's movement speed when it travels on the block. Greater value results in less friction.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:geometry</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">Identifier String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
 <td style="border-style:solid; border-width:3; padding:7px">The geometry description identifier to use, this identifier must match an existing geometry identifier in any of the currently loaded resource packs.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:immovable</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">An Immovable block cannot be pushed by pistons</br></td>
-</tr>
-<tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:loot</td>
-<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">Path String</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">The path to the loot table, relative to the behavior pack.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">The path to the loot table, relative to the behavior pack. Path string is limited to 256 characters.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:map_color</td>
 <td style="border-style:solid; border-width:3; padding:7px">String</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">A color represented as a hex value. This will be the color rendered to a map.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">#RRGGBB</td>
+<td style="border-style:solid; border-width:3; padding:7px">Sets the color of the block when rendered to a map. The color is represented as a hex value in the format "#RRGGBB". May also be expressed as an array of [R, G, B] from 0 to 255.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:material_instances</td>
 <td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Maps face or material_instance names in a geometry file to an actual material instance. Material instance can either be a full material instance or a name to another already defined instance</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">The material instances for a block.</br>Maps face or material_instance names in a geometry file to an actual material instance. Material instance can either be a full material instance or a name to another already defined instance.</br>Limited to 64 instances.</br>Experimental toggles required: Holiday Creator Features</br><h3><p id="Material Instance">Material Instance</p></h3>
+
+A material instance definition to map to a material instance in a geometry file. The material instance '*' will be used for any materials that don't have a match.</br><h4></h4>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Default Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">ambient_occlusion</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">true</td>
+<td style="border-style:solid; border-width:1; padding:9px">Should this material have ambient occlusion applied when lighting.</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:onlypistonpush</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Blocks with those components won't stick to stickyPistons</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">face_dimming</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">true</td>
+<td style="border-style:solid; border-width:1; padding:9px">Should this material be dimmed by the direction it's facing.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">render_method</td>
+<td style="border-style:solid; border-width:1; padding:9px">String</td>
+<td style="border-style:solid; border-width:1; padding:9px">opaque</td>
+<td style="border-style:solid; border-width:1; padding:9px">The render method to use. Must be one of 'opaque', 'double_sided', 'blend', or 'alpha_test'.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">texture</td>
+<td style="border-style:solid; border-width:1; padding:9px">String</td>
+<td style="border-style:solid; border-width:1; padding:9px"></td>
+<td style="border-style:solid; border-width:1; padding:9px">Texture name for the material.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+</td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:part_visibility</td>
@@ -156,33 +214,12 @@
 <td style="border-style:solid; border-width:3; padding:7px">Maps bone names in a geometry file to a condition that turns their rendering on/off. The condition should be a Molang query that uses block properties to determine true/falseSupported queries include 'has_block_property', 'block_property', and other queries that can evaluate without knowledge of the block's in-game positional or player affected data.</br>Experimental toggles required: Upcoming Creator Features</br></td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:pick_collision</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px">false</td>
-<td style="border-style:solid; border-width:3; padding:7px">Can only be set to false, it disables the collision of the block with entities</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
-<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">origin</td>
-<td style="border-style:solid; border-width:2; padding:8px">Array</td>
-<td style="border-style:solid; border-width:2; padding:8px">[-8.0, 0.0, -8.0]</td>
-<td style="border-style:solid; border-width:2; padding:8px">Minimal position Bounds of the collision box</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">size</td>
-<td style="border-style:solid; border-width:2; padding:8px">Array</td>
-<td style="border-style:solid; border-width:2; padding:8px">[16.0, 16.0, 16.0]</td>
-<td style="border-style:solid; border-width:2; padding:8px">Size of each side of the box of the component</br></td>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:placement_filter</td>
 <td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Sets rules for under what conditions the block can be placed/survive</br><h3><p id="conditions">conditions</p></h3>
+<td style="border-style:solid; border-width:3; padding:7px">Sets rules for under what conditions the block can be placed/survive</br>Experimental toggles required: Holiday Creator Features</br><h3><p id="conditions">conditions</p></h3>
 
-List of conditions where the block can be placed/survive</br><h4></h4>
+List of conditions where the block can be placed/survive. Limited to 64 conditions.</br><h4></h4>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
 <tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Default Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
@@ -190,13 +227,13 @@ List of conditions where the block can be placed/survive</br><h4></h4>
 <td style="border-style:solid; border-width:1; padding:9px">allowed_faces</td>
 <td style="border-style:solid; border-width:1; padding:9px">Array</td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
-<td style="border-style:solid; border-width:1; padding:9px">List of any of the following strings: up, down, north, south, east, west, side, all</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">List of any of the following strings: up, down, north, south, east, west, side, all. Limited to 6 faces.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">block_filter</td>
 <td style="border-style:solid; border-width:1; padding:9px">Array</td>
 <td style="border-style:solid; border-width:1; padding:9px"></td>
-<td style="border-style:solid; border-width:1; padding:9px">List of blocks (can use tags to specify them) that this block can be placed against in the allowed_faces direction</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">List of blocks (can use tags to specify them) that this block can be placed against in the allowed_faces direction. Limited to 64 blocks.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -204,46 +241,34 @@ List of conditions where the block can be placed/survive</br><h4></h4>
 </td>
 </tr>
 <tr>
-<td style="border-style:solid; border-width:3; padding:7px">minecraft:preventsjumping</td>
-<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
-<td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">this component makes it so actors can't jump when walking on this block</br></td>
-</tr>
-<tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:random_ticking</td>
 <td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Describes the component that will trigger an even at a regular interval between two values</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<td style="border-style:solid; border-width:3; padding:7px">Triggers the specified event randomly based on the random tick speed gamerule. The random tick speed determines how often blocks are updated. Some other examples of game mechanics that use random ticking are crop growth and fire spreading.</br>Experimental toggles required: Holiday Creator Features</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">on_tick</td>
 <td style="border-style:solid; border-width:2; padding:8px">Trigger</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">on_tick</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<td style="border-style:solid; border-width:2; padding:8px">The event that will be triggered on random ticks.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
 <tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Default Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">condition</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">1</td>
-<td style="border-style:solid; border-width:1; padding:9px">The condition of event to be executed on the block.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">A condition using Molang queries that results to true/false. If true on the random tick, the event will be triggered. If false on the random tick, the event will not be triggered.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">event</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">set_block_property</td>
-<td style="border-style:solid; border-width:1; padding:9px">The type of event executed on the block.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:1; padding:9px">range</td>
-<td style="border-style:solid; border-width:1; padding:9px">Array</td>
-<td style="border-style:solid; border-width:1; padding:9px">[10, 10]</td>
-<td style="border-style:solid; border-width:1; padding:9px">The Range between which the component will trigger his event.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">The event that will be triggered.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">target</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">self</td>
-<td style="border-style:solid; border-width:1; padding:9px">The target of event executed on the block.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">The target of the event executed by the block.</br></td>
 </tr>
 </table>
 </td>
@@ -255,52 +280,46 @@ List of conditions where the block can be placed/survive</br><h4></h4>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:rotation</td>
 <td style="border-style:solid; border-width:3; padding:7px">Vector [a, b, c]</td>
 <td style="border-style:solid; border-width:3; padding:7px">rotation[0, 0, 0]</td>
-<td style="border-style:solid; border-width:3; padding:7px">This is the block's rotation around the center of the cube in degrees. The rotation order is x-y-z.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">This is the block's rotation around the center of the cube in degrees. The rotation order is x-y-z. Angles need to be in factors of 90.</br>Experimental toggles required: Holiday Creator Features</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">minecraft:ticking</td>
 <td style="border-style:solid; border-width:3; padding:7px">JSON Object</td>
 <td style="border-style:solid; border-width:3; padding:7px"></td>
-<td style="border-style:solid; border-width:3; padding:7px">Describes the component that will trigger an even at a regular interval between two values</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<td style="border-style:solid; border-width:3; padding:7px">Triggers the specified event, either once, or at a regular interval equal to a number of ticks randomly chosen from the range provided.</br>Experimental toggles required: Holiday Creator Features</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">looping</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">Does the event loop? If false, the event will only be triggered once, after a delay equal to a number of ticks randomly chosen from the range. If true, the event will loop, and each interval between events will be equal to a number of ticks randomly chosen from the range.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">on_tick</td>
 <td style="border-style:solid; border-width:2; padding:8px">Trigger</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">on_tick</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
+<td style="border-style:solid; border-width:2; padding:8px">The event that will be triggered once or on an interval.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:1;">
 <tr> <th style="border-style:solid; border-width:1;">Name</th> <th style="border-style:solid; border-width:1;">Type</th> <th style="border-style:solid; border-width:1;">Default Value</th> <th style="border-style:solid; border-width:1;">Description</th> </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">condition</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">1</td>
-<td style="border-style:solid; border-width:1; padding:9px">The condition of event to be executed on the block.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">A condition using Molang queries that results to true/false. If true on the scheduled tick, the event will be triggered. If false on the scheduled tick, the event will not be triggered.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">event</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">set_block_property</td>
-<td style="border-style:solid; border-width:1; padding:9px">The type of event executed on the block.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:1; padding:9px">range</td>
-<td style="border-style:solid; border-width:1; padding:9px">Array</td>
-<td style="border-style:solid; border-width:1; padding:9px">[10, 10]</td>
-<td style="border-style:solid; border-width:1; padding:9px">The Range between which the component will trigger his event.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">The event that will be triggered.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">target</td>
 <td style="border-style:solid; border-width:1; padding:9px">String</td>
 <td style="border-style:solid; border-width:1; padding:9px">self</td>
-<td style="border-style:solid; border-width:1; padding:9px">The target of event executed on the block.</br></td>
+<td style="border-style:solid; border-width:1; padding:9px">The target of the event executed by the block.</br></td>
 </tr>
 </table>
 </td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:2; padding:8px">looping</td>
-<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
-<td style="border-style:solid; border-width:2; padding:8px">true</td>
-<td style="border-style:solid; border-width:2; padding:8px">Does the event loop</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">range</td>
@@ -428,6 +447,12 @@ Event responses for block trigger components.</br><h2></h2>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">0</td>
 <td style="border-style:solid; border-width:2; padding:8px">The amount of damage to deal.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">mob_amount</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</td>
+<td style="border-style:solid; border-width:2; padding:8px">The amount of damage to deal if held by a mob.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">target</td>

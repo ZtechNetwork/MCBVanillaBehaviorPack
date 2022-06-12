@@ -1,4 +1,4 @@
-<h1>ANIMATIONS DOCUMENTATION </br>Version: 1.18.0.2</h1>
+<h1>ANIMATIONS DOCUMENTATION </br>Version: 1.19.0.5</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Animation Controllers">Animation Controllers</a></th> </tr>
@@ -12,6 +12,8 @@
 <tr> <td> <a href="#Adding Animations"> Adding Animations</a> </tr> </td>
 <tr> <td> <a href="#Animation Hierarchy"> Animation Hierarchy</a> </tr> </td>
 <tr> <td> <a href="#Upgrade from v1.10 to v1.17.30"> Upgrade from v1.10 to v1.17.30</a> </tr> </td>
+<tr> <td> <a href="#Upgrade from v1.17.30 to v1.18.10"> Upgrade from v1.17.30 to v1.18.10</a> </tr> </td>
+<tr> <td> <a href="#Upgrade from v1.18.10 to v1.18.20"> Upgrade from v1.18.10 to v1.18.20</a> </tr> </td>
 <tr> <td> <a href="#Upgrade from v1.7 Beta to v1.8"> Upgrade from v1.7 Beta to v1.8</a> </tr> </td>
 <tr> <td> <a href="#Upgrade from v1.8 Beta to v1.10"> Upgrade from v1.8 Beta to v1.10</a> </tr> </td>
 <tr> <th><a href="#Key Frames">Key Frames</a></th> </tr>
@@ -411,6 +413,14 @@ Animations are channel based (rotation, position, or scale), and within that, th
 <h1><p id="Upgrade from v1.10 to v1.17.30">Upgrade from v1.10 to v1.17.30</p></h1>
 
 The major change with 1.17.30 is:</br>- Molang expressions inside transitions that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Upgrade from v1.17.30 to v1.18.10">Upgrade from v1.17.30 to v1.18.10</p></h1>
+
+The major change with 1.18.10 is:</br>- Fixed an issue where animation controller events defined in the default state would get skipped if the controller immediately transitioned to another state.</br><a href="#Index">Back to top</a><br><br>
+
+<h1><p id="Upgrade from v1.18.10 to v1.18.20">Upgrade from v1.18.10 to v1.18.20</p></h1>
+
+The major change with 1.18.20 is:</br>- Molang expressions inside animation scripts for actor resource definition (pre_animation and initialize) that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected.</br><a href="#Index">Back to top</a><br><br>
 
 <h1><p id="Upgrade from v1.7 Beta to v1.8">Upgrade from v1.7 Beta to v1.8</p></h1>
 

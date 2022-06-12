@@ -34,7 +34,7 @@
           "update_interval_base": 60,
           "update_interval_variant": 40,
           "can_find_poi": false,
-          "can_migrate": false,
+          "can_migrate": true,
           "first_founding_reward": 0
         },
         "minecraft:behavior.move_to_village": {
@@ -47,10 +47,10 @@
           "range": 4.0,
           "event_name": "ambient.in.raid"
         }
+      },
+      "minecraft:raid_persistence": {
+        "minecraft:persistent": {}
       }
-    },
-    "minecraft:raid_persistence": {
-      "minecraft:persistent": {}
     },
     "components": {
       "minecraft:is_hidden_when_invisible": {
