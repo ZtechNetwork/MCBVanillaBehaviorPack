@@ -69,7 +69,7 @@
         },
         "minecraft:is_baby": {},
         "minecraft:scale": {
-          "value": 0.53125
+          "value": 0.5
         },
         "minecraft:movement": {
           "value": 0.35
@@ -98,9 +98,6 @@
           "speed_multiplier": 1.25,
           "target_dist": 0.0,
           "track_target": true
-        },
-        "minecraft:scale": {
-          "value": 1.0625
         }
       },
 
@@ -108,6 +105,10 @@
         "minecraft:behavior.find_mount": {
           "priority": 1,
           "within_radius": 16
+        }
+      },
+      "minecraft:can_break_doors": {
+        "minecraft:annotation.break_door": {
         }
       }
     },
@@ -173,8 +174,6 @@
         "can_pass_doors": true,
         "can_break_doors": true,
         "avoid_portals": false
-      },
-      "minecraft:annotation.break_door": {
       },
       "minecraft:movement.basic": {
 
@@ -524,39 +523,56 @@
 
     "events": {
       "minecraft:entity_spawned": {
-        "randomize": [
+        "sequence": [
           {
-            "weight": 9500,
-            "remove": {
-            },
-            "add": {
-              "component_groups": [
-                "minecraft:zombie_husk_adult"
-              ]
-            }
+            "randomize": [
+              {
+                "weight": 9500,
+                "remove": {
+                },
+                "add": {
+                  "component_groups": [
+                    "minecraft:zombie_husk_adult"
+                  ]
+                }
+              },
+              {
+                "weight": 425,
+                "remove": {
+                },
+                "add": {
+                  "component_groups": [
+                    "minecraft:zombie_husk_baby"
+                  ]
+
+                }
+              },
+              {
+                "weight": 75,
+                "remove": {
+                },
+                "add": {
+                  "component_groups": [
+                    "minecraft:zombie_husk_baby",
+                    "minecraft:zombie_husk_jockey"
+                  ]
+
+                }
+              }
+            ]
           },
           {
-            "weight": 425,
-            "remove": {
-            },
-            "add": {
-              "component_groups": [
-                "minecraft:zombie_husk_baby"
-              ]
-
-            }
-          },
-          {
-            "weight": 75,
-            "remove": {
-            },
-            "add": {
-              "component_groups": [
-                "minecraft:zombie_husk_baby",
-                "minecraft:zombie_husk_jockey"
-              ]
-
-            }
+            "randomize": [
+              {
+                "weight": 10,
+                "add": {
+                  "component_groups": [ "minecraft:can_break_doors" ]
+                }
+              },
+              {
+                "weight": 90
+              }
+            ]
           }
         ]
       },

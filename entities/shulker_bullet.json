@@ -25,7 +25,7 @@
             "durationeasy": 200,
             "durationnormal": 200,
             "durationhard": 200,
-            "amplifier": 1
+            "amplifier": 0
           },
           "remove_on_hit": {
           },

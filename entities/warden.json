@@ -16,6 +16,12 @@
             "target": "self"
           }
         }
+      },
+      "pushable": {
+        "minecraft:pushable": {
+          "is_pushable": true,
+          "is_pushable_by_piston": true
+        }
       }
     },
     "components": {
@@ -66,8 +72,11 @@
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
-        "avoid_water": true,
+        "can_path_over_lava": true,
         "avoid_damage_blocks": true
+      },
+      "minecraft:preferred_path": {
+        "max_fall_blocks": 20
       },
       "minecraft:ambient_sound_interval": {
         "value": 2.0,
@@ -113,7 +122,11 @@
         "idle_time": 60.0,
         "vibration_is_disturbance": true,
         "suspicion_is_disturbance": true,
-        "digs_in_daylight": false
+        "digs_in_daylight": false,
+        "on_start": {
+          "event": "on_digging_event",
+          "target": "self"
+        }
       },
       "minecraft:behavior.roar": {
         "priority": 2,
@@ -159,10 +172,6 @@
         "priority": 11
       },
       "minecraft:physics": {},
-      "minecraft:pushable": {
-        "is_pushable": true,
-        "is_pushable_by_piston": true
-      },
       "minecraft:mob_effect": {
         "effect_range": 20,
         "effect_time": 13,
@@ -191,6 +200,11 @@
         }
       },
       "minecraft:emerged": {
+        "add": {
+          "component_groups": [
+            "pushable"
+          ]
+        },
         "remove": {
           "component_groups": [
             "emerging"
@@ -198,6 +212,18 @@
         }
       },
       "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "pushable"
+          ]
+        }
+      },
+      "on_digging_event": {
+        "remove": {
+          "component_groups": [
+            "pushable"
+          ]
+        }
       }
     }
   }

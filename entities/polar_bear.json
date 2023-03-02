@@ -189,10 +189,6 @@
         "is_pushable": true,
         "is_pushable_by_piston": true
       },
-      "minecraft:behavior.panic": {
-        "priority": 2,
-        "speed_multiplier": 2.0
-      },
       "minecraft:leashable": {
         "soft_distance": 4.0,
         "hard_distance": 6.0,

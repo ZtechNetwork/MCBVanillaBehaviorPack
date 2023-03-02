@@ -232,10 +232,6 @@
         },
         "minecraft:is_dyeable": {
           "interact_text": "action.interact.dye"
-        },
-
-        "minecraft:balloonable": {
-          "mass": 0.8
         }
       }
     },
@@ -255,6 +251,9 @@
           "target": "self"
         }
       }, 
+      "minecraft:balloonable": {
+        "mass": 0.8
+      },
       "minecraft:is_hidden_when_invisible": {
       },
       "minecraft:nameable": {
@@ -297,7 +296,7 @@
       "minecraft:can_climb": {
       },
       "minecraft:attack": {
-        "damage": 4
+        "damage": 3
       },
       "minecraft:healable": {
         "items": [

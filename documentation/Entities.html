@@ -1,4 +1,4 @@
-<h1>ENTITIES DOCUMENTATION </br>Version: 1.19.2.2</h1>
+<h1>ENTITIES DOCUMENTATION </br>Version: 1.19.60.3</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Client Entity Documentation">Client Entity Documentation</a></th> </tr>
@@ -7,6 +7,7 @@
 <tr> <td> <a href="#animation_controllers"> animation_controllers</a> </tr> </td>
 <tr> <td> <a href="#animations"> animations</a> </tr> </td>
 <tr> <td> <a href="#enable_attachables"> enable_attachables</a> </tr> </td>
+<tr> <td> <a href="#held_item_ignores_lighting"> held_item_ignores_lighting</a> </tr> </td>
 <tr> <td> <a href="#hide_armor"> hide_armor</a> </tr> </td>
 <tr> <td> <a href="#identifier"> identifier</a> </tr> </td>
 <tr> <td> <a href="#locators"> locators</a> </tr> </td>
@@ -18,8 +19,12 @@
 <tr> <th><a href="#Data-Driven Spawning">Data-Driven Spawning</a></th> </tr>
 <tr> <td> <a href="#Spawn Rules"> Spawn Rules</a> </tr> </td>
 <tr> <th><a href="#Filters">Filters</a></th> </tr>
+<tr> <td> <a href="#actor_health"> actor_health</a> </tr> </td>
+<tr> <td> <a href="#bool_property"> bool_property</a> </tr> </td>
 <tr> <td> <a href="#clock_time"> clock_time</a> </tr> </td>
 <tr> <td> <a href="#distance_to_nearest_player"> distance_to_nearest_player</a> </tr> </td>
+<tr> <td> <a href="#enum_property"> enum_property</a> </tr> </td>
+<tr> <td> <a href="#float_property"> float_property</a> </tr> </td>
 <tr> <td> <a href="#has_ability"> has_ability</a> </tr> </td>
 <tr> <td> <a href="#has_biome_tag"> has_biome_tag</a> </tr> </td>
 <tr> <td> <a href="#has_component"> has_component</a> </tr> </td>
@@ -28,6 +33,7 @@
 <tr> <td> <a href="#has_equipment"> has_equipment</a> </tr> </td>
 <tr> <td> <a href="#has_mob_effect"> has_mob_effect</a> </tr> </td>
 <tr> <td> <a href="#has_nametag"> has_nametag</a> </tr> </td>
+<tr> <td> <a href="#has_property"> has_property</a> </tr> </td>
 <tr> <td> <a href="#has_ranged_weapon"> has_ranged_weapon</a> </tr> </td>
 <tr> <td> <a href="#has_silk_touch"> has_silk_touch</a> </tr> </td>
 <tr> <td> <a href="#has_tag"> has_tag</a> </tr> </td>
@@ -43,8 +49,10 @@
 <tr> <td> <a href="#in_water"> in_water</a> </tr> </td>
 <tr> <td> <a href="#in_water_or_rain"> in_water_or_rain</a> </tr> </td>
 <tr> <td> <a href="#inactivity_timer"> inactivity_timer</a> </tr> </td>
+<tr> <td> <a href="#int_property"> int_property</a> </tr> </td>
 <tr> <td> <a href="#is_altitude"> is_altitude</a> </tr> </td>
 <tr> <td> <a href="#is_avoiding_mobs"> is_avoiding_mobs</a> </tr> </td>
+<tr> <td> <a href="#is_baby"> is_baby</a> </tr> </td>
 <tr> <td> <a href="#is_biome"> is_biome</a> </tr> </td>
 <tr> <td> <a href="#is_block"> is_block</a> </tr> </td>
 <tr> <td> <a href="#is_brightness"> is_brightness</a> </tr> </td>
@@ -81,11 +89,14 @@
 <tr> <td> <a href="#light_level"> light_level</a> </tr> </td>
 <tr> <td> <a href="#moon_intensity"> moon_intensity</a> </tr> </td>
 <tr> <td> <a href="#moon_phase"> moon_phase</a> </tr> </td>
+<tr> <td> <a href="#on_fire"> on_fire</a> </tr> </td>
 <tr> <td> <a href="#on_ground"> on_ground</a> </tr> </td>
+<tr> <td> <a href="#on_hot_block"> on_hot_block</a> </tr> </td>
 <tr> <td> <a href="#on_ladder"> on_ladder</a> </tr> </td>
 <tr> <td> <a href="#random_chance"> random_chance</a> </tr> </td>
 <tr> <td> <a href="#rider_count"> rider_count</a> </tr> </td>
 <tr> <td> <a href="#surface_mob"> surface_mob</a> </tr> </td>
+<tr> <td> <a href="#target_distance"> target_distance</a> </tr> </td>
 <tr> <td> <a href="#trusts"> trusts</a> </tr> </td>
 <tr> <td> <a href="#weather"> weather</a> </tr> </td>
 <tr> <td> <a href="#weather_at_position"> weather_at_position</a> </tr> </td>
@@ -177,6 +188,14 @@ Allows the player to assign names to reference the long name for animations. The
 This determines if the entity can equip attachables when this is set to true. This allows the entity to render armor and weapons.</br><h2></h2>
 <br / ><textarea readonly="true" cols="27" rows="2">
 "enable_attachables": true
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="held_item_ignores_lighting">held_item_ignores_lighting</p></h1>
+
+This determines if the item held by an entity should render fully lit up (if true), or depending on surrounding lighting.</br><h2></h2>
+<br / ><textarea readonly="true" cols="35" rows="2">
+"held_item_ignores_lighting": true
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -832,7 +851,229 @@ Example Spawn Rules for the zombie<br / ><textarea readonly="true" cols="72" row
 
 <h1><p id="Filters">Filters</p></h1>
 
-Filters allow data objects to specify test criteria which allows their use.</br></br>For example, a model that includes a filter will only be used when the filter criteria is true.</br></br></br></br>A typical filter consists of four parameters:</br></br> name: the name of the test to apply.</br></br> domain: the domain the test should be performed in. An armor slot, for example. This parameter is only used by a few tests.</br></br> operator: the comparison to apply with the value, such as 'equal' or 'greater'.</br></br> value: the value being compared with the test.</br></br></br></br>A typical filter looks like the following:</br></br> { "test" : "moon_intensity", "subject" : "self", "operator" : "greater", "value" : "0.5" } </br></br>Which results in the calling entity (self) calculating the moon_intensity at its location and returning true if the result is greater than 0.5.</br></br></br></br>Tests can be combined into groups using the collections 'all_of', 'any_of', or 'none_of'.</br></br> All tests in an 'all_of' group must pass in order for the group to pass.</br></br> One or more tests in an 'any_of' group must pass in order for the group to pass.</br></br> All tests in a 'none_of' group must fail in order for the group to pass.</br></br><h1><p id="clock_time">clock_time</p></h1>
+Filters allow data objects to specify test criteria which allows their use.</br></br>For example, a model that includes a filter will only be used when the filter criteria is true.</br></br></br></br>A typical filter consists of four parameters:</br></br> name: the name of the test to apply.</br></br> domain: the domain the test should be performed in. An armor slot, for example. This parameter is only used by a few tests.</br></br> operator: the comparison to apply with the value, such as 'equal' or 'greater'.</br></br> value: the value being compared with the test.</br></br></br></br>A typical filter looks like the following:</br></br> { "test" : "moon_intensity", "subject" : "self", "operator" : "greater", "value" : "0.5" } </br></br>Which results in the calling entity (self) calculating the moon_intensity at its location and returning true if the result is greater than 0.5.</br></br></br></br>Tests can be combined into groups using the collections 'all_of', 'any_of', or 'none_of'.</br></br> All tests in an 'all_of' group must pass in order for the group to pass.</br></br> One or more tests in an 'any_of' group must pass in order for the group to pass.</br></br> All tests in a 'none_of' group must fail in order for the group to pass.</br></br><h1><p id="actor_health">actor_health</p></h1>
+
+Tests the health of an actor.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) An integer value.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="82" rows="2">
+{ "test": "actor_health", "subject": "self", "operator": "equals", "value": "0" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="41" rows="2">
+{ "test": "actor_health", "value": "0" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="bool_property">bool_property</p></h1>
+
+Returns true when the bool actor property matches the value provided.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">domain</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) The property name to look for</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">true</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) true or false.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="119" rows="2">
+{ "test": "bool_property", "subject": "self", "domain": "minecraft:can_climb", "operator": "equals", "value": "true" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="61" rows="2">
+{ "test": "bool_property", "domain": "minecraft:can_climb" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="clock_time">clock_time</p></h1>
 
 Compares the current time with a float value in the range (0.0, 1.0).0.0= Noon0.25= Sunset0.5= Midnight0.75= Sunrise</br><h2></h2>
 
@@ -1045,6 +1286,234 @@ Full..<br / ><textarea readonly="true" cols="99" rows="2">
 </textarea> </br>
 Short (using Defaults)..<br / ><textarea readonly="true" cols="58" rows="2">
 { "test": "distance_to_nearest_player", "value": "0.00" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="enum_property">enum_property</p></h1>
+
+Returns true when the enum actor property matches the value provided.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">domain</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) The property name to look for</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) A string value.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="115" rows="2">
+{ "test": "enum_property", "subject": "self", "domain": "minecraft:can_climb", "operator": "equals", "value": "" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="74" rows="2">
+{ "test": "enum_property", "domain": "minecraft:can_climb", "value": "" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="float_property">float_property</p></h1>
+
+Returns true when the float actor property matches the value provided.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">domain</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) The property name to look for</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) A floating point value.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="120" rows="2">
+{ "test": "float_property", "subject": "self", "domain": "minecraft:can_climb", "operator": "equals", "value": "0.00" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="79" rows="2">
+{ "test": "float_property", "domain": "minecraft:can_climb", "value": "0.00" }
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -1775,6 +2244,10 @@ Tests for the presence of a named item in the designated slot of the subject ent
 <td style="border-style:solid; border-width:2; padding:8px"></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">inventory</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">leg</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
 </tr>
@@ -2100,6 +2573,114 @@ Full..<br / ><textarea readonly="true" cols="84" rows="2">
 </textarea> </br>
 Short (using Defaults)..<br / ><textarea readonly="true" cols="26" rows="2">
 { "test": "has_nametag" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="has_property">has_property</p></h1>
+
+Tests for the presence of a property of the subject entity.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) The property name to look for</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="100" rows="2">
+{ "test": "has_property", "subject": "self", "operator": "equals", "value": "minecraft:can_climb" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="59" rows="2">
+{ "test": "has_property", "value": "minecraft:can_climb" }
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -3723,6 +4304,120 @@ Short (using Defaults)..<br / ><textarea readonly="true" cols="45" rows="2">
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
+<h1><p id="int_property">int_property</p></h1>
+
+Returns true when the int actor property matches the value provided.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">domain</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) The property name to look for</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Integer</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) An integer value.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="115" rows="2">
+{ "test": "int_property", "subject": "self", "domain": "minecraft:can_climb", "operator": "equals", "value": "0" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="74" rows="2">
+{ "test": "int_property", "domain": "minecraft:can_climb", "value": "0" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
 <h1><p id="is_altitude">is_altitude</p></h1>
 
 Tests the current altitude against a provided value. 0= bedrock elevation.</br><h2></h2>
@@ -3936,6 +4631,114 @@ Full..<br / ><textarea readonly="true" cols="89" rows="2">
 </textarea> </br>
 Short (using Defaults)..<br / ><textarea readonly="true" cols="31" rows="2">
 { "test": "is_avoiding_mobs" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="is_baby">is_baby</p></h1>
+
+Returns true when the subject entity is a baby.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">true</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) true or false.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="80" rows="2">
+{ "test": "is_baby", "subject": "self", "operator": "equals", "value": "true" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="22" rows="2">
+{ "test": "is_baby" }
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -8013,6 +8816,114 @@ Short (using Defaults)..<br / ><textarea readonly="true" cols="39" rows="2">
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
+<h1><p id="on_fire">on_fire</p></h1>
+
+Tests if the subject is on fire.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">true</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) true or false.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="80" rows="2">
+{ "test": "on_fire", "subject": "self", "operator": "equals", "value": "true" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="22" rows="2">
+{ "test": "on_fire" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
 <h1><p id="on_ground">on_ground</p></h1>
 
 Returns true when the subject entity is on ground.</br><h2></h2>
@@ -8118,6 +9029,114 @@ Full..<br / ><textarea readonly="true" cols="82" rows="2">
 </textarea> </br>
 Short (using Defaults)..<br / ><textarea readonly="true" cols="24" rows="2">
 { "test": "on_ground" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="on_hot_block">on_hot_block</p></h1>
+
+Tests if the subject is on a hot block.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">true</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) true or false.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="85" rows="2">
+{ "test": "on_hot_block", "subject": "self", "operator": "equals", "value": "true" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="27" rows="2">
+{ "test": "on_hot_block" }
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -8550,6 +9569,114 @@ Full..<br / ><textarea readonly="true" cols="84" rows="2">
 </textarea> </br>
 Short (using Defaults)..<br / ><textarea readonly="true" cols="26" rows="2">
 { "test": "surface_mob" }
+</textarea> </br>
+<a href="#Index">Back to top</a><br><br>
+
+<h1><p id="target_distance">target_distance</p></h1>
+
+Tests the distance between the calling entity and its target.</br><h2></h2>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
+<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Type</th> <th style="border-style:solid; border-width:3;">Default</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">operator</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">equals</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The comparison to apply with 'value'.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">!=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for less-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px"><></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">==</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">></td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">>=</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for greater-than or equal to the value.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equals</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for equality.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">not</td>
+<td style="border-style:solid; border-width:2; padding:8px">Test for inequality.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">subject</td>
+<td style="border-style:solid; border-width:3; padding:7px">String</td>
+<td style="border-style:solid; border-width:3; padding:7px">self</td>
+<td style="border-style:solid; border-width:3; padding:7px">(Optional) The subject of this filter test.</br><table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Options</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">block</td>
+<td style="border-style:solid; border-width:2; padding:8px">The block involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">damager</td>
+<td style="border-style:solid; border-width:2; padding:8px">The damaging actor involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">other</td>
+<td style="border-style:solid; border-width:2; padding:8px">The other member of an interaction, not the caller.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">parent</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current parent.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">player</td>
+<td style="border-style:solid; border-width:2; padding:8px">The player involved with the interaction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">self</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity or object calling the test</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">target</td>
+<td style="border-style:solid; border-width:2; padding:8px">The caller's current target.</br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">value</td>
+<td style="border-style:solid; border-width:3; padding:7px">Decimal</td>
+<td style="border-style:solid; border-width:3; padding:7px"></td>
+<td style="border-style:solid; border-width:3; padding:7px">(Required) A floating point value.</br></td>
+</tr>
+</table>
+<h2>Examples</h2>
+Full..<br / ><textarea readonly="true" cols="88" rows="2">
+{ "test": "target_distance", "subject": "self", "operator": "equals", "value": "0.00" }
+</textarea> </br>
+Short (using Defaults)..<br / ><textarea readonly="true" cols="47" rows="2">
+{ "test": "target_distance", "value": "0.00" }
 </textarea> </br>
 <a href="#Index">Back to top</a><br><br>
 
@@ -9334,7 +10461,7 @@ Allows the entity to be controlled by the player using an item in the item_contr
 
 <h2><p id="minecraft:behavior.croak">minecraft:behavior.croak</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Allows the entity to croak at a random time interval with configurable conditions.</br><h3></h3>
+Allows the entity to croak at a random time interval with configurable conditions.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -9406,6 +10533,12 @@ Allows the mob to target another mob that hurts an entity it trusts.</br><h3></h
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -9613,7 +10746,7 @@ Allows an entity to attack, while also delaying the damage-dealt until a specifi
 
 <h2><p id="minecraft:behavior.dig">minecraft:behavior.dig</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Activates the "DIGGING" actor flag during the specified duration. Currently only Warden can use the Dig goal</br><h3></h3>
+Allows this entity to dig into the ground before despawning.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -9640,6 +10773,12 @@ Allows an entity to attack, while also delaying the damage-dealt until a specifi
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
 <td style="border-style:solid; border-width:2; padding:8px">The minimum idle time in seconds between the last detected disturbance to the start of digging.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">on_start</td>
+<td style="border-style:solid; border-width:2; padding:8px">Trigger</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Event(s) to run when the goal starts.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">suspicion_is_disturbance</td>
@@ -9808,6 +10947,27 @@ Allows this entity to fly around looking for a player to shoot fireballs at. Can
 <h2><p id="minecraft:behavior.dragontakeoff">minecraft:behavior.dragontakeoff</p></h2>
 
 Allows the dragon to leave perch mode and go back to flying around. Can only be used by the Ender Dragon.</br><a href="#Index">Back to top</a><br><br>
+
+<h2><p id="minecraft:behavior.drink_milk">minecraft:behavior.drink_milk</p></h2>
+
+Allows the mob to drink milk based on specified environment conditions.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">cooldown_seconds</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">5.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Time (in seconds) that the goal is on cooldown before it can be used again.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">filters</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Conditions that need to be met for the behavior to start.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:behavior.drink_potion">minecraft:behavior.drink_potion</p></h2>
 
@@ -10012,7 +11172,7 @@ If the mob is carrying a food item, the mob will eat it and the effects will be 
 
 <h2><p id="minecraft:behavior.eat_mob">minecraft:behavior.eat_mob</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Allows the entity to eat a specified Mob.</br><h3></h3>
+Allows the entity to eat a specified Mob.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -10057,7 +11217,7 @@ If the mob is carrying a food item, the mob will eat it and the effects will be 
 
 <h2><p id="minecraft:behavior.emerge">minecraft:behavior.emerge</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Activates the "EMERGING" actor flag during the specified duration and triggers "on_done" at the end</br><h3></h3>
+Allows this entity to emerge from the ground</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -10324,7 +11484,18 @@ Allows the mob to run away from direct sunlight and seek shade.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.float">minecraft:behavior.float</p></h2>
 
-Allows the mob to stay afloat while swimming.</br><a href="#Index">Back to top</a><br><br>
+Allows the mob to stay afloat while swimming. Passengers will be kicked out the moment the mob's head goes underwater, which may not happen for tall mobs.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">sink_with_passengers</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, the mob will keep sinking as long as it has passengers.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:behavior.float_wander">minecraft:behavior.float_wander</p></h2>
 
@@ -10412,6 +11583,12 @@ Allows the mob to follow mobs that are in a caravan.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -10547,7 +11724,7 @@ Allows mob to move towards its current target captain.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.go_and_give_items_to_noteblock">minecraft:behavior.go_and_give_items_to_noteblock</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.</br><h3></h3>
+The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -10598,7 +11775,7 @@ Allows mob to move towards its current target captain.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.go_and_give_items_to_owner">minecraft:behavior.go_and_give_items_to_owner</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to its owner.</br><h3></h3>
+The entity will attempt to toss the items from its inventory to its owner.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -10903,6 +12080,12 @@ Allows the mob to target another mob that hurts them.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
 <td style="border-style:solid; border-width:1; padding:9px">Decimal</td>
 <td style="border-style:solid; border-width:1; padding:9px">1.0</td>
@@ -10967,7 +12150,7 @@ Allows the mob to inspect bookshelves.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.investigate_suspicious_location">minecraft:behavior.investigate_suspicious_location</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] The entity moves towards a "suspicious" position based on data gathered in minecraft:suspect_tracking</br><h3></h3>
+Allows this entity to move towards a "suspicious" position based on data gathered in minecraft:suspect_tracking</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -11161,13 +12344,13 @@ Allows the mob to lay an egg block on certain types of blocks if the mob is preg
 <td style="border-style:solid; border-width:2; padding:8px">allow_laying_from_below</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">egg_type</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
-<td style="border-style:solid; border-width:2; padding:8px"> minecraft:turtle_egg</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:turtle_egg</td>
+<td style="border-style:solid; border-width:2; padding:8px">Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">goal_radius</td>
@@ -11178,14 +12361,14 @@ Allows the mob to lay an egg block on certain types of blocks if the mob is preg
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">lay_egg_sound</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
-<td style="border-style:solid; border-width:2; padding:8px"> lay_egg</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Sound event name for laying egg. Defaulted to lay_egg which is used for Turtles.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">lay_egg</td>
+<td style="border-style:solid; border-width:2; padding:8px">Name of the sound event played when laying the egg. Defaults to lay_egg, which is used for Turtles.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">lay_seconds</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px">10.0f</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Duration of the laying egg process in seconds.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Duration of the laying egg process in seconds.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">on_lay</td>
@@ -11215,19 +12398,19 @@ Allows the mob to lay an egg block on certain types of blocks if the mob is preg
 <td style="border-style:solid; border-width:2; padding:8px">target_blocks</td>
 <td style="border-style:solid; border-width:2; padding:8px">Array</td>
 <td style="border-style:solid; border-width:2; padding:8px">[ minecraft:sand ]</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Blocks that the mob can lay its eggs on top of.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Blocks that the mob can lay its eggs on top of.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">target_materials_above_block</td>
 <td style="border-style:solid; border-width:2; padding:8px">Array</td>
 <td style="border-style:solid; border-width:2; padding:8px">[ Air ]</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Types of materials that can exist above the target block. Valid types are Air, Water, and Lava.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Types of materials that can exist above the target block. Valid types are Air, Water, and Lava.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">use_default_animation</td>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">true</td>
-<td style="border-style:solid; border-width:2; padding:8px">[EXPERIMENTAL] Specifies if the default lay-egg animation should be played when the egg is placed or not.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Specifies if the default lay-egg animation should be played when the egg is placed or not.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -12169,6 +13352,12 @@ Allows an entity to attack the closest target within a given subset of specific 
 <td style="border-style:solid; border-width:3; padding:7px">3.0</td>
 <td style="border-style:solid; border-width:3; padding:7px">Time (in seconds) the target must not be seen by this entity to become invalid. Used only if "must_see" is true.</br></td>
 </tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">reevaluate_description</td>
+<td style="border-style:solid; border-width:3; padding:7px">Boolean</td>
+<td style="border-style:solid; border-width:3; padding:7px">false</td>
+<td style="border-style:solid; border-width:3; padding:7px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
+</tr>
 </table>
 </td>
 </tr>
@@ -12282,6 +13471,12 @@ Allows the mob to check for and pursue the nearest valid target.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -12447,7 +13642,48 @@ Allows an entity to attack by sneaking and pouncing.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.offer_flower">minecraft:behavior.offer_flower</p></h2>
 
-Allows the mob to offer the player a flower like the Iron Golem does.</br><a href="#Index">Back to top</a><br><br>
+Allows the mob to offer a flower to another mob with the minecraft:take_flower behavior.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">chance_to_start</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Percent chance that the mob will start this goal from 0.0 to 1.0 (where 1.0 = 100%).</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">filters</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Conditions that need to be met for the behavior to start.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_head_rotation_y</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30</td>
+<td style="border-style:solid; border-width:2; padding:8px">Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_offer_flower_duration</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">20.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The max amount of time (in seconds) that the mob will offer the flower for before exiting the Goal.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_rotation_x</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30</td>
+<td style="border-style:solid; border-width:2; padding:8px">Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">search_area</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[6, 2, 6]</td>
+<td style="border-style:solid; border-width:2; padding:8px">The dimensions of the AABB used to search for a potential mob to offer flower to.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:behavior.open_door">minecraft:behavior.open_door</p></h2>
 
@@ -12499,6 +13735,12 @@ Allows the mob to target another mob that hurts their owner.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -12553,6 +13795,12 @@ Allows the mob to target a mob that is hurt by their owner.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -12707,15 +13955,57 @@ Allows the mob to pick up items on the ground.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.play">minecraft:behavior.play</p></h2>
 
-Allows the mob to play with other baby villagers. This can only be used by Villagers.</br><h3></h3>
+Allows the mob to play with other mobs by chasing each other and moving around randomly.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">chance_to_start</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Percent chance that the mob will start this goal, from 0 to 1.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">follow_distance</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">2</td>
+<td style="border-style:solid; border-width:2; padding:8px">The distance (in blocks) that the mob tries to be in range of the friend it's following.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">friend_search_area</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[6, 3, 6]</td>
+<td style="border-style:solid; border-width:2; padding:8px">The dimensions of the AABB used to search for a potential friend to play with.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">friend_types</td>
+<td style="border-style:solid; border-width:2; padding:8px">Array</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity type(s) to consider when searching for a potential friend to play with.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_play_duration_seconds</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">50.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The max amount of seconds that the mob will play for before exiting the Goal.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">random_pos_search_height</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">3</td>
+<td style="border-style:solid; border-width:2; padding:8px">The height (in blocks) that the mob will search within to find a random position position to move to. Must be at least 1.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">random_pos_search_range</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">16</td>
+<td style="border-style:solid; border-width:2; padding:8px">The distance (in blocks) on ground that the mob will search within to find a random position to move to. Must be at least 1.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">speed_multiplier</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">1.0</td>
-<td style="border-style:solid; border-width:2; padding:8px">Movement speed multiplier of the mob when using this AI Goal</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">1.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Movement speed multiplier of the mob when using this AI Goal.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -13030,6 +14320,18 @@ Allows the mob to randomly look around.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">[2, 4]</td>
 <td style="border-style:solid; border-width:2; padding:8px">The range of time in seconds the mob will stay looking in a random direction before looking elsewhere</br></td>
 </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_angle_of_view_horizontal</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">30</td>
+<td style="border-style:solid; border-width:2; padding:8px">The rightmost angle a mob can look at on the horizontal plane with respect to its initial facing direction.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">min_angle_of_view_horizontal</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">-30</td>
+<td style="border-style:solid; border-width:2; padding:8px">The leftmost angle a mob can look at on the horizontal plane with respect to its initial facing direction.</br></td>
+</tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
 
@@ -13039,6 +14341,18 @@ Allows the mob to randomly sit and look around for a duration. Note: Must have a
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">continue_if_leashed</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">If the goal should continue to be used as long as the mob is leashed.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_angle_of_view_horizontal</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">The rightmost angle a mob can look at on the horizontal plane with respect to its initial facing direction.</br></td>
+</tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">max_look_count</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
@@ -13050,6 +14364,12 @@ Allows the mob to randomly sit and look around for a duration. Note: Must have a
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">40</td>
 <td style="border-style:solid; border-width:2; padding:8px">The max amount of time (in ticks) a mob will stay looking at a direction while looking around.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">min_angle_of_view_horizontal</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">-30.0</td>
+<td style="border-style:solid; border-width:2; padding:8px">The leftmost angle a mob can look at on the horizontal plane with respect to its initial facing direction.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">min_look_count</td>
@@ -13065,9 +14385,15 @@ Allows the mob to randomly sit and look around for a duration. Note: Must have a
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">probability</td>
-<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px">0.02</td>
 <td style="border-style:solid; border-width:2; padding:8px">The probability of randomly looking around/sitting.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">random_look_around_cooldown</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</td>
+<td style="border-style:solid; border-width:2; padding:8px">The cooldown in seconds before the goal can be used again.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -13179,7 +14505,7 @@ Allows an entity to randomly move through water</br><h3></h3>
 
 <h2><p id="minecraft:behavior.ranged_attack">minecraft:behavior.ranged_attack</p></h2>
 
-Allows an entity to attack by using ranged shots. "charge_shoot_trigger" must be greater than 0 to enable charged up burst-shot attacks.</br><h3></h3>
+Allows an entity to attack by using ranged shots. "charge_shoot_trigger" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -13323,7 +14649,7 @@ Allows the mob to stay at a certain level when in liquid.</br><h3></h3>
 
 <h2><p id="minecraft:behavior.roar">minecraft:behavior.roar</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Plays the provided sound and activates the "ROARING" actor flag during the specified duration</br><h3></h3>
+Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -13331,7 +14657,7 @@ Allows the mob to stay at a certain level when in liquid.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">duration</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px">0.0</td>
-<td style="border-style:solid; border-width:2; padding:8px">Goal duration in seconds</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">The amount of time to roar for.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -13464,6 +14790,12 @@ Allows the mob to give items it has to others.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -13759,6 +15091,12 @@ Allows the mob to stop and sneeze possibly startling nearby mobs and dropping an
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
 <td style="border-style:solid; border-width:1; padding:9px">Decimal</td>
 <td style="border-style:solid; border-width:1; padding:9px">1.0</td>
@@ -13814,7 +15152,7 @@ Allows the mob to stop and sneeze possibly startling nearby mobs and dropping an
 
 <h2><p id="minecraft:behavior.sniff">minecraft:behavior.sniff</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] The entity detects the nearest player within "sniffing_radius" and updates its "minecraft:suspect_tracking" component state</br><h3></h3>
+Allows this entity to detect the nearest player within "sniffing_radius" and update its "minecraft:suspect_tracking" component state</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -13853,7 +15191,7 @@ Allows the mob to stop and sneeze possibly startling nearby mobs and dropping an
 
 <h2><p id="minecraft:behavior.sonic_boom">minecraft:behavior.sonic_boom</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] Plays the provided sounds and activates the "SONIC BOOM" actor flag during the specified duration</br><h3></h3>
+Allows this entity to perform a 'sonic boom' ranged attack</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -14017,7 +15355,7 @@ Allows a mob to stalk a target, then once within range pounce onto a target, on 
 
 <h2><p id="minecraft:behavior.stay_near_noteblock">minecraft:behavior.stay_near_noteblock</p></h2>
 
-[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.</br><h3></h3>
+The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -14603,7 +15941,60 @@ Allows an entity to attack using swoop attack behavior; Ideal for use with flyin
 
 <h2><p id="minecraft:behavior.take_flower">minecraft:behavior.take_flower</p></h2>
 
-Can only be used by Villagers. Allows the mob to accept flowers from Iron Golems.</br><a href="#Index">Back to top</a><br><br>
+Allows the mob to accept flowers from another mob with the minecraft:offer_flower behavior.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">filters</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Conditions that need to be met for the behavior to start.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_head_rotation_y</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30</td>
+<td style="border-style:solid; border-width:2; padding:8px">Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_rotation_x</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">30</td>
+<td style="border-style:solid; border-width:2; padding:8px">Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_wait_time</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">20.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The maximum amount of time (in seconds) for the mob to randomly wait for before taking the flower.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">min_distance_to_target</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">2.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minimum distance (in blocks) for the entity to be considered having reached its target.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">min_wait_time</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">4.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The minimum amount of time (in seconds) for the mob to randomly wait for before taking the flower.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">search_area</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vector [a, b, c]</td>
+<td style="border-style:solid; border-width:2; padding:8px">[6, 2, 6]</td>
+<td style="border-style:solid; border-width:2; padding:8px">The dimensions of the AABB used to search for a potential mob to take a flower from.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">speed_multiplier</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.50</td>
+<td style="border-style:solid; border-width:2; padding:8px">Movement speed multiplier of the mob when using this AI Goal.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:behavior.tempt">minecraft:behavior.tempt</p></h2>
 
@@ -14703,7 +16094,24 @@ Allows the mob to look at a player that is holding a tradable item.</br><h3></h3
 
 <h2><p id="minecraft:behavior.trade_with_player">minecraft:behavior.trade_with_player</p></h2>
 
-Allows the player to trade with this mob.</br><a href="#Index">Back to top</a><br><br>
+Allows the player to trade with this mob. When the goal starts, it will stop the mob's navigation.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">filters</td>
+<td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Conditions that need to be met for the behavior to start.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">max_distance_from_player</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">8.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The max distance that the mob can be from the player before exiting the goal.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:behavior.vex_copy_owner_target">minecraft:behavior.vex_copy_owner_target</p></h2>
 
@@ -14740,6 +16148,12 @@ Allows the mob to target the same entity its owner is targeting.</br><h3></h3>
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -14802,6 +16216,12 @@ Allows the wither to focus its attacks on whichever mob has dealt the most damag
 <td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
 <td style="border-style:solid; border-width:1; padding:9px">3.0</td>
 <td style="border-style:solid; border-width:1; padding:9px">Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:1; padding:9px">reevaluate_description</td>
+<td style="border-style:solid; border-width:1; padding:9px">Boolean</td>
+<td style="border-style:solid; border-width:1; padding:9px">false</td>
+<td style="border-style:solid; border-width:1; padding:9px">If true, the mob will stop being targeted if it stops meeting any conditions.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:1; padding:9px">sprint_speed_multiplier</td>
@@ -15359,6 +16779,12 @@ A component that does damage to entities that get within range.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">The type of damage that is applied to entities that enter the damage range.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">damage_cooldown</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</td>
+<td style="border-style:solid; border-width:2; padding:8px">Attack cooldown (in seconds) for how often this entity can attack a target.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">damage_per_tick</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">2</td>
@@ -15375,6 +16801,12 @@ A component that does damage to entities that get within range.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">Minecraft Filter</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
 <td style="border-style:solid; border-width:2; padding:8px">The set of entities that are valid to apply the damage to when within range.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">play_attack_sound</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">4.94066e-324</td>
+<td style="border-style:solid; border-width:2; padding:8px">If the entity should play their attack sound when attacking a target.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -16072,6 +17504,33 @@ Defines what events to call when this entity is damaged by specific entities or 
 </table>
 <a href="#Index">Back to top</a><br><br>
 
+<h2><p id="minecraft:dash">minecraft:dash</p></h2>
+
+Ability for a ridable entity to dash.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">cooldown_time</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">1.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">The dash cooldown in seconds. Default value is 1.000000.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">horizontal_momentum</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">1.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Horizontal momentum of the dash.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">vertical_momentum</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">1.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Vertical momentum of the dash.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
 <h2><p id="minecraft:despawn">minecraft:despawn</p></h2>
 
 Despawns the Actor when the despawn rules or optional filters evaluate to true.</br><h3></h3>
@@ -16397,7 +17856,7 @@ Defines how much exhaustion each player action should take.</br><h3></h3>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">attack</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.3</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.1</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when attacking.</br></td>
 </tr>
 <tr>
@@ -16409,19 +17868,19 @@ Defines how much exhaustion each player action should take.</br><h3></h3>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">heal</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">3</td>
+<td style="border-style:solid; border-width:2; padding:8px">6</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when healed through food regeneration.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">jump</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.2</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.05</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when jumping.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">mine</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.025</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.005</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when mining.</br></td>
 </tr>
 <tr>
@@ -16433,19 +17892,19 @@ Defines how much exhaustion each player action should take.</br><h3></h3>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">sprint_jump</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.8</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.2</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when sprint jumping.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">swim</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.015</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.01</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when swimming.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">walk</td>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
-<td style="border-style:solid; border-width:2; padding:8px">0.01</td>
+<td style="border-style:solid; border-width:2; padding:8px">0</td>
 <td style="border-style:solid; border-width:2; padding:8px">Amount of exhaustion applied when walking.</br></td>
 </tr>
 </table>
@@ -16642,6 +18101,33 @@ Allows entities to flock in groups in water or not.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
 <td style="border-style:solid; border-width:2; padding:8px">false</td>
 <td style="border-style:solid; border-width:2; padding:8px">Tells the flockers that they will follow flocks based on the center of mass.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
+<h2><p id="minecraft:game_event_movement_tracking">minecraft:game_event_movement_tracking</p></h2>
+
+Allows an entity to emit `entityMove`, `swim` and `flap` game events, depending on the block the entity is moving through. It is added by default to every mob. Add it again to override its behavior.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">emit_flap</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, the `flap` game event will be emitted when the entity moves through air.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">emit_move</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, the `entityMove` game event will be emitted when the entity moves on ground or through a solid.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">emit_swim</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">true</td>
+<td style="border-style:solid; border-width:2; padding:8px">If true, the `swim` game event will be emitted when the entity moves through a liquid.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -16855,6 +18341,23 @@ Defines the interactions with this entity for healing it.</br><h3></h3>
 
 <h2><p id="minecraft:heartbeat">minecraft:heartbeat</p></h2>
 
+Defines the entity's heartbeat.</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">interval</td>
+<td style="border-style:solid; border-width:2; padding:8px">Molang</td>
+<td style="border-style:solid; border-width:2; padding:8px">1.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">A Molang expression defining the inter-beat interval in seconds. A value of zero or less means no heartbeat.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">sound_event</td>
+<td style="border-style:solid; border-width:2; padding:8px">String</td>
+<td style="border-style:solid; border-width:2; padding:8px">heartbeat</td>
+<td style="border-style:solid; border-width:2; padding:8px">Level sound event to be played as the heartbeat sound.</br></td>
+</tr>
+</table>
 <a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:home">minecraft:home</p></h2>
@@ -16986,6 +18489,12 @@ Defines interactions with this entity.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
 <td style="border-style:solid; border-width:2; padding:8px">0</td>
 <td style="border-style:solid; border-width:2; padding:8px">Time in seconds before this entity can be interacted with after being attacked.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">equip_item_slot</td>
+<td style="border-style:solid; border-width:2; padding:8px">Integer</td>
+<td style="border-style:solid; border-width:2; padding:8px">-1</td>
+<td style="border-style:solid; border-width:2; padding:8px">The entity's equipment slot to equip the item to, if any, upon successful interaction.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">health_amount</td>
@@ -18384,6 +19893,12 @@ Defines physics properties of an actor, including if it is affected by gravity o
 <td style="border-style:solid; border-width:2; padding:8px">true</td>
 <td style="border-style:solid; border-width:2; padding:8px">Whether or not the entity is affected by gravity.</br></td>
 </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">push_towards_closest_space</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Whether or not the entity should be pushed towards the nearest open area when stuck inside a block.</br></td>
+</tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
 
@@ -18634,7 +20149,7 @@ Attempts to trigger a raid at the entity's location.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">triggered_event</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">Event to run we attempt to trigger a raid on the village.</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Event to run when a raid is triggered on the village.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -18947,7 +20462,7 @@ Number of this item this entity wants to have.</br><a href="#Index">Back to top<
 
 <h2><p id="minecraft:shooter">minecraft:shooter</p></h2>
 
-Defines the entity's ranged attack behavior.</br><h3></h3>
+Defines the entity's ranged attack behavior. The "minecraft:behavior.ranged_attack" goal uses this component to determine which projectiles to shoot.</br><h3></h3>
 
 <table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
 <tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
@@ -18955,13 +20470,37 @@ Defines the entity's ranged attack behavior.</br><h3></h3>
 <td style="border-style:solid; border-width:2; padding:8px">aux_val</td>
 <td style="border-style:solid; border-width:2; padding:8px">Integer</td>
 <td style="border-style:solid; border-width:2; padding:8px">-1</td>
-<td style="border-style:solid; border-width:2; padding:8px">ID of the Potion effect to be applied on hit</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">ID of the Potion effect for the default projectile to be applied on hit.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">def</td>
 <td style="border-style:solid; border-width:2; padding:8px">String</td>
 <td style="border-style:solid; border-width:2; padding:8px"></td>
-<td style="border-style:solid; border-width:2; padding:8px">Actor definition to use as projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">Actor definition to use as the default projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">magic</td>
+<td style="border-style:solid; border-width:2; padding:8px">Boolean</td>
+<td style="border-style:solid; border-width:2; padding:8px">false</td>
+<td style="border-style:solid; border-width:2; padding:8px">Sets whether the projectiles being used are flagged as magic. If set, the ranged attack goal will not be used at the same time as other magic goals, such as minecraft:behavior.drink_potion</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">power</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.00</td>
+<td style="border-style:solid; border-width:2; padding:8px">Velocity in which the projectiles will be shot at. A power of 0 will be overwritten by the default projectile throw power.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">projectiles</td>
+<td style="border-style:solid; border-width:2; padding:8px">List</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">List of projectiles that can be used by the shooter. Projectiles are evaluated in the order of the list; After a projectile is chosen, the rest of the list is ignored.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">sound</td>
+<td style="border-style:solid; border-width:2; padding:8px">String</td>
+<td style="border-style:solid; border-width:2; padding:8px"></td>
+<td style="border-style:solid; border-width:2; padding:8px">Sound that is played when the shooter shoots a projectile.</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>
@@ -19573,6 +21112,33 @@ Defines the rules for a mob to trust players.</br><h3></h3>
 </table>
 <a href="#Index">Back to top</a><br><br>
 
+<h2><p id="minecraft:variable_max_auto_step">minecraft:variable_max_auto_step</p></h2>
+
+Entities with this component will have a maximum auto step height that is different depending on whether they are on a block that prevents jumping. Incompatible with "runtime_identifier": "minecraft:horse".</br><h3></h3>
+
+<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:2;">
+<tr> <th style="border-style:solid; border-width:2;">Name</th> <th style="border-style:solid; border-width:2;">Type</th> <th style="border-style:solid; border-width:2;">Default Value</th> <th style="border-style:solid; border-width:2;">Description</th> </tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">base_value</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.5625</td>
+<td style="border-style:solid; border-width:2; padding:8px">The maximum auto step height when on any other block.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">controlled_value</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.5625</td>
+<td style="border-style:solid; border-width:2; padding:8px">The maximum auto step height when on any other block and controlled by the player.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">jump_prevented_value</td>
+<td style="border-style:solid; border-width:2; padding:8px">Decimal</td>
+<td style="border-style:solid; border-width:2; padding:8px">0.5625</td>
+<td style="border-style:solid; border-width:2; padding:8px">The maximum auto step height when on a block that prevents jumping.</br></td>
+</tr>
+</table>
+<a href="#Index">Back to top</a><br><br>
+
 <h2><p id="minecraft:vibration_damper">minecraft:vibration_damper</p></h2>
 
 Vibrations emitted by this entity will be ignored.</br><a href="#Index">Back to top</a><br><br>
@@ -19845,6 +21411,10 @@ Sets the mapping of internal animation controller references to actual animation
 <td style="border-style:solid; border-width:2; padding:8px">-1912535317</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.drink_milk</td>
+<td style="border-style:solid; border-width:2; padding:8px">14686590835698253470</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.drink_potion</td>
 <td style="border-style:solid; border-width:2; padding:8px">277029334</br></td>
 </tr>
@@ -20102,7 +21672,7 @@ Sets the mapping of internal animation controller references to actual animation
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.offer_flower</td>
-<td style="border-style:solid; border-width:2; padding:8px">-885387854</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">14523794672066366898</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.open_door</td>
@@ -20134,7 +21704,7 @@ Sets the mapping of internal animation controller references to actual animation
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.play</td>
-<td style="border-style:solid; border-width:2; padding:8px">-505601580</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">9028661884418335188</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.play_dead</td>
@@ -20346,7 +21916,7 @@ Sets the mapping of internal animation controller references to actual animation
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.take_flower</td>
-<td style="border-style:solid; border-width:2; padding:8px">1218648257</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">16066043784359778497</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.tempt</td>
@@ -20358,7 +21928,7 @@ Sets the mapping of internal animation controller references to actual animation
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.trade_with_player</td>
-<td style="border-style:solid; border-width:2; padding:8px">-2048563493</br></td>
+<td style="border-style:solid; border-width:2; padding:8px">13082946109325010651</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:behavior.vex_copy_owner_target</td>
@@ -20523,6 +22093,10 @@ Sets the mapping of internal animation controller references to actual animation
 <td style="border-style:solid; border-width:2; padding:8px">-82616534</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:dash</td>
+<td style="border-style:solid; border-width:2; padding:8px">-51257122</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:despawn</td>
 <td style="border-style:solid; border-width:2; padding:8px">1674909940</br></td>
 </tr>
@@ -20565,6 +22139,10 @@ Sets the mapping of internal animation controller references to actual animation
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:flocking</td>
 <td style="border-style:solid; border-width:2; padding:8px">1967597361</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:game_event_movement_tracking</td>
+<td style="border-style:solid; border-width:2; padding:8px">763815151</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:genetics</td>
@@ -20829,6 +22407,10 @@ Sets the mapping of internal animation controller references to actual animation
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:trusting</td>
 <td style="border-style:solid; border-width:2; padding:8px">936499892</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:2; padding:8px">minecraft:variable_max_auto_step</td>
+<td style="border-style:solid; border-width:2; padding:8px">-368684982</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:2; padding:8px">minecraft:vibration_damper</td>
@@ -21281,7 +22863,7 @@ Sets the offset from the ground that the entity is actually at.</br><h3></h3>
 
 <h2><p id="minecraft:input_ground_controlled">minecraft:input_ground_controlled</p></h2>
 
-When configured as a rideable entity, the entity will be controlled using WASD controls.</br><a href="#Index">Back to top</a><br><br>
+When configured as a rideable entity, the entity will be controlled using WASD controls. Beginning with 1.19.50 the default auto step height for rideable entities is half a block. Consider adding the `variable_max_auto_step` component to increase it.</br><a href="#Index">Back to top</a><br><br>
 
 <h2><p id="minecraft:is_baby">minecraft:is_baby</p></h2>
 

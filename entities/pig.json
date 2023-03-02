@@ -106,7 +106,7 @@
         },
         "minecraft:rideable": {
           "seat_count": 1,
-          "interact_text": "action.interact.mount",
+          "interact_text": "action.interact.ride.horse",
           "family_types": [
             "player"
           ],

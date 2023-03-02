@@ -66,61 +66,6 @@
         }
       },
 
-      "minecraft:llama_wandering_trader": {
-        "minecraft:mark_variant": {
-          "value": 1
-        },
-        "minecraft:on_friendly_anger": {
-          "event": "minecraft:defend_wandering_trader",
-          "target": "self"
-        },
-        "minecraft:environment_sensor": {
-          "triggers": [
-            {
-              // If this is a Wandering Trader's llama and it was just released from its leash, make it tame
-              "filters": {
-                "all_of": [
-                {
-                  "test": "is_leashed",
-                  "subject": "self",
-                  "value": false
-                },
-                {
-                  "test": "has_component",
-                  "subject": "self",
-                  "operator": "!=",
-                  "value": "minecraft:is_tamed"
-                }
-                ]
-              },
-              "event": "minecraft:on_tame"
-            },
-            {
-              "filters": {
-                "all_of": [
-                  {
-                    "test": "is_leashed",
-                    "subject": "self",
-                    "value": false
-                  },
-                  {
-                    "test": "has_component",
-                    "subject": "self",
-                    "operator": "==",
-                    "value": "minecraft:persistent"
-                  }
-                ]
-              },
-              "event": "minecraft:remove_persistence"
-            }
-          ]
-        }
-      },
-      "minecraft:llama_persistence": {
-        "minecraft:persistent": {
-        }
-      },
-
       "minecraft:strength_1": {
         "minecraft:strength": {
           "value": 1,
@@ -200,23 +145,6 @@
               "temper_mod": 6
             }
           ],
-          "auto_reject_items": [
-            {
-              "item": "horsearmorleather"
-            },
-            {
-              "item": "horsearmoriron"
-            },
-            {
-              "item": "horsearmorgold"
-            },
-            {
-              "item": "horsearmordiamond"
-            },
-            {
-              "item": "saddle"
-            }
-          ],
           "tame_event": {
             "event": "minecraft:on_tame",
             "target": "self"
@@ -263,17 +191,9 @@
               "on_interact": {
                 "filters": {
                   "all_of": [
-                    {
-                      "test": "is_family",
-                      "subject": "other",
-                      "value": "player"
-                    },
-                    {
-                      "test": "has_equipment",
-                      "domain": "hand",
-                      "subject": "other",
-                      "value": "chest"
-                    }
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "is_sneaking", "subject": "other", "value": false },
+                    { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "chest" }
                   ]
                 },
                 "event": "minecraft:on_chest",
@@ -281,6 +201,22 @@
               },
               "use_item": true,
               "interact_text": "action.interact.attachchest"
+            },
+            {
+              "play_sounds": "armor.equip_generic",
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "has_equipment", "subject": "self", "domain": "inventory", "operator": "not", "value": "carpet" },
+                    { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "carpet" },
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "is_sneaking", "subject": "other", "value": false }
+                  ]
+                },
+                "target": "self"
+              },
+              "equip_item_slot": 0,
+              "interact_text": "action.interact.equipcarpet"
             }
           ]
         }
@@ -288,7 +224,26 @@
 
       "minecraft:llama_chested": {
         "minecraft:is_chested": {
-
+        },
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "play_sounds": "armor.equip_generic",
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "has_equipment", "subject": "self", "domain": "inventory", "operator": "not", "value": "carpet" },
+                    { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "carpet" },
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "is_sneaking", "subject": "other", "value": false }
+                  ]
+                },
+                "target": "self"
+              },
+              "equip_item_slot": 0,
+              "interact_text": "action.interact.equipcarpet"
+            }
+          ]
         }
       },
 
@@ -324,22 +279,6 @@
           "charge_charged_trigger": 1
         }
       },
-      "minecraft:llama_defend_trader": {
-        "minecraft:angry": {
-          "duration": 10,
-          "calm_event": {
-            "event": "minecraft:on_calm",
-            "target": "self"
-          }
-        },
-        "minecraft:behavior.ranged_attack": {
-          "priority": 2,
-          "attack_radius": 64,
-          "charge_shoot_trigger": 2,
-          "charge_charged_trigger": 1
-        }
-      },
-
       "minecraft:in_caravan": {
         "minecraft:damage_sensor": {
           "triggers": {
@@ -591,23 +530,6 @@
         }
       },
 
-      "minecraft:from_wandering_trader": {
-        "sequence": [
-          {
-            "add": {
-              "component_groups": [
-                "minecraft:llama_adult",
-                "minecraft:llama_wandering_trader",
-                "minecraft:llama_persistence"
-              ]
-            }
-          },
-          {
-            "trigger": "minecraft:add_attributes"
-          }
-        ]
-      },
-
       "minecraft:ageable_grow_up": {
         "remove": {
           "component_groups": [
@@ -635,13 +557,6 @@
           ]
         }
       },
-      "minecraft:remove_persistence": {
-        "remove": {
-          "component_groups": [
-            "minecraft:llama_persistence"
-          ]
-        }
-      },
       "minecraft:join_caravan": {
         "add": {
           "component_groups": [
@@ -663,13 +578,6 @@
           ]
         }
       },
-      "minecraft:defend_wandering_trader": {
-        "add": {
-          "component_groups": [
-            "minecraft:llama_defend_trader"
-          ]
-        }
-      },
       "minecraft:become_angry": {
         "add": {
           "component_groups": [
@@ -681,8 +589,7 @@
         "remove": {
           "component_groups": [
             "minecraft:llama_angry",
-            "minecraft:llama_angry_wolf",
-            "minecraft:llama_defend_trader"
+            "minecraft:llama_angry_wolf"
           ]
         }
       },

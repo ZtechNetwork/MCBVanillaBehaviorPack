@@ -3,7 +3,7 @@
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:ender_dragon",
-      "is_spawnable": false,
+      "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
     },
@@ -100,6 +100,9 @@
       "minecraft:physics": {
         "has_gravity": false,
         "has_collision": false
+      },
+      "minecraft:game_event_movement_tracking": {
+        "emit_flap": true
       }
     },
 

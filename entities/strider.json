@@ -50,7 +50,12 @@
           "interactions": [
             {
               "on_interact": {
-                "filters": { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "saddle"},
+                "filters": {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "hand",
+                  "value": "saddle"
+                },
                 "event": "minecraft:on_saddled"
               },
               "use_item": true,
@@ -70,7 +75,8 @@
           "seat_count": 1,
           "crouching_skip_interact": true,
           "family_types": [
-            "player", "zombie_pigman"
+            "player",
+            "zombie_pigman"
           ],
           "interact_text": "action.interact.ride.strider",
           "seats": {
@@ -81,7 +87,7 @@
       "minecraft:strider_parent_jockey": {
         "minecraft:addrider": {
           "entity_type": "minecraft:strider",
-          "spawn_event": "spawn_baby"
+          "spawn_event": "minecraft:spawn_baby_strider_jockey"
         },
         "minecraft:rideable": {
           "seat_count": 1,
@@ -143,63 +149,125 @@
           "breed_items": [ "warped_fungus" ]
         }
       },
-
       "minecraft:start_suffocating": {
         "minecraft:is_shaking": {},
         "minecraft:environment_sensor": {
-          "triggers": {
-            "filters": {
-              "any_of": [
-                {
-                  "test": "in_lava",
-                  "subject": "self",
-                  "operator": "==",
-                  "value": true
-                },
-                {
-                  "test": "in_lava",
-                  "subject": "other",
-                  "operator": "==",
-                  "value": true
-                }
-              ]
+          "triggers": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "in_lava",
+                    "subject": "self",
+                    "operator": "==",
+                    "value": true
+                  },
+                  {
+                    "test": "in_lava",
+                    "subject": "other",
+                    "operator": "==",
+                    "value": true
+                  }
+                ]
+              },
+              "event": "stop_suffocating"
             },
-            "event": "stop_suffocating"
-          }
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_riding",
+                    "subject": "self",
+                    "operator": "equals",
+                    "value": false
+                  },
+                  {
+                    "test": "has_component",
+                    "subject": "self",
+                    "operator": "not",
+                    "value": "minecraft:behavior.move_to_liquid"
+                  }
+                ]
+              },
+              "event": "on_not_riding_parent"
+            }
+          ]
         }
       },
 
       "minecraft:detect_suffocating": {
         "minecraft:environment_sensor": {
-          "triggers": {
-            "filters": {
-              "all_of": [
-                {
-                  "test": "in_lava",
-                  "subject": "self",
-                  "operator": "==",
-                  "value": false
-                },
-                {
-                  "any_of": [
-                    {
-                      "test": "is_riding",
-                      "subject": "self",
-                      "operator": "==",
-                      "value": false
-                    },
-                    {
-                      "test": "in_lava",
-                      "subject": "other",
-                      "operator": "==",
-                      "value": false
-                    }
-                  ]
-                }
-              ]
+          "triggers": [
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "in_lava",
+                    "subject": "self",
+                    "operator": "==",
+                    "value": false
+                  },
+                  {
+                    "any_of": [
+                      {
+                        "test": "is_riding",
+                        "subject": "self",
+                        "operator": "==",
+                        "value": false
+                      },
+                      {
+                        "test": "in_lava",
+                        "subject": "other",
+                        "operator": "==",
+                        "value": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "event": "start_suffocating"
             },
-            "event": "start_suffocating"
-          }
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_riding",
+                    "subject": "self",
+                    "operator": "equals",
+                    "value": false
+                  },
+                  {
+                    "test": "has_component",
+                    "subject": "self",
+                    "operator": "not",
+                    "value": "minecraft:behavior.move_to_liquid"
+                  }
+                ]
+              },
+              "event": "on_not_riding_parent"
+            }
+          ]
+        }
+      },
+
+      "minecraft:strider_pathing_behaviors": {
+        "minecraft:behavior.rise_to_liquid_level": {
+          "priority": 0,
+          "liquid_y_offset": 0.25,
+          "rise_delta": 0.01,
+          "sink_delta": 0.01
+        },
+        "minecraft:behavior.move_to_liquid": {
+          "priority": 7,
+          "search_range": 16,
+          "search_height": 10,
+          "goal_radius": 0.9,
+          "material_type": "Lava",
+          "search_count": 30
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 8,
+          "speed_multiplier": 0.8
         }
       }
     },
@@ -267,24 +335,6 @@
       },
       "minecraft:physics": {
       },
-      "minecraft:behavior.rise_to_liquid_level": {
-        "priority": 0,
-        "liquid_y_offset": 0.25,
-        "rise_delta": 0.01,
-        "sink_delta": 0.01
-      },
-      "minecraft:behavior.move_to_liquid": {
-        "priority": 7,
-        "search_range": 16,
-        "search_height": 10,
-        "goal_radius": 0.9,
-        "material_type": "Lava",
-        "search_count": 30
-      },
-      "minecraft:behavior.random_stroll": {
-        "priority": 8,
-        "speed_multiplier": 0.8
-      },
       "minecraft:behavior.look_at_player": {
         "priority": 9,
         "look_distance": 6.0,
@@ -349,7 +399,8 @@
           "component_groups": [
             "minecraft:strider_adult",
             "minecraft:strider_unsaddled",
-            "minecraft:detect_suffocating"
+            "minecraft:detect_suffocating",
+            "minecraft:strider_pathing_behaviors"
           ]
         }
       },
@@ -359,7 +410,8 @@
             "minecraft:strider_adult",
             "minecraft:strider_parent_jockey",
             "minecraft:strider_unsaddled",
-            "minecraft:detect_suffocating"
+            "minecraft:detect_suffocating",
+            "minecraft:strider_pathing_behaviors"
           ]
         }
       },
@@ -369,11 +421,21 @@
             "minecraft:strider_adult",
             "minecraft:strider_saddled",
             "minecraft:strider_piglin_jockey",
-            "minecraft:detect_suffocating"
+            "minecraft:detect_suffocating",
+            "minecraft:strider_pathing_behaviors"
           ]
         }
       },
       "spawn_baby": {
+        "add": {
+          "component_groups": [
+            "minecraft:strider_baby",
+            "minecraft:detect_suffocating",
+            "minecraft:strider_pathing_behaviors"
+          ]
+        }
+      },
+      "minecraft:spawn_baby_strider_jockey": {
         "add": {
           "component_groups": [
             "minecraft:strider_baby",
@@ -425,6 +487,13 @@
         "remove": {
           "component_groups": [
             "minecraft:start_suffocating"
+          ]
+        }
+      },
+      "on_not_riding_parent": {
+        "add": {
+          "component_groups": [
+            "minecraft:strider_pathing_behaviors"
           ]
         }
       }

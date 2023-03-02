@@ -1,5 +1,5 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.19.60",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wandering_trader",
@@ -23,7 +23,8 @@
           "broadcastAnger": true,
           "broadcastRange": 10,
           "broadcast_targets": [
-            "llama"
+            "llama",
+            "trader_llama"
           ],
           "broadcast_filters": { "test": "is_leashed_to", "subject": "other", "value": true },
           "calm_event": {
@@ -56,7 +57,7 @@
           {
             "min_wait_time": 0,
             "max_wait_time": 0,
-            "spawn_entity": "llama",
+            "spawn_entity": "trader_llama",
             "spawn_event": "minecraft:from_wandering_trader",
             "single_use": true,
             "num_to_spawn": 2,
@@ -153,7 +154,22 @@
         ]
       },
       "minecraft:behavior.trade_with_player": {
-        "priority": 1
+        "priority": 1,
+        "filters": {
+          "all_of": [
+            {
+              "all_of": [
+                { "test": "in_water", "value": false }
+              ]
+            },
+            {
+              "any_of": [
+                { "test": "on_ground", "value": true },
+                { "test": "is_sleeping", "value": true }
+              ]
+            }
+          ]
+        }
       },
       "minecraft:behavior.trade_interest": {
           "priority": 3,
@@ -229,7 +245,8 @@
                 { "test": "is_family", "subject": "other", "value": "zombie_villager" },
                 { "test": "is_family", "subject": "other", "value": "zombie_pigman" },
                 { "test": "is_family", "subject": "other", "value": "illager" },
-                { "test": "is_family", "subject": "other", "value": "vex" }
+                { "test": "is_family", "subject": "other", "value": "vex" },
+                { "test" : "is_family", "subject" : "other", "value" : "zoglin" }
               ]
             },
             "walk_speed_multiplier": 0.6,
@@ -237,6 +254,16 @@
           }
         ],
         "max_dist": 6
+      },
+      "minecraft:behavior.drink_milk": {
+        "priority": 5,
+        "filters": {
+          "all_of": [
+            { "test": "is_daytime", "value" : true },
+            { "test": "is_visible", "subject": "self", "value": false },
+            { "test": "is_avoiding_mobs", "subject": "self", "value": false }
+          ]
+        }
       },
       "minecraft:behavior.move_towards_home_restriction": {
         "priority": 6,

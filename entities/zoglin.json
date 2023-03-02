@@ -40,8 +40,8 @@
           "family": [ "zoglin", "zoglin_adult", "undead", "mob" ]
         },
         "minecraft:collision_box": {
-          "width": 0.9,
-          "height": 0.9
+          "width": 1.4,
+          "height": 1.4
         },
         "minecraft:custom_hit_test": {
           "hitboxes": [
@@ -108,6 +108,7 @@
       },
       "minecraft:behavior.melee_attack": {
         "priority": 4,
+        "reach_multiplier": 2.15, // Matches Java reach which is 3.0 blocks (collision_box:width * reach_multiplier)
         "speed_multiplier": 1.4,
         "track_target": true
       },

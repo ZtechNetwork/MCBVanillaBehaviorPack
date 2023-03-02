@@ -52,6 +52,11 @@
         }
       },
 
+      "can_break_doors": {
+        "minecraft:annotation.break_door": {
+        }
+      },
+
       "from_abandoned_village": {
         "minecraft:navigation.walk": {
           "is_amphibious": true,
@@ -308,8 +313,6 @@
         "can_pass_doors": true,
         "can_break_doors": true,
         "avoid_sun": false
-      },
-      "minecraft:annotation.break_door": {
       },
       "minecraft:movement.basic": {
       },
@@ -777,6 +780,19 @@
           },
           {
             "trigger": "minecraft:add_biome_and_skin"
+          },
+          {
+            "randomize": [
+              {
+                "weight": 10,
+                "add": {
+                  "component_groups": [ "can_break_doors" ]
+                }
+              },
+              {
+                "weight": 90
+              }
+            ]
           }
         ]
       },

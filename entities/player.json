@@ -87,7 +87,7 @@
         "attack": 0.1,
         "damage": 0.1,
         "walk": 0.0,
-        "sprint": 0.01,
+        "sprint": 0.1,
         "swim": 0.01
       },
       "minecraft:player.saturation": {
@@ -117,6 +117,7 @@
         "allow_name_tag_renaming": false
       },
       "minecraft:physics": {
+        "push_towards_closest_space": true
       },
       "minecraft:pushable": {
         "is_pushable": false,

@@ -16,11 +16,15 @@
       "minecraft:seed": {
         "crop_result": "sweet_berry_bush",
         "plant_at": [
+          "farmland",
           "grass",
           "dirt",
           "podzol",
           "moss_block",
-          "mycelium"
+          "mycelium",
+          "mud",
+          "muddy_mangrove_roots",
+          "dirt_with_roots"
         ]
       }
     }

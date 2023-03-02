@@ -152,8 +152,8 @@
       },
       "minecraft:hoglin_adult": {
         "minecraft:collision_box": {
-          "width": 0.9,
-          "height": 0.9
+          "width": 1.4,
+          "height": 1.4
         },
         "minecraft:movement": {
           "value": 0.3
@@ -197,7 +197,7 @@
           "priority": 4,
           "speed_multiplier": 1,
           "track_target": true,
-          "reach_multiplier": 2.5,
+          "reach_multiplier": 2.15, // Matches Java reach which is 3.0 blocks (collision_box:width * reach_multiplier)
           "cooldown_time": 2
         },
         "minecraft:attack": {
