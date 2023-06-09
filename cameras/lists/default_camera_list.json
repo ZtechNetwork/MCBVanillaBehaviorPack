@@ -1,0 +1,11 @@
+{
+  "format_version": "1.19.50",
+  "minecraft:camera_list": {
+    "identifier": "minecraft:default_camera_list",
+    "cameras": [
+      "minecraft:first_person",
+      "minecraft:third_person",
+      "minecraft:third_person_front"
+    ]
+  }
+}
