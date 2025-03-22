@@ -71,7 +71,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:tallgrass:2"
+                  "item": "minecraft:fern"
                 }
               ]
             },
@@ -141,7 +141,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:yellow_flower"
+                  "item": "minecraft:dandelion"
                 }
               ]
             },
@@ -155,7 +155,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:0"
+                  "item": "minecraft:poppy"
                 }
               ]
             },
@@ -169,7 +169,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:1"
+                  "item": "minecraft:blue_orchid"
                 }
               ]
             },
@@ -183,7 +183,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:2"
+                  "item": "minecraft:allium"
                 }
               ]
             },
@@ -197,7 +197,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:3"
+                  "item": "minecraft:azure_bluet"
                 }
               ]
             },
@@ -211,7 +211,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:4"
+                  "item": "minecraft:red_tulip"
                 }
               ]
             },
@@ -225,7 +225,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:5"
+                  "item": "minecraft:orange_tulip"
                 }
               ]
             },
@@ -239,7 +239,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:6"
+                  "item": "minecraft:white_tulip"
                 }
               ]
             },
@@ -253,7 +253,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:7"
+                  "item": "minecraft:pink_tulip"
                 }
               ]
             },
@@ -267,7 +267,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:8"
+                  "item": "minecraft:oxeye_daisy"
                 }
               ]
             },
@@ -281,7 +281,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:9"
+                  "item": "minecraft:cornflower"
                 }
               ]
             },
@@ -295,7 +295,21 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:red_flower:10"
+                  "item": "minecraft:lily_of_the_valley"
+                }
+              ]
+            },
+            {
+              "max_uses": 7,
+              "wants": [
+                {
+                  "item": "minecraft:emerald",
+                  "quantity": 1
+                }
+              ],
+              "gives": [
+                {
+                  "item": "minecraft:open_eyeblossom"
                 }
               ]
             },
@@ -368,20 +382,31 @@
                 {
                   "choice": [
                     {
-                      "item": "minecraft:sapling",
-                      "functions": [
-                        {
-                          "function": "random_block_state",
-                          "block_state": "sapling_type",
-                          "values": {
-                            "min": 0,
-                            "max": 5
-                          }
-                        }
-                      ]
+                      "item": "minecraft:oak_sapling"
+                    },
+                    {
+                      "item": "minecraft:spruce_sapling"
+                    },
+                    {
+                      "item": "minecraft:birch_sapling"
+                    },
+                    {
+                      "item": "minecraft:jungle_sapling"
+                    },
+                    {
+                      "item": "minecraft:acacia_sapling"
+                    },
+                    {
+                      "item": "minecraft:dark_oak_sapling"
+                    },
+                    {
+                      "item": "minecraft:cherry_sapling"
                     },
                     {
                       "item": "minecraft:mangrove_propagule"
+                    },
+                    {
+                      "item": "minecraft:pale_oak_sapling"
                     }
                   ]
                 }
@@ -398,16 +423,23 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:dye",
-                  "quantity": 3,
-                  "functions": [
-                    {
-                      "function": "random_aux_value",
-                      "values": {
-                        "min": 0,
-                        "max": 15
-                      }
-                    }
+                  "choice": [
+                    {"item": "minecraft:red_dye", "quantity": 3},
+                    {"item": "minecraft:white_dye", "quantity": 3},
+                    {"item": "minecraft:blue_dye", "quantity": 3},
+                    {"item": "minecraft:pink_dye", "quantity": 3},
+                    {"item": "minecraft:black_dye", "quantity": 3},
+                    {"item": "minecraft:green_dye", "quantity": 3},
+                    {"item": "minecraft:light_gray_dye", "quantity": 3},
+                    {"item": "minecraft:magenta_dye", "quantity": 3},
+                    {"item": "minecraft:yellow_dye", "quantity": 3},
+                    {"item": "minecraft:gray_dye", "quantity": 3},
+                    {"item": "minecraft:purple_dye", "quantity": 3},
+                    {"item": "minecraft:light_blue_dye", "quantity": 3},
+                    {"item": "minecraft:lime_dye", "quantity": 3},
+                    {"item": "minecraft:orange_dye", "quantity": 3},
+                    {"item": "minecraft:brown_dye", "quantity": 3},
+                    {"item": "minecraft:cyan_dye", "quantity": 3}
                   ]
                 }
               ]
@@ -423,16 +455,21 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:coral_block",
-                  "quantity": 1,
-                  "functions": [
+                  "choice": [
                     {
-                      "function": "random_block_state",
-                      "block_state": "coral_color",
-                      "values": {
-                        "min": 0,
-                        "max": 4
-                      }
+                      "item": "minecraft:tube_coral_block"
+                    },
+                    {
+                      "item": "minecraft:brain_coral_block"
+                    },
+                    {
+                      "item": "minecraft:bubble_coral_block"
+                    },
+                    {
+                      "item": "minecraft:fire_coral_block"
+                    },
+                    {
+                      "item": "minecraft:horn_coral_block"
                     }
                   ]
                 }
@@ -448,7 +485,10 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:vine"
+                  "choice": [
+                    { "item": "minecraft:vine" },
+                    { "item": "minecraft:pale_hanging_moss" }
+                  ]
                 }
               ]
             },
@@ -514,7 +554,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:sand:0",
+                  "item": "minecraft:sand",
                   "quantity": 8
                 }
               ]
@@ -529,7 +569,7 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:sand:1",
+                  "item": "minecraft:red_sand",
                   "quantity": 4
                 }
               ]
@@ -574,8 +614,10 @@
               ],
               "gives": [
                 {
-                  "item": "minecraft:moss_block",
-                  "quantity": 2
+                  "choice": [
+                    { "item": "minecraft:moss_block", "quantity": 2 },
+                    { "item": "minecraft:pale_moss_block", "quantity": 2 }
+                  ]
                 }
               ]
             }

@@ -1,12 +1,13 @@
 {
-  "format_version": "1.18.10",
+  "format_version": "1.21.40",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:cat",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
+
     "component_groups": {
       "minecraft:cat_baby": {
         "minecraft:is_baby": {
@@ -23,7 +24,6 @@
           }
         }
       },
-
       "minecraft:cat_adult": {
         "minecraft:experience_reward": {
           "on_bred": "Math.Random(1,7)",
@@ -35,14 +35,11 @@
         "minecraft:scale": {
           "value": 0.8
         },
-        "minecraft:behavior.breed": {
-          "priority": 3,
-          "speed_multiplier": 1.0
-        },
         "minecraft:breedable": {
           "require_tame": true,
           "require_full_health": true,
           "allow_sitting": true,
+          "combine_parent_colors": true,
           "breeds_with": {
             "mate_type": "minecraft:cat",
             "baby_type": "minecraft:cat",
@@ -52,6 +49,10 @@
             }
           },
           "breed_items": [ "fish", "salmon" ]
+        },
+        "minecraft:behavior.breed": {
+          "priority": 3,
+          "speed_multiplier": 1.0
         }
       },
       "minecraft:cat_wild": {
@@ -83,25 +84,15 @@
           "entity_types": [
             {
               "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "rabbit"
+                "test": "is_family", "subject": "other", "value": "rabbit"
               },
               "max_dist": 8
             },
             {
               "filters": {
                 "all_of": [
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "baby_turtle"
-                  },
-                  {
-                    "test": "in_water",
-                    "subject": "other",
-                    "operator": "!=",
-                    "value": true
+                  { "test": "is_family", "subject": "other", "value": "baby_turtle" },
+                  { "test": "in_water", "subject": "other", "operator": "!=", "value": true
                   }
                 ]
               },
@@ -114,6 +105,8 @@
           "speed_multiplier": 0.5,
           "within_radius": 16,
           "can_get_scared": true,
+          "tempt_sound": "tempt",
+          "sound_interval": [0, 100],
           "items": [
             "fish",
             "salmon"
@@ -150,6 +143,38 @@
         },
         "minecraft:sittable": {
         },
+        "minecraft:is_dyeable": {
+          "interact_text": "action.interact.dye"
+        },
+        "minecraft:on_wake_with_owner": {
+          "event": "minecraft:pet_slept_with_owner",
+          "target": "self"
+        },
+        "minecraft:behavior.teleport_to_owner": {
+          "priority": 0,
+          "filters": {
+            "all_of": [
+              { "test": "owner_distance", "operator": ">", "value": 12 },
+              { "test": "is_panicking" }
+            ]
+          }
+        },
+        "minecraft:behavior.pet_sleep_with_owner": {
+          "priority": 2,
+          "speed_multiplier": 1.2,
+          "search_radius": 10,
+          "search_height": 10,
+          "goal_radius": 1.0
+        },
+        "minecraft:behavior.stay_while_sitting": {
+          "priority": 3
+        },
+        "minecraft:behavior.follow_owner": {
+          "priority": 4,
+          "speed_multiplier": 1.0,
+          "start_distance": 10,
+          "stop_distance": 2
+        },
         "minecraft:behavior.tempt": {
           "priority": 5,
           "speed_multiplier": 0.5,
@@ -159,32 +184,9 @@
             "salmon"
           ]
         },
-        "minecraft:is_dyeable": {
-          "interact_text": "action.interact.dye"
-        },
-        "minecraft:behavior.follow_owner": {
-          "priority": 4,
-          "speed_multiplier": 1.0,
-          "start_distance": 10,
-          "stop_distance": 2
-        },
-        "minecraft:behavior.stay_while_sitting": {
-          "priority": 3
-        },
         "minecraft:behavior.ocelot_sit_on_block": {
           "priority": 7,
           "speed_multiplier": 1.0
-        },
-        "minecraft:behavior.pet_sleep_with_owner": {
-          "priority": 2,
-          "speed_multiplier": 1.2,
-          "search_radius": 10,
-          "search_height": 10,
-          "goal_radius": 1.0
-        },
-        "minecraft:on_wake_with_owner": {
-          "event": "minecraft:pet_slept_with_owner",
-          "target": "self"
         }
       },
       "minecraft:cat_gift_for_owner": {
@@ -339,7 +341,7 @@
       "minecraft:damage_sensor": {
         "triggers": {
           "cause": "fall",
-          "deals_damage": false
+          "deals_damage": "no"
         }
       },
       "minecraft:dweller": {
@@ -353,6 +355,14 @@
       },
       "minecraft:despawn": {
         "despawn_from_distance": {}
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:conditional_bandwidth_optimization": {
       },
       "minecraft:behavior.float": {
         "priority": 0
@@ -390,14 +400,6 @@
       },
       "minecraft:behavior.look_at_player": {
         "priority": 9
-      },
-      "minecraft:physics": {
-      },
-      "minecraft:pushable": {
-        "is_pushable": true,
-        "is_pushable_by_piston": true
-      },
-      "minecraft:conditional_bandwidth_optimization": {
       }
     },
 
@@ -524,32 +526,17 @@
           }
         ]
       },
-
       "minecraft:spawn_from_village": {
         "sequence": [
           {
             "randomize": [
               {
                 "weight": 3,
-                "remove": {
-                },
-                "add": {
-                  "component_groups": [
-                    "minecraft:cat_adult",
-                    "minecraft:cat_wild"
-                  ]
-                }
+                "trigger": "minecraft:spawn_wild_adult"
               },
               {
                 "weight": 1,
-                "remove": {
-                },
-                "add": {
-                  "component_groups": [
-                    "minecraft:cat_baby",
-                    "minecraft:cat_wild"
-                  ]
-                }
+                "trigger": "minecraft:spawn_wild_baby"
               }
             ]
           },
@@ -639,41 +626,60 @@
           }
         ]
       },
-
       "minecraft:spawn_midnight_cat": {
         "sequence": [
           {
+            "trigger": "minecraft:spawn_wild_adult",
             "add": {
               "component_groups": [
-                "minecraft:cat_adult",
-                "minecraft:cat_wild",
                 "minecraft:cat_black"
               ]
             }
           }
         ]
       },
-
       "minecraft:entity_born": {
         "sequence": [
           {
             "filters": {
-              "test": "has_component",
-              "operator": "!=",
-              "value": "minecraft:is_baby"
+              "test": "has_component", "operator": "!=", "value": "minecraft:is_baby"
             },
-            "remove": {
-            },
-            "add": {
-              "component_groups": [
-                "minecraft:cat_baby",
-                "minecraft:cat_tame"
-              ]
-            }
+            "trigger": "minecraft:spawn_tame_baby"
           }
         ]
       },
-
+      "minecraft:spawn_wild_baby": {
+        "add": {
+          "component_groups": [
+            "minecraft:cat_baby",
+            "minecraft:cat_wild"
+          ]
+        }
+      },
+      "minecraft:spawn_wild_adult": {
+        "add": {
+          "component_groups": [
+            "minecraft:cat_adult",
+            "minecraft:cat_wild"
+          ]
+        }
+      },
+      "minecraft:spawn_tame_baby": {
+        "add": {
+          "component_groups": [
+            "minecraft:cat_baby",
+            "minecraft:cat_tame"
+          ]
+        }
+      },
+      "minecraft:spawn_tame_adult": {
+        "add": {
+          "component_groups": [
+            "minecraft:cat_adult",
+            "minecraft:cat_tame"
+          ]
+        }
+      },
       "minecraft:ageable_grow_up": {
         "remove": {
           "component_groups": [

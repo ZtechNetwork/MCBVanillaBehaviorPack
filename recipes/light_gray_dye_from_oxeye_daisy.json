@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:light_gray_dye_from_oxeye_daisy"
@@ -11,8 +11,12 @@
     "priority": 1,
     "ingredients": [
       {
-        "item": "minecraft:red_flower",
-        "data": 8
+        "item": "minecraft:oxeye_daisy"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:oxeye_daisy"
       }
     ],
     "result": {

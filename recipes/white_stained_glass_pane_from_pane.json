@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:white_stained_glass_pane_from_pane"
@@ -18,13 +18,19 @@
         "item": "minecraft:glass_pane"
       },
       "X": {
-        "item": "minecraft:dye",
-        "data": 19
+        "item": "minecraft:white_dye"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:glass_pane"
+      },
+      {
+        "item": "minecraft:white_dye"
+      }
+    ],
     "result": {
-      "item": "minecraft:stained_glass_pane",
-      "data": 0,
+      "item": "minecraft:white_stained_glass_pane",
       "count": 8
     }
   }

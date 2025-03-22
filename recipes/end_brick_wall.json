@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:end_brick_wall"
@@ -16,9 +16,13 @@
         "item": "minecraft:end_bricks"
       }
     },
+    "unlock": [
+      {
+        "item": "minecraft:end_bricks"
+      }
+    ],
     "result": {
-      "item": "minecraft:cobblestone_wall",
-      "data": 10,
+      "item": "minecraft:end_stone_brick_wall",
       "count": 6
     }
   }

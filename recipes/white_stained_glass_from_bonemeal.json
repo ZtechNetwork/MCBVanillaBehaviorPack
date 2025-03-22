@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:white_stained_glass_from_bonemeal"
@@ -19,13 +19,16 @@
         "item": "minecraft:glass"
       },
       "X": {
-        "item": "minecraft:dye",
-        "data": 15
+        "item": "minecraft:bone_meal"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:glass"
+      }
+    ],
     "result": {
-      "item": "minecraft:stained_glass",
-      "data": 0,
+      "item": "minecraft:white_stained_glass",
       "count": 8
     }
   }

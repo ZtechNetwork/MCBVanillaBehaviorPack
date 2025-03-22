@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:light_blue_dye_from_blue_orchid"
@@ -10,9 +10,13 @@
     "group": "light_blue_dye",
     "ingredients": [
       {
-        "item": "minecraft:red_flower",
-        "data": 1
+        "item": "minecraft:blue_orchid"
       }
+    ],
+	"unlock": [
+      {
+         "item": "minecraft:blue_orchid"
+	  }
     ],
     "result": {
       "item": "minecraft:dye",

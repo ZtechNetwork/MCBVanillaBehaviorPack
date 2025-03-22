@@ -1,11 +1,11 @@
 {
-  "format_version": "1.17.10",
+  "format_version": "1.21.60",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:fox",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
 
     "component_groups": {
@@ -26,7 +26,6 @@
             "target": "self"
           }
         },
-
         "minecraft:behavior.follow_parent": {
           "priority": 9,
           "speed_multiplier": 1.1
@@ -94,20 +93,18 @@
           "priority": 1,
           "speed_multiplier": 1.25
         },
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_box_attack": {
           "priority": 10,
           "track_target": true,
-          "require_complete_path": true,
-          "reach_multiplier": 1.5
+          "require_complete_path": true
         }
       },
 
       "minecraft:defending_fox": {
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_box_attack": {
           "priority": 1,
           "track_target": true,
-          "require_complete_path": true,
-          "reach_multiplier": 1.5
+          "require_complete_path": true
         },
         "minecraft:behavior.panic": {
           "priority": 2,
@@ -345,52 +342,17 @@
           "mob_detect_height": 6.0,
           "can_nap_filters": {
             "all_of": [
-              {
-                "test": "in_water",
-                "subject": "self",
-                "operator": "==",
-                "value": false
-              },
-              {
-                "test": "on_ground",
-                "subject": "self",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "test": "is_underground",
-                "subject": "self",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "test": "weather_at_position",
-                "subject": "self",
-                "operator": "!=",
-                "value": "thunderstorm"
-              }
+              { "test": "in_water", "subject": "self", "operator": "==", "value": false },
+              { "test": "on_ground", "subject": "self", "operator": "==", "value": true },
+              { "test": "is_underground", "subject": "self", "operator": "==", "value": true },
+              { "test": "weather_at_position", "subject": "self", "operator": "!=", "value": "thunderstorm" }
             ]
           },
           "wake_mob_exceptions": {
             "any_of": [
-              {
-                "test": "trusts",
-                "subject": "other",
-                "operator": "==",
-                "value": true
-              },
-              {
-                "test": "is_family",
-                "subject": "other",
-                "operator": "==",
-                "value": "fox"
-              },
-              {
-                "test": "is_sneaking",
-                "subject": "other",
-                "operator": "==",
-                "value": true
-              }
+              { "test": "trusts", "subject": "other", "operator": "==", "value": true },
+              { "test": "is_family", "subject": "other", "operator": "==", "value": "fox" },
+              { "test": "is_sneaking", "subject": "other", "operator": "==", "value": true }
             ]
           }
         },
@@ -404,7 +366,7 @@
       "minecraft:fox_night": {
         "minecraft:environment_sensor": {
           "triggers": [
-	    {
+	          {
               "filters": { "test" : "weather_at_position", "value" : "thunderstorm" },
               "event": "minecraft:fox_configure_thunderstorm"
             },
@@ -413,7 +375,7 @@
               "event": "minecraft:fox_configure_day"
             }
           ]
-	},
+	      },
         "minecraft:behavior.stroll_towards_village": {
           "priority": 11,
           "speed_multiplier": 1.0,
@@ -441,6 +403,12 @@
           "event_name": "screech",
           "value": 80,
           "range": 160
+        }
+      },
+
+      "minecraft:fox_ambient_defending_target": {
+        "minecraft:ambient_sound_interval": {
+          "event_name": "mad"
         }
       }
     },
@@ -475,8 +443,8 @@
       "minecraft:nameable": {
       },
       "minecraft:health": {
-        "value": 20,
-        "max": 20
+        "value": 10,
+        "max": 10
       },
       "minecraft:movement": {
         "value": 0.3
@@ -485,6 +453,7 @@
         "damage": 2
       },
       "minecraft:shareables": {
+        "singular_pickup": true,
         "all_items": true,
         "all_items_max_amount": 1,
         "items": [
@@ -495,6 +464,7 @@
           { "item": "minecraft:beetroot", "priority": 0, "max_amount": 1 },
           { "item": "minecraft:beetroot_soup", "priority": 0, "max_amount": 1 },
           { "item": "minecraft:bread", "priority": 0, "max_amount": 1 },
+          { "item": "minecraft:bundle", "priority": 1, "max_amount": 1 },
           { "item": "minecraft:carrot", "priority": 0, "max_amount": 1 },
           { "item": "minecraft:chicken", "priority": 0, "max_amount": 1 },
           { "item": "minecraft:chorus_fruit", "priority": 0, "max_amount": 1 },
@@ -539,7 +509,7 @@
                 "value": "minecraft:sweet_berry_bush"
               }
             },
-            "deals_damage": false
+            "deals_damage": "no"
           }
         ]
       },
@@ -848,7 +818,8 @@
         },
         "add": {
           "component_groups": [
-            "minecraft:defending_fox"
+            "minecraft:defending_fox",
+            "minecraft:fox_ambient_defending_target"
           ]
         }
       },

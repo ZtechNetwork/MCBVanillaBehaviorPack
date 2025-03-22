@@ -1,5 +1,5 @@
 {
-    "format_version": "1.16",
+    "format_version": "1.20.10",
     "minecraft:recipe_shaped": {
         "description": {
             "identifier": "minecraft:lodestone"
@@ -14,12 +14,17 @@
         ],
         "key": {
             "S": {
-                "item": "minecraft:stonebrick:3"
+                "item": "minecraft:chiseled_stone_bricks"
             },
             "#": {
                 "item": "minecraft:netherite_ingot"
             }
         },
+        "unlock": [
+          {
+            "item": "minecraft:netherite_ingot"
+          }
+        ],
         "result": {
             "item": "minecraft:lodestone",
             "count": 1

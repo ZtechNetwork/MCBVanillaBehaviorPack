@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:suspicious_stew_from_dandelion"
@@ -18,9 +18,12 @@
         "item": "minecraft:bowl"
       },
       {
-        "item": "minecraft:yellow_flower"
+        "item": "minecraft:dandelion"
       }
     ],
+    "unlock": {
+        "context": "None"
+    },
     "result": {
       "item": "minecraft:suspicious_stew",
       "data": 5

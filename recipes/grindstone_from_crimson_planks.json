@@ -4,27 +4,24 @@
         "description": {
             "identifier": "minecraft:grindstone_from_crimson_planks"
         },
-        "tags": [
-            "crafting_table"
-        ],
+        "tags": [ "crafting_table" ],
         "pattern": [
-            "ABA",
-            "C C"
+          "|_|",
+          "# #"
         ],
         "key": {
-            "A": {
-                "item": "stick"
-            },
-            "B": {
-                "item": "stone_slab"
-            },
-            "C": {
-                "item": "crimson_planks"
-            }
+          "|": {
+              "item": "minecraft:stick"
+          },
+          "#": {
+            "item": "minecraft:crimson_planks"
+          },
+          "_": {
+            "item": "minecraft:normal_stone_slab"
+          }
         },
         "result": {
-            "item": "grindstone",
-            "count": 1
+          "item": "minecraft:grindstone"
         },
         "priority": 2
     }

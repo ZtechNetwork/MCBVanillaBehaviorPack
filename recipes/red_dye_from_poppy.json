@@ -1,17 +1,19 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:red_dye_from_poppy"
     },
-
-    
     "tags": [ "crafting_table" ],
     "group": "red_dye",
     "ingredients": [
       {
-        "item": "minecraft:red_flower",
-        "data": 0
+        "item": "minecraft:poppy"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:poppy"
       }
     ],
     "result": {

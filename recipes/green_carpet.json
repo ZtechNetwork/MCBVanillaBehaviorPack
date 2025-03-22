@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:green_carpet"
@@ -13,13 +13,16 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:wool",
-        "data": 13
+        "item": "minecraft:green_wool"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:green_wool"
+      }
+    ],
     "result": {
-      "item": "minecraft:carpet",
-      "data": 13,
+      "item": "minecraft:green_carpet",
       "count": 3
     }
   }

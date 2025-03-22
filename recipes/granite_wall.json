@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:granite_wall"
@@ -13,13 +13,16 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:stone",
-        "data": 1
+        "item": "minecraft:granite"
       }
     },
+    "unlock": [
+      {
+        "item": "minecraft:granite"
+      }
+    ],
     "result": {
-      "item": "minecraft:cobblestone_wall",
-      "data": 2,
+      "item": "minecraft:granite_wall",
       "count": 6
     }
   }

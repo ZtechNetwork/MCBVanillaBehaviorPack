@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_smooth_double_stone_slab"
@@ -10,13 +10,16 @@
     "priority": 0,
     "ingredients": [
       {
-        "item": "minecraft:smooth_stone",
-        "data": 0
+        "item": "minecraft:smooth_stone"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:smooth_stone"
       }
     ],
     "result": {
-      "item": "minecraft:double_stone_slab",
-      "data": 0,
+      "item": "minecraft:smooth_stone_slab",
       "count": 2
     }
   }

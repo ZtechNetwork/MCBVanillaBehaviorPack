@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_red_sandstone_cut"
@@ -14,9 +14,14 @@
         "data": 0
       }
     ],
+    "unlock": [
+      {
+        "item": "minecraft:red_sandstone",
+        "data": 0
+      }
+    ],
     "result": {
-      "item": "minecraft:red_sandstone",
-      "data": 2,
+      "item": "minecraft:cut_red_sandstone",
       "count": 1
     }
   }

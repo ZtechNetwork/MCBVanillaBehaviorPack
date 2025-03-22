@@ -3,6 +3,7 @@
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:axolotl",
+      "spawn_category": "axolotls",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
@@ -275,7 +276,7 @@
           }
         ]
       },
-      "minecraft:behavior.melee_attack": {
+      "minecraft:behavior.melee_box_attack": {
         "priority": 4,
         "on_kill": {
             "event": "killed_enemy_event",

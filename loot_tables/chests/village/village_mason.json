@@ -32,7 +32,7 @@
         {
           "type": "item",
           "weight": 2,
-          "name": "minecraft:stonebrick"
+          "name": "minecraft:stone_bricks"
         },
         {
           "type": "item",
@@ -50,13 +50,7 @@
         },
         {
           "type": "item",
-          "functions": [
-            {
-              "function": "minecraft:set_data",
-              "data": 11
-            }
-          ],
-          "name": "minecraft:dye"
+          "name": "minecraft:yellow_dye"
         },
         {
           "type": "item",

@@ -1,11 +1,11 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:vindicator",
+      "spawn_category": "monster",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
 
     "component_groups": {
@@ -44,14 +44,9 @@
           "must_see": true,
           "within_radius": 12.0,
           "must_see_forget_duration": 40.0,
-
           "entity_types": [
             {
-              "filters": {
-                "all_of": [
-                  { "test": "is_family", "subject": "other", "operator": "!=", "value": "illager" }
-                ]
-              },
+              "filters": { "test": "is_family", "subject": "other", "operator": "!=", "value": "illager" },
               "max_dist": 12
             }
           ]
@@ -63,7 +58,6 @@
           "must_see": true,
           "within_radius": 12.0,
           "must_see_forget_duration": 40.0,
-
           "entity_types": [
             {
               "filters": {
@@ -144,26 +138,8 @@
             }
           ]
         },
-        "minecraft:damage_sensor": {
-          "triggers": {
-            "on_damage": {
-              "filters": {
-                "all_of": [
-                  {
-                    "test": "has_damage",
-                    "value": "fatal"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "player"
-                  }
-                ]
-              },
-              "event": "minecraft:gain_bad_omen",
-              "target": "other"
-            }
-          }
+        "minecraft:loot": {
+          "table": "loot_tables/entities/pillager_captain.json"
         }
       },
       "minecraft:patrol_captain": {
@@ -181,26 +157,8 @@
             }
           ]
         },
-        "minecraft:damage_sensor": {
-          "triggers": {
-            "on_damage": {
-              "filters": {
-                "all_of": [
-                  {
-                    "test": "has_damage",
-                    "value": "fatal"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "player"
-                  }
-                ]
-              },
-              "event": "minecraft:gain_bad_omen",
-              "target": "other"
-            }
-          }
+        "minecraft:loot": {
+          "table": "loot_tables/entities/pillager_captain.json"
         },
         "minecraft:behavior.move_to_random_block": {
           "priority": 5,
@@ -220,10 +178,25 @@
     },
 
     "components": {
+      // Components
+      "minecraft:equip_item": {
+      },
+      "minecraft:shareables": {
+        "items": [
+          {
+            "item": "minecraft:banner:15",
+            "want_amount": 1,
+            "surplus_amount": 1,
+            "priority": 0
+          }
+        ]
+      },
       "minecraft:is_hidden_when_invisible": {
       },
       "minecraft:experience_reward": {
         "on_death": "query.last_hit_by_player ? (query.is_baby ? 12 : 5) + (Math.die_roll(query.equipment_count,1,3)) : 0"
+      },
+      "minecraft:can_join_raid": {
       },
       "minecraft:conditional_bandwidth_optimization": {
       },
@@ -242,8 +215,6 @@
           }
         ]
       },
-
-      // vindicator Components
       "minecraft:type_family": {
         "family": [ "vindicator", "monster", "illager", "mob" ]
       },
@@ -293,12 +264,21 @@
       "minecraft:equipment": {
         "table": "loot_tables/entities/vindicator_gear.json"
       },
-
-      // vindicator Behaviors
+      // Behaviors
       "minecraft:behavior.float": {
         "priority": 0
       },
-      "minecraft:behavior.melee_attack": {
+      "minecraft:behavior.avoid_mob_type": {
+        "priority": 2,
+        "entity_types": [
+          {
+            "filters": { "test": "is_family", "subject": "other", "value": "creaking" },
+            "max_dist": 8,
+            "sprint_speed_multiplier": 1.2
+          }
+        ]
+      },
+      "minecraft:behavior.melee_box_attack": {
         "priority": 3
       },
       "minecraft:behavior.random_stroll": {
@@ -311,7 +291,22 @@
         "probability": 0.02
       },
       "minecraft:behavior.hurt_by_target": {
-        "priority": 1
+        "priority": 1,
+        "entity_types": {
+          "filters": {
+            "test": "is_family", "subject": "other", "operator": "!=", "value": "illager"
+          },
+          "max_dist": 64
+        }
+      },
+      "minecraft:behavior.equip_item": {
+        "priority": 3
+      },
+      "minecraft:behavior.pickup_items": {
+        "priority": 7,
+        "max_dist": 3,
+        "goal_radius": 2,
+        "speed_multiplier": 1.0
       },
       "minecraft:on_target_acquired": {
         "event": "minecraft:become_aggro",

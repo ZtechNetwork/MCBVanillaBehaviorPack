@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:blue_dye_from_cornflower"
@@ -10,8 +10,12 @@
     "group": "blue_dye",
     "ingredients": [
       {
-        "item": "minecraft:red_flower",
-        "data": 9
+        "item": "minecraft:cornflower"
+      }
+    ],
+	"unlock": [
+      {
+        "item": "minecraft:cornflower"
       }
     ],
     "result": {

@@ -1,8 +1,9 @@
 {
-  "format_version": "1.17.20",
+  "format_version": "1.20.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:drowned",
+      "spawn_category": "monster",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
@@ -17,7 +18,7 @@
           "value": 0.5
         },
         "minecraft:movement": {
-          "value": 0.25
+          "value": 0.35
         },
         "minecraft:underwater_movement": {
           "value": 0.08
@@ -50,7 +51,8 @@
 
       "minecraft:ranged_mode": {
         "minecraft:shooter": {
-          "def": "minecraft:thrown_trident"
+          "def": "minecraft:thrown_trident",
+          "sound": "item.trident.throw"
         },
         "minecraft:behavior.ranged_attack": {
           "priority": 3,
@@ -77,7 +79,8 @@
         "minecraft:attack": {
           "damage": 3
         },
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_box_attack": {
+          "can_spread_on_fire": true,
           "priority": 3,
           "speed_multiplier": 1,
           "track_target": false,
@@ -134,6 +137,11 @@
         "family": [ "drowned", "zombie", "undead", "monster", "mob" ]
       },
       "minecraft:equip_item": {
+        "excluded_items": [
+          {
+            "item": "minecraft:banner:15"
+          }
+        ]
       },
       "minecraft:collision_box": {
         "width": 0.6,
@@ -181,6 +189,7 @@
         "avoid_sun": true
       },
       "minecraft:shareables": {
+        "singular_pickup": true,
         "items": [
           {
             "item": "minecraft:nautilus_shell",

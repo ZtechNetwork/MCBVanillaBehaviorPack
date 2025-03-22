@@ -1,11 +1,11 @@
 {
-  "format_version": "1.18.10",
+  "format_version": "1.21.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:panda",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
     "component_groups": {
       "minecraft:panda_baby": {
@@ -43,28 +43,10 @@
             {
               "filters": {
                 "all_of": [
-                  {
-                    "test": "has_component",
-                    "subject": "other",
-                    "operator": "!=",
-                    "value": "minecraft:is_baby"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "panda"
-                  },
-                  {
-                    "test": "in_water",
-                    "subject": "other",
-                    "operator": "!=",
-                    "value": true
-                  },
-                  {
-                    "test": "on_ground",
-                    "operator": "==",
-                    "value": true
-                  }
+                  { "test": "has_component", "subject": "other", "operator": "!=", "value": "minecraft:is_baby" },
+                  { "test": "is_family", "subject": "other", "value": "panda" },
+                  { "test": "in_water", "subject": "other", "operator": "!=", "value": true },
+                  { "test": "on_ground", "operator": "==", "value": true }
                 ]
               },
               "max_dist": 10
@@ -121,11 +103,10 @@
         "minecraft:attack": {
           "damage": 2.0
         },
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_box_attack": {
           "priority": 2,
           "attack_once": true,
-          "track_target": true,
-          "reach_multiplier": 1.0
+          "track_target": true
         }
       },
       "minecraft:panda_lazy": {
@@ -267,10 +248,9 @@
         "minecraft:attack": {
           "damage": 6.0
         },
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_box_attack": {
           "priority": 2,
-          "track_target": true,
-          "reach_multiplier": 1.0
+          "track_target": true
         },
         "minecraft:on_friendly_anger": {
           "event": "minecraft:on_anger",
@@ -279,7 +259,7 @@
         "minecraft:behavior.panic": {
           "priority": 1,
           "speed_multiplier": 1.25,
-          // Aggressive pandas don't panic from mob damage
+          "damage_sources": [ "campfire", "fire", "fire_tick", "freezing", "lightning", "lava", "magma", "temperature", "soul_campfire" ],
           "ignore_mob_damage": true
         }
       },
@@ -318,7 +298,6 @@
         }
       }
     },
-
 
     "components": {
       "minecraft:is_hidden_when_invisible": {

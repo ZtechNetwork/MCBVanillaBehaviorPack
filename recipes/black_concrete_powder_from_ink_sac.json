@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:black_concrete_powder_from_ink_sac"
@@ -11,8 +11,7 @@
     "priority": 1,
     "ingredients": [
       {
-        "item": "minecraft:dye",
-        "data": 0
+        "item": "minecraft:ink_sac"
       },
       {
         "item": "minecraft:sand",
@@ -43,9 +42,17 @@
         "item": "minecraft:gravel"
       }
     ],
+	"unlock": [
+      {
+        "item": "minecraft:gravel"
+	  },
+	  {
+		"item": "minecraft:sand",
+        "data": 0
+      }
+    ],
     "result": {
-      "item": "minecraft:concrete_powder",
-      "data": 15,
+      "item": "minecraft:black_concrete_powder",
       "count": 8
     }
   }

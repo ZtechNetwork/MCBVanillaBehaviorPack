@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:acacia_wood"
@@ -10,17 +10,20 @@
     "group": "wood",
     "pattern": [
       "##",
-  	"##"
+	  "##"
     ],
     "key": {
       "#": {
-        "item": "minecraft:log2",
-        "data": 0
+        "item": "minecraft:acacia_log"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:acacia_log"
+      }
+    ],
     "result": {
-      "item": "minecraft:wood",
-      "data": 4,
+      "item": "minecraft:acacia_wood",
       "count": 3
     }
   }

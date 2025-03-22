@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:suspicious_stew_from_oxeye_daisy"
@@ -18,10 +18,12 @@
         "item": "minecraft:bowl"
       },
       {
-        "item": "minecraft:red_flower",
-        "data": 8
+        "item": "minecraft:oxeye_daisy"
       }
     ],
+    "unlock": {
+        "context": "None"
+    },
     "result": {
       "item": "minecraft:suspicious_stew",
       "data": 8

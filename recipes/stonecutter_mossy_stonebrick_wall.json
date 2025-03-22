@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_mossy_stonebrick_wall"
@@ -10,13 +10,16 @@
     "priority": 2,
     "ingredients": [
       {
-        "item": "minecraft:stonebrick",
-        "data": 1
+        "item": "minecraft:mossy_stone_bricks"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:mossy_stone_bricks"
       }
     ],
     "result": {
-      "item": "minecraft:cobblestone_wall",
-      "data": 8,
+      "item": "minecraft:mossy_stone_brick_wall",
       "count": 1
     }
   }

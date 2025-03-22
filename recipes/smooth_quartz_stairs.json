@@ -1,11 +1,9 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:smooth_quartz_stairs"
     },
-
-    
     "tags": [ "crafting_table" ],
     "pattern": [
       "#  ",
@@ -14,10 +12,14 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:quartz_block",
-        "data": 3
+        "item": "minecraft:smooth_quartz"
       }
     },
+	  "unlock": [
+      {
+        "item": "minecraft:smooth_quartz"
+      }
+    ],
     "result": {
       "item": "minecraft:smooth_quartz_stairs",
       "count": 4

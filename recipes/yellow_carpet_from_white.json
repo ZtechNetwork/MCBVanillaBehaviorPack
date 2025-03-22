@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:yellow_carpet_from_white"
@@ -15,17 +15,22 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:carpet",
-        "data": 0
+        "item": "minecraft:white_carpet"
       },
       "X": {
-        "item": "minecraft:dye",
-        "data": 11
+        "item": "minecraft:yellow_dye"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:white_carpet"
+	  },
+	  {
+		"item": "minecraft:yellow_dye"
+      }
+    ],
     "result": {
-      "item": "minecraft:carpet",
-      "data": 4,
+      "item": "minecraft:yellow_carpet",
       "count": 8
     }
   }

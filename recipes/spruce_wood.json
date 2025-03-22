@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:spruce_wood"
@@ -14,13 +14,16 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:log",
-        "data": 1
+        "item": "minecraft:spruce_log"
       }
     },
+	"unlock": [
+        {
+          "item": "minecraft:spruce_log"
+        }
+    ],
     "result": {
-      "item": "minecraft:wood",
-      "data": 1,
+      "item": "minecraft:spruce_wood",
       "count": 3
     }
   }

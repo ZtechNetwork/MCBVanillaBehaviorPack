@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:brown_banner"
@@ -15,13 +15,17 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:wool",
-        "data": 12
+        "item": "minecraft:brown_wool"
       },
       "|": {
         "item": "minecraft:stick"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:brown_wool"
+      }
+    ],
     "result": {
       "item": "minecraft:banner",
       "data": 3

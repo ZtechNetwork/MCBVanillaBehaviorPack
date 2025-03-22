@@ -1,11 +1,11 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.21.60",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:skeleton_horse",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
     "component_groups": {
       "minecraft:skeleton_horse_r5_upgrade": {
@@ -69,12 +69,10 @@
           "triggers": {
             "on_damage": {
               "filters": {
-                "test": "is_family",
-                "subject": "other",
-                "value": "lightning"
+                "test": "is_family", "subject": "other", "value": "lightning"
               }
             },
-            "deals_damage": false
+            "deals_damage": "no"
           }
         }
       }
@@ -82,6 +80,8 @@
 
     "components": {
       "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:ambient_sound_interval": {
       },
       "minecraft:type_family": {
         "family": [ "skeletonhorse", "undead", "mob" ]

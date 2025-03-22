@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_cobbledouble_stone_slab"
@@ -10,13 +10,16 @@
     "priority": 0,
     "ingredients": [
       {
-        "item": "minecraft:cobblestone",
-        "data": 0
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
       }
     ],
     "result": {
-      "item": "minecraft:double_stone_slab",
-      "data": 3,
+      "item": "minecraft:cobblestone_slab",
       "count": 2
     }
   }

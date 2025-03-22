@@ -3,6 +3,7 @@
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:wither_skeleton",
+      "spawn_category": "monster",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
@@ -26,6 +27,11 @@
         "max": 20
       },
       "minecraft:equip_item": {
+        "excluded_items": [
+          {
+            "item": "minecraft:banner:15"
+          }
+        ]
       },
       "minecraft:collision_box": {
         "width": 0.72,
@@ -57,6 +63,7 @@
       "minecraft:can_climb": {
       },
       "minecraft:shareables": {
+        "singular_pickup": true,
         "items": [
           {
             "item": "minecraft:netherite_sword",
@@ -480,7 +487,7 @@
       "minecraft:behavior.equip_item": {
         "priority": 3
       },
-      "minecraft:behavior.melee_attack": {
+      "minecraft:behavior.melee_box_attack": {
         "priority": 4,
         "track_target": true,
         "speed_multiplier": 1.25

@@ -1,11 +1,11 @@
 {
-  "format_version": "1.16.0",
+  "format_version": "1.21.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:camel",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
     "component_groups": {
       "minecraft:camel_saddled": {
@@ -69,12 +69,12 @@
                     { "test": "has_equipment", "subject": "self", "domain": "inventory", "operator": "not", "value": "saddle" },
                     { "test": "has_equipment", "subject": "other", "domain": "hand", "value": "saddle" },
                     { "test": "is_family", "subject": "other", "value": "player" },
-                    { "test": "is_sneaking", "subject": "other", "value": false }
+                    { "test": "is_sneak_held", "subject": "other", "value": false }
                   ]
                 },
                 "target": "self"
               },
-              "equip_item_slot": 0,
+              "equip_item_slot": "0",
               "interact_text": "action.interact.saddle"
             }
           ]
@@ -136,8 +136,6 @@
         }
       },
       "minecraft:camel_sitting": {
-        "minecraft:persist_sit": {
-        },
         "minecraft:pushable": {
           "is_pushable": false,
           "is_pushable_by_piston": true
@@ -163,6 +161,8 @@
         "soft_distance": 4.0,
         "hard_distance": 6.0,
         "max_distance": 10.0
+      },
+      "minecraft:balloonable": {
       },
       "minecraft:type_family": {
         "family": [ "camel", "mob" ]
@@ -229,6 +229,7 @@
       "minecraft:behavior.random_look_around_and_sit": {
         "priority": 4,
         "continue_if_leashed": true,
+        "continue_sitting_on_reload": true,
         "min_look_count": 2,
         "max_look_count": 5,
         "min_look_time": 80,

@@ -23,17 +23,11 @@
         {
           "type": "item",
           "weight": 2,
-          "name": "minecraft:yellow_flower"
+          "name": "minecraft:dandelion"
         },
         {
           "type": "item",
-          "functions": [
-            {
-              "function": "minecraft:set_data",
-              "data": 0
-            }
-          ],
-          "name": "minecraft:red_flower"
+          "name": "minecraft:poppy"
         },
         {
           "type": "item",
@@ -109,13 +103,9 @@
                 "min": 1,
                 "max": 2
               }
-            },
-            {
-              "function": "minecraft:set_data",
-              "data": 0
             }
           ],
-          "name": "minecraft:sapling"
+          "name": "minecraft:oak_sapling"
         }
       ]
     }

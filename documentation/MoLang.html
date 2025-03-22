@@ -1,4 +1,4 @@
-<h1>MOLANG DOCUMENTATION </br>Version: 1.20.0.1</h1>
+<h1>MOLANG DOCUMENTATION </br>Version: 1.21.60.10</h1>
 <h2><p id="Index">Index</p></h2>
 <table border="1">
 <tr> <th><a href="#Why Does Molang Exist?">Why Does Molang Exist?</a></th> </tr>
@@ -815,15 +815,19 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.armor_color_slot</td>
-<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body).</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.armor_damage_slot</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the damage value of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body). Support for entities other than players may be limited, as the damage value is not always available on clients.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.armor_material_slot</td>
-<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.armor_texture_slot</td>
-<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the texture type of the requested slot.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns the texture type of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body).</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.average_frame_time</td>
@@ -834,8 +838,28 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns the block face for this (only valid for certain triggers such as placing blocks, or interacting with block) (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.block_has_all_tags</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.block_has_any_tag</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.block_neighbor_has_all_tags</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes a block-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.block_neighbor_has_any_tag</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes a block-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.block_property</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns the value of the associated Blocks Block State.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.40.) Returns the value of the associated block's Block State.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.block_state</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the value of the associated block's Block State.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.blocking</td>
@@ -852,6 +876,14 @@ Query Functions are operators that access a wide variety of information. They ca
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.bone_aabb</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the axis aligned bounding box of a bone as a struct with members '.min', '.max', along with '.x', '.y', and '.z' values for each.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.bone_orientation_matrix</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the name of the bone as an argument. Returns the bone orientation (as a matrix) of the desired bone provided it exists in the queryable geometry of the mob, else this returns the identity matrix and throws a content error.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.bone_orientation_trs</td>
+<td style="border-style:solid; border-width:3; padding:7px">TRS stands for Translate/Rotate/Scale.  Takes the name of the bone as an argument.  Returns the bone orientation matrix decomposed into the component translation/rotation/scale parts of the desired bone provided it exists in the queryable geometry of the mob, else this returns the identity matrix and throws a content error.  The returned value is returned as a variable of type 'struct' with members '.t', '.r', and '.s', each with members '.x', '.y', and '.z', and can be accessed as per the following example: v.my_variable = q.bone_orientation_trs('rightarm'); return v.my_variable.r.x;</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.bone_origin</td>
@@ -918,8 +950,24 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns the current facing of the player (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.client_max_render_distance</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.client_memory_tier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns a number representing the client RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the Client (Resource Packs) only.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.combine_entities</td>
 <td style="border-style:solid; border-width:3; padding:7px">Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.cooldown_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the total cooldown time in seconds for the item held or worn by the specified equipment slot name (and if required second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.cooldown_time_remaining</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the cooldown time remaining in seconds for specified cooldown type or the item held or worn by the specified equipment slot name (and if required second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities. Returns highest cooldown if no parameters are supplied.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.count</td>
@@ -931,7 +979,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.dash_cooldown_progress</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns dash cooldown progress if the entity can dash, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.50.) DEPRECATED. DO NOT USE AFTER 1.20.40. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown. Returns dash cooldown progress if the entity can dash, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.day</td>
@@ -963,7 +1011,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.equipment_count</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns the number of equipped armor pieces for an actor from 0 to 4, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the number of equipped armor pieces for an actor from 0 to 5, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.equipped_item_all_tags</td>
@@ -1035,7 +1083,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_armor_slot</td>
-<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_biome_tag</td>
@@ -1043,7 +1091,11 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_block_property</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the associated block has the given block property or 0.0 if not</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_block_state</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the associated block has the given block state or 0.0 if not.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_cape</td>
@@ -1062,8 +1114,16 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is affected by gravity, else it returns 0.0.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_head_gear</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns boolean whether an Actor has an item in their head armor slot or not, or false if no actor in current context</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_owner</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns true if the entity has an owner ID else it returns false</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.has_player_rider</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1 if the entity has a player riding it in any seat, else it returns 0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.has_property</td>
@@ -1087,7 +1147,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.head_y_rotation</td>
-<td style="border-style:solid; border-width:3; padding:7px">Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.health</td>
@@ -1132,6 +1192,10 @@ Query Functions are operators that access a wide variety of information. They ca
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_angry</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is angry, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_attached</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is attached to another entity (such as being held or worn), else it will return 0.0. Available only with resource packs.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_attached_to_entity</td>
@@ -1186,6 +1250,14 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity has chests attached to it, else it returns 0.0.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_cooldown_type</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the specified held or worn item has the specified cooldown type name, otherwise returns 0.0. First argument is the cooldown name to check for, second argument is the equipment slot name, and if required third argument is the numerical slot id. For second and third arguments, uses the same name and id that the replaceitem command takes when querying entities.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_crawling</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is crawling, else it returns 0.0</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_critical</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is critical, else it returns 0.0.</br></td>
 </tr>
@@ -1231,7 +1303,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_feeling_happy</td>
-<td style="border-style:solid; border-width:3; padding:7px">[EXPERIMENTAL] Returns 1.0 if the entity is feeling happy, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_fire_immune</td>
@@ -1268,6 +1340,10 @@ Query Functions are operators that access a wide variety of information. They ca
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_in_contact_with_water</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in contact with any water (water, rain, splash water bottle), else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.is_in_lava</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is in lava, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_in_love</td>
@@ -1395,7 +1471,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_rising</td>
-<td style="border-style:solid; border-width:3; padding:7px">[EXPERIMENTAL] Returns 1.0 if the entity is rising, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_roaring</td>
@@ -1415,11 +1491,11 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_scenting</td>
-<td style="border-style:solid; border-width:3; padding:7px">[EXPERIMENTAL] Returns 1.0 if the entity is scenting, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_searching</td>
-<td style="border-style:solid; border-width:3; padding:7px">[EXPERIMENTAL] Returns 1.0 if the entity is searching, else it returns 0.0.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity is searching, else it returns 0.0.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.is_selected_item</td>
@@ -1546,6 +1622,10 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.last_input_mode_is_any</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.lie_amount</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the lie down amount for the entity.</br></td>
 </tr>
@@ -1662,8 +1742,48 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.relative_block_has_all_tags</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.relative_block_has_any_tag</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.remaining_durability</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns the how much durability an item has remaining.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns how much durability an item has remaining.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.ride_body_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the body pitch world-rotation of the ride an entity, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.ride_body_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the body yaw world-rotation of the ride of on an entity, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.ride_head_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the head x world-rotation of the ride of an entity, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.ride_head_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one optional argument as a parameter. Returns the head y world-rotation of the ride of an entity, else it returns 0.0. First parameter only for horses, zombie horses, skeleton horses, donkeys and mules that clamps rotation in degrees.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.rider_body_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the body pitch world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.rider_body_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the body yaw world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.rider_head_x_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one argument as a parameter. Returns the head x world-rotation of the rider entity at the provided index, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.rider_head_y_rotation</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one or two arguments as parameters. Returns the head y world-rotation of the rider entity at the provided index, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.roll_counter</td>
@@ -1672,6 +1792,14 @@ Query Functions are operators that access a wide variety of information. They ca
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.rotation_to_camera</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the rotation required to aim at the camera.  Requires one argument representing the rotation axis you would like (0 for x, 1 for y).</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.scoreboard</td>
+<td style="border-style:solid; border-width:3; padding:7px">Takes one argument - the name of the scoreboard entry for this entity. Returns the specified scoreboard value for this entity. Available only with behavior packs.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.server_memory_tier</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns a number representing the server RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the server side (Behavior Packs) only.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.shake_angle</td>
@@ -1712,6 +1840,10 @@ Query Functions are operators that access a wide variety of information. They ca
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.standing_scale</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the scale of how standing up the entity is.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.state_time</td>
+<td style="border-style:solid; border-width:3; padding:7px">Only valid in an animation controller. Returns the time in seconds in the current animation controller state.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.structural_integrity</td>
@@ -1770,6 +1902,18 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns the current time stamp of the level</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.timer_flag_1</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.timer_flag_2</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.timer_flag_3</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if behavior.timer_flag_3 is running, else it returns 0.0.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.total_emitter_count</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the total number of active emitters in the world.</br></td>
 </tr>
@@ -1778,12 +1922,16 @@ Query Functions are operators that access a wide variety of information. They ca
 <td style="border-style:solid; border-width:3; padding:7px">Returns the total number of active particles in the world.</br></td>
 </tr>
 <tr>
+<td style="border-style:solid; border-width:3; padding:7px">query.touch_only_affects_hotbar</td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.</br></td>
+</tr>
+<tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.trade_tier</td>
 <td style="border-style:solid; border-width:3; padding:7px">Returns the trade tier of the entity if it makes sense, else it returns 0.0</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.unhappy_counter</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns how unhappy the entity is.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Always returns zero. (Was originally meant to indicate Panda unhappiness but due to an early code change it has always only returned zero)</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.variant</td>
@@ -1795,7 +1943,7 @@ Query Functions are operators that access a wide variety of information. They ca
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.walk_distance</td>
-<td style="border-style:solid; border-width:3; padding:7px">Returns the walk distance of the entity.</br></td>
+<td style="border-style:solid; border-width:3; padding:7px">Returns the total distance traveled by an entity while on the ground and not sneaking.</br></td>
 </tr>
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">query.wing_flap_position</td>
@@ -1814,103 +1962,6 @@ Query Functions are operators that access a wide variety of information. They ca
 
 <h1><p id="List of Experimental Entity Queries">List of Experimental Entity Queries</p></h1>
 
-<h2></h2>
-
-<table border="1" style="width:100%; border-style:solid; border-collapse:collapse; border-width:3;">
-<tr> <th style="border-style:solid; border-width:3;">Name</th> <th style="border-style:solid; border-width:3;">Description</th> </tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.biome_has_all_tags</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if all of them exist in the biome, else it returns 0.  Eg: query.biome_has_all_tags('is_cold', 'has_trees').</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.biome_has_any_tag</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if any of them exist in the biome, else it returns 0.  Eg: query.biome_has_any_tag('is_cold', 'has_trees').</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.block_has_all_tags</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.block_has_any_tag</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.block_neighbor_has_all_tags</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes a block-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.block_neighbor_has_any_tag</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes a block-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.bone_orientation_matrix</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes the name of the bone as an argument. Returns the bone orientation (as a matrix) of the desired bone provided it exists in the queryable geometry of the mob, else this returns the identity matrix and throws a content error.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.bone_orientation_trs</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) TRS stands for Translate/Rotate/Scale.  Takes the name of the bone as an argument.  Returns the bone orientation matrix decomposed into the component translation/rotation/scale parts of the desired bone provided it exists in the queryable geometry of the mob, else this returns the identity matrix and throws a content error.  The returned value is returned as a variable of type 'struct' with members '.t', '.r', and '.s', each with members '.x', '.y', and '.z', and can be accessed as per the following example: v.my_variable = q.bone_orientation_trs('rightarm'); return v.my_variable.r.x;</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.client_input_type</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns either 'mouse', 'touch', 'gamepad', or 'motion_controller' depending on the type of input used by the current client.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.cooldown_time</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the total cooldown time in seconds for the item held or worn by the specified equipment slot name (and optional second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.cooldown_time_remaining</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the cooldown time remaining in seconds for specified cooldown type or the item held or worn by the specified equipment slot name (and optional second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities. Returns highest cooldown if no parameters are supplied.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.get_nearby_entities</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.get_nearby_entities_except_self</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.get_ride</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the entity this entity is riding if it is riding something, else it returns 0.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.get_riders</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the array of entities that are riding this entity.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.has_player_rider</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.is_attached</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the actor is attached to another actor (such as being held or worn), else it will return 0.0.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.is_cooldown_type</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the specified held or worn item has the specified cooldown type name, otherwise returns 0.0. First argument is the cooldown name to check for, second argument is the equipment slot name, and optional third argument is the numerical slot id. For second and third arguments, uses the same name and id that the replaceitem command takes when querying entities.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.relative_block_has_all_tags</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.relative_block_has_any_tag</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.scoreboard</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) DEPRECATED (The coming Actor Property feature will replace the need for querying hidden scoreboard data. Current client-side scoreboard code is only meant for supporting the standard UI elements.) Takes one argument - the name of the scoreboard entry for this entity.  Returns the specified scoreboard value for this entity.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.self</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the current entity.</br></td>
-</tr>
-<tr>
-<td style="border-style:solid; border-width:3; padding:7px">query.target</td>
-<td style="border-style:solid; border-width:3; padding:7px">(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the target of the current entity if one exists.</br></td>
-</tr>
-</table>
 <a href="#Index">Back to top</a><br><br>
 
 <br><br>
@@ -1958,6 +2009,22 @@ Molang uses the `"min_engine_version"` from the `manifest.json` of the resource 
 <tr>
 <td style="border-style:solid; border-width:3; padding:7px">1.20.0</td>
 <td style="border-style:solid; border-width:3; padding:7px">Fixed query.cape_flap_amount using the wrong player rotation (head rotation instead of body rotation).</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">1.20.10</td>
+<td style="border-style:solid; border-width:3; padding:7px">Renamed block_property and has_block_property to block_state and has_block_state post this version.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">1.20.40</td>
+<td style="border-style:solid; border-width:3; padding:7px">Deprecated block_property and has_block_property.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">1.20.50</td>
+<td style="border-style:solid; border-width:3; padding:7px">dash_cooldown_progress is no longer supported, as that logic is done in the animation. Additionally is_scenting, is_rising, and is_feelingHappy queries are no longer available, and timer_flag_1, timer_flag_2, and timer_flag_3 can be used instead.</br></td>
+</tr>
+<tr>
+<td style="border-style:solid; border-width:3; padding:7px">1.20.70</td>
+<td style="border-style:solid; border-width:3; padding:7px">Queries surface_particle_texture_size, surface_particle_texture_coordinate, and surface_particle_texture_size now register leaf blocks as supporting for step particles</br></td>
 </tr>
 </table>
 <a href="#Index">Back to top</a><br><br>

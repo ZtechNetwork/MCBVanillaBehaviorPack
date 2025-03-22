@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:pink_stained_hardened_clay"
@@ -18,13 +18,16 @@
         "item": "minecraft:hardened_clay"
       },
       "X": {
-        "item": "minecraft:dye",
-        "data": 9
+        "item": "minecraft:pink_dye"
       }
     },
+	"unlock": [
+      {
+        "item": "minecraft:hardened_clay"
+      }
+    ],
     "result": {
-      "item": "minecraft:stained_hardened_clay",
-      "data": 6,
+      "item": "minecraft:pink_terracotta",
       "count": 8
     }
   }

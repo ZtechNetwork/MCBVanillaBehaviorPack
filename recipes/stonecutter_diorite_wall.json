@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_diorite_wall"
@@ -10,13 +10,16 @@
     "priority": 2,
     "ingredients": [
       {
-        "item": "minecraft:stone",
-        "data": 3
+        "item": "minecraft:diorite"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:diorite"
       }
     ],
     "result": {
-      "item": "minecraft:cobblestone_wall",
-      "data": 3,
+      "item": "minecraft:diorite_wall",
       "count": 1
     }
   }

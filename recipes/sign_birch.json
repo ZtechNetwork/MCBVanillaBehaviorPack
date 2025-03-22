@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
     "identifier": "minecraft:sign_birch"
@@ -15,13 +15,17 @@
     ],
     "key": {
       "#": {
-        "item": "minecraft:planks",
-  	    "data": 2
+        "item": "minecraft:birch_planks"
       },
       "|": {
         "item": "minecraft:stick"
       }
     },
+    "unlock": [
+      {
+        "item": "minecraft:birch_planks"
+      }
+    ],
     "result": {
       "item": "minecraft:birch_sign",
       "count": 3

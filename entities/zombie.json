@@ -1,11 +1,11 @@
 {
-  "format_version": "1.17.20",
+  "format_version": "1.21.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:zombie",
+      "spawn_category": "monster",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
     "component_groups": {
       "minecraft:look_to_start_drowned_transformation": {
@@ -130,6 +130,11 @@
         "family": [ "zombie", "undead", "monster", "mob" ]
       },
       "minecraft:equip_item": {
+        "excluded_items": [
+          {
+            "item": "minecraft:banner:15"
+          }
+        ]
       },
       "minecraft:collision_box": {
         "width": 0.6,
@@ -175,6 +180,7 @@
         "table": "loot_tables/entities/zombie.json"
       },
       "minecraft:shareables": {
+        "singular_pickup": true,
         "items": [
           {
             "item": "minecraft:netherite_sword",
@@ -402,7 +408,8 @@
       "minecraft:behavior.equip_item": {
         "priority": 2
       },
-      "minecraft:behavior.melee_attack": {
+      "minecraft:behavior.melee_box_attack": {
+        "can_spread_on_fire": true,
         "priority": 3
       },
       "minecraft:behavior.stomp_turtle_egg": {
@@ -437,7 +444,17 @@
         "priority": 9
       },
       "minecraft:behavior.hurt_by_target": {
-        "priority": 1
+        "priority": 1,
+        "entity_types": [
+          {
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "operator": "!=",
+              "value": "breeze"
+            }
+          }
+        ]
       },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,

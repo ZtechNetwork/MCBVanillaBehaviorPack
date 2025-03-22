@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_double_stone_slab"
@@ -14,9 +14,14 @@
         "data": 0
       }
     ],
+    "unlock": [
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ],
     "result": {
-      "item": "minecraft:double_stone_slab4",
-      "data": 2,
+      "item": "minecraft:normal_stone_slab",
       "count": 2
     }
   }

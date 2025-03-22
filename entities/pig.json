@@ -1,11 +1,11 @@
 {
-  "format_version": "1.20.0",
+  "format_version": "1.21.0",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:pig",
+      "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false
+      "is_summonable": true
     },
     "component_groups": {
       "minecraft:pig_baby": {
@@ -32,6 +32,7 @@
       "minecraft:pig_transform": {
         "minecraft:transformation": {
           "into": "minecraft:pig_zombie",
+          "transformation_sound": "mob.pig.death",
           "delay": 0.5
         }
       },
@@ -122,7 +123,6 @@
         }
       }
     },
-
 
     "components": {
       "minecraft:is_hidden_when_invisible": {
@@ -244,7 +244,6 @@
       }
     },
 
-
     "events": {
       "become_zombie": {
         "remove": {
@@ -274,7 +273,6 @@
           }
         ]
       },
-
       "minecraft:entity_born": {
         "remove": {
         },
@@ -284,7 +282,6 @@
           ]
         }
       },
-
       "minecraft:ageable_grow_up": {
         "remove": {
           "component_groups": [
@@ -298,7 +295,6 @@
           ]
         }
       },
-
       "minecraft:on_saddled": {
         "remove": {
           "component_groups": [

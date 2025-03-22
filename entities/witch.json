@@ -3,6 +3,7 @@
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:witch",
+      "spawn_category": "monster",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
@@ -115,6 +116,27 @@
         "projectiles" : [
           {
             "def" : "minecraft:splash_potion",
+            "aux_val" : 21, // healing
+            "filters" : {
+              "all_of" : [
+                { "test": "is_raider", "subject": "other", "value": true },
+                { "test": "actor_health", "subject": "other", "value": 4, "operator" : "<=" }
+              ]
+            },
+            "lose_target" : true
+          },
+          {
+            "def" : "minecraft:splash_potion",
+            "aux_val" : 28, // regeneration
+            "filters" : {
+              "all_of" : [
+                { "test": "is_raider", "subject": "other", "value": true }
+              ]
+            },
+            "lose_target" : true
+          },
+          {
+            "def" : "minecraft:splash_potion",
             "aux_val" : 17, // slowness
             "filters" : {
               "all_of" : [
@@ -165,7 +187,7 @@
       },
       "minecraft:behavior.look_at_player": {
         "priority": 5,
-        "look_distance": 8.0
+        "look_distance": 16.0
       },
       "minecraft:behavior.random_look_around": {
         "priority": 5,
@@ -238,7 +260,7 @@
       "minecraft:behavior.hurt_by_target": {
         "priority": 1
       },
-      "minecraft:behavior.nearest_attackable_target": {
+      "minecraft:behavior.nearest_prioritized_attackable_target": {
         "priority": 2,
         "entity_types": [
           {
@@ -261,6 +283,35 @@
                 }
               ]
             },
+            "priority": 1,
+            "max_dist": 10
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_raider",
+                  "subject": "other",
+                  "value": true
+                },
+                {
+                  "test": "is_raider",
+                  "subject": "self",
+                  "value": true
+                },
+                {
+                  "none_of":[
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "witch"
+                    }
+                  ]
+                }
+              ]
+            },
+            "priority": 2,
+            "cooldown" : 10,
             "max_dist": 10
           }
         ],
@@ -281,6 +332,8 @@
       },
       "minecraft:follow_range": {
         "value": 64
+      },
+      "minecraft:can_join_raid": {
       },
       "minecraft:conditional_bandwidth_optimization": {
       }

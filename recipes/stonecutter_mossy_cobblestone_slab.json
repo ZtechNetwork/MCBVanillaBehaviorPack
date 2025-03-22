@@ -1,5 +1,5 @@
 {
-  "format_version": "1.12",
+  "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
     "identifier": "minecraft:stonecutter_mossy_cobbledouble_stone_slab"
@@ -10,13 +10,16 @@
     "priority": 0,
     "ingredients": [
       {
-        "item": "minecraft:mossy_cobblestone",
-        "data": 0
+        "item": "minecraft:mossy_cobblestone"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:mossy_cobblestone"
       }
     ],
     "result": {
-      "item": "minecraft:double_stone_slab2",
-      "data": 5,
+      "item": "minecraft:mossy_cobblestone_slab",
       "count": 2
     }
   }
