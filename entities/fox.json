@@ -1,5 +1,5 @@
 {
-  "format_version": "1.26.0",
+  "format_version": "1.26.10",
   "minecraft:entity": {
     "description": {
       "identifier": "minecraft:fox",
@@ -17,6 +17,8 @@
         "minecraft:ageable": {
           "duration": 1200,
           "feed_items": ["sweet_berries", "glow_berries"],
+          "pause_growth_items": [ "golden_dandelion" ],
+          "reset_growth_items": [ "golden_dandelion" ],
           "grow_up": {
             "event": "minecraft:ageable_grow_up",
             "target": "self"
@@ -460,7 +462,7 @@
       "minecraft:spawn_egg_interaction": {},
       "minecraft:is_hidden_when_invisible": {},
       "minecraft:type_family": {
-        "family": [ "fox", "lightweight", "mob" ]
+        "family": ["fox", "lightweight", "mob"]
       },
       "minecraft:breathable": {
         "totalSupply": 15,
@@ -648,9 +650,9 @@
         "mass": 0.6
       },
       "minecraft:physics": {},
-      "minecraft:pushable": {
-        "is_pushable": true,
-        "is_pushable_by_piston": true
+      "minecraft:pushable_by_entity": {
+      },
+      "minecraft:pushable_by_block": {
       },
       "minecraft:conditional_bandwidth_optimization": {},
       "minecraft:scheduler": {
