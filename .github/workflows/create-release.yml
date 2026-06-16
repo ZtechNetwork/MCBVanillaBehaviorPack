@@ -61,7 +61,7 @@ jobs:
       # ── Get previous tag ──────────────────────────────────────────────
       - name: Get previous tag
         id: previoustag
-        uses: actions-ecosystem/action-get-latest-tag@v1
+        uses: KurojakiKaoru/action-get-latest-tag@v1
 
       # ── Build zip ─────────────────────────────────────────────────────
       - name: Build behavior pack
@@ -83,7 +83,7 @@ jobs:
 
       # ── Create GitHub Release ─────────────────────────────────────────
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.vars.outputs.tag }}
           target_commitish: ${{ github.ref_name }}
