@@ -3,8 +3,12 @@ name: Create Release
 on:
   workflow_dispatch:
     inputs:
+      old_version:
+        description: 'Previous version number (ex. 26.20.0)'
+        required: true
+        type: string
       version:
-        description: 'Version number (e.g., 26.10.0)'
+        description: 'Current version number (ex. 26.30.0)'
         required: true
         type: string
       release_notes_url:
@@ -26,8 +30,10 @@ jobs:
       # ── Validate inputs ───────────────────────────────────────────────
       - name: Validate version format
         run: |
+          FORMAT_PATTERN="^[0-9]+\.[0-9]+\.[0-9]+$"
+          OLD_VERSION="${{  inputs.old_version }}"
           VERSION="${{ inputs.version }}"
-          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ !"$VERSION" =~ $FORMAT_PATTERN ]] && [[ !"$OLD_VERSION" =~ $FORMAT_PATTERN ]]; then
             echo "::error::Version must be three dot-separated numbers (e.g., 26.10.0). Got: $VERSION"
             exit 1
           fi
@@ -36,13 +42,16 @@ jobs:
       - name: Set release variables
         id: vars
         run: |
+          OLD_VERSION="${{ inputs.old_version }}"
           VERSION="${{ inputs.version }}"
           BRANCH="${{ github.ref_name }}"
+          OLD_TAG="v${OLD_VERSION}"
           TAG="v${VERSION}"
           PRERELEASE=false
           MAKE_LATEST=true
           
 
+          echo "old_tag=$OLD_TAG"         >> "$GITHUB_OUTPUT"
           echo "tag=$TAG"                 >> "$GITHUB_OUTPUT"
           echo "prerelease=$PRERELEASE"   >> "$GITHUB_OUTPUT"
           echo "make_latest=$MAKE_LATEST" >> "$GITHUB_OUTPUT"
@@ -58,28 +67,12 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      # ── Get previous tag ──────────────────────────────────────────────
-      - name: Get previous tag
-        id: previoustag
-        uses: KurojakiKaoru/action-get-latest-tag@v1
-
       # ── Build zip ─────────────────────────────────────────────────────
       - name: Build behavior pack
         run: |
           ZIP_NAME="BehaviorPack_${{ steps.vars.outputs.tag }}.zip"
 
-          zip -r "$ZIP_NAME" \
-            biomes/ \
-            documentation/ \
-            entities/ \
-            items/ \
-            loot_tables/ \
-            recipes/ \
-            spawn_rules/ \
-            trading/ \
-            bug_pack_icon.png \
-            pack_icon.png \
-            manifest.json 
+          zip -r "$ZIP_NAME" -x ".git/*" ".github/*" "README.md"
 
       # ── Create GitHub Release ─────────────────────────────────────────
       - name: Create GitHub Release
@@ -91,7 +84,7 @@ jobs:
           body: |
             - Updated for **${{ steps.vars.outputs.tag }}**.
             - View the game changelog [here](${{ inputs.release_notes_url }}).
-            - View changes [here](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/compare/${{ steps.previoustag.outputs.tag }}...${{ steps.vars.outputs.tag }}).
+            - View changes [here](https://github.com/ZtechNetwork/MCBVanillaBehaviorPack/compare/${{ steps.vars.outputs.old_tag }}...${{ steps.vars.outputs.tag }}).
           prerelease: ${{ steps.vars.outputs.prerelease == 'true' }}
           make_latest: ${{ steps.vars.outputs.make_latest == 'true' }}
           files: |
