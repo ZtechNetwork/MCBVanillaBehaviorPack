@@ -72,7 +72,7 @@ jobs:
         run: |
           ZIP_NAME="BehaviorPack_${{ steps.vars.outputs.tag }}.zip"
 
-          zip -r "$ZIP_NAME" -x ".git/*" ".github/*" "README.md"
+          zip -r "$ZIP_NAME" . -x ".git/*" ".github/*" "README.md" ".gitignore"
 
       # ── Create GitHub Release ─────────────────────────────────────────
       - name: Create GitHub Release
